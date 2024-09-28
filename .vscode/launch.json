@@ -1,0 +1,14 @@
+{
+    "version": "0.1.0",
+    "configurations": [
+        {
+            "name": "lldb minishell",
+            "type": "lldb",
+            "request": "launch",
+            "program": "${workspaceFolder}/minishell",
+            "args": [""],
+            "cwd": "${workspaceFolder}",
+            "preLaunchTask": "lldb re-compil",
+        },
+    ]
+}
