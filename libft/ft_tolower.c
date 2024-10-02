@@ -1,17 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_tolower.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abergman <abergman@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hsharame <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/09/28 13:33:18 by abergman          #+#    #+#             */
-/*   Updated: 2024/09/30 16:31:30 by hsharame         ###   ########.fr       */
+/*   Created: 2024/05/22 16:02:32 by hsharame          #+#    #+#             */
+/*   Updated: 2024/05/24 19:13:48 by hsharame         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-int	main(int ac, char **av)
-{
-	return (0);
-}
+#include "libft.h"
 
+int	ft_tolower(int c)
+{
+	if (c >= 65 && c <= 90)
+		return (c += 32);
+	else
+		return (c);
+}
+/*
+#include <stdio.h>
+int main()
+{
+	printf("%c - Z, %c - A, %c - 8",  ft_tolower('Z'), 
+			ft_tolower('A'), ft_tolower('8'));
+}*/

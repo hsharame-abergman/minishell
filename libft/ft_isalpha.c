@@ -1,17 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_isalpha.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abergman <abergman@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hsharame <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/09/28 13:33:18 by abergman          #+#    #+#             */
-/*   Updated: 2024/09/30 16:31:30 by hsharame         ###   ########.fr       */
+/*   Created: 2024/05/20 10:22:16 by hsharame          #+#    #+#             */
+/*   Updated: 2024/05/24 19:07:35 by hsharame         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-int	main(int ac, char **av)
-{
-	return (0);
-}
+#include "libft.h"
 
+int	ft_isalpha(int c)
+{
+	if ((c >= 'A' && c <= 'Z') || (c >= 'a' && c <= 'z'))
+		return (1);
+	else
+		return (0);
+}
+/*#include <stdio.h>
+int	main()
+{
+	printf("%d", ft_isalpha('9'));
+}*/

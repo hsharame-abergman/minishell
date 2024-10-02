@@ -1,17 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_putchar_fd.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abergman <abergman@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hsharame <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/09/28 13:33:18 by abergman          #+#    #+#             */
-/*   Updated: 2024/09/30 16:31:30 by hsharame         ###   ########.fr       */
+/*   Created: 2024/06/04 14:37:00 by hsharame          #+#    #+#             */
+/*   Updated: 2024/06/04 14:38:08 by hsharame         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-int	main(int ac, char **av)
-{
-	return (0);
-}
+#include <unistd.h>
+#include "libft.h"
 
+void	ft_putchar_fd(char c, int fd)
+{
+	write (fd, &c, 1);
+}

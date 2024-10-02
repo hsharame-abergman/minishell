@@ -1,17 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   lexer_utils.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abergman <abergman@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hsharame <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/09/28 13:33:18 by abergman          #+#    #+#             */
-/*   Updated: 2024/09/30 16:31:30 by hsharame         ###   ########.fr       */
+/*   Created: 2024/10/02 11:49:32 by hsharame          #+#    #+#             */
+/*   Updated: 2024/10/02 11:49:34 by hsharame         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-int	main(int ac, char **av)
+#include "minishell.h"
+
+bool	ft_isspace(char c)
 {
-	return (0);
+	if ((c > 8 && c < 14) || c == ' ')
+		return (true);
+	else
+		return (false);
 }
 
+bool	ft_isoperator(char c)
+{
+	if (c == '|' || c == '<' || c == '>')
+		return (true);
+	else
+		return (false);
+}

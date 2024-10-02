@@ -1,17 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_toupper.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abergman <abergman@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hsharame <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/09/28 13:33:18 by abergman          #+#    #+#             */
-/*   Updated: 2024/09/30 16:31:30 by hsharame         ###   ########.fr       */
+/*   Created: 2024/05/22 15:59:13 by hsharame          #+#    #+#             */
+/*   Updated: 2024/05/24 19:14:04 by hsharame         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-int	main(int ac, char **av)
-{
-	return (0);
-}
+#include <ctype.h>
+#include <stdio.h>
+#include "libft.h"
 
+int	ft_toupper(int c)
+{
+	if (c >= 97 && c <= 122)
+		return (c -= 32);
+	else
+		return (c);
+}
+/*
+int main()
+{
+	printf("%c\n", ft_toupper('z'));
+	printf("%c\n", toupper('z'));
+}*/
