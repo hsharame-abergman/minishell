@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   lexer.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hsharame <hsharame@student.42.fr>          +#+  +:+       +#+        */
+/*   By: abergman <abergman@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/30 15:48:48 by hsharame          #+#    #+#             */
-/*   Updated: 2024/10/07 17:47:19 by hsharame         ###   ########.fr       */
+/*   Updated: 2024/10/07 20:09:46 by abergman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "../header/minishell.h"
 
 t_token	*new_token(char *value, int type)
 {

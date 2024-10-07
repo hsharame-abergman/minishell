@@ -6,27 +6,27 @@
 #    By: abergman <abergman@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/09/28 13:34:37 by abergman          #+#    #+#              #
-#    Updated: 2024/09/28 13:35:33 by abergman         ###   ########.fr        #
+#    Updated: 2024/10/07 20:09:19 by abergman         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME			= minishell
 
 OBJDIR 			= ./bin
-SRC				= ./lexer/*.c
-OBJS			:= $(SRC:./lexer/%.c=$(OBJDIR)/%.o)
+SRC				:= $(shell find . -type f -name "*.c")
+OBJS			:= $(patsubst %.c,$(OBJDIR)/%.o,$(SRC))
+
 HEADERS 		= ./header/minishell.h
 
 CC				= cc -g3 -Wall -Wextra -Werror -O3 -pthread
-INCLUDES		= -I./libft
-LIBFT			= ./libft/libft.a
+
 RM				= rm -f
 
-$(OBJDIR)/%.o: ./%.c
+$(OBJDIR)/%.o: ./%.c $(HEADERS)
 		$(CC) -c $< -o $@
 
-$(NAME): $(LIBFT) $(OBJDIR) $(HEADERS) $(OBJS)
-		$(CC) $(OBJS) -o $(NAME) $(LIBFT) $(INCLUDES)
+$(NAME): $(OBJDIR) $(HEADERS) $(OBJS)
+		$(CC) $(OBJS) -o $(NAME)
 
 all: $(NAME)
 

@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   lexer_utils.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hsharame <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: abergman <abergman@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/02 11:49:32 by hsharame          #+#    #+#             */
-/*   Updated: 2024/10/02 11:49:34 by hsharame         ###   ########.fr       */
+/*   Updated: 2024/10/07 20:09:37 by abergman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "../header/minishell.h"
 
 bool	ft_isspace(char c)
 {
