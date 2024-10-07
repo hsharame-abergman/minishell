@@ -13,22 +13,25 @@
 NAME			= minishell
 
 OBJDIR 			= ./bin
-SRC				= $(shell find . -name "*.c")
-OBJS			:= $(SRC:./%.c=$(OBJDIR)/%.o)
-
-HEADERS 		= ./includes.h
+SRC				= ./lexer/*.c
+OBJS			:= $(SRC:./lexer/%.c=$(OBJDIR)/%.o)
+HEADERS 		= ./header/minishell.h
 
 CC				= cc -g3 -Wall -Wextra -Werror -O3 -pthread
-
+INCLUDES		= -I./libft
+LIBFT			= ./libft/libft.a
 RM				= rm -f
 
 $(OBJDIR)/%.o: ./%.c
 		$(CC) -c $< -o $@
 
-$(NAME): $(OBJDIR) $(HEADERS) $(OBJS)
-		$(CC) $(OBJS) -o $(NAME)
+$(NAME): $(LIBFT) $(OBJDIR) $(HEADERS) $(OBJS)
+		$(CC) $(OBJS) -o $(NAME) $(LIBFT) $(INCLUDES)
 
 all: $(NAME)
+
+$(LIBFT):
+		make -C ./libft
 
 $(OBJDIR):
 	@mkdir $@
@@ -36,9 +39,11 @@ $(OBJDIR):
 
 clean:
 	$(RM) -rf $(OBJDIR)
+	make -C ./libft clean
 
 fclean: clean
 	$(RM) $(NAME)
+	make -C ./libft fclean
 
 re: fclean all
 

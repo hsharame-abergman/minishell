@@ -3,14 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   token_type.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hsharame <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: hsharame <hsharame@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/02 14:09:39 by hsharame          #+#    #+#             */
-/*   Updated: 2024/10/02 14:09:41 by hsharame         ###   ########.fr       */
+/*   Updated: 2024/10/02 17:57:27 by hsharame         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+//refaire 
 
 void	token_quotes(t_token **token_list, char *input, int *i)
 {
@@ -37,5 +39,5 @@ void	token_quotes(t_token **token_list, char *input, int *i)
 
 void	token_word(t_token **token_list, char *input, int *i)
 {
-
+	return ;
 }
