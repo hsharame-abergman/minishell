@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lexer.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hsharame <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: hsharame <hsharame@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/30 15:48:48 by hsharame          #+#    #+#             */
-/*   Updated: 2024/09/30 15:49:33 by hsharame         ###   ########.fr       */
+/*   Updated: 2024/10/07 17:47:19 by hsharame         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ void	init_tokens(t_token **token_list, char *input, int *i)
 	int		start;
 	char	*value;
 
-	start = i;
+	start = *i;
 	if (input[*i] == 34 || input[*i] == 39)
 		token_quotes(token_list, input, &i);
 	else if (ft_isoperator(input[*i]))
@@ -73,28 +73,28 @@ void	init_tokens(t_token **token_list, char *input, int *i)
 		if (ft_isoperator(input[*i + 1]))
 		{
 			value = ft_substr(input, start, 2);
-			i++;
+			(*i)++;
 		}
 		else
 			value = ft_substr(input, start, 1);
 		add_token(token_list, value, get_type(value));
 		(*i)++;
 	}
-	else
+	else if (ft_isascii(input[*i]))
 		token_word(token_list, input, &i);
 	return ;
 }
 
 int	lexer(char *input)
 {
-	int		*i;
+	int		i;
 	t_token	*token_list;
 
 	i = 0;
-	while (input[*i])
+	while (input[i])
 	{
-		if (ft_isspace(input[*i]))
-			(*i)++;
+		if (ft_isspace(input[i]))
+			i++;
 		else
 			init_tokens(token_list, input, &i);
 	}
