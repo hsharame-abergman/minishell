@@ -6,7 +6,7 @@
 /*   By: abergman <abergman@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/28 13:33:18 by abergman          #+#    #+#             */
-/*   Updated: 2024/10/08 11:35:45 by abergman         ###   ########.fr       */
+/*   Updated: 2024/10/08 13:24:09 by abergman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,26 +15,28 @@
 int	main(int ac, char **av, char **envp)
 {
 	char	*input;
-	t_tiny tiny;
+	// t_tiny tiny;
 
 	(void)ac;
 	(void)av;
 
 	if (ac != 1 || envp == NULL || *envp == NULL)
-		return (ft_putstr_fd("Error:\nNo environment found. Exiting.", 1), 0);
-	init(&tiny, envp);
-	while (tiny.exit == 0)
+		return (ft_putstr_fd("Error:\nNo environment found. Exiting.", 2), 0);
+	// init(&tiny, envp);
+	while (1)
 	{
 		ft_putstr_fd("minishell> ", 1);
 		input = readline(NULL);
 		if (input == NULL)
 		{
-			ft_putstr_fd("Error:\nMinishell was closed", 1);
+			ft_putstr_fd("Error:\nMinishell was closed", 2);
 			break ;
 		}
 		if (*input)
 		{
-			add_history(input);
+			// add_history(input);
+			// lexer();
+			// builtin();
 		}
 		free(input);
 	}
