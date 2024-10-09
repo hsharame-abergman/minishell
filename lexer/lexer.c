@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lexer.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abergman <abergman@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hsharame <hsharame@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/30 15:48:48 by hsharame          #+#    #+#             */
-/*   Updated: 2024/10/07 20:09:46 by abergman         ###   ########.fr       */
+/*   Updated: 2024/10/09 11:48:31 by hsharame         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,13 +25,13 @@ t_token	*new_token(char *value, int type)
 	return (token);
 }
 
-void	add_token(t_token **token_list, char value, int type)
+void	add_token(t_token **token_list, char *value, int type)
 {
 	t_token	*new;
 	t_token	*current;
 
 	new = new_token(value, type);
-	if (!token_list)
+	if (!*token_list)
 		*token_list = new;
 	else
 	{
@@ -58,6 +58,7 @@ int	get_type(char *token)
 			return (APPEND_MODE);
 		return (REDIRECT_OUTPUT);
 	}
+	return (-1);
 }
 
 void	init_tokens(t_token **token_list, char *input, int *i)
@@ -67,7 +68,7 @@ void	init_tokens(t_token **token_list, char *input, int *i)
 
 	start = *i;
 	if (input[*i] == 34 || input[*i] == 39)
-		token_quotes(token_list, input, &i);
+		quotes(token_list, input, i);
 	else if (ft_isoperator(input[*i]))
 	{
 		if (ft_isoperator(input[*i + 1]))
@@ -81,8 +82,17 @@ void	init_tokens(t_token **token_list, char *input, int *i)
 		(*i)++;
 	}
 	else if (ft_isascii(input[*i]))
-		token_word(token_list, input, &i);
+		token_word(token_list, input, i);
 	return ;
+}
+
+void	affiche_tokens(t_token *token_list)
+{
+	while (token_list != NULL)
+	{
+		printf("value %s, type %d\n", token_list->value, token_list->type);
+		token_list = token_list->next;
+	}
 }
 
 int	lexer(char *input)
@@ -91,13 +101,15 @@ int	lexer(char *input)
 	t_token	*token_list;
 
 	i = 0;
+	token_list = NULL;
 	while (input[i])
 	{
 		if (ft_isspace(input[i]))
 			i++;
 		else
-			init_tokens(token_list, input, &i);
+			init_tokens(&token_list, input, &i);
 	}
+	affiche_tokens(token_list);
 	return (i);
 }
 
