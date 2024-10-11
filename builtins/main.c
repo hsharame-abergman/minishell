@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hsharame <hsharame@student.42.fr>          +#+  +:+       +#+        */
+/*   By: abergman <abergman@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/08 12:39:40 by abergman          #+#    #+#             */
-/*   Updated: 2024/10/11 12:49:57 by hsharame         ###   ########.fr       */
+/*   Updated: 2024/10/11 18:56:39 by abergman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,16 @@
 /* ◦ env with no options or arguments			*/
 /* ◦ exit with no options						*/
 
-/*int main(void)
+#include "builtins.h"
+
+int	main(int ac, char **av, char **env)
 {
-	
+	if (is_builtins(av))
+	{
+		if (ft_strcmp(av[0], "echo") == 0)
+			builtin_echo(av);
+		else if (ft_strcmp(av[0], "cd") == 0)
+			builtin_cd(av);
+	}
 	return (0);
-}*/
+}
