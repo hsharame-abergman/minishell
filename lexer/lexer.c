@@ -6,7 +6,7 @@
 /*   By: hsharame <hsharame@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/30 15:48:48 by hsharame          #+#    #+#             */
-/*   Updated: 2024/10/11 15:26:47 by hsharame         ###   ########.fr       */
+/*   Updated: 2024/10/11 16:07:12 by hsharame         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ int	get_type(char *token)
 	if (token[0] == '<')
 	{
 		if (token[1] == '<')
-			return (FIND_DELIMITER);
+			return (HEREDOC);
 		return (REDIRECT_INPUT);
 	}
 	if (token[0] == '>')

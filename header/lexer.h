@@ -6,7 +6,7 @@
 /*   By: hsharame <hsharame@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/02 11:09:24 by hsharame          #+#    #+#             */
-/*   Updated: 2024/10/11 13:35:07 by hsharame         ###   ########.fr       */
+/*   Updated: 2024/10/11 16:06:47 by hsharame         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ typedef enum e_token_type
 	PIPE,
 	REDIRECT_INPUT,
 	REDIRECT_OUTPUT,
-	FIND_DELIMITER,
+	HEREDOC,
 	APPEND_MODE,
 	ENVIRONMENT,
 	CHAR_QUOTE,
