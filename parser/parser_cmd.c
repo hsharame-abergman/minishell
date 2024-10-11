@@ -1,25 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   parser_cmd.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hsharame <hsharame@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/08 12:39:40 by abergman          #+#    #+#             */
-/*   Updated: 2024/10/11 12:49:57 by hsharame         ###   ########.fr       */
+/*   Created: 2024/10/11 15:37:39 by hsharame          #+#    #+#             */
+/*   Updated: 2024/10/11 15:44:06 by hsharame         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-/* ◦ echo with option -n						*/
-/* ◦ cd with only a relative or absolute path	*/
-/* ◦ pwd with no options						*/
-/* ◦ export with no options						*/
-/* ◦ unset with no options						*/
-/* ◦ env with no options or arguments			*/
-/* ◦ exit with no options						*/
+#include "../header/minishell.h"
 
-/*int main(void)
+t_ast	*parser_cmd(t_token **token_list)
 {
-	
-	return (0);
-}*/
+
+}

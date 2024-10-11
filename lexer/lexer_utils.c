@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lexer_utils.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abergman <abergman@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hsharame <hsharame@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/02 11:49:32 by hsharame          #+#    #+#             */
-/*   Updated: 2024/10/07 20:09:37 by abergman         ###   ########.fr       */
+/*   Updated: 2024/10/11 15:26:32 by hsharame         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,4 +26,13 @@ bool	ft_isoperator(char c)
 		return (true);
 	else
 		return (false);
+}
+
+void	affiche_tokens(t_token *token_list)
+{
+	while (token_list != NULL)
+	{
+		printf("value %s, type %d\n", token_list->value, token_list->type);
+		token_list = token_list->next;
+	}
 }

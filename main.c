@@ -6,7 +6,7 @@
 /*   By: hsharame <hsharame@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/28 13:33:18 by abergman          #+#    #+#             */
-/*   Updated: 2024/10/09 11:29:43 by hsharame         ###   ########.fr       */
+/*   Updated: 2024/10/11 15:23:28 by hsharame         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,7 @@ int	main(int ac, char **av, char **envp)
 			// builtin();
 		}
 		free(input);
+		//rl_clear_history();
 	}
 	return (0);
 }

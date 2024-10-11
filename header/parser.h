@@ -6,11 +6,24 @@
 /*   By: hsharame <hsharame@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/07 17:51:28 by hsharame          #+#    #+#             */
-/*   Updated: 2024/10/07 17:52:10 by hsharame         ###   ########.fr       */
+/*   Updated: 2024/10/11 15:21:16 by hsharame         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PARSER_H
 # define PARSER_H
+
+typedef enum e_parser_type
+{
+	ERROR = -1
+}	t_parser_type;
+
+typedef struct s_ast
+{
+	char			*value;
+	int				type;
+	struct s_ast	*left;
+	struct s_ast	*right;
+}	t_ast;
 
 #endif

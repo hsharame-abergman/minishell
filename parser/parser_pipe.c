@@ -1,25 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   parser_pipe.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hsharame <hsharame@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/08 12:39:40 by abergman          #+#    #+#             */
-/*   Updated: 2024/10/11 12:49:57 by hsharame         ###   ########.fr       */
+/*   Created: 2024/10/11 15:37:35 by hsharame          #+#    #+#             */
+/*   Updated: 2024/10/11 15:42:12 by hsharame         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-/* ◦ echo with option -n						*/
-/* ◦ cd with only a relative or absolute path	*/
-/* ◦ pwd with no options						*/
-/* ◦ export with no options						*/
-/* ◦ unset with no options						*/
-/* ◦ env with no options or arguments			*/
-/* ◦ exit with no options						*/
+#include "../header/minishell.h"
 
-/*int main(void)
+t_ast	*parser_pipe(t_token **token_list)
 {
-	
-	return (0);
-}*/
+
+}

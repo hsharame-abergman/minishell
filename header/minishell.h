@@ -6,7 +6,7 @@
 /*   By: hsharame <hsharame@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/02 11:29:45 by hsharame          #+#    #+#             */
-/*   Updated: 2024/10/09 11:05:04 by hsharame         ###   ########.fr       */
+/*   Updated: 2024/10/10 15:51:29 by hsharame         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,5 +21,6 @@
 # include <readline/history.h>
 # include "../libft/libft.h"
 # include "lexer.h"
+# include "parser.h"
 
 #endif

@@ -6,23 +6,26 @@
 /*   By: hsharame <hsharame@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/02 11:09:24 by hsharame          #+#    #+#             */
-/*   Updated: 2024/10/09 11:49:45 by hsharame         ###   ########.fr       */
+/*   Updated: 2024/10/11 13:35:07 by hsharame         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef LEXER_H
 # define LEXER_H
 
-# define TOKEN_WORD 1
-# define OPTION 2
-# define PIPE 3
-# define REDIRECT_INPUT 4
-# define REDIRECT_OUTPUT 5
-# define FIND_DELIMITER 6
-# define APPEND_MODE 7
-# define ENVIRONMENT 8
-# define CHAR_QUOTE 9
-# define CHAR_DQUOTE 10
+typedef enum e_token_type
+{
+	TOKEN_WORD = 1,
+	OPTION,
+	PIPE,
+	REDIRECT_INPUT,
+	REDIRECT_OUTPUT,
+	FIND_DELIMITER,
+	APPEND_MODE,
+	ENVIRONMENT,
+	CHAR_QUOTE,
+	CHAR_DQUOTE
+}	t_token_type;
 
 typedef struct s_token
 {
@@ -31,7 +34,8 @@ typedef struct s_token
 	struct s_token	*next;
 }	t_token;
 
-int		token_quotes(t_token **token_list, char *input, int *i);
+int		token_quotes(t_token **token_list, char *input, int *i, char quote);
+void	token_quotes_error(t_token **token_list, char *input, char quote);
 void	quotes(t_token **token_list, char *input, int *i);
 void	token_word(t_token **token_list, char *input, int *i);
 bool	ft_isspace(char c);
