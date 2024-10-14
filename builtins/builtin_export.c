@@ -6,11 +6,11 @@
 /*   By: abergman <abergman@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/12 15:44:23 by abergman          #+#    #+#             */
-/*   Updated: 2024/10/12 15:46:02 by abergman         ###   ########.fr       */
+/*   Updated: 2024/10/14 16:53:14 by abergman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "builtins.h"
+#include "../header/minishell.h"
 
 void	builtin_export(void)
 {

@@ -6,11 +6,11 @@
 /*   By: abergman <abergman@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/11 18:04:57 by abergman          #+#    #+#             */
-/*   Updated: 2024/10/11 20:42:14 by abergman         ###   ########.fr       */
+/*   Updated: 2024/10/14 16:50:58 by abergman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "builtins.h"
+#include "../header/minishell.h"
 
 int	builtin_cd(char *av)
 {

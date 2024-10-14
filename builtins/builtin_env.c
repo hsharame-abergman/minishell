@@ -6,11 +6,11 @@
 /*   By: abergman <abergman@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/12 15:47:52 by abergman          #+#    #+#             */
-/*   Updated: 2024/10/12 15:48:42 by abergman         ###   ########.fr       */
+/*   Updated: 2024/10/14 16:52:43 by abergman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "builtins.h"
+#include "../header/minishell.h"
 
 void builtin_env(void)
 {
