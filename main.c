@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hsharame <hsharame@student.42.fr>          +#+  +:+       +#+        */
+/*   By: abergman <abergman@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/28 13:33:18 by abergman          #+#    #+#             */
-/*   Updated: 2024/10/11 15:23:28 by hsharame         ###   ########.fr       */
+/*   Updated: 2024/10/14 17:39:50 by abergman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,14 +14,15 @@
 
 int	main(int ac, char **av, char **envp)
 {
+	t_minishell *data;
 	char	*input;
-	// t_tiny tiny;
 
 	(void)ac;
 	(void)av;
 
 	if (ac != 1 || envp == NULL || *envp == NULL)
 		return (ft_putstr_fd("Error:\nNo environment found. Exiting.", 2), 0);
+	data = builtins(av);
 	// init(&tiny, envp);
 	while (1)
 	{

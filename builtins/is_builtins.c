@@ -6,11 +6,11 @@
 /*   By: abergman <abergman@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/11 17:42:48 by abergman          #+#    #+#             */
-/*   Updated: 2024/10/14 17:13:35 by abergman         ###   ########.fr       */
+/*   Updated: 2024/10/14 17:15:34 by abergman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "builtins.h"
+#include "../header/minishell.h"
 
 /* ◦ echo with option -n						*/
 /* ◦ cd with only a relative or absolute path	*/
