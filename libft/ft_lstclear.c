@@ -1,31 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell.h                                        :+:      :+:    :+:   */
+/*   ft_lstclear.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: abergman <abergman@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/02 11:29:45 by hsharame          #+#    #+#             */
-/*   Updated: 2024/10/14 18:19:20 by abergman         ###   ########.fr       */
+/*   Created: 2024/06/01 16:58:42 by abergman          #+#    #+#             */
+/*   Updated: 2024/06/01 17:23:47 by abergman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINISHELL_H
-# define MINISHELL_H
+#include "libft.h"
+#include <stdlib.h>
 
-# include "../libft/libft.h"
-# include "lexer.h"
-# include "parser.h"
-# include <readline/history.h>
-# include <readline/readline.h>
-# include <stdbool.h>
-# include <stdio.h>
-# include <stdlib.h>
-# include <unistd.h>
-
-typedef struct s_minishell
+void	ft_lstclear(t_list **lst, void (*del)(void *))
 {
-	/* data */
-}	t_minishell;
-
-#endif
+	if (!del || !lst || !(*lst))
+		return ;
+	ft_lstclear(&(*lst)->next, del);
+	del((*lst)->content);
+	free(*lst);
+	*lst = NULL;
+}

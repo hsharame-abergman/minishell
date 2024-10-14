@@ -1,31 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell.h                                        :+:      :+:    :+:   */
+/*   ft_lstadd_front_bonus.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: abergman <abergman@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/02 11:29:45 by hsharame          #+#    #+#             */
-/*   Updated: 2024/10/14 18:19:20 by abergman         ###   ########.fr       */
+/*   Created: 2024/05/29 19:55:08 by abergman          #+#    #+#             */
+/*   Updated: 2024/05/29 21:46:59 by abergman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINISHELL_H
-# define MINISHELL_H
+#include "libft.h"
 
-# include "../libft/libft.h"
-# include "lexer.h"
-# include "parser.h"
-# include <readline/history.h>
-# include <readline/readline.h>
-# include <stdbool.h>
-# include <stdio.h>
-# include <stdlib.h>
-# include <unistd.h>
-
-typedef struct s_minishell
+void	ft_lstadd_front(t_list **lst, t_list *new)
 {
-	/* data */
-}	t_minishell;
-
-#endif
+	new->next = *lst;
+	*lst = new;
+}

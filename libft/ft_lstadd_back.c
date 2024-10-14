@@ -1,31 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell.h                                        :+:      :+:    :+:   */
+/*   ft_lstadd_back.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: abergman <abergman@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/02 11:29:45 by hsharame          #+#    #+#             */
-/*   Updated: 2024/10/14 18:19:20 by abergman         ###   ########.fr       */
+/*   Created: 2024/05/30 00:15:39 by abergman          #+#    #+#             */
+/*   Updated: 2024/06/02 16:11:49 by abergman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINISHELL_H
-# define MINISHELL_H
+#include "libft.h"
 
-# include "../libft/libft.h"
-# include "lexer.h"
-# include "parser.h"
-# include <readline/history.h>
-# include <readline/readline.h>
-# include <stdbool.h>
-# include <stdio.h>
-# include <stdlib.h>
-# include <unistd.h>
-
-typedef struct s_minishell
+void	ft_lstadd_back(t_list **lst, t_list *new)
 {
-	/* data */
-}	t_minishell;
+	t_list	*search_last;
 
-#endif
+	if (!(*lst))
+	{
+		*lst = new;
+		return ;
+	}
+	if (!lst || !new)
+		return ;
+	search_last = *lst;
+	while (search_last->next)
+		search_last = search_last->next;
+	search_last->next = new;
+}

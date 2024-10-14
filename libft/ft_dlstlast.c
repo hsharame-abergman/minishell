@@ -1,31 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell.h                                        :+:      :+:    :+:   */
+/*   ft_dlstlast.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: abergman <abergman@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/02 11:29:45 by hsharame          #+#    #+#             */
-/*   Updated: 2024/10/14 18:19:20 by abergman         ###   ########.fr       */
+/*   Created: 2024/08/17 16:27:45 by abergman          #+#    #+#             */
+/*   Updated: 2024/08/25 14:14:51 by abergman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINISHELL_H
-# define MINISHELL_H
+#include "libft.h"
 
-# include "../libft/libft.h"
-# include "lexer.h"
-# include "parser.h"
-# include <readline/history.h>
-# include <readline/readline.h>
-# include <stdbool.h>
-# include <stdio.h>
-# include <stdlib.h>
-# include <unistd.h>
-
-typedef struct s_minishell
+t_dlist	*ft_dlstlast(t_dlist *dlist)
 {
-	/* data */
-}	t_minishell;
-
-#endif
+	if (!dlist)
+		return (NULL);
+	while (dlist->next)
+	{
+		dlist = dlist->next;
+	}
+	return (dlist);
+}
