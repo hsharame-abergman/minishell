@@ -6,7 +6,7 @@
 /*   By: hsharame <hsharame@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/02 11:09:24 by hsharame          #+#    #+#             */
-/*   Updated: 2024/10/11 16:06:47 by hsharame         ###   ########.fr       */
+/*   Updated: 2024/10/14 14:50:54 by hsharame         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,13 +16,11 @@
 typedef enum e_token_type
 {
 	TOKEN_WORD = 1,
-	OPTION,
 	PIPE,
 	REDIRECT_INPUT,
 	REDIRECT_OUTPUT,
 	HEREDOC,
 	APPEND_MODE,
-	ENVIRONMENT,
 	CHAR_QUOTE,
 	CHAR_DQUOTE
 }	t_token_type;
@@ -34,6 +32,8 @@ typedef struct s_token
 	struct s_token	*next;
 }	t_token;
 
+void	check_pipe(t_token *token_list, char *input, int *i);
+void	affiche_tokens(t_token *token_list);
 int		token_quotes(t_token **token_list, char *input, int *i, char quote);
 void	token_quotes_error(t_token **token_list, char *input, char quote);
 void	quotes(t_token **token_list, char *input, int *i);

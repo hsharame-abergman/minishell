@@ -6,7 +6,7 @@
 /*   By: hsharame <hsharame@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/02 14:09:39 by hsharame          #+#    #+#             */
-/*   Updated: 2024/10/11 12:57:56 by hsharame         ###   ########.fr       */
+/*   Updated: 2024/10/14 11:59:06 by hsharame         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,8 +83,5 @@ void	token_word(t_token **token_list, char *input, int *i)
 	while (input[*i] && !ft_isspace(input[*i]) && !ft_isoperator(input[*i]))
 		(*i)++;
 	token = ft_substr(input, start, (size_t)(*i - start));
-	if (token[0] == '-')
-		add_token(token_list, token, OPTION);
-	else
-		add_token(token_list, token, TOKEN_WORD);
+	add_token(token_list, token, TOKEN_WORD);
 }
