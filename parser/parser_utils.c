@@ -6,7 +6,7 @@
 /*   By: hsharame <hsharame@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/11 15:37:21 by hsharame          #+#    #+#             */
-/*   Updated: 2024/10/14 17:47:24 by hsharame         ###   ########.fr       */
+/*   Updated: 2024/10/15 22:22:14 by hsharame         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,64 +26,44 @@ t_ast	*create_node(char *value, int type)
 	return (node);
 }
 
-int	get_pars_type(char *value, int type)
+int	ft_strcmp(char *s1, char *s2)
 {
-	if (type == TOKEN_WORD)
+	int	i;
+
+	i = 0;
+	while (s1[i] != '\0' || s2[i] != '\0')
 	{
-		if (is_cmd(value))
-			return (CMD);
-		else if (is_flag(value))
-			return (FLAG);
-		else
-			return (ARGUMENT);
+		if (s1[i] != s2[i])
+			return ((unsigned char)s1[i] - (unsigned char)s2[i]);
+		i++;
 	}
-	else if (type == REDIRECT_INPUT)
-		return (REDIRECT_IN);
-	else if (type == REDIRECT_OUTPUT)
-		return (REDIRECT_OUT);
-	else if (type == HEREDOC)
-		return (NODE_HEREDOC);
-	else if (type == APPEND_MODE)
-		return (NODE_APPEND);
-	else if (type == CHAR_DQUOTE)
-		return (DQ_ARGUMENTS);
-	else if (type == CHAR_DQUOTE)
-		return (Q_ARGUMENT);
-}
-
-bool	is_word_token(int type)
-{
-	if (type == TOKEN_WORD || type == CHAR_DQUOTE || type == CHAR_QUOTE)
-		return (true);
-	else
-		return (false);
-}
-
-bool	is_redirection_token(int type)
-{
-	if (type == REDIRECT_INPUT || type == REDIRECT_OUTPUT
-		|| type == HEREDOC || type == APPEND_MODE)
-		return (true);
-	else
-		return (false);
+	return (0);
 }
 
 void	affiche_ast(t_ast *node)
 {
-	if (node == NULL)
-		return ;
-	else if (node->type == NODE_PIPE)
-		printf("%s | %s\n", node->left->value, node->right->value);
-	else if (node->type == REDIRECT_IN)
-		printf("%s < %s\n", node->left->value, node->right->value);
-	else if (node->type == REDIRECT_OUT)
-		printf("%s > %s\n", node->left->value, node->right->value);
-	else if (node->type == NODE_HEREDOC)
-		printf("%s << %s\n", node->left->value, node->right->value);
-	else if (node->type == NODE_APPEND)
-		printf("%s >> %s\n", node->left->value, node->right->value);
-	else
-		printf("left:%s %s right:%s\n", node->left->value, node->value,
-			node->right->value);
-	affiche_ast(node->right);
+	int	i;
+
+	i = 1;
+	while (node != NULL)
+	{
+		if (node->left)
+		{
+			printf("%d. left:%s %s right:%s\n", i, node->left->value, node->value,
+				node->right->value);
+			printf("%d. left:%d %d right:%d\n", i, node->left->type, node->type,
+				node->right->type);
+		}
+		else if (node->right)
+		{
+			printf("%d. %s right:%s\n", i, node->value, node->right->value);
+			printf("%d. %d right:%d\n", i, node->type, node->right->type);
+		}
+		else
+		{
+			printf("%d. %s\n", i, node->value);
+			printf("%d. %d\n", i, node->type);
+		}
+		i++;
+	}
 }

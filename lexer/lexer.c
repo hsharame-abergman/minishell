@@ -6,7 +6,7 @@
 /*   By: hsharame <hsharame@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/30 15:48:48 by hsharame          #+#    #+#             */
-/*   Updated: 2024/10/14 14:50:29 by hsharame         ###   ########.fr       */
+/*   Updated: 2024/10/15 22:14:21 by hsharame         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,8 +102,8 @@ int	lexer(char *input)
 			init_tokens(&token_list, input, &i);
 	}
 	check_pipe(token_list, input, &i);
-	affiche_tokens(token_list);
-	//parser(token_list);
+	//affiche_tokens(token_list);
+	parser(&token_list);
 	return (i);
 }
 

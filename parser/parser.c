@@ -6,7 +6,7 @@
 /*   By: hsharame <hsharame@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/10 15:50:50 by hsharame          #+#    #+#             */
-/*   Updated: 2024/10/14 15:43:02 by hsharame         ###   ########.fr       */
+/*   Updated: 2024/10/15 22:24:47 by hsharame         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ t_ast	*init_tree(t_token **token_list)
 		if (is_word_token(save->type))
 			current = parser_cmd(save, last_node);
 		else if (save->type == PIPE)
-			current = parser_pipe(&save, last_node);
+			current = parser_pipe(save, last_node);
 		else if (is_redirection_token(save->type))
 			current = parser_redirect(&save, last_node);
 		if (!current)
@@ -49,5 +49,6 @@ t_ast	*parser(t_token **token_list)
 		ft_putstr_fd("Syntax error\n", 2);
 		return (NULL);
 	}
+	//affiche_ast(syntax_tree);
 	return (syntax_tree);
 }
