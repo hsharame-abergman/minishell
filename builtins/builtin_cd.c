@@ -6,15 +6,27 @@
 /*   By: abergman <abergman@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/11 18:04:57 by abergman          #+#    #+#             */
-/*   Updated: 2024/10/16 15:52:52 by abergman         ###   ########.fr       */
+/*   Updated: 2024/10/16 23:12:27 by abergman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../header/minishell.h"
 
-void	*error_message()
+int	chdir_errno_mod(path)
+{
+	if (errcode == "ESTALE")
+		errcode = "ENOENT";
+	ft_error_message("cd", path, strerror(errcode), errcode);
+	return (0);
+}
+
+void	ft_update_wds(store, value)
 {
 	
+}
+
+void	*error_message(void)
+{
 }
 
 char	*get_argv(t_envp *envs, char *key)
@@ -29,7 +41,30 @@ char	*get_argv(t_envp *envs, char *key)
 
 int	*ft_change_directory(t_minishell *store, char *path)
 {
-	return (0);
+	char	*value;
+	char	*tempory;
+	char	cwd[PATH_MAX];
+
+	value = NULL;
+	if (chdir(path) != 0)
+		return (chdir_errno_mod(path));
+	value = getcwd(cwd, PATH_MAX);
+	if (!value)
+	{
+		ft_error_message("Error\ncd: fail with retrieving current directory",
+			"getcwd: cannot access parent directories", strerror(errcode),
+			errcode);
+		value = ft_strjoin(store->working_directory, "/");
+		tempory = value;
+		value = ft_strjoin(tempory, path);
+		free_pointer(tempory);
+	}
+	else
+	{
+		value = ft_strdup(cwd);
+	}
+	ft_update_wds(store, value);
+	return (1);
 }
 
 int	builtin_cd(t_minishell *store, char **args)
@@ -51,7 +86,8 @@ int	builtin_cd(t_minishell *store, char **args)
 		return (!ft_change_directory(store, path));
 	}
 	if (args[2])
-		return (ft_error_message("cd", NULL, ERR_MSG_TOO_MANY_ARGS), EXIT_FAILURE);
+		return (ft_error_message("cd", NULL, ERR_MSG_TOO_MANY_ARGS),
+			EXIT_FAILURE);
 	if (ft_strncmp(args[1], "-", 2) == 0)
 	{
 		path = get_argv(store->envp, "OLDPWD");
