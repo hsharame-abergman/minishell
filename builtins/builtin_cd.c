@@ -6,7 +6,7 @@
 /*   By: abergman <abergman@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/11 18:04:57 by abergman          #+#    #+#             */
-/*   Updated: 2024/10/17 10:32:10 by abergman         ###   ########.fr       */
+/*   Updated: 2024/10/17 10:42:53 by abergman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ void	ft_update_workdirs(t_store *store, char workdir)
 	free_pointer(workdir);
 }
 
-void	*error_message(void)
+void	*ft_error_message(char *a, char *b, char *c)
 {
 }
 
@@ -87,18 +87,18 @@ int	builtin_cd(t_store *store, char **args)
 	{
 		path = get_env_variable(store->envp, "HOME");
 		if (!path || *path == '\0' || ft_isspace(*path))
-			return (ft_error_message("cd", NULL, ERR_MSG_HOME_IS_EMPTY),
+			return (ft_error_message("cd", NULL, "Error\n$HOME is empty"),
 				EXIT_FAILURE);
 		return (!ft_change_directory(store, path));
 	}
 	if (args[2])
-		return (ft_error_message("cd", NULL, ERR_MSG_TOO_MANY_ARGS),
+		return (ft_error_message("cd", NULL, "Error\ntoo many arguments"),
 			EXIT_FAILURE);
 	if (ft_strncmp(args[1], "-", 2) == 0)
 	{
 		path = get_env_variable(store->envp, "OLDPWD");
 		if (!path)
-			return (ft_error_message("cd", NULL, ERR_MSG_OLDPDW_IS_EMTY),
+			return (ft_error_message("cd", NULL, "Error\nOLDPWD is empty"),
 				EXIT_FAILURE);
 		return (!ft_change_directory(store, path));
 	}
