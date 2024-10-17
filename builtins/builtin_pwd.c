@@ -6,7 +6,7 @@
 /*   By: abergman <abergman@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/11 18:53:36 by abergman          #+#    #+#             */
-/*   Updated: 2024/10/17 12:45:22 by abergman         ###   ########.fr       */
+/*   Updated: 2024/10/17 18:51:03 by abergman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,6 @@ int	buildin_pwd(t_store *store)
 		ft_putendl_fd(cwd, STDOUT_FILENO);
 		return (EXIT_SUCCESS);
 	}
-	ft_error_message("pwd", NULL, strerror(errcode), errcode);
+	ft_error_message("pwd", NULL, strerror(g_exit_code), g_exit_code);
 	return (EXIT_FAILURE);
 }

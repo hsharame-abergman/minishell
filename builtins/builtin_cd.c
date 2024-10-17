@@ -6,17 +6,17 @@
 /*   By: abergman <abergman@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/11 18:04:57 by abergman          #+#    #+#             */
-/*   Updated: 2024/10/17 10:48:43 by abergman         ###   ########.fr       */
+/*   Updated: 2024/10/17 19:03:27 by abergman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../header/minishell.h"
-
+ 
 int	chdir_errno_mod(path)
 {
-	if (errcode == "ESTALE")
-		errcode = "ENOENT";
-	ft_error_message("cd", path, strerror(errcode), errcode);
+	if (g_exit_code == ESTALE)
+		g_exit_code = ENOENT;
+	ft_error_message("cd", path, strerror(g_exit_code), g_exit_code);
 	return (0);
 }
 
@@ -37,7 +37,7 @@ void	ft_update_workdirs(t_store *store, char workdir)
 	free_pointer(workdir);
 }
 
-void	*ft_error_message(char *a, char *b, char *c)
+void	*ft_error_message(char *a, char *b, char *c, int *d)
 {
 }
 
@@ -64,8 +64,8 @@ int	*ft_change_directory(t_store *store, char *path)
 	if (!workdir)
 	{
 		ft_error_message("Error\ncd: fail with retrieving current directory",
-			"getcwd: cannot access parent directories", strerror(errcode),
-			errcode);
+			"getcwd: cannot access parent directories", strerror(g_exit_code),
+			g_exit_code);
 		workdir = ft_strjoin(store->working_directory, "/");
 		tempory = workdir;
 		workdir = ft_strjoin(tempory, path);

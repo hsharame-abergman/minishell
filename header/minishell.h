@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hsharame <hsharame@student.42.fr>          +#+  +:+       +#+        */
+/*   By: abergman <abergman@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/02 11:29:45 by hsharame          #+#    #+#             */
-/*   Updated: 2024/10/17 14:00:48 by hsharame         ###   ########.fr       */
+/*   Updated: 2024/10/17 19:05:05 by abergman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@
 # include <stdlib.h>
 # include <unistd.h>
 # include "../libft/libft.h"
+# include "errno.h"
 
 # ifndef PATH_MAX
 #  define PATH_MAX 4096
@@ -123,5 +124,12 @@ t_ast	*parser_redirect(t_token **token, t_ast *last);
 t_ast	*init_tree(t_token **token_list);
 t_ast	*parser(t_token **token_list);
 void	affiche_ast(t_ast *node);
+
+/* ************************************************************************** */
+/*                    Builtins                                                */
+/* ************************************************************************** */
+
+int	*ft_builtins(t_store *store, char **av);
+
 
 #endif
