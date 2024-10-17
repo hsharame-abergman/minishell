@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: abergman <abergman@student.42.fr>          +#+  +:+       +#+         #
+#    By: hsharame <hsharame@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/05/24 18:14:09 by hsharame          #+#    #+#              #
-#    Updated: 2024/10/14 18:24:58 by abergman         ###   ########.fr        #
+#    Updated: 2024/10/17 14:04:14 by hsharame         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,7 +21,7 @@ SRC = ft_atoi.c ft_bzero.c ft_calloc.c ft_isalnum.c ft_isalpha.c ft_isascii.c \
       ft_toupper.c ft_putnbr_fd.c ft_lstnew.c ft_lstadd_front.c ft_lstsize.c \
       ft_dlstlast.c ft_dlstadd_back.c ft_dlstnew.c ft_dlstsize.c ft_dlstclear.c \
       ft_lstlast.c ft_lstadd_back.c ft_lstdelone.c \
-      ft_lstclear.c ft_lstiter.c ft_lstmap.c
+      ft_lstclear.c ft_lstiter.c ft_lstmap.c ft_strcmp.c
 HEAD = libft.h
 OBJS = ft_atoi.o ft_bzero.o ft_calloc.o ft_isalnum.o ft_isalpha.o ft_isascii.o \
       ft_isdigit.o ft_isprint.o ft_itoa.o ft_memchr.o ft_memcmp.o ft_memcpy.o \
@@ -32,7 +32,7 @@ OBJS = ft_atoi.o ft_bzero.o ft_calloc.o ft_isalnum.o ft_isalpha.o ft_isascii.o \
       ft_toupper.o ft_putnbr_fd.o ft_lstnew.o ft_lstadd_front.o ft_lstsize.o \
       ft_dlstlast.o ft_dlstadd_back.o ft_dlstnew.o ft_dlstsize.o ft_dlstclear.o \
       ft_lstlast.o ft_lstadd_back.o ft_lstdelone.o \
-      ft_lstclear.o ft_lstiter.o ft_lstmap.o
+      ft_lstclear.o ft_lstiter.o ft_lstmap.o ft_strcmp.o
 OPTION = -c -I $(HEAD)
 
 all: $(NAME)
