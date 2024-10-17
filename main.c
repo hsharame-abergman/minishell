@@ -6,17 +6,15 @@
 /*   By: abergman <abergman@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/28 13:33:18 by abergman          #+#    #+#             */
-/*   Updated: 2024/10/16 22:58:43 by abergman         ###   ########.fr       */
+/*   Updated: 2024/10/17 10:26:56 by abergman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "header/minishell.h"
 
-global int errcode;
-
 int	main(int ac, char **av, char **envp)
 {
-	t_minishell *data;
+	t_store *data;
 	char	*input;
 
 	(void)ac;
