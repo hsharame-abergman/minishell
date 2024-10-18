@@ -6,7 +6,7 @@
 #    By: hsharame <hsharame@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/09/28 13:34:37 by abergman          #+#    #+#              #
-#    Updated: 2024/10/09 11:07:50 by hsharame         ###   ########.fr        #
+#    Updated: 2024/10/18 18:28:12 by hsharame         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,7 +18,7 @@ OBJS			:= $(patsubst %.c,$(OBJDIR)/%.o,$(SRC))
 
 HEADERS 		= ./header/minishell.h
 
-CC				= cc -g3 -Wall -Wextra -Werror -O3 -pthread 
+CC				= cc -g3 -Wall -Wextra -Werror -O3 -pthread -v
 
 RM				= rm -f
 

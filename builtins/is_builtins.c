@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   is_builtins.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abergman <abergman@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hsharame <hsharame@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/11 17:42:48 by abergman          #+#    #+#             */
-/*   Updated: 2024/10/14 17:15:34 by abergman         ###   ########.fr       */
+/*   Updated: 2024/10/18 17:42:18 by hsharame         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,20 +20,20 @@
 /* ◦ env with no options or arguments			*/
 /* ◦ exit with no options						*/
 
-int	is_builtins(char **av)
+int	is_builtins(t_store *store, char **av)
 {
 	(void)av;
-	if (av[0] == "cd")
-		builtin_cd();
-	else if (av[0] == "echo")
-		builtin_echo();
-	else if (av[0] == "env")
+	if (ft_strcmp(av[0], "cd"))
+		builtin_cd(store, av);
+	else if (ft_strcmp(av[0], "echo"))
+		builtin_echo(av);
+	else if (ft_strcmp(av[0], "env"))
 		builtin_env();
-	else if (av[0] == "exit")
+	else if (ft_strcmp(av[0], "exit"))
 		builtin_exit();
-	else if (av[0] == "export")
-		builtins_export();
-	else if (av[0] == "pwd")
-		builtins_pwd();
+	else if (ft_strcmp(av[0], "export"))
+		builtin_export();
+	else if (ft_strcmp(av[0], "pwd"))
+		builtin_pwd(store);
 	return (1);
 }

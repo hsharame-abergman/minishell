@@ -6,7 +6,7 @@
 /*   By: hsharame <hsharame@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/02 11:29:45 by hsharame          #+#    #+#             */
-/*   Updated: 2024/10/18 17:20:51 by hsharame         ###   ########.fr       */
+/*   Updated: 2024/10/18 18:27:08 by hsharame         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,8 +51,8 @@ typedef struct s_cmd
 	char			**args;
 	bool			pipe;
 	t_redirect		*redirect;
-	struct s_ast	*left;
-	struct s_ast	*right;
+	struct s_cmd	*left;
+	struct s_cmd	*right;
 }	t_cmd;
 
 typedef struct s_token
@@ -85,10 +85,10 @@ typedef struct s_store
 	t_cmd			*pars;
 }					t_store;
 
-int	initial_store(t_store *store, char **envp);
-void	ft_error_message(char *error_msg, char *description, int quotes);
-int	ft_standart_error(int res);
-int	check_input_arguments(t_store *store, int ac, char *av, char **envp);
+int		initial_store(t_store *store, char **envp);
+int	ft_error_message(char *error_msg, char *description, int quotes, int res);
+int		ft_standart_error(int res);
+int	check_input_arguments(t_store *store, int ac, char **av, char **envp);
 
 /* ************************************************************************** */
 /*                     Lexer                                                  */
@@ -130,17 +130,24 @@ void	handle_pipe(t_token **save, t_cmd **current, int *first);
 bool	is_redirection_token(int type);
 bool	is_word_token(int type);
 t_cmd	*create_node(char *value);
-int		count_args(t_token *save, t_cmd *cmd);
+int		count_args(t_token *save);
 void	add_args(t_token *save, t_cmd *cmd);
 t_cmd	*parser_cmd(t_token *token, t_cmd *last);
 t_cmd	*init_tree(t_token **token_list);
-void	*parser(t_store *data, t_token *token_list);
+void	parser(t_store *data, t_token *token_list);
 void	affiche_ast(t_cmd *node);
 
 /* ************************************************************************** */
 /*                    Builtins                                                */
 /* ************************************************************************** */
 
-int	*ft_builtins(t_store *store, char **av);
+int	is_builtins(t_store *store, char **av);
+int	ft_builtins(t_store *store, char **av);
+int	builtin_cd(t_store *store, char **args);
+int	builtin_pwd(t_store *store);
+void	builtin_echo(char **av);
+void builtin_env(void);
+void builtin_exit(void);
+void	builtin_export(void);
 
 #endif

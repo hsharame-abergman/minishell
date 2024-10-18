@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   validate_args.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abergman <abergman@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hsharame <hsharame@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/18 17:08:21 by abergman          #+#    #+#             */
-/*   Updated: 2024/10/18 17:09:23 by abergman         ###   ########.fr       */
+/*   Updated: 2024/10/18 18:01:28 by hsharame         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../header/minishell.h"
 
-int	check_input_arguments(t_store *store, int ac, char *av, char **envp)
+int	check_input_arguments(t_store *store, int ac, char **av, char **envp)
 {
 	if (envp == NULL || *envp == NULL)
 		return (ft_putstr_fd("Error:\nNo environment found. Exiting.", 2), 0);

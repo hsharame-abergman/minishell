@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   initial_store.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abergman <abergman@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hsharame <hsharame@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/18 17:03:12 by abergman          #+#    #+#             */
-/*   Updated: 2024/10/18 17:13:51 by abergman         ###   ########.fr       */
+/*   Updated: 2024/10/18 18:25:03 by hsharame         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,5 @@ int	initial_store(t_store *store, char **envp)
 		return (ft_putstr_fd("TODO: Create error message", 2), 1);
 	store->token = NULL;
 	store->input = NULL;
-	g_exit_code = 0;
 	return (1);
 }

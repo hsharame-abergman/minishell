@@ -3,31 +3,33 @@
 /*                                                        :::      ::::::::   */
 /*   builtin_pwd.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abergman <abergman@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hsharame <hsharame@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/11 18:53:36 by abergman          #+#    #+#             */
-/*   Updated: 2024/10/17 18:51:03 by abergman         ###   ########.fr       */
+/*   Updated: 2024/10/18 17:58:05 by hsharame         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../header/minishell.h"
 
-int	buildin_pwd(t_store *store)
+int	builtin_pwd(t_store *store)
 {
 	char	buffer[PATH_MAX];
-	char	cwd;
+	char	*cwd;
 
+	(void)buffer;
 	if (store->working_directory)
 	{
 		ft_putendl_fd(store->working_directory, STDOUT_FILENO);
 		return (EXIT_SUCCESS);
 	}
-	cwd = get_cwd(buffer, PATH_MAX);
+	cwd = 0;
+	// cwd = get_cwd(buffer, PATH_MAX);
 	if (cwd)
 	{
 		ft_putendl_fd(cwd, STDOUT_FILENO);
 		return (EXIT_SUCCESS);
 	}
-	ft_error_message("pwd", NULL, strerror(g_exit_code), g_exit_code);
+	// ft_error_message("pwd", NULL, strerror(g_exit_code), g_exit_code);
 	return (EXIT_FAILURE);
 }

@@ -6,7 +6,7 @@
 /*   By: hsharame <hsharame@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/10 15:50:50 by hsharame          #+#    #+#             */
-/*   Updated: 2024/10/18 17:08:01 by hsharame         ###   ########.fr       */
+/*   Updated: 2024/10/18 17:30:42 by hsharame         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,18 +28,18 @@ t_cmd	*init_tree(t_token **token_list)
 		if (first == 1)
 			current = handle_command(&save, &last_node, &first);
 		if (is_word_token(save->type))
-			add_args(&save, current);
+			add_args(save, current);
 		if (save->type == PIPE)
 			handle_pipe(&save, &current, &first);
 		if (is_redirection_token(save->type))
-			add_redirect(&save, current);
+			//add_redirect(&save, current);
 		last_node = current;
 		save = save->next;
 	}
 	return (current);
 }
 
-int	count_args(t_token *save, t_cmd *cmd)
+int	count_args(t_token *save)
 {
 	int	i;
 
@@ -58,7 +58,7 @@ void	add_args(t_token *save, t_cmd *cmd)
 	int	i;
 
 	i = 1;
-	count = count_args(save, cmd) + 2;
+	count = count_args(save) + 2;
 	cmd->args = (char **)malloc(sizeof(char *) * count);
 	if (!cmd->args)
 		return ;
@@ -72,16 +72,19 @@ void	add_args(t_token *save, t_cmd *cmd)
 	cmd->args[count - 1] = NULL;
 }
 
-void	*parser(t_store *data, t_token *token_list)
+void	parser(t_store *data, t_token *token_list)
 {
 	t_cmd	*syntax_tree;
 
-	syntax_tree = init_tree(token_list);
-	if (!syntax_tree && !check_cmd(syntax_tree) || !check_grammar(syntax_tree))
+	syntax_tree = init_tree(&token_list);
+	affiche_ast(syntax_tree);
+	data->pars = syntax_tree;
+}
+
+
+/*	if (!syntax_tree && !check_cmd(syntax_tree) || !check_grammar(syntax_tree))
 	{
 		ft_putstr_fd("Syntax error\n", 2);
 		return (NULL);
 	}
-	affiche_ast(syntax_tree);
-	data->pars = syntax_tree;
-}
+	*/

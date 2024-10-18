@@ -3,21 +3,21 @@
 /*                                                        :::      ::::::::   */
 /*   error_handlers.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abergman <abergman@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hsharame <hsharame@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/18 16:53:50 by abergman          #+#    #+#             */
-/*   Updated: 2024/10/18 17:12:58 by abergman         ###   ########.fr       */
+/*   Updated: 2024/10/18 18:00:57 by hsharame         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../header/minishell.h"
 
-void	ft_error_message(char *error_msg, char *description, int quotes)
+int	ft_error_message()
 {
 	char *message;
-	
 	message = ft_strdup("minishell: ");
 	// message = 
+	return (1);
 }
 
 int	ft_standart_error(int res)

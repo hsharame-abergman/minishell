@@ -6,41 +6,44 @@
 /*   By: hsharame <hsharame@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/28 13:33:18 by abergman          #+#    #+#             */
-/*   Updated: 2024/10/18 17:18:46 by hsharame         ###   ########.fr       */
+/*   Updated: 2024/10/18 18:27:59 by hsharame         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "header/minishell.h"
 
-
-int	main(int ac, char **av, char **envp)
+int main(int ac, char **av, char **envp)
 {
-	t_store	*store;
+	t_store store;
+	int g_exit_code;
 
+	g_exit_code = 0;
+	printf("Hello shell");
 	ft_memset(&store, 0, sizeof(t_store));
 
 	if (!check_input_arguments(&store, ac, av, envp) || !initial_store(&store, envp))
-		destroy_minishell(NULL, EXIT_FAILURE);
+		return (0);
+		// destroy_minishell(NULL, EXIT_FAILURE);
 
 	while (1)
 	{
 		ft_putstr_fd("minishell> ", 1);
-		store->input = readline(NULL);
-		if (store->input == NULL)
+		store.input = readline(NULL);
+		if (store.input == NULL)
 		{
 			ft_putstr_fd("Error:\nMinishell was closed", 2);
-			break ;
+			break;
 		}
-		if (store->input)
+		if (store.input)
 		{
-			add_history(store->input);
-			if (lexer(store))
-				g_exit_code = ft_builtins(store, av);
+			add_history(store.input);
+			if (lexer(&store))
+				g_exit_code = ft_builtins(&store, av);
 			else
 				g_exit_code = 1;
 		}
-		free(store->input);
-		//rl_clear_history();
+		free(store.input);
+		// rl_clear_history();
 	}
 	return (0);
 }
