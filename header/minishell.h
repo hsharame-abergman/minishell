@@ -6,17 +6,17 @@
 /*   By: abergman <abergman@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/02 11:29:45 by hsharame          #+#    #+#             */
-/*   Updated: 2024/10/17 19:21:02 by abergman         ###   ########.fr       */
+/*   Updated: 2024/10/18 17:14:03 by abergman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 /*
- *         _____                                                                   
- *     ___|    _|__  ____  ____   _  ____  ______  __   _  ______  ____    ____    
- *    |    \  /  | ||    ||    \ | ||    ||   ___||  |_| ||   ___||    |  |    |   
- *    |     \/   | ||    ||     \| ||    | `-.`-. |   _  ||   ___||    |_ |    |_  
- *    |__/\__/|__|_||____||__/\____||____||______||__| |_||______||______||______| 
- *        |_____|                                                                  
+ *      _____                                                                   
+ *  ___|    _|__  ____  ____   _  ____  ______  __   _  ______  ____    ____    
+ * |    \  /  | ||    ||    \ | ||    ||   ___||  |_| ||   ___||    |  |    |   
+ * |     \/   | ||    ||     \| ||    | `-.`-. |   _  ||   ___||    |_ |    |_  
+ * |__/\__/|__|_||____||__/\____||____||______||__| |_||______||______||______| 
+ *     |_____|                                                                  
  *                                                                                 
  */
 
@@ -61,16 +61,26 @@ typedef struct s_envp
 	struct s_envp	*next;
 }					t_envp;
 
+typedef enum s_mode {
+	SINDLE_COMMAND,
+	INTERACTIVE
+} t_mode;
+
 typedef struct s_store
 {
 	struct s_envp	*envp;
 	char			*input;
 	char			*working_directory;
 	char			*old_working_directory;
+	t_mode			mode_usage;
 	t_token			*token;
 	t_ast			*pars;
 }					t_store;
 
+int	initial_store(t_store *store, char **envp);
+void	ft_error_message(char *error_msg, char *description, int quotes);
+int	ft_standart_error(int res);
+int	check_input_arguments(t_store *store, int ac, char *av, char **envp);
 
 /* ************************************************************************** */
 /*                     LEXER                                                  */
@@ -140,6 +150,5 @@ void	affiche_ast(t_ast *node);
 /* ************************************************************************** */
 
 int	*ft_builtins(t_store *store, char **av);
-
 
 #endif

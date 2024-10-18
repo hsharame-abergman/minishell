@@ -6,7 +6,7 @@
 /*   By: abergman <abergman@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/28 13:33:18 by abergman          #+#    #+#             */
-/*   Updated: 2024/10/17 19:07:10 by abergman         ###   ########.fr       */
+/*   Updated: 2024/10/18 17:08:42 by abergman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,12 +16,11 @@ int	main(int ac, char **av, char **envp)
 {
 	t_store *store;
 
-	(void)ac;
-	(void)av;
-	if (ac != 1 || envp == NULL || *envp == NULL)
-		return (ft_putstr_fd("Error:\nNo environment found. Exiting.", 2), 0);
-	store = builtins(av);
-	// init(&tiny, envp);
+	ft_memset(&store, 0, sizeof(t_store));
+
+	if (!check_input_arguments(&store, ac, av, envp) || !initial_store(&store, envp))
+		destroy_minishell(NULL, EXIT_FAILURE);
+
 	while (1)
 	{
 		ft_putstr_fd("minishell> ", 1);
