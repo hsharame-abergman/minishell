@@ -6,7 +6,7 @@
 /*   By: hsharame <hsharame@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/30 15:48:48 by hsharame          #+#    #+#             */
-/*   Updated: 2024/10/17 13:48:27 by hsharame         ###   ########.fr       */
+/*   Updated: 2024/10/18 17:05:12 by hsharame         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,10 +99,12 @@ bool	lexer(t_store *data)
 		{
 			init_tokens(&data->token, data->input, &i);
 		}
-	}
+	}	
+	if (data->input[i] == '\0')
+		add_token(&data->token, "\0", END);
 	check_pipe(&data->token, data->input, &i);
 	//affiche_tokens(data->token);
-	parser(&data->token);
+	parser(data, data->token);
 	return (true);
 }
 

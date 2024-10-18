@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abergman <abergman@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hsharame <hsharame@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/02 11:29:45 by hsharame          #+#    #+#             */
-/*   Updated: 2024/10/18 17:14:03 by abergman         ###   ########.fr       */
+/*   Updated: 2024/10/18 17:20:51 by hsharame         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,13 +39,21 @@
 
 extern int	g_exit_code;
 
-typedef struct s_ast
+typedef	struct s_redirect
+{
+	
+}	t_redirect;
+
+typedef struct s_cmd
 {
 	char			*value;
-	int				type;
+	char			*path;
+	char			**args;
+	bool			pipe;
+	t_redirect		*redirect;
 	struct s_ast	*left;
 	struct s_ast	*right;
-}	t_ast;
+}	t_cmd;
 
 typedef struct s_token
 {
@@ -74,7 +82,7 @@ typedef struct s_store
 	char			*old_working_directory;
 	t_mode			mode_usage;
 	t_token			*token;
-	t_ast			*pars;
+	t_cmd			*pars;
 }					t_store;
 
 int	initial_store(t_store *store, char **envp);
@@ -83,7 +91,7 @@ int	ft_standart_error(int res);
 int	check_input_arguments(t_store *store, int ac, char *av, char **envp);
 
 /* ************************************************************************** */
-/*                     LEXER                                                  */
+/*                     Lexer                                                  */
 /* ************************************************************************** */
 
 typedef enum e_token_type
@@ -95,7 +103,8 @@ typedef enum e_token_type
 	HEREDOC,
 	APPEND_MODE,
 	CHAR_QUOTE,
-	CHAR_DQUOTE
+	CHAR_DQUOTE,
+	END
 }	t_token_type;
 
 void	check_pipe(t_token **token_list, char *input, int *i);
@@ -113,37 +122,20 @@ void	init_tokens(t_token **token_list, char *input, int *i);
 bool	lexer(t_store *data);
 
 /* ************************************************************************** */
-/*                    PARSER                                                  */
+/*                    Parser                                                  */
 /* ************************************************************************** */
 
-typedef enum e_parser_type
-{
-	CMD		= 1,
-	ARGUMENT,
-	Q_ARGUMENT,
-	DQ_ARGUMENTS,
-	FLAG,
-	NODE_PIPE,
-	REDIRECT_OUT,
-	REDIRECT_IN,
-	NODE_HEREDOC,
-	NODE_APPEND,
-	ERROR	= -1
-}	t_parser_type;
-
+t_cmd	*handle_command(t_token **save, t_cmd **last_node, int *first);
+void	handle_pipe(t_token **save, t_cmd **current, int *first);
 bool	is_redirection_token(int type);
 bool	is_word_token(int type);
-int		get_pars_type(char *value, int type);
-bool	is_flag(char *s);
-bool	is_cmd(char *value);
-t_ast	*create_node(char *value, int type);
-int		ft_strcmp(char *s1, char *s2);
-t_ast	*parser_cmd(t_token *token, t_ast *last);
-t_ast	*parser_pipe(t_token *token, t_ast *last);
-t_ast	*parser_redirect(t_token **token, t_ast *last);
-t_ast	*init_tree(t_token **token_list);
-t_ast	*parser(t_token **token_list);
-void	affiche_ast(t_ast *node);
+t_cmd	*create_node(char *value);
+int		count_args(t_token *save, t_cmd *cmd);
+void	add_args(t_token *save, t_cmd *cmd);
+t_cmd	*parser_cmd(t_token *token, t_cmd *last);
+t_cmd	*init_tree(t_token **token_list);
+void	*parser(t_store *data, t_token *token_list);
+void	affiche_ast(t_cmd *node);
 
 /* ************************************************************************** */
 /*                    Builtins                                                */

@@ -1,42 +1,42 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parser_pipe.c                                      :+:      :+:    :+:   */
+/*   parser_check.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hsharame <hsharame@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/11 15:37:35 by hsharame          #+#    #+#             */
-/*   Updated: 2024/10/18 17:15:35 by hsharame         ###   ########.fr       */
+/*   Created: 2024/10/11 15:37:29 by hsharame          #+#    #+#             */
+/*   Updated: 2024/10/18 17:07:33 by hsharame         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../header/minishell.h"
 
-/*t_cmd	*parser_pipe(t_token *token, t_cmd *last)
+bool	check_cmd(t_cmd *cmd)
 {
 	t_cmd	*current;
 
-	if (!last)
+	current = cmd;
+	while (current)
 	{
-		ft_putstr_fd("syntax error near unexpected token `|'\n", 2);
-		return (NULL);
+		current = current->right;
 	}
-	current = create_node(token->value);
-	last->right = current;
-	current->left = last;
-	return (current);
+	return (true);
 }
 
-void	add_redirect(t_token **token, t_cmd **current)
+bool	check_grammar(t_cmd *cmd)
 {
-	t_token	*temp;
-	t_cmd	*cmd;
+	t_cmd	*current;
 
-	temp = *token;
-	cmd = 
-	if ((*token)->next->type == END)
+	current = cmd;
+	while (current)
 	{
-		ft_putstr_fd("syntax error near unexpected token `newline'\n", 2);
-		return ;
+		if (!current->value[0] == '|')
+		{
+			ft_putstr_fd("syntax error near unexpected token `|'\n", 2);
+			return (false);
+		}
+		current = current->right;
 	}
-}*/
+	return (true);
+}

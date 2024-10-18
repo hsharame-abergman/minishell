@@ -6,50 +6,64 @@
 /*   By: hsharame <hsharame@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/11 15:37:21 by hsharame          #+#    #+#             */
-/*   Updated: 2024/10/17 14:02:43 by hsharame         ###   ########.fr       */
+/*   Updated: 2024/10/18 16:21:52 by hsharame         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../header/minishell.h"
 
-t_ast	*create_node(char *value, int type)
+t_cmd	*create_node(char *value)
 {
-	t_ast	*node;
+	t_cmd	*node;
 
-	node = malloc(sizeof(t_ast));
+	node = (t_cmd *)malloc(sizeof(t_cmd));
 	if (!node)
 		return (NULL);
 	node->value = ft_strdup(value);
-	node->type = type;
+	node->args = NULL;
+	node->pipe = false;
 	node->left = NULL;
 	node->right = NULL;
 	return (node);
 }
 
-void	affiche_ast(t_ast *node)
+bool	is_word_token(int type)
+{
+	if (type == TOKEN_WORD || type == CHAR_DQUOTE || type == CHAR_QUOTE)
+		return (true);
+	else
+		return (false);
+}
+
+bool	is_redirection_token(int type)
+{
+	if (type == REDIRECT_INPUT || type == REDIRECT_OUTPUT
+		|| type == HEREDOC || type == APPEND_MODE)
+		return (true);
+	else
+		return (false);
+}
+
+void	affiche_ast(t_cmd *node)
 {
 	int	i;
 
 	i = 1;
-	while (node != NULL)
+	if (!node)
+		return ;
+	printf("Commande : %s\n", node->value);
+	//printf("PATH : %s\n", node->path);
+	if (node->args)
 	{
-		if (node->left)
+		printf("Arguments : ");
+		while (node->args[i])
 		{
-			printf("%d. left:%s %s right:%s\n", i, node->left->value, node->value,
-				node->right->value);
-			printf("%d. left:%d %d right:%d\n", i, node->left->type, node->type,
-				node->right->type);
+			printf("%s ", node->args[i]);
+				i++;
 		}
-		else if (node->right)
-		{
-			printf("%d. %s right:%s\n", i, node->value, node->right->value);
-			printf("%d. %d right:%d\n", i, node->type, node->right->type);
-		}
-		else
-		{
-			printf("%d. %s\n", i, node->value);
-			printf("%d. %d\n", i, node->type);
-		}
-		i++;
+		printf("\n");
 	}
+	if (node->pipe)
+		printf("Pipe detected\n");
+	affiche_ast(node->right);
 }
