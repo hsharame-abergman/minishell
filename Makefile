@@ -6,7 +6,7 @@
 #    By: hsharame <hsharame@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/09/28 13:34:37 by abergman          #+#    #+#              #
-#    Updated: 2024/10/18 18:28:12 by hsharame         ###   ########.fr        #
+#    Updated: 2024/10/21 12:56:41 by hsharame         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -48,5 +48,5 @@ fclean: clean
 
 re: fclean all
 
-.SILENT:
+.SILENT: .
 .PHONY: all clean fclean re

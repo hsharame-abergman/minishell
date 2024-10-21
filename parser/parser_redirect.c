@@ -1,42 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parser_check.c                                     :+:      :+:    :+:   */
+/*   parser_redirect.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hsharame <hsharame@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/11 15:37:29 by hsharame          #+#    #+#             */
-/*   Updated: 2024/10/18 17:32:12 by hsharame         ###   ########.fr       */
+/*   Created: 2024/10/21 16:46:32 by hsharame          #+#    #+#             */
+/*   Updated: 2024/10/21 18:53:39 by hsharame         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../header/minishell.h"
 
-/*bool	check_cmd(t_cmd *cmd)
+void	add_redirect(t_token **save, t_cmd **current, t_store *data)
 {
-	t_cmd	*current;
-
-	current = cmd;
-	while (current)
+	(void)data;
+	if ((*save)->next->type == END)
 	{
-		current = current->right;
+		error_syntax("syntax error near unexpected token `newline'\n", 2);
+		(*current)->error = true;
+		return ;
 	}
-	return (true);
+	//(*current)->redirect = 
 }
-
-bool	check_grammar(t_cmd *cmd)
-{
-	t_cmd	*current;
-
-	current = cmd;
-	while (current)
-	{
-		if (current->value[0] == '|')
-		{
-			ft_putstr_fd("syntax error near unexpected token `|'\n", 2);
-			return (false);
-		}
-		current = current->right;
-	}
-	return (true);
-}*/

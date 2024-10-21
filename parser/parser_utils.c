@@ -6,7 +6,7 @@
 /*   By: hsharame <hsharame@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/11 15:37:21 by hsharame          #+#    #+#             */
-/*   Updated: 2024/10/18 16:21:52 by hsharame         ###   ########.fr       */
+/*   Updated: 2024/10/21 17:32:30 by hsharame         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,10 @@ t_cmd	*create_node(char *value)
 	if (!node)
 		return (NULL);
 	node->value = ft_strdup(value);
+	node->path = NULL;
 	node->args = NULL;
 	node->pipe = false;
+	node->error = false;
 	node->left = NULL;
 	node->right = NULL;
 	return (node);
@@ -58,7 +60,7 @@ void	affiche_ast(t_cmd *node)
 		printf("Arguments : ");
 		while (node->args[i])
 		{
-			printf("%s ", node->args[i]);
+			printf("%d: %s ", i, node->args[i]);
 				i++;
 		}
 		printf("\n");

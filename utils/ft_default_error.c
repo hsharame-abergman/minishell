@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: abergman <abergman@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/21 18:49:41 by abergman          #+#    #+#             */
-/*   Updated: 2024/10/21 18:50:55 by abergman         ###   ########.fr       */
+/*   Created: 2024/10/18 16:53:50 by abergman          #+#    #+#             */
+/*   Updated: 2024/10/18 18:00:57 by hsharame         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,4 +16,14 @@ int	ft_defauit_error(int res)
 {
 	ft_putstr_fd("Error\nTry again.", 2);
 	return (res);
+}
+
+int	error_syntax(char *s, int error)
+{
+	char	*str;
+
+	str = ft_strjoin("minishell: ", s);
+	ft_putstr_fd(str, 2);
+	free(str);
+	return (error);
 }

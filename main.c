@@ -6,7 +6,7 @@
 /*   By: hsharame <hsharame@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/28 13:33:18 by abergman          #+#    #+#             */
-/*   Updated: 2024/10/18 18:27:59 by hsharame         ###   ########.fr       */
+/*   Updated: 2024/10/21 12:11:22 by hsharame         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,13 +18,10 @@ int main(int ac, char **av, char **envp)
 	int g_exit_code;
 
 	g_exit_code = 0;
-	printf("Hello shell");
 	ft_memset(&store, 0, sizeof(t_store));
-
 	if (!check_input_arguments(&store, ac, av, envp) || !initial_store(&store, envp))
 		return (0);
 		// destroy_minishell(NULL, EXIT_FAILURE);
-
 	while (1)
 	{
 		ft_putstr_fd("minishell> ", 1);

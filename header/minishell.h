@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abergman <abergman@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hsharame <hsharame@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/02 11:29:45 by hsharame          #+#    #+#             */
-/*   Updated: 2024/10/21 18:50:42 by abergman         ###   ########.fr       */
+/*   Updated: 2024/10/21 19:02:07 by hsharame         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,11 @@ extern int	g_exit_code;
 
 typedef	struct s_redirect
 {
-	
+	int		fd_in;
+	int		fd_out;
+	char	*inile;
+	char	*outfile;
+	char	*delimiter;
 }	t_redirect;
 
 typedef struct s_cmd
@@ -50,6 +54,7 @@ typedef struct s_cmd
 	char			*path;
 	char			**args;
 	bool			pipe;
+	bool			error;
 	t_redirect		*redirect;
 	struct s_cmd	*left;
 	struct s_cmd	*right;
@@ -85,6 +90,11 @@ typedef struct s_store
 	t_cmd			*pars;
 }					t_store;
 
+/* ************************************************************************** */
+/*                     Utils                                                  */
+/* ************************************************************************** */
+
+int	error_syntax(char *s, int error);
 int		initial_store(t_store *store, char **envp);
 char	*ft_strjoin2(char *dest, char *str);
 int		ft_error_handler(char *cmd, char *desc, char errmsg, int errcode);
@@ -105,7 +115,8 @@ typedef enum e_token_type
 	APPEND_MODE,
 	CHAR_QUOTE,
 	CHAR_DQUOTE,
-	END
+	END,
+	ERROR
 }	t_token_type;
 
 void	check_pipe(t_token **token_list, char *input, int *i);
@@ -126,15 +137,16 @@ bool	lexer(t_store *data);
 /*                    Parser                                                  */
 /* ************************************************************************** */
 
-t_cmd	*handle_command(t_token **save, t_cmd **last_node, int *first);
+void	add_redirect(t_token **save, t_cmd **current, t_store *data);
+t_cmd	*handle_cmd(t_token **save, t_cmd **last, int *first);
 void	handle_pipe(t_token **save, t_cmd **current, int *first);
 bool	is_redirection_token(int type);
 bool	is_word_token(int type);
 t_cmd	*create_node(char *value);
 int		count_args(t_token *save);
-void	add_args(t_token *save, t_cmd *cmd);
+void	add_args(t_token **save, t_cmd *cmd);
 t_cmd	*parser_cmd(t_token *token, t_cmd *last);
-t_cmd	*init_tree(t_token **token_list);
+t_cmd	*init_tree(t_token **token_list, t_store *data);
 void	parser(t_store *data, t_token *token_list);
 void	affiche_ast(t_cmd *node);
 

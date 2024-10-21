@@ -6,7 +6,7 @@
 /*   By: hsharame <hsharame@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/02 11:49:32 by hsharame          #+#    #+#             */
-/*   Updated: 2024/10/17 13:30:01 by hsharame         ###   ########.fr       */
+/*   Updated: 2024/10/21 17:16:38 by hsharame         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ void	check_pipe(t_token **token_list, char *input, int *i)
 	char	*extra_input;
 
 	current = *token_list;
-	while (current->next != NULL)
+	while (current->next->type != END)
 		current = current->next;
 	if (current->type == PIPE)
 	{
