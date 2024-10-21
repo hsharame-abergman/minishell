@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtin_cd.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hsharame <hsharame@student.42.fr>          +#+  +:+       +#+        */
+/*   By: abergman <abergman@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/11 18:04:57 by abergman          #+#    #+#             */
-/*   Updated: 2024/10/18 18:24:50 by hsharame         ###   ########.fr       */
+/*   Updated: 2024/10/21 16:37:52 by abergman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ static int	chdir_errno_mod(char *path)
 	(void)path;
 	if (g_exit_code == ESTALE)
 		g_exit_code = ENOENT;
-	// ft_error_message("cd", path, strerror(g_exit_code), g_exit_code);
+	ft_error_message("cd", path, strerror(g_exit_code), g_exit_code);
 	return (0);
 }
 
