@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hsharame <hsharame@student.42.fr>          +#+  +:+       +#+        */
+/*   By: abergman <abergman@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/02 11:29:45 by hsharame          #+#    #+#             */
-/*   Updated: 2024/10/18 18:27:08 by hsharame         ###   ########.fr       */
+/*   Updated: 2024/10/21 18:50:42 by abergman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,9 +86,10 @@ typedef struct s_store
 }					t_store;
 
 int		initial_store(t_store *store, char **envp);
-int	ft_error_message(char *error_msg, char *description, int quotes, int res);
-int		ft_standart_error(int res);
-int	check_input_arguments(t_store *store, int ac, char **av, char **envp);
+char	*ft_strjoin2(char *dest, char *str);
+int		ft_error_handler(char *cmd, char *desc, char errmsg, int errcode);
+int		ft_default_error(int res);
+int		check_input_arguments(t_store *store, int ac, char **av, char **envp);
 
 /* ************************************************************************** */
 /*                     Lexer                                                  */

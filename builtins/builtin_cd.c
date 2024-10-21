@@ -6,19 +6,21 @@
 /*   By: abergman <abergman@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/11 18:04:57 by abergman          #+#    #+#             */
-/*   Updated: 2024/10/21 16:37:52 by abergman         ###   ########.fr       */
+/*   Updated: 2024/10/21 18:57:19 by abergman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../header/minishell.h"
- 
+
 static int	chdir_errno_mod(char *path)
 {
-	int g_exit_code = 0;
+	int	g_exit_code;
+
+	g_exit_code = 0;
 	(void)path;
 	if (g_exit_code == ESTALE)
 		g_exit_code = ENOENT;
-	ft_error_message("cd", path, strerror(g_exit_code), g_exit_code);
+	ft_error_handler("cd", path, strerror(g_exit_code), g_exit_code);
 	return (0);
 }
 
@@ -41,7 +43,8 @@ void	ft_update_workdirs(t_store *store, char *workdir)
 
 char	*get_env_variable(t_envp *envs, char *key)
 {
-	char *res;
+	char	*res;
+
 	while (envs->next)
 	{
 		if (envs->key == key)
@@ -63,9 +66,9 @@ int	ft_change_directory(t_store *store, char *path)
 	workdir = getcwd(cwd, PATH_MAX);
 	if (!workdir)
 	{
-		// ft_error_message("Error\ncd: fail with retrieving current directory",
-		// 	"getcwd: cannot access parent directories", strerror(g_exit_code),
-		// 	g_exit_code);
+		ft_error_handler("Error\ncd: fail with retrieving current directory",
+			"getcwd: cannot access parent directories", strerror(g_exit_code),
+			g_exit_code);
 		workdir = ft_strjoin(store->working_directory, "/");
 		tempory = workdir;
 		workdir = ft_strjoin(tempory, path);
@@ -87,19 +90,19 @@ int	builtin_cd(t_store *store, char **args)
 	{
 		path = get_env_variable(store->envp, "HOME");
 		if (!path || *path == '\0' || ft_isspace(*path))
-			// return (ft_error_message("cd", NULL, "Error\n$HOME is empty"),
-			// 	EXIT_FAILURE);
+			return (ft_error_handler("cd", NULL, "Error\n$HOME is empty",
+					EXIT_FAILURE));
 		return (!ft_change_directory(store, path));
 	}
 	if (args[2])
-		// return (ft_error_message("cd", NULL, "Error\ntoo many arguments"),
-		// 	EXIT_FAILURE);
+		return (ft_error_handler("cd", NULL, "Error\ntoo many arguments",
+				EXIT_FAILURE));
 	if (ft_strncmp(args[1], "-", 2) == 0)
 	{
 		path = get_env_variable(store->envp, "OLDPWD");
 		if (!path)
-			// return (ft_error_message("cd", NULL, "Error\nOLDPWD is empty"),
-				// EXIT_FAILURE);
+			return (ft_error_handler("cd", NULL, "Error\nOLDPWD is empty",
+					EXIT_FAILURE));
 		return (!ft_change_directory(store, path));
 	}
 	// return (!ft_change_directory(store, *args[1]));
