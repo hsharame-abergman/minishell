@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hsharame <hsharame@student.42.fr>          +#+  +:+       +#+        */
+/*   By: abergman <abergman@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/02 11:29:45 by hsharame          #+#    #+#             */
-/*   Updated: 2024/10/22 11:44:13 by hsharame         ###   ########.fr       */
+/*   Updated: 2024/10/22 16:13:54 by abergman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@
 # include <readline/history.h>
 # include <readline/readline.h>
 # include <stdbool.h>
+# include <stddef.h>
 # include <stdio.h>
 # include <stdlib.h>
 # include <unistd.h>
@@ -81,7 +82,7 @@ typedef enum s_mode {
 
 typedef struct s_store
 {
-	struct s_envp	*envp;
+	char	**envp;
 	char			*input;
 	char			*working_directory;
 	char			*old_working_directory;
@@ -98,9 +99,11 @@ void	free_tab(char **tab);
 int		error_syntax(char *s, int error);
 int		initial_store(t_store *store, char **envp);
 char	*ft_strjoin2(char *dest, char *str);
-int		ft_error_handler(char *cmd, char *desc, char errmsg, int errcode);
-int		ft_default_error(int res);
+int		ft_error_handler(char *cmd, char *detail, char *errmsg, int errcode);
+int		ft_defauit_error(int res);
 int		check_input_arguments(t_store *store, int ac, char **av, char **envp);
+void	ft_free_pointer(void *pointer);
+int		ft_set_env(t_store *store, char *key, char *value);
 
 /* ************************************************************************** */
 /*                     Lexer                                                  */

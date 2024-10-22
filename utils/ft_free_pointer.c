@@ -1,35 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   builtin_pwd.c                                      :+:      :+:    :+:   */
+/*   ft_free_pointer.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: abergman <abergman@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/11 18:53:36 by abergman          #+#    #+#             */
-/*   Updated: 2024/10/21 19:18:19 by abergman         ###   ########.fr       */
+/*   Created: 2024/10/21 19:00:34 by abergman          #+#    #+#             */
+/*   Updated: 2024/10/21 19:12:05 by abergman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../header/minishell.h"
 
-int	builtin_pwd(t_store *store)
+void	ft_free_pointer(void *pointer)
 {
-	char	buffer[PATH_MAX];
-	char	*cwd;
-
-	(void)buffer;
-	if (store->working_directory)
+	if (pointer != NULL)
 	{
-		ft_putendl_fd(store->working_directory, STDOUT_FILENO);
-		return (EXIT_SUCCESS);
+		free(pointer);
+		pointer = NULL;
 	}
-	cwd = 0;
-	cwd = getcwd(buffer, PATH_MAX);
-	if (cwd)
-	{
-		ft_putendl_fd(cwd, STDOUT_FILENO);
-		return (EXIT_SUCCESS);
-	}
-	ft_error_handler("pwd", NULL, strerror(g_exit_code), g_exit_code);
-	return (EXIT_FAILURE);
 }

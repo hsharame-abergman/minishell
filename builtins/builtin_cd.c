@@ -6,7 +6,7 @@
 /*   By: abergman <abergman@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/11 18:04:57 by abergman          #+#    #+#             */
-/*   Updated: 2024/10/21 18:57:19 by abergman         ###   ########.fr       */
+/*   Updated: 2024/10/21 19:27:48 by abergman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,19 +26,19 @@ static int	chdir_errno_mod(char *path)
 
 void	ft_update_workdirs(t_store *store, char *workdir)
 {
-	// set_env_variable(store, "OLDPWD", (store->envp, "PWD"));
-	// set_env_variable(store, "PWD", workdir);
+	// ft_set_env(store, "OLDPWD", (store->envp, "PWD"));
+	// ft_set_env(store, "PWD", workdir);
 	if (store->old_working_directory)
 	{
-		// free_pointer(store->old_working_directory);
+		free_pointer(store->old_working_directory);
 		store->old_working_directory = ft_strdup(store->working_directory);
 	}
 	if (store->working_directory)
 	{
-		// free_pointer(store->working_directory);
+		free_pointer(store->working_directory);
 		store->working_directory = ft_strdup(workdir);
 	}
-	// free_pointer(workdir);
+	free_pointer(workdir);
 }
 
 char	*get_env_variable(t_envp *envs, char *key)
@@ -72,7 +72,7 @@ int	ft_change_directory(t_store *store, char *path)
 		workdir = ft_strjoin(store->working_directory, "/");
 		tempory = workdir;
 		workdir = ft_strjoin(tempory, path);
-		// free_pointer(tempory);
+		free_pointer(tempory);
 	}
 	else
 	{
@@ -105,6 +105,6 @@ int	builtin_cd(t_store *store, char **args)
 					EXIT_FAILURE));
 		return (!ft_change_directory(store, path));
 	}
-	// return (!ft_change_directory(store, *args[1]));
+	return (!ft_change_directory(store, *args[1]));
 	return (0);
 }
