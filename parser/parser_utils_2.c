@@ -1,23 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   var_env.c                                          :+:      :+:    :+:   */
+/*   parser_utils_2.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hsharame <hsharame@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/22 12:04:51 by hsharame          #+#    #+#             */
-/*   Updated: 2024/10/22 12:09:31 by hsharame         ###   ########.fr       */
+/*   Created: 2024/10/22 16:03:14 by hsharame          #+#    #+#             */
+/*   Updated: 2024/10/22 16:15:14 by hsharame         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../header/minishell.h"
 
-void	check_var(t_cmd *cmd)
+void	check_if_exists(t_cmd *node)
 {
-	while (cmd && cmd->left)
+	if (node->path == NULL)
+		cmd_error(node);
+	else
 	{
-		if (ft_strcmp(cmd->value, "echo"))
-			find_var(cmd);
-		cmd = cmd->left;
+		
 	}
+}
+
+void	cmd_error(t_cmd *node)
+{
+	node->error = true;
+	printf("minishell: %s:command not found\n", node->value);
+	exit ;
 }
