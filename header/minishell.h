@@ -3,14 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abergman <abergman@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hsharame <hsharame@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/02 11:29:45 by hsharame          #+#    #+#             */
-<<<<<<< Updated upstream
-/*   Updated: 2024/10/22 16:13:54 by abergman         ###   ########.fr       */
-=======
-/*   Updated: 2024/10/22 16:00:11 by hsharame         ###   ########.fr       */
->>>>>>> Stashed changes
+/*   Updated: 2024/10/22 16:25:47 by hsharame         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
