@@ -6,7 +6,7 @@
 /*   By: hsharame <hsharame@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/02 11:29:45 by hsharame          #+#    #+#             */
-/*   Updated: 2024/10/21 19:02:07 by hsharame         ###   ########.fr       */
+/*   Updated: 2024/10/22 11:44:13 by hsharame         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@
 
 extern int	g_exit_code;
 
-typedef	struct s_redirect
+typedef struct s_redirect
 {
 	int		fd_in;
 	int		fd_out;
@@ -94,7 +94,8 @@ typedef struct s_store
 /*                     Utils                                                  */
 /* ************************************************************************** */
 
-int	error_syntax(char *s, int error);
+void	free_tab(char **tab);
+int		error_syntax(char *s, int error);
 int		initial_store(t_store *store, char **envp);
 char	*ft_strjoin2(char *dest, char *str);
 int		ft_error_handler(char *cmd, char *desc, char errmsg, int errcode);
@@ -137,6 +138,9 @@ bool	lexer(t_store *data);
 /*                    Parser                                                  */
 /* ************************************************************************** */
 
+bool	is_builtin(char *s);
+char	*find_path(char **env, char *cmd);
+char	*define_path(char *cmd);
 void	add_redirect(t_token **save, t_cmd **current, t_store *data);
 t_cmd	*handle_cmd(t_token **save, t_cmd **last, int *first);
 void	handle_pipe(t_token **save, t_cmd **current, int *first);

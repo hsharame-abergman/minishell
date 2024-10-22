@@ -6,7 +6,7 @@
 /*   By: hsharame <hsharame@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/10 15:50:50 by hsharame          #+#    #+#             */
-/*   Updated: 2024/10/21 18:52:19 by hsharame         ###   ########.fr       */
+/*   Updated: 2024/10/22 12:06:48 by hsharame         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,18 +78,13 @@ void	add_args(t_token **save, t_cmd *cmd)
 void	parser(t_store *data, t_token *token_list)
 {
 	t_cmd	*syntax_tree;
+	t_cmd	*temp;
 
 	syntax_tree = init_tree(&token_list, data);
 	while (syntax_tree->left)
 		syntax_tree = syntax_tree->left;
+	temp = syntax_tree;
+	check_var(temp);
 	affiche_ast(syntax_tree);
 	data->pars = syntax_tree;
 }
-
-
-/*	if (!syntax_tree && !check_cmd(syntax_tree) || !check_grammar(syntax_tree))
-	{
-		ft_putstr_fd("Syntax error\n", 2);
-		return (NULL);
-	}
-	*/

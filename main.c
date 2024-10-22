@@ -6,20 +6,21 @@
 /*   By: hsharame <hsharame@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/28 13:33:18 by abergman          #+#    #+#             */
-/*   Updated: 2024/10/21 12:11:22 by hsharame         ###   ########.fr       */
+/*   Updated: 2024/10/22 11:46:07 by hsharame         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "header/minishell.h"
 
-int main(int ac, char **av, char **envp)
+int	main(int ac, char **av, char **envp)
 {
-	t_store store;
-	int g_exit_code;
+	t_store	store;
+	int		g_exit_code;
 
 	g_exit_code = 0;
 	ft_memset(&store, 0, sizeof(t_store));
-	if (!check_input_arguments(&store, ac, av, envp) || !initial_store(&store, envp))
+	if (!check_input_arguments(&store, ac, av, envp)
+		|| !initial_store(&store, envp))
 		return (0);
 		// destroy_minishell(NULL, EXIT_FAILURE);
 	while (1)
@@ -29,7 +30,7 @@ int main(int ac, char **av, char **envp)
 		if (store.input == NULL)
 		{
 			ft_putstr_fd("Error:\nMinishell was closed", 2);
-			break;
+			break ;
 		}
 		if (store.input)
 		{

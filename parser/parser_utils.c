@@ -6,7 +6,7 @@
 /*   By: hsharame <hsharame@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/11 15:37:21 by hsharame          #+#    #+#             */
-/*   Updated: 2024/10/21 17:32:30 by hsharame         ###   ########.fr       */
+/*   Updated: 2024/10/22 11:38:58 by hsharame         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,23 @@ bool	is_redirection_token(int type)
 		return (false);
 }
 
+bool	is_builtin(char *s)
+{
+	if (ft_strcmp(s, "cd"))
+		return (true);
+	else if (ft_strcmp(s, "echo"))
+		return (true);
+	else if (ft_strcmp(s, "env"))
+		return (true);
+	else if (ft_strcmp(s, "exit"))
+		return (true);
+	else if (ft_strcmp(s, "export"))
+		return (true);
+	else if (ft_strcmp(s, "pwd"))
+		return (true);
+	return (false);
+}
+
 void	affiche_ast(t_cmd *node)
 {
 	int	i;
@@ -54,7 +71,7 @@ void	affiche_ast(t_cmd *node)
 	if (!node)
 		return ;
 	printf("Commande : %s\n", node->value);
-	//printf("PATH : %s\n", node->path);
+	printf("PATH : %s\n", node->path);
 	if (node->args)
 	{
 		printf("Arguments : ");

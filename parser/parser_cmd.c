@@ -6,7 +6,7 @@
 /*   By: hsharame <hsharame@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/11 15:37:39 by hsharame          #+#    #+#             */
-/*   Updated: 2024/10/21 18:53:15 by hsharame         ###   ########.fr       */
+/*   Updated: 2024/10/22 11:56:58 by hsharame         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,15 +17,16 @@ char	*find_path(char **env, char *cmd)
 	char	*path;
 	int		i;
 
-	(void)cmd;
-	path = NULL;
 	i = 0;
 	while (env[i])
 	{
-		printf("%s\n", env[i]);
+		path = ft_strjoin(env[i], cmd);
+		if (access(path, X_OK) == 0)
+			return (path);
+		free(path);
 		i++;
 	}
-	return (path);
+	return (NULL);
 }
 
 char	*define_path(char *cmd)
@@ -40,6 +41,8 @@ char	*define_path(char *cmd)
 	env_dir = ft_split(path_env, ':');
 	cmd = ft_strjoin("/", cmd);
 	path = find_path(env_dir, cmd);
+	free(cmd);
+	free_tab(env_dir);
 	return (path);
 }
 
@@ -53,10 +56,15 @@ t_cmd	*parser_cmd(t_token *token, t_cmd *last)
 		last->right = current;
 		current->left = last;
 	}
-	if (!ft_strchr(current->value, '/'))
-		current->path = define_path(current->value);
-	else
+	if (is_builtin(current->value))
 		current->path = ft_strdup(current->value);
+	else
+	{
+		if (!ft_strchr(current->value, '/'))
+			current->path = define_path(current->value);
+		else
+			current->path = ft_strdup(current->value);
+	}
 	return (current);
 }
 
