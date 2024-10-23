@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hsharame <hsharame@student.42.fr>          +#+  +:+       +#+        */
+/*   By: abergman <abergman@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/02 11:29:45 by hsharame          #+#    #+#             */
-/*   Updated: 2024/10/22 16:25:47 by hsharame         ###   ########.fr       */
+/*   Updated: 2024/10/23 13:08:06 by abergman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,6 +104,7 @@ int		ft_defauit_error(int res);
 int		check_input_arguments(t_store *store, int ac, char **av, char **envp);
 void	ft_free_pointer(void *pointer);
 int		ft_set_env(t_store *store, char *key, char *value);
+int		ft_search_flag(char *str, char flag);
 
 /* ************************************************************************** */
 /*                     Lexer                                                  */

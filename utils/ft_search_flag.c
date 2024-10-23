@@ -1,39 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   builtin_echo.c                                     :+:      :+:    :+:   */
+/*   ft_search_flag.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: abergman <abergman@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/11 17:46:04 by abergman          #+#    #+#             */
-/*   Updated: 2024/10/23 13:07:18 by abergman         ###   ########.fr       */
+/*   Created: 2024/10/23 13:04:28 by abergman          #+#    #+#             */
+/*   Updated: 2024/10/23 13:07:48 by abergman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../header/minishell.h"
 
-static void	ft_echo_util(char **av, int is_newline, int index)
+int ft_search_flag(char *str, char flag)
 {
-	if (!av[index])
-	{
-		if (!is_newline)
-			ft_putchar_fd("\n", STDERR_FILENO);
-		return ;
-	}
-}
+	int index;
+	int is_flag;
 
-void builtin_echo(char **av)
-{
-	int	index;
-	int	is_n;
-
-	index = 1;
-	is_n = 0;
-	while (av[index] && ft_search_flag(av[index], "n"))
-	{
-		is_n = 1;
+	is_flag = 0;
+	index = 0;
+	if (str[index] != '-')
+		return (is_flag);
+	index++;
+	while (str[index] && str[index] == flag)
 		index++;
-	}
-	ft_echo_util(av, is_n, index);
-	return (EXIT_SUCCESS);
+	if (str[index] == '\0')
+		is_flag = 1;
+	return (is_flag); 
 }

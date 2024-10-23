@@ -6,7 +6,7 @@
 /*   By: abergman <abergman@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/11 18:04:57 by abergman          #+#    #+#             */
-/*   Updated: 2024/10/21 19:27:48 by abergman         ###   ########.fr       */
+/*   Updated: 2024/10/22 18:08:05 by abergman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,8 @@ static int	chdir_errno_mod(char *path)
 
 void	ft_update_workdirs(t_store *store, char *workdir)
 {
-	// ft_set_env(store, "OLDPWD", (store->envp, "PWD"));
-	// ft_set_env(store, "PWD", workdir);
+	ft_set_env(store, "OLDPWD", (store->envp, "PWD"));
+	ft_set_env(store, "PWD", workdir);
 	if (store->old_working_directory)
 	{
 		free_pointer(store->old_working_directory);
