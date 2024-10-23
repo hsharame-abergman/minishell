@@ -6,7 +6,7 @@
 /*   By: hsharame <hsharame@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/02 14:09:39 by hsharame          #+#    #+#             */
-/*   Updated: 2024/10/14 11:59:06 by hsharame         ###   ########.fr       */
+/*   Updated: 2024/10/23 15:23:14 by hsharame         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,12 +17,12 @@ int	token_quotes(t_token **token_list, char *input, int *i, char quote)
 	int		start;
 	char	*value;
 
-	start = ++(*i);
+	start = *i;
 	while (input[*i] && input[*i] != quote)
 		(*i)++;
 	if (input[*i] != quote)
 		return (-1);
-	value = ft_substr(input, start, (size_t)(*i - start));
+	value = ft_substr(input, start, (size_t)(*i - start + 1));
 	if (quote == 39)
 		add_token(token_list, value, CHAR_QUOTE);
 	else if (quote == 34)
@@ -39,7 +39,7 @@ void	token_quotes_error(t_token **token_list, char *input, char quote)
 	start = 0;
 	while (input[start] != quote)
 		start++;
-	value = ft_substr(input, start + 1, (size_t)(ft_strlen(input) - start - 3));
+	value = ft_substr(input, start, (size_t)(ft_strlen(input) - start - 2));
 	value = ft_strjoin(value, "\n");
 	if (quote == 39)
 		add_token(token_list, value, CHAR_QUOTE);
@@ -55,21 +55,20 @@ void	quotes(t_token **token_list, char *input, int *i)
 	quote = input[*i];
 	if (token_quotes(token_list, input, i, quote) == -1)
 	{
-		ft_putstr_fd("> ", 1);
-		extra_input = readline(NULL);
+		extra_input = readline("> ");
 		while (extra_input)
 		{
 			input = ft_strjoin(input, extra_input);
 			input = ft_strjoin(input, "\n");
-			(*i) += ft_strlen(extra_input);
+			(*i) += ft_strlen(extra_input) + 1;
 			if (ft_strchr(extra_input, quote) != NULL)
 			{
 				token_quotes_error(token_list, input, quote);
 				free(extra_input);
 				break ;
 			}
-			ft_putstr_fd("> ", 1);
-			extra_input = readline(NULL);
+			free(extra_input);
+			extra_input = readline("> ");
 		}
 	}
 }

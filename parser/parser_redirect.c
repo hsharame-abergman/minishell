@@ -6,7 +6,7 @@
 /*   By: hsharame <hsharame@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/21 16:46:32 by hsharame          #+#    #+#             */
-/*   Updated: 2024/10/22 15:59:34 by hsharame         ###   ########.fr       */
+/*   Updated: 2024/10/23 18:09:35 by hsharame         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 /*
 	<< HEREDOC
 	< REDIRECT_INPUT
-	>> APPEND_MODE);
+	>> APPEND_MODE
 	> REDIRECT_OUTPUT
 */
 
@@ -35,4 +35,37 @@ void	add_redirect(t_token **save, t_cmd **current, t_store *data)
 		parse_heredoc(data, current, save);
 	else if ((*save)->type == APPEND_MODE)
 		parse_append(current, save);
+}
+
+void	parse_append(t_cmd **cmd, t_token **token)
+{
+	t_token	*temp;
+
+	temp = *token;
+	create_redirect(*cmd);
+	open_file_append((*cmd)->redirect, temp->next->value);
+	temp = temp->next->next;
+	*token = temp;
+}
+
+void	parse_input(t_cmd **cmd, t_token **token)
+{
+	t_token	*temp;
+
+	temp = *token;
+	create_redirect(*cmd);
+	open_input((*cmd)->redirect, temp->next->value);
+	temp = temp->next->next;
+	*token = temp;
+}
+
+void	parse_trunc(t_cmd **cmd, t_token **token)
+{
+	t_token	*temp;
+
+	temp = *token;
+	create_redirect(*cmd);
+	open_file_trunc((*cmd)->redirect, temp->next->value);
+	temp = temp->next->next;
+	*token = temp;
 }

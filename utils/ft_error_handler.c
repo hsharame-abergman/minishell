@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_error_handler.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abergman <abergman@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hsharame <hsharame@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/18 16:53:50 by abergman          #+#    #+#             */
-/*   Updated: 2024/10/21 18:50:25 by abergman         ###   ########.fr       */
+/*   Updated: 2024/10/23 18:15:56 by hsharame         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,6 @@ int	ft_error_handler(char *cmd, char *detail, char *errmsg, int errcode)
 	}
 	message = ft_strjoin2(message, errmsg);
 	ft_putstr_fd(message, STDERR_FILENO);
-	free_pointer(message);
+	ft_free_pointer(message);
 	return (errcode);
 }

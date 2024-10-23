@@ -6,7 +6,7 @@
 /*   By: hsharame <hsharame@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/11 15:37:21 by hsharame          #+#    #+#             */
-/*   Updated: 2024/10/22 11:38:58 by hsharame         ###   ########.fr       */
+/*   Updated: 2024/10/23 13:29:53 by hsharame         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@ t_cmd	*create_node(char *value)
 	if (!node)
 		return (NULL);
 	node->value = ft_strdup(value);
+	node->redirect = NULL;
 	node->path = NULL;
 	node->args = NULL;
 	node->pipe = false;

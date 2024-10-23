@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strjoin2.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abergman <abergman@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hsharame <hsharame@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/21 18:39:35 by abergman          #+#    #+#             */
-/*   Updated: 2024/10/21 18:42:27 by abergman         ###   ########.fr       */
+/*   Updated: 2024/10/23 18:16:32 by hsharame         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,13 +18,13 @@ char	*ft_strjoin2(char *dest, char *str)
 
 	temp = NULL;
 	if (!str || !dest)
-		free_pointer(temp);
+		ft_free_pointer(temp);
 	if (!str)
 		return (str);
 	if (!dest)
 		return (ft_strdup(str));
 	temp = str;
 	str = ft_strjoin(temp, str);
-	free_pointer(temp);
-	retunr(str);
+	ft_free_pointer(temp);
+	return(str);
 }

@@ -6,7 +6,7 @@
 /*   By: hsharame <hsharame@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/02 11:49:32 by hsharame          #+#    #+#             */
-/*   Updated: 2024/10/21 17:16:38 by hsharame         ###   ########.fr       */
+/*   Updated: 2024/10/23 15:12:19 by hsharame         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,9 +47,9 @@ void	check_pipe(t_token **token_list, char *input, int *i)
 		current = current->next;
 	if (current->type == PIPE)
 	{
-		ft_putstr_fd("> ", 1);
-		extra_input = readline(NULL);
+		extra_input = readline("> ");
 		input = ft_strjoin(input, extra_input);
+		free(extra_input);
 		while (input[*i])
 		{
 			if (ft_isspace(input[*i]))
@@ -57,5 +57,6 @@ void	check_pipe(t_token **token_list, char *input, int *i)
 			else
 				init_tokens(token_list, input, i);
 		}
+		free(input);
 	}
 }

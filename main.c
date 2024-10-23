@@ -6,7 +6,7 @@
 /*   By: hsharame <hsharame@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/28 13:33:18 by abergman          #+#    #+#             */
-/*   Updated: 2024/10/22 11:46:07 by hsharame         ###   ########.fr       */
+/*   Updated: 2024/10/23 15:08:28 by hsharame         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,7 @@ int	main(int ac, char **av, char **envp)
 		// destroy_minishell(NULL, EXIT_FAILURE);
 	while (1)
 	{
-		ft_putstr_fd("minishell> ", 1);
-		store.input = readline(NULL);
+		store.input = readline("minishell> ");
 		if (store.input == NULL)
 		{
 			ft_putstr_fd("Error:\nMinishell was closed", 2);

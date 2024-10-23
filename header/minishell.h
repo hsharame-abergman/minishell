@@ -3,21 +3,21 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abergman <abergman@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hsharame <hsharame@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/02 11:29:45 by hsharame          #+#    #+#             */
-/*   Updated: 2024/10/23 13:08:06 by abergman         ###   ########.fr       */
+/*   Updated: 2024/10/23 18:22:30 by hsharame         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 /*
- *      _____                                                                   
- *  ___|    _|__  ____  ____   _  ____  ______  __   _  ______  ____    ____    
- * |    \  /  | ||    ||    \ | ||    ||   ___||  |_| ||   ___||    |  |    |   
- * |     \/   | ||    ||     \| ||    | `-.`-. |   _  ||   ___||    |_ |    |_  
- * |__/\__/|__|_||____||__/\____||____||______||__| |_||______||______||______| 
- *     |_____|                                                                  
- *                                                                                 
+ *      _____                                                               
+ *  ___|    _|__  ____  ____   _  ____  ______  __   _  ______  ____    ____ 
+ * |    \  /  | ||    ||    \ | ||    ||   ___||  |_| ||   ___||    |  |    | 
+ * |     \/   | ||    ||     \| ||    | `-.`-. |   _  ||   ___||    |_ |    |_
+ * |__/\__/|__|_||____||__/\____||____||______||__| |_||______||______||______|
+ *     |_____|                                                            
+ *                                                                          
  */
 
 #ifndef MINISHELL_H
@@ -31,6 +31,9 @@
 # include <stdio.h>
 # include <stdlib.h>
 # include <unistd.h>
+# include <sys/types.h>
+# include <sys/stat.h>
+# include <fcntl.h>
 # include "../libft/libft.h"
 # include "errno.h"
 
@@ -44,7 +47,7 @@ typedef struct s_redirect
 {
 	int		fd_in;
 	int		fd_out;
-	char	*inile;
+	char	*infile;
 	char	*outfile;
 	char	*delimiter;
 }	t_redirect;
@@ -142,6 +145,16 @@ bool	lexer(t_store *data);
 /*                    Parser                                                  */
 /* ************************************************************************** */
 
+void	open_file_trunc(t_redirect *trunc, char *filename);
+void	open_file_append(t_redirect *trunc, char *filename);
+void	open_input(t_redirect *trunc, char *filename);
+void	parse_append(t_cmd **cmd, t_token **token);
+void	parse_input(t_cmd **cmd, t_token **token);
+void	parse_trunc(t_cmd **cmd, t_token **token);
+char	*temp_file(int number);
+char	*check_if_var(char *input);
+bool	heredoc_succes(t_store *data, t_redirect *heredoc);
+void	parse_heredoc(t_store *data, t_cmd **cmd, t_token **token);
 bool	is_builtin(char *s);
 char	*find_path(char **env, char *cmd);
 char	*define_path(char *cmd);
@@ -157,6 +170,11 @@ t_cmd	*parser_cmd(t_token *token, t_cmd *last);
 t_cmd	*init_tree(t_token **token_list, t_store *data);
 void	parser(t_store *data, t_token *token_list);
 void	affiche_ast(t_cmd *node);
+void	create_redirect(t_cmd *cmd);
+void	check_if_exists(t_cmd *node);
+void	cmd_error(t_cmd *node, int i);
+char	*tab_to_str(char **token);
+char	*fill_str(char *res, char **token);
 
 /* ************************************************************************** */
 /*                    Builtins                                                */
