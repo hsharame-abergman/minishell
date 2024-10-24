@@ -6,7 +6,7 @@
 /*   By: hsharame <hsharame@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/02 11:29:45 by hsharame          #+#    #+#             */
-/*   Updated: 2024/10/23 18:22:30 by hsharame         ###   ########.fr       */
+/*   Updated: 2024/10/24 17:42:29 by hsharame         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,24 +71,18 @@ typedef struct s_token
 	struct s_token	*next;
 }	t_token;
 
-typedef struct s_envp
-{
-	char			*key;
-	char			*value;
-	struct s_envp	*next;
-}					t_envp;
-
 typedef enum s_mode {
 	SINDLE_COMMAND,
 	INTERACTIVE
-} t_mode;
+}	t_mode;
 
 typedef struct s_store
 {
-	char	**envp;
+	char			**envp;
 	char			*input;
 	char			*working_directory;
 	char			*old_working_directory;
+	int				error;
 	t_mode			mode_usage;
 	t_token			*token;
 	t_cmd			*pars;
