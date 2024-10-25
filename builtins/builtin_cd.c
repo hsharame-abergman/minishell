@@ -6,7 +6,7 @@
 /*   By: abergman <abergman@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/11 18:04:57 by abergman          #+#    #+#             */
-/*   Updated: 2024/10/22 18:08:05 by abergman         ###   ########.fr       */
+/*   Updated: 2024/10/25 15:24:10 by abergman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,19 +39,6 @@ void	ft_update_workdirs(t_store *store, char *workdir)
 		store->working_directory = ft_strdup(workdir);
 	}
 	free_pointer(workdir);
-}
-
-char	*get_env_variable(t_envp *envs, char *key)
-{
-	char	*res;
-
-	while (envs->next)
-	{
-		if (envs->key == key)
-			res = envs->value;
-		envs = envs->next;
-	}
-	return (res);
 }
 
 int	ft_change_directory(t_store *store, char *path)
@@ -88,7 +75,7 @@ int	builtin_cd(t_store *store, char **args)
 
 	if (!args || !args[1] || ft_isspace(args[1][0]))
 	{
-		path = get_env_variable(store->envp, "HOME");
+		path = get_env(store->envp, "HOME");
 		if (!path || *path == '\0' || ft_isspace(*path))
 			return (ft_error_handler("cd", NULL, "Error\n$HOME is empty",
 					EXIT_FAILURE));
@@ -99,7 +86,7 @@ int	builtin_cd(t_store *store, char **args)
 				EXIT_FAILURE));
 	if (ft_strncmp(args[1], "-", 2) == 0)
 	{
-		path = get_env_variable(store->envp, "OLDPWD");
+		path = get_env(store->envp, "OLDPWD");
 		if (!path)
 			return (ft_error_handler("cd", NULL, "Error\nOLDPWD is empty",
 					EXIT_FAILURE));

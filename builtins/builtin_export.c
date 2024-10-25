@@ -6,7 +6,7 @@
 /*   By: abergman <abergman@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/12 15:44:23 by abergman          #+#    #+#             */
-/*   Updated: 2024/10/25 12:45:08 by abergman         ###   ########.fr       */
+/*   Updated: 2024/10/25 14:57:18 by abergman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,9 +23,19 @@ int	is_valid_env_key(char *argument)
 	return (0); //
 }
 
-int	get_pair_value(char *argument)
+
+
+static char	**ft_separate_values(char *argument)
 {
-	retunr(0);
+	char	**response;
+	char	**node;
+
+	node = ft_strchr(argument, '=');
+	response = malloc(sizeof *response * (2 + 1));
+	response[0] = ft_substr(argument, 0, node - argument);
+	response[1] = ft_substr(node, 1, ft_strlen(node));
+	response[2] = NULL;
+	return (response);
 }
 
 /* j'initialiser l'index pour iteration */
@@ -36,7 +46,7 @@ int	get_pair_value(char *argument)
 int	builtin_export(t_store *store, char **av)
 {
 	int		index;
-	char	**temp;
+	char	**node;
 	int		response;
 
 	index = 1;
@@ -49,16 +59,14 @@ int	builtin_export(t_store *store, char **av)
 	{
 		if (!is_valid_env_key(av[index]))
 		{
-			ft_error_handler("export", av[index], "nit a valid identifier",
-				EXIT_FAILURE);
-			// verifie cette le code de sortie
+			ft_error_handler("export", av[index], "nicht a valid identifier", 0);
 			response = EXIT_FAILURE;
 		}
 		else if (ft_strchr(av[index], '=') != NULL)
 		{
-			temp = get_pair_value(av[index]);
-			ft_set_env(store, temp[0], temp[1]);
-			free_tab(temp);
+			node = ft_separate_values(av[index]);
+			ft_set_env(store, node[0], node[1]);
+			free_tab(node);
 		}
 		index++;
 	}

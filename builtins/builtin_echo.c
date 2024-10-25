@@ -6,11 +6,14 @@
 /*   By: abergman <abergman@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/11 17:46:04 by abergman          #+#    #+#             */
-/*   Updated: 2024/10/23 13:07:18 by abergman         ###   ########.fr       */
+/*   Updated: 2024/10/25 16:45:32 by abergman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../header/minishell.h"
+
+/* ***************************************************** */
+/* Imprime le tableau donné (value) d'arguments à STDOUT */
 
 static void	ft_echo_util(char **av, int is_newline, int index)
 {
@@ -20,9 +23,26 @@ static void	ft_echo_util(char **av, int is_newline, int index)
 			ft_putchar_fd("\n", STDERR_FILENO);
 		return ;
 	}
+	while (av[index])
+	{
+		ft_putstr_fd(av[index], STDOUT_FILENO);
+		if (av[index + 1])
+		{
+			ft_putchar_fd(' ', STDOUT_FILENO);
+		}
+		else if (!av[index + 1] && !is_newline)
+		{
+			ft_putchar_fd('\n', STDOUT_FILENO);
+		}
+		index++;
+	}
 }
 
-void builtin_echo(char **av)
+/* **************************************************************** */
+/* Imprime les chaînes données et ajoute une nouvelle ligne ou non, */
+/* 	selon le flag -n.                                               */
+
+void	builtin_echo(char **av)
 {
 	int	index;
 	int	is_n;
