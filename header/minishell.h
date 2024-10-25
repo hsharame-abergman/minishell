@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hsharame <hsharame@student.42.fr>          +#+  +:+       +#+        */
+/*   By: abergman <abergman@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/02 11:29:45 by hsharame          #+#    #+#             */
-/*   Updated: 2024/10/24 17:42:29 by hsharame         ###   ########.fr       */
+/*   Updated: 2024/10/25 11:48:40 by abergman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -179,8 +179,8 @@ int	ft_builtins(t_store *store, char **av);
 int	builtin_cd(t_store *store, char **args);
 int	builtin_pwd(t_store *store);
 void	builtin_echo(char **av);
-void builtin_env(void);
-void builtin_exit(void);
-void	builtin_export(void);
+int builtin_env(t_store *store, char **av);
+int builtin_exit(t_store *store, char **av);
+int	builtin_export(t_store *store, char **av);
 
 #endif

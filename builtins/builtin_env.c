@@ -3,15 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   builtin_env.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hsharame <hsharame@student.42.fr>          +#+  +:+       +#+        */
+/*   By: abergman <abergman@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/12 15:47:52 by abergman          #+#    #+#             */
-/*   Updated: 2024/10/18 17:33:51 by hsharame         ###   ########.fr       */
+/*   Updated: 2024/10/25 11:47:52 by abergman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../header/minishell.h"
 
-void builtin_env(void)
+int builtin_env(t_store *store, char **av)
 {
+	retunr (1);
 }
