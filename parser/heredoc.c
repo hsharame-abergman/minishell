@@ -6,7 +6,7 @@
 /*   By: hsharame <hsharame@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/23 14:27:04 by hsharame          #+#    #+#             */
-/*   Updated: 2024/10/23 18:10:34 by hsharame         ###   ########.fr       */
+/*   Updated: 2024/10/25 18:28:12 by hsharame         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,30 +36,45 @@ char	*temp_file(int number)
 
 char	*check_if_var(char *input)
 {
-	char	**token;
 	char	*env_value;
+	char	*temp;
+	char	*temp_2;
+	char	*res;
+	char	*res_final;
 	int		i;
+	int		start;
+	int		length;
 
 	i = 0;
-	token = ft_split(input, ' ');
-	if (!token)
-		return (NULL);
-	while (token[i])
+	while (input[i])
 	{
-		token[i] = ft_strrchr(token[i], '$');
-		if (token[i] != NULL)
+		if (input[i] == '$' && ft_isalpha(input[i + 1]))
 		{
-			env_value = getenv(token[i]);
+			temp = ft_substr(input, 0, i);
+			start = i;
+			length = 0;
+			while (!ft_isspace(input[length]))
+			{
+				length++;
+				i++;
+			}
+			temp_2 = ft_substr(input, i, ft_strlen(input) - i);
+			res = ft_substr(input, start, length);
+			env_value = getenv(res);
 			if (!env_value)
-				token[i] = ft_strdup("");
+				res = ft_strdup("");
 			else
-				token[i] = ft_strdup(env_value);
+				res = ft_strdup(env_value);
+			res_final = ft_strjoin(temp, res);
+			res_final = ft_strjoin(res_final, temp_2);
+			free(temp);
+			free(res);
+			free(temp_2);
 		}
 		i++;
 	}
-	input = tab_to_str(token);
-	free_tab(token);
-	return (input);
+	free(input);
+	return (res_final);
 }
 
 bool	heredoc_succes(t_store *data, t_redirect *heredoc)
@@ -74,7 +89,7 @@ bool	heredoc_succes(t_store *data, t_redirect *heredoc)
 		input = readline("> ");
 		if (ft_strcmp(input, heredoc->delimiter) == 0)
 			break ;
-		if (ft_strrchr(input, '$') != NULL)
+		if (ft_strchr(input, '$') != NULL)
 			input = check_if_var(input);
 		ft_putendl_fd(input, fd);
 		free(input);
