@@ -6,7 +6,7 @@
 /*   By: hsharame <hsharame@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/30 15:48:48 by hsharame          #+#    #+#             */
-/*   Updated: 2024/10/25 16:55:50 by hsharame         ###   ########.fr       */
+/*   Updated: 2024/10/28 17:58:58 by hsharame         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@ t_token	*new_token(char *value, int type)
 	token->value = ft_strdup(value);
 	token->type = type;
 	token->next = NULL;
+	token->prev = NULL;
 	return (token);
 }
 
@@ -39,6 +40,7 @@ void	add_token(t_token **token_list, char *value, int type)
 		while (current->next)
 			current = current->next;
 		current->next = new;
+		new->prev = current;
 	}
 }
 
@@ -91,6 +93,8 @@ bool	lexer(t_store *data)
 	int		i;
 
 	i = 0;
+	if (data->token)
+		reset_tokens(&data->token);
 	while (data->input[i])
 	{
 		if (ft_isspace(data->input[i]))
@@ -103,8 +107,8 @@ bool	lexer(t_store *data)
 	if (data->input[i] == '\0')
 		add_token(&data->token, "\0", END);
 	check_pipe(&data->token, data->input, &i);
-	//affiche_tokens(data->token);
 	expander(data, &data->token);
+	//affiche_tokens(data->token);
 	parser(data, data->token);
 	return (true);
 }

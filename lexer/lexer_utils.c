@@ -6,11 +6,27 @@
 /*   By: hsharame <hsharame@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/02 11:49:32 by hsharame          #+#    #+#             */
-/*   Updated: 2024/10/23 15:12:19 by hsharame         ###   ########.fr       */
+/*   Updated: 2024/10/28 16:52:10 by hsharame         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../header/minishell.h"
+
+void	reset_tokens(t_token **token)
+{
+	t_token	*current;
+	t_token	*prev;
+
+	current = *token;
+	while (current)
+	{
+		prev = current->prev;
+		free(current->value);
+		free(current);
+		current = prev;
+	}
+	*token = NULL;
+}
 
 bool	ft_isspace(char c)
 {

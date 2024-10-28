@@ -6,7 +6,7 @@
 /*   By: hsharame <hsharame@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/11 15:37:21 by hsharame          #+#    #+#             */
-/*   Updated: 2024/10/23 13:29:53 by hsharame         ###   ########.fr       */
+/*   Updated: 2024/10/28 18:01:33 by hsharame         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,17 +49,17 @@ bool	is_redirection_token(int type)
 
 bool	is_builtin(char *s)
 {
-	if (ft_strcmp(s, "cd"))
+	if (ft_strcmp(s, "cd") == 0)
 		return (true);
-	else if (ft_strcmp(s, "echo"))
+	else if (ft_strcmp(s, "echo") == 0)
 		return (true);
-	else if (ft_strcmp(s, "env"))
+	else if (ft_strcmp(s, "env") == 0)
 		return (true);
-	else if (ft_strcmp(s, "exit"))
+	else if (ft_strcmp(s, "exit") == 0)
 		return (true);
-	else if (ft_strcmp(s, "export"))
+	else if (ft_strcmp(s, "export") == 0)
 		return (true);
-	else if (ft_strcmp(s, "pwd"))
+	else if (ft_strcmp(s, "pwd") == 0)
 		return (true);
 	return (false);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_env_is_valid.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abergman <abergman@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hsharame <hsharame@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/25 16:56:54 by abergman          #+#    #+#             */
-/*   Updated: 2024/10/25 17:16:29 by abergman         ###   ########.fr       */
+/*   Updated: 2024/10/28 12:42:25 by hsharame         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,14 +21,14 @@ int	ft_env_is_valid(char *node)
 	int	index;
 
 	index = 0;
-	if (ft_isalpha(node[index]) == 0 && node[index] != "_")
+	if (ft_isalpha(node[index]) == 0 && node[index] != '_')
 	{
 		return (0);
 	}
 	index++;
-	while (node[index] && node[index] != "=")
+	while (node[index] && node[index] != '=')
 	{
-		if (ft_isalnum(node[index]) != 1 && node[index] != "_")
+		if (ft_isalnum(node[index]) != 1 && node[index] != '_')
 		{
 			return (0);
 		}

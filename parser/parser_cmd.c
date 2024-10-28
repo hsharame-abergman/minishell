@@ -6,7 +6,7 @@
 /*   By: hsharame <hsharame@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/11 15:37:39 by hsharame          #+#    #+#             */
-/*   Updated: 2024/10/22 16:02:44 by hsharame         ###   ########.fr       */
+/*   Updated: 2024/10/28 18:02:05 by hsharame         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ t_cmd	*parser_cmd(t_token *token, t_cmd *last)
 		current->path = ft_strdup(current->value);
 	else
 	{
-		if (!ft_strchr(current->value, '/'))
+		if (ft_strchr(current->value, '/') == NULL)
 			current->path = define_path(current->value);
 		else
 			current->path = ft_strdup(current->value);

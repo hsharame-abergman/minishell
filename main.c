@@ -6,7 +6,7 @@
 /*   By: hsharame <hsharame@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/28 13:33:18 by abergman          #+#    #+#             */
-/*   Updated: 2024/10/23 15:08:28 by hsharame         ###   ########.fr       */
+/*   Updated: 2024/10/28 15:28:02 by hsharame         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,8 @@ int	main(int ac, char **av, char **envp)
 		{
 			add_history(store.input);
 			if (lexer(&store))
-				g_exit_code = ft_builtins(&store, av);
+				g_exit_code = 2;
+				//g_exit_code = ft_builtins(&store, av);
 			else
 				g_exit_code = 1;
 		}

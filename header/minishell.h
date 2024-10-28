@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abergman <abergman@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hsharame <hsharame@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/02 11:29:45 by hsharame          #+#    #+#             */
-/*   Updated: 2024/10/25 17:43:00 by abergman         ###   ########.fr       */
+/*   Updated: 2024/10/28 15:51:54 by hsharame         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,6 +69,7 @@ typedef struct s_token
 	char			*value;
 	int				type;
 	struct s_token	*next;
+	struct s_token	*prev;
 }	t_token;
 
 typedef enum s_mode {
@@ -122,6 +123,7 @@ typedef enum e_token_type
 	ERROR
 }	t_token_type;
 
+void	reset_tokens(t_token **token);
 void	check_pipe(t_token **token_list, char *input, int *i);
 void	affiche_tokens(t_token *token_list);
 int		token_quotes(t_token **token_list, char *input, int *i, char quote);
@@ -137,6 +139,16 @@ void	init_tokens(t_token **token_list, char *input, int *i);
 bool	lexer(t_store *data);
 
 /* ************************************************************************** */
+/*                     Expander                                               */
+/* ************************************************************************** */
+
+void	expander(t_store *data, t_token **token_list);
+bool	check_escape(char *str, int i);
+char	*get_env_value(char *input, int *i);
+char	*check_if_var(char *input);
+bool	expander_heredoc(char *input);
+
+/* ************************************************************************** */
 /*                    Parser                                                  */
 /* ************************************************************************** */
 
@@ -147,7 +159,6 @@ void	parse_append(t_cmd **cmd, t_token **token);
 void	parse_input(t_cmd **cmd, t_token **token);
 void	parse_trunc(t_cmd **cmd, t_token **token);
 char	*temp_file(int number);
-char	*check_if_var(char *input);
 bool	heredoc_succes(t_store *data, t_redirect *heredoc);
 void	parse_heredoc(t_store *data, t_cmd **cmd, t_token **token);
 bool	is_builtin(char *s);
@@ -175,13 +186,13 @@ char	*fill_str(char *res, char **token);
 /*                    Builtins                                                */
 /* ************************************************************************** */
 
-int	is_builtins(t_store *store, char **av);
-int	ft_builtins(t_store *store, char **av);
-int	builtin_cd(t_store *store, char **args);
-int	builtin_pwd(t_store *store);
+int		is_builtins(t_store *store, char **av);
+int		ft_builtins(t_store *store, char **av);
+int		builtin_cd(t_store *store, char **args);
+int		builtin_pwd(t_store *store);
 void	builtin_echo(char **av);
-int builtin_env(t_store *store, char **av);
-int builtin_exit(t_store *store, char **av);
-int	builtin_export(t_store *store, char **av);
+int		builtin_env(t_store *store, char **av);
+int		builtin_exit(t_store *store, char **av);
+int		builtin_export(t_store *store, char **av);
 
 #endif

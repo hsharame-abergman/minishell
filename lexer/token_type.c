@@ -6,7 +6,7 @@
 /*   By: hsharame <hsharame@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/02 14:09:39 by hsharame          #+#    #+#             */
-/*   Updated: 2024/10/23 15:23:14 by hsharame         ###   ########.fr       */
+/*   Updated: 2024/10/28 17:54:46 by hsharame         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,17 +17,20 @@ int	token_quotes(t_token **token_list, char *input, int *i, char quote)
 	int		start;
 	char	*value;
 
+	(*i)++;
 	start = *i;
 	while (input[*i] && input[*i] != quote)
 		(*i)++;
 	if (input[*i] != quote)
 		return (-1);
-	value = ft_substr(input, start, (size_t)(*i - start + 1));
+	value = ft_substr(input, start, (size_t)(*i - start));
 	if (quote == 39)
 		add_token(token_list, value, CHAR_QUOTE);
 	else if (quote == 34)
 		add_token(token_list, value, CHAR_DQUOTE);
 	(*i)++;
+	if (input[*i] == '$' && (input[*i + 1] == 34 || input[*i + 1] == 39))
+		(*i)++;
 	return (0);
 }
 
@@ -35,12 +38,15 @@ void	token_quotes_error(t_token **token_list, char *input, char quote)
 {
 	char	*value;
 	int		start;
+	int		end;
 
 	start = 0;
 	while (input[start] != quote)
 		start++;
-	value = ft_substr(input, start, (size_t)(ft_strlen(input) - start - 2));
-	value = ft_strjoin(value, "\n");
+	end = ft_strlen(input);
+	while (input[end] != quote)
+		end--;
+	value = ft_substr(input, start + 1, end - start - 1);
 	if (quote == 39)
 		add_token(token_list, value, CHAR_QUOTE);
 	else if (quote == 34)
@@ -49,27 +55,12 @@ void	token_quotes_error(t_token **token_list, char *input, char quote)
 
 void	quotes(t_token **token_list, char *input, int *i)
 {
-	char	*extra_input;
 	char	quote;
 
 	quote = input[*i];
 	if (token_quotes(token_list, input, i, quote) == -1)
 	{
-		extra_input = readline("> ");
-		while (extra_input)
-		{
-			input = ft_strjoin(input, extra_input);
-			input = ft_strjoin(input, "\n");
-			(*i) += ft_strlen(extra_input) + 1;
-			if (ft_strchr(extra_input, quote) != NULL)
-			{
-				token_quotes_error(token_list, input, quote);
-				free(extra_input);
-				break ;
-			}
-			free(extra_input);
-			extra_input = readline("> ");
-		}
+		error_syntax("error: unclosed quotes\n", 2);
 	}
 }
 
@@ -79,7 +70,8 @@ void	token_word(t_token **token_list, char *input, int *i)
 	char	*token;
 
 	start = *i;
-	while (input[*i] && !ft_isspace(input[*i]) && !ft_isoperator(input[*i]))
+	while (input[*i] && !ft_isspace(input[*i]) && !ft_isoperator(input[*i])
+		&& input[*i] != 34 && input[*i] != 39)
 		(*i)++;
 	token = ft_substr(input, start, (size_t)(*i - start));
 	add_token(token_list, token, TOKEN_WORD);
