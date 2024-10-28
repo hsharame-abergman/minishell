@@ -6,11 +6,21 @@
 /*   By: abergman <abergman@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/27 20:49:12 by abergman          #+#    #+#             */
-/*   Updated: 2024/10/27 21:21:32 by abergman         ###   ########.fr       */
+/*   Updated: 2024/10/28 19:34:37 by abergman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../header/minishell.h"
+
+int ft_count_env(char **envp)
+{
+    int i;
+
+    i = 0;
+    while (envp[i])
+        i++;
+    return (i);
+}
 
 static char **ft_realloc_envs(t_store *store, int counter) // wip
 {

@@ -6,7 +6,11 @@
 /*   By: hsharame <hsharame@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/02 11:29:45 by hsharame          #+#    #+#             */
+<<<<<<< Updated upstream
 /*   Updated: 2024/10/28 15:51:54 by hsharame         ###   ########.fr       */
+=======
+/*   Updated: 2024/10/28 19:34:31 by abergman         ###   ########.fr       */
+>>>>>>> Stashed changes
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,6 +108,9 @@ void	ft_free_pointer(void *pointer);
 int		ft_search_flag(char *str, char flag);
 int		ft_set_env(t_store *store, char *key, char *value);
 int		ft_env_is_valid(char *node);
+int		ft_count_env(char **envp);
+int		ft_remove_env(t_store *store, int index);
+int		ft_get_env_index(char **envp, char *key);
 
 /* ************************************************************************** */
 /*                     Lexer                                                  */
