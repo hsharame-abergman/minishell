@@ -62,6 +62,7 @@ typedef struct s_cmd
 	char			*path;
 	char			**args;
 	bool			pipe;
+	int				*fd_pipe;
 	bool			error;
 	t_redirect		*redirect;
 	struct s_cmd	*left;

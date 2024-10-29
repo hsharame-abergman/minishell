@@ -6,12 +6,11 @@
 /*   By: hsharame <hsharame@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/24 16:11:52 by hsharame          #+#    #+#             */
-/*   Updated: 2024/10/28 17:45:43 by hsharame         ###   ########.fr       */
+/*   Updated: 2024/10/29 11:27:34 by hsharame         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../header/minishell.h"
-
 
 bool	check_escape(char *str, int i)
 {

@@ -6,11 +6,16 @@
 /*   By: hsharame <hsharame@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/11 15:37:21 by hsharame          #+#    #+#             */
-/*   Updated: 2024/10/28 18:01:33 by hsharame         ###   ########.fr       */
+/*   Updated: 2024/10/29 11:22:36 by hsharame         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../header/minishell.h"
+
+/*
+	fd_pipe[0] - to read
+	fd_pipe[1] - to write
+*/
 
 t_cmd	*create_node(char *value)
 {
@@ -24,6 +29,7 @@ t_cmd	*create_node(char *value)
 	node->path = NULL;
 	node->args = NULL;
 	node->pipe = false;
+	node->fd_pipe = 0;
 	node->error = false;
 	node->left = NULL;
 	node->right = NULL;
