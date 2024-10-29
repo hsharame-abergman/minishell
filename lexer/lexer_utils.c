@@ -6,7 +6,7 @@
 /*   By: hsharame <hsharame@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/02 11:49:32 by hsharame          #+#    #+#             */
-/*   Updated: 2024/10/28 16:52:10 by hsharame         ###   ########.fr       */
+/*   Updated: 2024/10/29 16:54:27 by hsharame         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,11 @@ void	affiche_tokens(t_token *token_list)
 		token_list = token_list->next;
 	}
 }
+
+/*
+	Check if input does not end with pipe.
+	If so, ask to complete the input
+*/
 
 void	check_pipe(t_token **token_list, char *input, int *i)
 {

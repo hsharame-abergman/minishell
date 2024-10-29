@@ -6,11 +6,7 @@
 /*   By: hsharame <hsharame@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/02 11:29:45 by hsharame          #+#    #+#             */
-<<<<<<< Updated upstream
-/*   Updated: 2024/10/28 15:51:54 by hsharame         ###   ########.fr       */
-=======
-/*   Updated: 2024/10/28 19:34:31 by abergman         ###   ########.fr       */
->>>>>>> Stashed changes
+/*   Updated: 2024/10/29 17:37:08 by hsharame         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +23,8 @@
 #ifndef MINISHELL_H
 # define MINISHELL_H
 
+# define _GNU_SOURCE
+
 # include <limits.h>
 # include <readline/history.h>
 # include <readline/readline.h>
@@ -38,6 +36,7 @@
 # include <sys/types.h>
 # include <sys/stat.h>
 # include <fcntl.h>
+# include <signal.h>
 # include "../libft/libft.h"
 # include "errno.h"
 
@@ -202,5 +201,13 @@ void	builtin_echo(char **av);
 int		builtin_env(t_store *store, char **av);
 int		builtin_exit(t_store *store, char **av);
 int		builtin_export(t_store *store, char **av);
+
+/* ************************************************************************** */
+/*                    Signals                                                 */
+/* ************************************************************************** */
+
+void	signals_ignore(void);
+void	signal_ctrl_c(int sign);
+void	signals_interactive(void);
 
 #endif

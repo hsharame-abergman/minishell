@@ -6,7 +6,7 @@
 /*   By: hsharame <hsharame@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/30 15:48:48 by hsharame          #+#    #+#             */
-/*   Updated: 2024/10/28 17:58:58 by hsharame         ###   ########.fr       */
+/*   Updated: 2024/10/29 16:46:57 by hsharame         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,12 @@ int	get_type(char *token)
 	}
 	return (-1);
 }
+
+/*
+	Iterates through the entire string of input except spaces
+	and redirects to the appropriate functions (handling quotes, 
+	redirects and words)
+*/
 
 void	init_tokens(t_token **token_list, char *input, int *i)
 {
