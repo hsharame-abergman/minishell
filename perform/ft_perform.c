@@ -6,11 +6,16 @@
 /*   By: abergman <abergman@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/30 15:42:08 by abergman          #+#    #+#             */
-/*   Updated: 2024/11/01 02:10:26 by abergman         ###   ########.fr       */
+/*   Updated: 2024/11/01 16:19:17 by abergman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../header/minishell.h"
+
+int	ft_check_redirect(t_redirect *redirect)
+{
+	return (0);
+}
 
 int	ft_get_children(t_store *store)
 {
@@ -59,8 +64,7 @@ int	ft_preporation_for_perform(t_store *store)
 {
 	if (!store->pars->value)
 	{
-		if (store->pars->redirect
-			&& !ft_check_ontfile_infile(store->pars->redirect))
+		if (store->pars->redirect && !ft_check_redirect(store->pars->redirect))
 			return (ft_error_message("minishell: syntax error near unexpected token `newline'\n",
 					258));
 		return (EXIT_SUCCESS);
@@ -68,11 +72,35 @@ int	ft_preporation_for_perform(t_store *store)
 	return (127); // COMMAND NOT FOUND
 }
 
+/* ************************************************************************ */
+/* Executes given commands by creating child processes and waiting			*/
+/* for them to finish. Returns the exit code of the last child to finish.	*/
+/* Returns exit code 1 if creating a child process fails. 					*/
+
+int	ft_reditect_io(t_redirect *redirect)
+{
+	return (0);
+}
+
+int	ft_restore_io(t_redirect *redirect)
+{
+	return (0);
+}
+
 int	ft_perform(t_store *store)
 {
 	int	response;
 
 	response = ft_preporation_for_perform(store);
+	if (response != 127)
+		return (response);
+	if (!store->pars->pipe && !store->pars->left
+		&& ft_check_redirect(store->pars->redirect))
+	{
+		ft_redirect_io(store->pars->redirect);
+		response = ft_builtins(store, store->pars);
+		ft_restore_io(store->pars->redirect);
+	}
 	if (response != 127)
 		return (response);
 	return (ft_create_process(store));
