@@ -6,7 +6,7 @@
 /*   By: hsharame <hsharame@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/23 17:21:07 by hsharame          #+#    #+#             */
-/*   Updated: 2024/10/23 18:14:38 by hsharame         ###   ########.fr       */
+/*   Updated: 2024/11/01 15:35:56 by hsharame         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ void	open_file_append(t_redirect *trunc, char *filename)
 
 /*
 	In case of input redirection, if the file does not already exist, 
-	it does not create a new file and displays the error
+	it does not create a new file and displays the error.
 	bash: [filename]: No such file or directory
 */
 

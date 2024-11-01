@@ -6,7 +6,7 @@
 /*   By: hsharame <hsharame@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/23 14:27:04 by hsharame          #+#    #+#             */
-/*   Updated: 2024/10/28 12:25:44 by hsharame         ###   ########.fr       */
+/*   Updated: 2024/11/01 15:22:00 by hsharame         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,14 @@ char	*temp_file(int number)
 	return (res);
 }
 
+/*
+	Heredoc creates a temporary file. The string or character passed
+	after the heredoc sign << is called delimiter and is stored in the
+	t_redirect structure stored in the t_cmd. Using the ft_putendl_fd function,
+	to which we pass the created temporary file fd, we store the additional
+	input with the return line until we find the delimiter.
+*/
+
 bool	heredoc_succes(t_store *data, t_redirect *heredoc)
 {
 	int		fd;
@@ -55,6 +63,12 @@ bool	heredoc_succes(t_store *data, t_redirect *heredoc)
 	close(fd);
 	return (true);
 }
+
+/*
+	This function is used to manage the heredoc and create a temporary
+	file that will have a unique name thanks to static int, which is 
+	implemented each time this function is called.
+*/
 
 void	parse_heredoc(t_store *data, t_cmd **cmd, t_token **token)
 {

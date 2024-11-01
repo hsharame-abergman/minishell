@@ -6,11 +6,18 @@
 /*   By: hsharame <hsharame@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/10 15:50:50 by hsharame          #+#    #+#             */
-/*   Updated: 2024/10/22 12:51:25 by hsharame         ###   ########.fr       */
+/*   Updated: 2024/11/01 15:07:26 by hsharame         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../header/minishell.h"
+
+/*
+	The integer first is used to indicate that this is the first token that must
+	be interpreted as a command. If first is equal to 0, the arguments are added
+	to the already created t_cmd node, if first is 1, a new node is created and
+	the previous node points to it. Redirects and pipes are managed separately.
+*/
 
 t_cmd	*init_tree(t_token **token_list, t_store *data)
 {
@@ -52,6 +59,13 @@ int	count_args(t_token *save)
 	}
 	return (i);
 }
+
+/*
+	Creates an argument table, where args[0] is always equal to the value
+	(the command name) stored in the current node, the last element is
+	always NULL, which allows to traverse the list of argument of a command
+	from args[1] to args[count - 1].
+*/
 
 void	add_args(t_token **save, t_cmd *cmd)
 {

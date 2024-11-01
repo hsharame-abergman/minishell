@@ -6,11 +6,17 @@
 /*   By: hsharame <hsharame@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/28 12:06:42 by hsharame          #+#    #+#             */
-/*   Updated: 2024/10/28 14:30:59 by hsharame         ###   ########.fr       */
+/*   Updated: 2024/11/01 14:57:33 by hsharame         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../header/minishell.h"
+
+/*
+	Checks if in the value of each token there is an environment variable. 
+	if so, replace it with its value, checking if there is no escape. otherwise,
+	returns the initial value of input
+*/
 
 char	*get_env_value(char *input, int *i)
 {

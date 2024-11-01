@@ -6,11 +6,26 @@
 /*   By: hsharame <hsharame@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/11 15:37:39 by hsharame          #+#    #+#             */
-/*   Updated: 2024/10/28 18:02:05 by hsharame         ###   ########.fr       */
+/*   Updated: 2024/11/01 15:35:11 by hsharame         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../header/minishell.h"
+
+/*
+	PATH is an environment variable, which contains something like this:
+	/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/snap/bin
+	
+	So, each path is separated by the ":" sign. To find the path that leads to
+	the appropriate command, we split each path, then try to put the command
+	name, if the access(path, X_OK) function returns 0, it means that an
+	executable of this name exists in this folder. So, we store the path string
+	in the t_cmd node.
+
+	example:							builtin example:
+	char *value = cat 					char *value = echo
+	char *path = /usr/bin/cat 			char *path = echo  
+*/
 
 char	*find_path(char **env, char *cmd)
 {
@@ -45,6 +60,12 @@ char	*define_path(char *cmd)
 	free_tab(env_dir);
 	return (path);
 }
+
+/*
+	Fill the char *path in the t_cmd node. If the command is a builtin or if it 
+	is already passed with absolute path (if it contains /), we duplicate in
+	this field the content of value. Otherwise, we search for the path.
+*/
 
 t_cmd	*parser_cmd(t_token *token, t_cmd *last)
 {
