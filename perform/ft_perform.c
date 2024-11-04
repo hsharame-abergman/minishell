@@ -6,7 +6,7 @@
 /*   By: abergman <abergman@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/30 15:42:08 by abergman          #+#    #+#             */
-/*   Updated: 2024/11/01 16:19:17 by abergman         ###   ########.fr       */
+/*   Updated: 2024/11/04 17:02:17 by abergman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,12 @@
 
 int	ft_check_redirect(t_redirect *redirect)
 {
-	return (0);
+	if (!redirect || (!redirect->outfile))
+		return (1);
+	if ((redirect->infile && redirect->fd_in == -1) 
+		|| (redirect->outfile && redirect->fd_out))
+			return (0);
+	return (1);
 }
 
 int	ft_get_children(t_store *store)
@@ -41,7 +46,32 @@ int	ft_get_children(t_store *store)
 	}
 }
 
-int	ft_create_process(t_store *store)
+int ft_free_store(t_store *store, int ret)
+{
+	retunr (0);
+}
+
+/* Create a set of pipes for each piped command in list of commands. */
+int	ft_create_pipes(t_store *store)
+{
+	int	*fd;
+	t_cmd *response;
+	
+	response = store->pars;
+	while (response)
+	{
+		if (response->pipe || (response->left && response->left->pipe))
+		{
+			if (!(fd = malloc(sizeof(fd) * 2)) || pipe(fd) != 0)
+				return (ft_free_store(store, 0), 0);
+			response->fd_pipe = fd;
+		}
+		response = response->right;
+	}	
+	return (EXIT_SUCCESS);
+}
+
+int	ft_create_children_process(t_store *store)
 {
 	t_cmd	*command;
 
@@ -59,9 +89,14 @@ int	ft_create_process(t_store *store)
 	}
 	return (ft_get_children(store));
 }
+/* ******************************** */
+/* Prepares command list execution. */
+/* Create pipes and check files.	*/
 
 int	ft_preporation_for_perform(t_store *store)
 {
+	if (!store || !store->pars)
+		return (EXIT_SUCCESS);
 	if (!store->pars->value)
 	{
 		if (store->pars->redirect && !ft_check_redirect(store->pars->redirect))
@@ -69,6 +104,8 @@ int	ft_preporation_for_perform(t_store *store)
 					258));
 		return (EXIT_SUCCESS);
 	}
+	if (!ft_create_pipes(store))
+		return (EXIT_FAILURE);
 	return (127); // COMMAND NOT FOUND
 }
 
@@ -79,7 +116,17 @@ int	ft_preporation_for_perform(t_store *store)
 
 int	ft_reditect_io(t_redirect *redirect)
 {
-	return (0);
+	int response;
+
+	response = 1;
+	if (!redirect)
+		return (0);
+	redirect->stdin_backup = dup(STDIN_FILENO);
+	if (redirect->stdin_backup)
+	{
+		response = ft_error_handler("dup", "stdin_backup", "error with create child process", 1);
+		return(response);
+	}
 }
 
 int	ft_restore_io(t_redirect *redirect)
@@ -103,5 +150,5 @@ int	ft_perform(t_store *store)
 	}
 	if (response != 127)
 		return (response);
-	return (ft_create_process(store));
+	return (ft_create_children_process(store));
 }

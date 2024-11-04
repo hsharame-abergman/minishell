@@ -6,7 +6,7 @@
 /*   By: abergman <abergman@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/02 11:29:45 by hsharame          #+#    #+#             */
-/*   Updated: 2024/11/01 16:21:20 by abergman         ###   ########.fr       */
+/*   Updated: 2024/11/04 17:01:18 by abergman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,8 @@ typedef struct s_redirect
 	char			*infile;
 	char			*outfile;
 	char			*delimiter;
+	int				stdin_backup;
+	int				stdout_backup;
 }					t_redirect;
 
 typedef struct s_cmd
