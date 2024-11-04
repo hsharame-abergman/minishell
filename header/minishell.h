@@ -6,7 +6,7 @@
 /*   By: abergman <abergman@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/02 11:29:45 by hsharame          #+#    #+#             */
-/*   Updated: 2024/11/04 17:01:18 by abergman         ###   ########.fr       */
+/*   Updated: 2024/11/04 17:16:34 by abergman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,6 +112,7 @@ int					check_input_arguments(t_store *store, int ac, char **av,
 						char **envp);
 void				ft_free_pointer(void *pointer);
 int					ft_search_flag(char *str, char flag);
+int					*ft_get_env(char **envp, char *search);
 int					ft_set_env(t_store *store, char *key, char *value);
 int					ft_env_is_valid(char *node);
 int					ft_count_env(char **envp);
