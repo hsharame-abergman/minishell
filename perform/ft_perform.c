@@ -6,7 +6,7 @@
 /*   By: abergman <abergman@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/30 15:42:08 by abergman          #+#    #+#             */
-/*   Updated: 2024/11/04 17:02:17 by abergman         ###   ########.fr       */
+/*   Updated: 2024/11/05 10:49:24 by abergman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -122,11 +122,16 @@ int	ft_reditect_io(t_redirect *redirect)
 	if (!redirect)
 		return (0);
 	redirect->stdin_backup = dup(STDIN_FILENO);
-	if (redirect->stdin_backup)
-	{
-		response = ft_error_handler("dup", "stdin_backup", "error with create child process", 1);
-		return(response);
-	}
+	if (redirect->stdin_backup == -1)
+		response = ft_error_handler("dup", "stdin backup", strerror(errno), 1);
+    if (redirect->stdout_backup == -1)
+        response = ft_error_handler("dup", "stdout backup", strerror(errno), 1);
+    if (redirect->fd_in != -1)
+        if (dup2(redirect->fd_in, STDIN_FILENO) == -1)
+            response = ft_error_handler("dup2", redirect->infile, srterror(errno), 1);
+    if (redirect->fd_out != -1)
+        if (dup2(redirect->fd_out, STDOUT_FILENO) == -1)
+            response = ft_error_handler("dup2", redirect->outfile, strerror(errno), 1);
 }
 
 int	ft_restore_io(t_redirect *redirect)

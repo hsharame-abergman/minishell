@@ -6,7 +6,7 @@
 /*   By: abergman <abergman@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/11 17:46:04 by abergman          #+#    #+#             */
-/*   Updated: 2024/10/25 16:45:32 by abergman         ###   ########.fr       */
+/*   Updated: 2024/11/05 11:33:24 by abergman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ static void	ft_echo_util(char **av, int is_newline, int index)
 /* Imprime les chaînes données et ajoute une nouvelle ligne ou non, */
 /* 	selon le flag -n.                                               */
 
-void	builtin_echo(char **av)
+int	builtin_echo(char **av)
 {
 	int	index;
 	int	is_n;
