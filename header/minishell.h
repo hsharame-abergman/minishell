@@ -6,7 +6,7 @@
 /*   By: abergman <abergman@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/02 11:29:45 by hsharame          #+#    #+#             */
-/*   Updated: 2024/11/05 11:44:11 by abergman         ###   ########.fr       */
+/*   Updated: 2024/11/06 17:43:38 by abergman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -199,7 +199,7 @@ char	*fill_str(char *res, char **token);
 /* ************************************************************************** */
 
 int		ft_builtins(t_store *store, t_cmd *command);
-int		is_builtins(t_store *store, t_cmd *command);
+int		is_builtins(t_store *store, char **args);
 int		builtin_cd(t_store *store, char **args);
 int		builtin_pwd(t_store *store);
 int		builtin_echo(char **av);

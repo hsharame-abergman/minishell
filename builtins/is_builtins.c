@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   is_builtins.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hsharame <hsharame@student.42.fr>          +#+  +:+       +#+        */
+/*   By: abergman <abergman@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/11 17:42:48 by abergman          #+#    #+#             */
-/*   Updated: 2024/10/18 17:42:18 by hsharame         ###   ########.fr       */
+/*   Updated: 2024/11/06 17:51:49 by abergman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,11 +28,11 @@ int	is_builtins(t_store *store, char **av)
 	else if (ft_strcmp(av[0], "echo"))
 		builtin_echo(av);
 	else if (ft_strcmp(av[0], "env"))
-		builtin_env();
+		builtin_env(store, av);
 	else if (ft_strcmp(av[0], "exit"))
-		builtin_exit();
+		builtin_exit(store, av);
 	else if (ft_strcmp(av[0], "export"))
-		builtin_export();
+		builtin_export(store, av);
 	else if (ft_strcmp(av[0], "pwd"))
 		builtin_pwd(store);
 	return (1);
