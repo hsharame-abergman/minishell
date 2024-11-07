@@ -19,10 +19,10 @@
 /* apportés: la chaîne donnée doit être un nom de variable complet.          */
 /* Renvoie null si la chaîne ne peut être trouvée dans l'environnement.      */
 
-int	*ft_get_env(char **envp, char *search)
+char	*ft_get_env(char **envp, char *search)
 {
 	int			index;
-	const char	*node;
+	char	*node;
 
 	node = ft_strjoin(search, "=");
 	if (!node)

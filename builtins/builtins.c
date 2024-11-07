@@ -17,7 +17,7 @@ int	ft_builtins(t_store *store, t_cmd *command)
 	int res;
 
 	res =  127; // 127 is the exit code for command not found
-	if (is_builtins(store, command->value))
+	if (is_builtins(store, &command->value))
 	{
 		if (ft_strncmp(command->value, "cd", 3) == 0)
 			res = builtin_cd(store, command->args);

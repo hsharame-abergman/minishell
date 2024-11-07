@@ -41,19 +41,20 @@ int	builtin_unset(t_store *store, char **av)
 	int	response;
 
 	response = EXIT_SUCCESS;
+	i = 1;
 	while (av[i])
 	{
-		if (!ft_env_is_valid(av[i]) || ft_strchar(av[i], '=') != NULL)
+		if (!ft_env_is_valid(av[i]) || ft_strchr(av[i], '=') != NULL)
 		{
 			ft_error_handler("unset", av[i], "not a valid identifier", 1);
 			response = EXIT_FAILURE;
 		}
 		else
 		{
-			i = ft_get_env_index(store->envp, av[i]);
-			if (i != -1)
+			j = ft_get_env_index(store->envp, av[i]);
+			if (j != -1)
 			{
-				ft_remove_env(store, i);
+				ft_remove_env(store, j);
 			}
 		}
 		i++;

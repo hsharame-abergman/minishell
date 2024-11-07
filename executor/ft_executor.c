@@ -139,7 +139,7 @@ int	ft_restore_io(t_redirect *redirect)
 	return (0);
 }
 
-int	ft_perform(t_store *store)
+int	ft_executor(t_store *store)
 {
 	int	response;
 

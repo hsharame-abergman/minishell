@@ -20,13 +20,25 @@
 
 int	is_valid_env_key(char *argument)
 {
-	return (0); //
+	int	index;
+
+	index = 0;
+	if (ft_isalpha(argument[index]) == 0 && argument[index] != '_')
+		return (false);
+	index++;
+	while (argument[index] && argument[index] != '=')
+	{
+		if (ft_isalnum(argument[index]) == 0 && argument[index] != '_')
+			return (false);
+		index++;
+	}
+	return (true);
 }
 
 static char	**ft_separate_values(char *argument)
 {
 	char	**response;
-	char	**node;
+	char	*node;
 
 	node = ft_strchr(argument, '=');
 	response = malloc(sizeof *response * (2 + 1));
@@ -55,7 +67,7 @@ int	builtin_export(t_store *store, char **av)
 	{
 		if (!is_valid_env_key(av[index]))
 		{
-			ft_error_handler("export", av[index], "nicht a valid identifier", 0);
+			ft_error_handler("export", av[index], "not a valid identifier", 0);
 			response = EXIT_FAILURE;
 		}
 		else if (ft_strchr(av[index], '=') != NULL)

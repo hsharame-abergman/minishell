@@ -20,7 +20,7 @@ static void	ft_echo_util(char **av, int is_newline, int index)
 	if (!av[index])
 	{
 		if (!is_newline)
-			ft_putchar_fd("\n", STDERR_FILENO);
+			ft_putchar_fd('\n', STDERR_FILENO);
 		return ;
 	}
 	while (av[index])
@@ -49,7 +49,7 @@ int	builtin_echo(char **av)
 
 	index = 1;
 	is_n = 0;
-	while (av[index] && ft_search_flag(av[index], "n"))
+	while (av[index] && ft_search_flag(av[index], 'n'))
 	{
 		is_n = 1;
 		index++;

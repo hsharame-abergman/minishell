@@ -10,16 +10,43 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "header/minishell.h"
+#include "../header/minishell.h"
 
-int	ft_free_store(t_store *store, int ret)
+void	ft_free_str_tab(char **tab)
 {
-	// free user data
-	if ()
-	
-	// free token
-	// free command
-	// free old working dir
-	// free envp
-	// clear history
+    int	i;
+
+    i = 0;
+    if (tab)
+    {
+        while (tab[i])
+        {
+            if (tab[i])
+            {
+                ft_free_pointer(tab[i]);
+                tab[i] = NULL;
+            }
+            i++;
+        }
+        free(tab);
+        tab = NULL;
+    }
+}
+
+void	ft_free_store(t_store *store, int history)
+{
+    if (store && store->input)
+    {
+        ft_free_pointer(store->input);
+        store->input = NULL;
+    }
+    if (history)
+    {
+        if (store && store->working_directory)
+            ft_free_pointer(store->working_directory);
+        if (store && store->old_working_directory)
+            ft_free_pointer(store->old_working_directory);
+        if (store && store->envp)
+            ft_free_str_tab(store->envp);
+    }
 }

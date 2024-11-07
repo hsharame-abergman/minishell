@@ -15,7 +15,6 @@
 int	main(int ac, char **av, char **envp)
 {
 	t_store	store;
-	int		g_exit_code;
 
 	g_exit_code = 0;
 	ft_memset(&store, 0, sizeof(t_store));
@@ -35,7 +34,7 @@ int	main(int ac, char **av, char **envp)
 		{
 			add_history(store.input);
 			if (lexer(&store))
-				g_exit_code = ft_builtins(&store, av);
+				g_exit_code = ft_executor(&store);
 			else
 				g_exit_code = 1;
 		}

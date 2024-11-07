@@ -12,11 +12,10 @@
 
 #include "../header/minishell.h"
 
-static int ft_check_out_of_raange(int sign, int num, int *is_error)
+static int ft_check_out_of_range(int sign, unsigned long num, int *is_error)
 {
-	if ((sign > 0 && num > LONG_MAX))
-		*is_error = 1;
-	if ((sign < 0 && num > -(unsigned long)LONG_MIN))
+	if ((sign == 1 && num > LONG_MAX)
+		|| (sign == -1 && num > -(unsigned long)LONG_MIN))
 		*is_error = 1;
 	return (*is_error);
 }
@@ -27,7 +26,7 @@ static int	ft_is_silent_mode(t_store *store)
 
 	command = store->pars;
 	if (!command)
-		retunr(0);
+		return (0);
 	if (command->left != NULL)
 		return (1);
 	if (command->right != NULL)
@@ -35,68 +34,66 @@ static int	ft_is_silent_mode(t_store *store)
 	return (0);
 }
 
-static int	ft_atoi_with_error_handler(char *ascii, int is_error)
+static int	ft_atol_err(char *ascii, int *is_error)
 {
-	int	res;
-	int sign;
-	int index;
+	unsigned long long	num;
+	int					neg;
+	int					i;
 
-	res = 0;
-	sign = 1;
-	index = 0;
-
-	while (ascii[index] && ft_isspace(ascii[index]))
-		index++;
-	if (ascii[index] == '+')
-		index++;
-	if (ascii[index] == '-')
+	num = 0;
+	neg = 1;
+	i = 0;
+	while (ascii[i] && ft_isspace(ascii[i]))
+		i++;
+	if (ascii[i] == '+')
+		i++;
+	else if (ascii[i] == '-')
 	{
-		index++;
-		sign *= -1;
+		neg *= -1;
+		i++;
 	}
-	while (ascii[index] && ft_isdigit(ascii[index]))
+	while (ascii[i] && ft_isdigit(ascii[i]))
 	{
-		res = (res * 10) + (ascii[index] - '0');
-		if (ft_check_out_of_raange(sign, res, is_error))
-		{
-			break;
-		}
-		index++;
+		num = (num * 10) + (ascii[i] - '0');
+		if (ft_check_out_of_range(neg, num, is_error))
+			break ;
+		i++;
 	}
-	return (res);
+	return (num * neg);
 }
 
 static int	ft_get_exit_code(char *cmd, int *is_error)
 {
-	int	index;
-	int	res;
+	unsigned long long	i;
 
-	index = 0;
-	res = 0;
 	if (!cmd)
 		return (g_exit_code);
-	while (ft_isspace(cmd[index]))
-		index++;
-	if (cmd[index] == '\0')
+	i = 0;
+	while (ft_isspace(cmd[i]))
+		i++;
+	if (cmd[i] == '\0')
 		*is_error = 1;
-	if (cmd[index] == '+' || cmd[index] == '-')
-		index++;
-	if (!ft_isdigit(cmd[index]))
+	if (cmd[i] == '-' || cmd[i] == '+')
+		i++;
+	if (!ft_isdigit(cmd[i]))
 		*is_error = 1;
-	while (cmd[index])
+	while (cmd[i])
 	{
-		if (!ft_isdigit(cmd[index]))
+		if (!ft_isdigit(cmd[i]) && !ft_isspace(cmd[i]))
 			*is_error = 1;
-		if (!ft_isspace(cmd[index]))
-			*is_error = 1;
-		index++;
+		i++;
 	}
-	res = ft_atoi_with_error_handler(cmd, is_error);
+	i = ft_atol_err(cmd, is_error);
+	return (i % 256);
 }
 
-static void	ft_exit_minishell(t_store *store, int exit_code)
+static void	ft_exit_program(t_store *store, int exit_code)
 {
-	return ;
+	if (store)
+	{
+		ft_free_store(store, 1);
+	}
+	exit(exit_code);
 }
 
 /* Implementation builtin's EXIT */
@@ -137,6 +134,6 @@ int	builtin_exit(t_store *store, char **av)
 			return (ft_error_handler("exit", NULL, "too many arguments", 1));
 		}
 	}
-	ft_exit_minishell(store, exit_code);
+	ft_exit_program(store, exit_code);
 	return (2);
 }

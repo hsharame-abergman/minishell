@@ -117,6 +117,13 @@ int		ft_count_env(char **envp);
 int		ft_remove_env(t_store *store, int index);
 int		ft_get_env_index(char **envp, char *key);
 
+/* clear */
+void	ft_free_store(t_store *store, int history);
+/* env */
+char	*ft_get_env(char **envp, char *search);
+/* executor */
+int		ft_executor(t_store *store);
+
 /* ************************************************************************** */
 /*                     Lexer                                                  */
 /* ************************************************************************** */
@@ -206,6 +213,7 @@ int		builtin_echo(char **av);
 int		builtin_env(t_store *store, char **av);
 int		builtin_exit(t_store *store, char **av);
 int		builtin_export(t_store *store, char **av);
+int		builtin_unset(t_store *store, char **av);
 
 /* ************************************************************************** */
 /*                    Signals                                                 */

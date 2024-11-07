@@ -26,19 +26,19 @@ static int	chdir_errno_mod(char *path)
 
 void	ft_update_workdirs(t_store *store, char *workdir)
 {
-	ft_set_env(store, "OLDPWD", (store->envp, "PWD"));
+	ft_set_env(store, "OLDPWD", ft_get_env(store->envp, "PWD"));
 	ft_set_env(store, "PWD", workdir);
 	if (store->old_working_directory)
 	{
-		free_pointer(store->old_working_directory);
+		ft_free_pointer(store->old_working_directory);
 		store->old_working_directory = ft_strdup(store->working_directory);
 	}
 	if (store->working_directory)
 	{
-		free_pointer(store->working_directory);
+		ft_free_pointer(store->working_directory);
 		store->working_directory = ft_strdup(workdir);
 	}
-	free_pointer(workdir);
+	ft_free_pointer(workdir);
 }
 
 int	ft_change_directory(t_store *store, char *path)
@@ -59,7 +59,7 @@ int	ft_change_directory(t_store *store, char *path)
 		workdir = ft_strjoin(store->working_directory, "/");
 		tempory = workdir;
 		workdir = ft_strjoin(tempory, path);
-		free_pointer(tempory);
+		ft_free_pointer(tempory);
 	}
 	else
 	{
@@ -92,6 +92,5 @@ int	builtin_cd(t_store *store, char **args)
 					EXIT_FAILURE));
 		return (!ft_change_directory(store, path));
 	}
-	return (!ft_change_directory(store, *args[1]));
-	return (0);
+	return (!ft_change_directory(store, args[1]));
 }

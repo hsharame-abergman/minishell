@@ -92,12 +92,12 @@ void	add_args(t_token **save, t_cmd *cmd)
 void	parser(t_store *data, t_token *token_list)
 {
 	t_cmd	*syntax_tree;
-	t_cmd	*temp;
+	// t_cmd	*temp;
 
 	syntax_tree = init_tree(&token_list, data);
 	while (syntax_tree->left)
 		syntax_tree = syntax_tree->left;
-	temp = syntax_tree;
+	// temp = syntax_tree;
 	affiche_ast(syntax_tree);
 	data->pars = syntax_tree;
 }
