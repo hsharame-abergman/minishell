@@ -28,27 +28,22 @@ int	ft_get_children(t_store *store)
 	int		status;
 	int		save_status;
 
-	close_fds(store->pars, false);
+	ft_close_fds(store->pars, 0);
 	save_status = 0;
 	wpid = 0;
-	while (wpid != -1 || g_exit_code != ECHILD)
+	while (wpid != -1 || errno != ECHILD)
 	{
 		wpid = waitpid(-1, &status, 0);
 		if (wpid == store->pid)
 			save_status = status;
-		continue ;
-		if (WIFEXITED(status))
-			save_status = WEXITSTATUS(status);
-		if (WIFSIGNALED(status))
-			save_status = WTERMSIG(status);
-		if (wpid == -1)
-			g_exit_code = ECHILD;
 	}
-}
-
-int ft_free_store(t_store *store, int ret)
-{
-	retunr (0);
+	if (WIFSIGNALED(save_status))
+		status = 128 + WTERMSIG(save_status);
+	else if (WEXITSTATUS(save_status))
+		status = WEXITSTATUS(save_status);
+	else
+		status = save_status;
+	return (save_status);
 }
 
 /* Create a set of pipes for each piped command in list of commands. */
@@ -83,7 +78,7 @@ int	ft_create_children_process(t_store *store)
 			return (ft_error_handler("fork", NULL, "", 1));
 		else if (store->pid == 0)
 		{
-			ft_perform_command(store, command);
+			ft_execute_command(store, command);
 		}
 		command = command->right;
 	}
@@ -114,7 +109,7 @@ int	ft_preporation_for_perform(t_store *store)
 /* for them to finish. Returns the exit code of the last child to finish.	*/
 /* Returns exit code 1 if creating a child process fails. 					*/
 
-int	ft_reditect_io(t_redirect *redirect)
+int	ft_redirect_io(t_redirect *redirect)
 {
 	int response;
 
@@ -132,11 +127,40 @@ int	ft_reditect_io(t_redirect *redirect)
     if (redirect->fd_out != -1)
         if (dup2(redirect->fd_out, STDOUT_FILENO) == -1)
             response = ft_error_handler("dup2", redirect->outfile, strerror(errno), 1);
+	return (response);
+}
+
+int ft_check_io(t_redirect *redirect)
+{
+	if (!redirect || (!redirect->infile && !redirect->outfile))
+		return (1);
+	if ((redirect->infile && redirect->fd_in == -1)
+		|| (redirect->outfile && redirect->fd_out == -1))
+		return (0);
+	return (1);
 }
 
 int	ft_restore_io(t_redirect *redirect)
 {
-	return (0);
+	int response;
+	response = 1;
+	if (!redirect)
+		return (response);
+	if (redirect->stdin_backup != -1)
+	{
+		if (dup2(redirect->stdin_backup, STDIN_FILENO) == -1)
+			response = 0;
+		close(redirect->stdin_backup);
+		redirect->stdout_backup = -1;
+	}
+	if (redirect->stdout_backup != -1)
+	{
+		if (dup2(redirect->stdout_backup, STDOUT_FILENO) == -1)
+			response = 0;
+		close(redirect->stdout_backup);
+		redirect->stdout_backup = -1;
+	}
+	return (response);
 }
 
 int	ft_executor(t_store *store)

@@ -87,10 +87,12 @@ static int	ft_get_exit_code(char *cmd, int *is_error)
 	return (i % 256);
 }
 
-static void	ft_exit_program(t_store *store, int exit_code)
+void	ft_exit_program(t_store *store, int exit_code)
 {
 	if (store)
 	{
+		if (store->pars && store->pars->redirect)
+			ft_close_fds(store->pars, 1);
 		ft_free_store(store, 1);
 	}
 	exit(exit_code);

@@ -123,6 +123,11 @@ void	ft_free_store(t_store *store, int history);
 char	*ft_get_env(char **envp, char *search);
 /* executor */
 int		ft_executor(t_store *store);
+int		ft_restore_io(t_redirect *redirect);
+void	ft_close_pipe_fds(t_cmd *cmds, t_cmd *skip_cmd);
+void	ft_close_fds(t_cmd *cmds, bool close_backups);
+void	ft_exit_program(t_store *store, int exit_code);
+int ft_check_io(t_redirect *redirect);
 
 /* ************************************************************************** */
 /*                     Lexer                                                  */
