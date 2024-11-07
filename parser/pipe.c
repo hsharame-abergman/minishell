@@ -24,3 +24,15 @@ void	ft_close_pipe_fds(t_cmd *cmds, t_cmd *skip_cmd)
         cmds = cmds->right;
     }
 }
+
+int ft_set_pipe_fds(t_cmd *cmds, t_cmd *cmd)
+{
+    if (!cmd)
+        return(0);
+    if (cmd->left && cmd->left->pipe)
+        dup2(cmd->left->fd_pipe[0], STDIN_FILENO);
+    if (cmd->pipe)
+        dup2(cmd->fd_pipe[1], STDOUT_FILENO);
+    ft_close_pipe_fds(cmds, cmd);
+    return (1);
+}

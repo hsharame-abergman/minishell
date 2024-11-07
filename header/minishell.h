@@ -128,6 +128,7 @@ void	ft_close_pipe_fds(t_cmd *cmds, t_cmd *skip_cmd);
 void	ft_close_fds(t_cmd *cmds, bool close_backups);
 void	ft_exit_program(t_store *store, int exit_code);
 int ft_check_io(t_redirect *redirect);
+int ft_set_pipe_fds(t_cmd *cmds, t_cmd *cmd);
 
 /* ************************************************************************** */
 /*                     Lexer                                                  */

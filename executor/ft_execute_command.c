@@ -12,5 +12,6 @@ int    ft_execute_command(t_store *store, t_cmd *cmd)
       }
       if (!ft_check_io(cmd->redirect))
         ft_exit_program(store, EXIT_FAILURE);
+      ft_set_pipe_fds(store->pars, cmd);
       return (response);
 }
