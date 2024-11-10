@@ -39,7 +39,7 @@ int	main(int ac, char **av, char **envp)
 				g_exit_code = 1;
 		}
 		free(store.input);
-		// rl_clear_history();
+		rl_clear_history();
 	}
 	return (0);
 }

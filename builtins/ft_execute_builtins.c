@@ -12,11 +12,11 @@
 
 #include "../header/minishell.h"
 
-int	ft_builtins(t_store *store, t_cmd *command)
+int	ft_execute_builtins(t_store *store, t_cmd *command)
 {
 	int res;
 
-	res =  127; // 127 is the exit code for command not found
+	res = CMD_NOT_FOUND;
 	if (is_builtins(store, &command->value))
 	{
 		if (ft_strncmp(command->value, "cd", 3) == 0)

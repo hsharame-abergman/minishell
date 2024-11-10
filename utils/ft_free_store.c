@@ -48,5 +48,6 @@ void	ft_free_store(t_store *store, int history)
             ft_free_pointer(store->old_working_directory);
         if (store && store->envp)
             ft_free_str_tab(store->envp);
+        rl_clear_history();
     }
 }

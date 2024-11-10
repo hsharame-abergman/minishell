@@ -6,7 +6,7 @@
 /*   By: abergman <abergman@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/02 11:29:45 by hsharame          #+#    #+#             */
-/*   Updated: 2024/11/06 17:43:38 by abergman         ###   ########.fr       */
+/*   Updated: 2024/11/10 16:29:48 by abergman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,11 +31,12 @@
 # include <stdbool.h>
 # include <stddef.h>
 # include <stdio.h>
-#include <string.h>
+# include <string.h>
 # include <stdlib.h>
 # include <unistd.h>
 # include <sys/types.h>
 # include <sys/stat.h>
+# include <sys/wait.h>
 # include <fcntl.h>
 # include <signal.h>
 # include "../libft/libft.h"
@@ -44,6 +45,8 @@
 # ifndef PATH_MAX
 #  define PATH_MAX 4096
 # endif
+
+# define CMD_NOT_FOUND 127
 
 extern int	g_exit_code;
 
@@ -107,7 +110,7 @@ int		error_syntax(char *s, int error);
 int		initial_store(t_store *store, char **envp);
 char	*ft_strjoin2(char *dest, char *str);
 int		ft_error_handler(char *cmd, char *detail, char *errmsg, int errcode);
-int		ft_defauit_error(int res);
+int		ft_default_error(int res);
 int		check_input_arguments(t_store *store, int ac, char **av, char **envp);
 void	ft_free_pointer(void *pointer);
 int		ft_search_flag(char *str, char flag);
@@ -127,9 +130,10 @@ int		ft_restore_io(t_redirect *redirect);
 void	ft_close_pipe_fds(t_cmd *cmds, t_cmd *skip_cmd);
 void	ft_close_fds(t_cmd *cmds, bool close_backups);
 void	ft_exit_program(t_store *store, int exit_code);
-int ft_check_io(t_redirect *redirect);
-int	ft_redirect_io(t_redirect *redirect);
-int ft_set_pipe_fds(t_cmd *cmds, t_cmd *cmd);
+int		ft_check_io(t_redirect *redirect);
+int		ft_set_pipe_fds(t_cmd *cmds, t_cmd *cmd);
+int		ft_execute_command(t_store *store, t_cmd *cmd);
+int		ft_redirect_io(t_redirect *redirect);
 
 /* ************************************************************************** */
 /*                     Lexer                                                  */

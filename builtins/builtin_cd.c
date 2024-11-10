@@ -20,8 +20,7 @@ static int	chdir_errno_mod(char *path)
 	(void)path;
 	if (g_exit_code == ESTALE)
 		g_exit_code = ENOENT;
-	ft_error_handler("cd", path, strerror(g_exit_code), g_exit_code);
-	return (0);
+	ft_error_handler("cd", path, strerror(g_exit_code), g_exit_code);return (0);
 }
 
 void	ft_update_workdirs(t_store *store, char *workdir)

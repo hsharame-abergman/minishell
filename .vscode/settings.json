@@ -8,5 +8,6 @@
 		"typeinfo": "c",
 		"__config": "c",
 		"atomic": "c"
-	}
+	},
+	"C_Cpp.errorSquiggles": "disabled"
 }

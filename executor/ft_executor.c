@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_perform.c                                       :+:      :+:    :+:   */
+/*   ft_executor.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: abergman <abergman@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/30 15:42:08 by abergman          #+#    #+#             */
-/*   Updated: 2024/11/05 10:49:24 by abergman         ###   ########.fr       */
+/*   Updated: 2024/11/10 16:33:45 by abergman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,9 +16,9 @@ int	ft_check_redirect(t_redirect *redirect)
 {
 	if (!redirect || (!redirect->outfile))
 		return (1);
-	if ((redirect->infile && redirect->fd_in == -1) 
-		|| (redirect->outfile && redirect->fd_out))
-			return (0);
+	if ((redirect->infile && redirect->fd_in == -1) || (redirect->outfile
+			&& redirect->fd_out))
+		return (0);
 	return (1);
 }
 
@@ -49,9 +49,9 @@ int	ft_get_children(t_store *store)
 /* Create a set of pipes for each piped command in list of commands. */
 int	ft_create_pipes(t_store *store)
 {
-	int	*fd;
-	t_cmd *response;
-	
+	int		*fd;
+	t_cmd	*response;
+
 	response = store->pars;
 	while (response)
 	{
@@ -62,7 +62,7 @@ int	ft_create_pipes(t_store *store)
 			response->fd_pipe = fd;
 		}
 		response = response->right;
-	}	
+	}
 	return (EXIT_SUCCESS);
 }
 
@@ -88,20 +88,19 @@ int	ft_create_children_process(t_store *store)
 /* Prepares command list execution. */
 /* Create pipes and check files.	*/
 
-int	ft_preporation_for_perform(t_store *store)
+int	ft_preporation_for_execution(t_store *store)
 {
 	if (!store || !store->pars)
 		return (EXIT_SUCCESS);
 	if (!store->pars->value)
 	{
 		if (store->pars->redirect && !ft_check_redirect(store->pars->redirect))
-			return (ft_error_message("minishell: syntax error near unexpected token `newline'\n",
-					258));
+			return (EXIT_FAILURE);
 		return (EXIT_SUCCESS);
 	}
 	if (!ft_create_pipes(store))
 		return (EXIT_FAILURE);
-	return (127); // COMMAND NOT FOUND
+	return (CMD_NOT_FOUND);
 }
 
 /* ************************************************************************ */
@@ -111,7 +110,7 @@ int	ft_preporation_for_perform(t_store *store)
 
 int	ft_redirect_io(t_redirect *redirect)
 {
-	int response;
+	int	response;
 
 	response = 1;
 	if (!redirect)
@@ -119,30 +118,33 @@ int	ft_redirect_io(t_redirect *redirect)
 	redirect->stdin_backup = dup(STDIN_FILENO);
 	if (redirect->stdin_backup == -1)
 		response = ft_error_handler("dup", "stdin backup", strerror(errno), 1);
-    if (redirect->stdout_backup == -1)
-        response = ft_error_handler("dup", "stdout backup", strerror(errno), 1);
-    if (redirect->fd_in != -1)
-        if (dup2(redirect->fd_in, STDIN_FILENO) == -1)
-            response = ft_error_handler("dup2", redirect->infile, srterror(errno), 1);
-    if (redirect->fd_out != -1)
-        if (dup2(redirect->fd_out, STDOUT_FILENO) == -1)
-            response = ft_error_handler("dup2", redirect->outfile, strerror(errno), 1);
+	if (redirect->stdout_backup == -1)
+		response = ft_error_handler("dup", "stdout backup", strerror(errno), 1);
+	if (redirect->fd_in != -1)
+		if (dup2(redirect->fd_in, STDIN_FILENO) == -1)
+			response = ft_error_handler("dup2", redirect->infile,
+					strerror(errno), 1);
+	if (redirect->fd_out != -1)
+		if (dup2(redirect->fd_out, STDOUT_FILENO) == -1)
+			response = ft_error_handler("dup2", redirect->outfile,
+					strerror(errno), 1);
 	return (response);
 }
 
-int ft_check_io(t_redirect *redirect)
+int	ft_check_io(t_redirect *redirect)
 {
 	if (!redirect || (!redirect->infile && !redirect->outfile))
 		return (1);
-	if ((redirect->infile && redirect->fd_in == -1)
-		|| (redirect->outfile && redirect->fd_out == -1))
+	if ((redirect->infile && redirect->fd_in == -1) || (redirect->outfile
+			&& redirect->fd_out == -1))
 		return (0);
 	return (1);
 }
 
 int	ft_restore_io(t_redirect *redirect)
 {
-	int response;
+	int	response;
+
 	response = 1;
 	if (!redirect)
 		return (response);
@@ -167,8 +169,8 @@ int	ft_executor(t_store *store)
 {
 	int	response;
 
-	response = ft_preporation_for_perform(store);
-	if (response != 127)
+	response = ft_preporation_for_execution(store);
+	if (response != CMD_NOT_FOUND)
 		return (response);
 	if (!store->pars->pipe && !store->pars->left
 		&& ft_check_redirect(store->pars->redirect))
@@ -177,7 +179,7 @@ int	ft_executor(t_store *store)
 		response = ft_builtins(store, store->pars);
 		ft_restore_io(store->pars->redirect);
 	}
-	if (response != 127)
+	if (response != CMD_NOT_FOUND)
 		return (response);
 	return (ft_create_children_process(store));
 }
