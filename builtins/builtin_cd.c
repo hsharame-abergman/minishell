@@ -6,7 +6,7 @@
 /*   By: abergman <abergman@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/11 18:04:57 by abergman          #+#    #+#             */
-/*   Updated: 2024/11/04 17:15:01 by abergman         ###   ########.fr       */
+/*   Updated: 2024/11/11 15:22:52 by abergman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,8 @@ static int	chdir_errno_mod(char *path)
 	(void)path;
 	if (g_exit_code == ESTALE)
 		g_exit_code = ENOENT;
-	ft_error_handler("cd", path, strerror(g_exit_code), g_exit_code);return (0);
+	ft_error_handler("cd", path, strerror(g_exit_code), g_exit_code);
+	return (0);
 }
 
 void	ft_update_workdirs(t_store *store, char *workdir)

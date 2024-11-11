@@ -6,22 +6,22 @@
 /*   By: abergman <abergman@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/25 15:24:27 by abergman          #+#    #+#             */
-/*   Updated: 2024/11/04 17:20:00 by abergman         ###   ########.fr       */
+/*   Updated: 2024/11/11 15:27:40 by abergman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../header/minishell.h"
 
-/* Searches for the givenvariables inthe enviroment variables. */
-
-/* Renvoie un pointeur vers la valeur de la variable dans l'environnement    */
-/* correspondant à la chaîne donnée. Les noms de variables partiels sont non */
-/* apportés: la chaîne donnée doit être un nom de variable complet.          */
-/* Renvoie null si la chaîne ne peut être trouvée dans l'environnement.      */
-
-char	*ft_get_env(char **envp, char *search)
+/*
+   Поиск данной переменной в переменных среды.
+   Возвращает указатель на значение переменной в окружении
+   совпадает с данной строкой. Имена частичных переменных не
+   поддерживается: указанная строка должна быть полным именем переменной.
+   Возвращает NULL, если строка не может быть найдена в окружении.
+*/
+int	*ft_get_env_value(char **envp, char *search)
 {
-	int			index;
+	int		index;
 	char	*node;
 
 	node = ft_strjoin(search, "=");
@@ -39,4 +39,34 @@ char	*ft_get_env(char **envp, char *search)
 	}
 	ft_free_pointer(node);
 	return (NULL);
+}
+
+/*
+	Поиск данной переменной в переменных среды.
+
+	Возвращает индекс переменной в окружении
+	совпадает с данной строкой. Имена частичных переменных не
+	поддерживается: указанная строка должна быть полным именем переменной.
+	Возвращает -1, если строка не может быть найдена в окружении.
+*/
+int	ft_get_env_index(char **envp, char *key)
+{
+	int i;
+	char *res;
+
+	i = 0;
+	res = ft_strjoin(key, "=");
+	if (!res)
+		return (-1);
+	while (envp[i])
+	{
+		if (ft_strncmp(res, envp[i], ft_strlen(res)) == 0)
+		{
+			ft_free_pointer(res);
+			return (i);
+		}
+		i++;
+	}
+	ft_free_pointer(res);
+	return (-1);
 }

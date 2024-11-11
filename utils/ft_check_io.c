@@ -1,30 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   builtin_env.c                                      :+:      :+:    :+:   */
+/*   ft_check_io.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: abergman <abergman@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/12 15:47:52 by abergman          #+#    #+#             */
-/*   Updated: 2024/11/11 15:23:39 by abergman         ###   ########.fr       */
+/*   Created: 2024/10/30 15:41:52 by abergman          #+#    #+#             */
+/*   Updated: 2024/11/11 15:27:01 by abergman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../header/minishell.h"
 
-int	builtin_env(t_store *store, char **av)
+/*
+Проверяет, правильно ли настроены инфайл и outfile.
+	Возвращает 1 при успехе, 0 при неудаче.
+*/
+int	ft_check_io(t_redirect *redirect)
 {
-	int	res;
-
-	if (av && av[1])
-		return (ft_error_handler("env", NULL, "too many arguments", 2));
-	res = 0;
-	if (!store->envp)
-		return (EXIT_FAILURE);
-	while (store->envp[res])
-	{
-		ft_putendl_fd(store->envp[res], STDOUT_FILENO);
-		res++;
-	}
-	return (EXIT_SUCCESS);
+	if (!redirect || (!redirect->infile && !redirect->outfile))
+		return (1);
+	if ((redirect->infile && redirect->fd_in == -1) || (redirect->outfile
+			&& redirect->fd_out == -1))
+		return (0);
+	return (1);
 }

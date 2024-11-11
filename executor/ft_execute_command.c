@@ -6,28 +6,47 @@
 /*   By: abergman <abergman@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/10 16:59:00 by abergman          #+#    #+#             */
-/*   Updated: 2024/11/10 17:09:27 by abergman         ###   ########.fr       */
+/*   Updated: 2024/11/11 15:25:11 by abergman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../header/minishell.h"
 
+/*	Проверяет, является ли команда директорией, а не исполняемым файлом.
+	Возвращает 1, если команда является каталогом и 0 если нет.
+*/
 int	ft_command_is_dir(char *value)
-(
-	return (1);
-)
-
-int	ft_get_cmd_path(t_store *store, char *value)
 {
-	return (1);
+	struct stat	cmd_stat;
+
+	ft_memset(&cmd_stat, 0, sizeof(cmd_stat));
+	stat(value, &cmd_stat);
+	return (S_ISDIR(cmd_stat.st_mode));
+}
+
+int	ft_get_cmd_path(t_store *store, t_cmd *cmd)
+{
+	if (ft_strchr(cmd->value, '/') == NULL && ft_get_env_index(store->envp,
+			"PATH") != -1)
+		return (ft_error_handler(cmd->value, NULL, "command not found",
+				CMD_NOT_FOUND));
+	if (access(cmd->value, F_OK) != 0)
+		return (ft_error_handler(cmd->value, NULL, strerror(errno),
+				CMD_NOT_FOUND));
+	else if (ft_command_is_dir(cmd->value))
+		return (ft_error_handler(cmd->value, NULL, "Is a directory",
+				CMD_NOT_EXECUTABLE));
+	else if (access(cmd->value, F_OK | X_OK) != 0)
+		return (ft_error_handler(cmd->value, NULL, strerror(errno),
+				CMD_NOT_EXECUTABLE));
+	return (EXIT_SUCCESS);
 }
 
 /*
  *	Executes the command's system binary file if it can be found
  *	among the environment executable paths.
  *	Returns CMD_NOT_FOUND if a path to the executable bin file cannot be
- *	found. Returns 1 in case of failure to run existing, executable
- *	file.
+ *	found. Returns 1 in case of failure to run existing, executable file.
  */
 int	ft_execute_sys_bin(t_store *store, t_cmd *cmd)
 {
@@ -38,6 +57,18 @@ int	ft_execute_sys_bin(t_store *store, t_cmd *cmd)
 	cmd->path = ft_get_cmd_path(store, cmd->value);
 	if (!cmd->path)
 		return (CMD_NOT_FOUND);
+	return (EXIT_FAILURE);
+}
+
+int	ft_execute_local_bin(t_store *data, t_cmd *cmd)
+{
+	int	res;
+
+	res = ft_check_command_not_found(data, cmd);
+	if (res != 0)
+		return (res);
+	if (execve(cmd->value, cmd->args, data->envp) == -1)
+		return (ft_error_handler("execve", NULL, strerror(errno), errno));
 	return (EXIT_FAILURE);
 }
 

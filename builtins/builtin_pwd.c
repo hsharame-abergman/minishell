@@ -12,6 +12,10 @@
 
 #include "../header/minishell.h"
 
+/*
+	Выполняет встроенную команду pwd и отображает текущий путь к рабочей директории.
+	Возвращает 0, если успешно, 1, если ошибка обнаружена.
+*/
 int	builtin_pwd(t_store *store)
 {
 	char	buffer[PATH_MAX];

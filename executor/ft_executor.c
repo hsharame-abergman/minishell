@@ -6,22 +6,24 @@
 /*   By: abergman <abergman@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/30 15:42:08 by abergman          #+#    #+#             */
-/*   Updated: 2024/11/10 16:33:45 by abergman         ###   ########.fr       */
+/*   Updated: 2024/11/11 15:26:29 by abergman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../header/minishell.h"
 
-int	ft_check_redirect(t_redirect *redirect)
-{
-	if (!redirect || (!redirect->outfile))
-		return (1);
-	if ((redirect->infile && redirect->fd_in == -1) || (redirect->outfile
-			&& redirect->fd_out))
-		return (0);
-	return (1);
-}
+/*
+	Ждет, пока дети закончат после очистки фдс и списка команд.
+	Возвращает статус выхода из программы как и bash:
+		"Статус возврата (см. Exit Status) простой команды
+			- это её статус выхода,
+			как это предусмотрено функцией POSIX 1003.1 waitpid, или 128+n,
+			если команда была закончена сигналом n."
 
+	Если в конвейере имеется несколько команд:
+		"Статус вывода трубопровода
+			- это статус вывода последней команды в трубопроводе"
+*/
 int	ft_get_children(t_store *store)
 {
 	pid_t	wpid;
@@ -46,26 +48,14 @@ int	ft_get_children(t_store *store)
 	return (save_status);
 }
 
-/* Create a set of pipes for each piped command in list of commands. */
-int	ft_create_pipes(t_store *store)
-{
-	int		*fd;
-	t_cmd	*response;
-
-	response = store->pars;
-	while (response)
-	{
-		if (response->pipe || (response->left && response->left->pipe))
-		{
-			if (!(fd = malloc(sizeof(fd) * 2)) || pipe(fd) != 0)
-				return (ft_free_store(store, 0), 0);
-			response->fd_pipe = fd;
-		}
-		response = response->right;
-	}
-	return (EXIT_SUCCESS);
-}
-
+/*
+	Создаёт дочерний процесс для каждой исполняемой команды,
+		за исключением встроенной команды,
+		которая не будет запущена и будет выполняться в основном процессе (в данном случае не создано дочерних).
+	Возвращает true,
+		когда процесс был создан для каждой команды или когда встроенный файл был выполнен самостоятельно.
+	Возвращает false, если была ошибка в ответвлении.
+*/
 int	ft_create_children_process(t_store *store)
 {
 	t_cmd	*command;
@@ -84,10 +74,10 @@ int	ft_create_children_process(t_store *store)
 	}
 	return (ft_get_children(store));
 }
+
 /* ******************************** */
 /* Prepares command list execution. */
 /* Create pipes and check files.	*/
-
 int	ft_preporation_for_execution(t_store *store)
 {
 	if (!store || !store->pars)
@@ -103,68 +93,11 @@ int	ft_preporation_for_execution(t_store *store)
 	return (CMD_NOT_FOUND);
 }
 
-/* ************************************************************************ */
-/* Executes given commands by creating child processes and waiting			*/
-/* for them to finish. Returns the exit code of the last child to finish.	*/
-/* Returns exit code 1 if creating a child process fails. 					*/
-
-int	ft_redirect_io(t_redirect *redirect)
-{
-	int	response;
-
-	response = 1;
-	if (!redirect)
-		return (0);
-	redirect->stdin_backup = dup(STDIN_FILENO);
-	if (redirect->stdin_backup == -1)
-		response = ft_error_handler("dup", "stdin backup", strerror(errno), 1);
-	if (redirect->stdout_backup == -1)
-		response = ft_error_handler("dup", "stdout backup", strerror(errno), 1);
-	if (redirect->fd_in != -1)
-		if (dup2(redirect->fd_in, STDIN_FILENO) == -1)
-			response = ft_error_handler("dup2", redirect->infile,
-					strerror(errno), 1);
-	if (redirect->fd_out != -1)
-		if (dup2(redirect->fd_out, STDOUT_FILENO) == -1)
-			response = ft_error_handler("dup2", redirect->outfile,
-					strerror(errno), 1);
-	return (response);
-}
-
-int	ft_check_io(t_redirect *redirect)
-{
-	if (!redirect || (!redirect->infile && !redirect->outfile))
-		return (1);
-	if ((redirect->infile && redirect->fd_in == -1) || (redirect->outfile
-			&& redirect->fd_out == -1))
-		return (0);
-	return (1);
-}
-
-int	ft_restore_io(t_redirect *redirect)
-{
-	int	response;
-
-	response = 1;
-	if (!redirect)
-		return (response);
-	if (redirect->stdin_backup != -1)
-	{
-		if (dup2(redirect->stdin_backup, STDIN_FILENO) == -1)
-			response = 0;
-		close(redirect->stdin_backup);
-		redirect->stdout_backup = -1;
-	}
-	if (redirect->stdout_backup != -1)
-	{
-		if (dup2(redirect->stdout_backup, STDOUT_FILENO) == -1)
-			response = 0;
-		close(redirect->stdout_backup);
-		redirect->stdout_backup = -1;
-	}
-	return (response);
-}
-
+/*
+	Выполняет указанные команды, создавая дочерние процессы и ожидая
+	их завершения. Возвращает код выхода последнего из числа подлежащих
+	удалению. Или код выхода 1 в случае провала процесса создания подлежащего удалению.
+*/
 int	ft_executor(t_store *store)
 {
 	int	response;

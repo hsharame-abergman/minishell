@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   free_token.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hsharame <hsharame@student.42.fr>          +#+  +:+       +#+        */
+/*   By: abergman <abergman@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/22 11:41:53 by hsharame          #+#    #+#             */
-/*   Updated: 2024/11/06 17:53:53 by hsharame         ###   ########.fr       */
+/*   Updated: 2024/11/11 15:26:49 by abergman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ static void	free_redirect(t_redirect *node)
 		free(node->outfile);
 	if (node->delimiter != NULL)
 		free(node->delimiter);
-	free (node);
+	free(node);
 }
 
 void	free_cmd(t_cmd *cmd)

@@ -3,18 +3,18 @@
 /*                                                        :::      ::::::::   */
 /*   ft_set_env.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hsharame <hsharame@student.42.fr>          +#+  +:+       +#+        */
+/*   By: abergman <abergman@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/21 19:28:40 by abergman          #+#    #+#             */
-/*   Updated: 2024/10/28 12:40:24 by hsharame         ###   ########.fr       */
+/*   Updated: 2024/11/11 15:28:44 by abergman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../header/minishell.h"
 
-int ft_env_var_count(char **envp)
+int	ft_env_var_count(char **envp)
 {
-	int index;
+	int	index;
 
 	index = 0;
 	while (envp[index])
@@ -22,10 +22,10 @@ int ft_env_var_count(char **envp)
 	return (index);
 }
 
-int ft_get_index_variable(char **env, const char *variable)
+int	ft_get_index_variable(char **env, const char *variable)
 {
-	int index;
-	char *res;
+	int		index;
+	char	*res;
 
 	res = ft_strjoin(variable, "=");
 	if (!res)
@@ -43,10 +43,10 @@ int ft_get_index_variable(char **env, const char *variable)
 	return (-1);
 }
 
-static char **ft_realloc_env_vars(t_store *store, int count)
+static char	**ft_realloc_env_vars(t_store *store, int count)
 {
-	char **n_env;
-	int index;
+	char	**n_env;
+	int		index;
 
 	n_env = ft_calloc(count + 1, sizeof(n_env));
 	if (!n_env)
@@ -62,12 +62,10 @@ static char **ft_realloc_env_vars(t_store *store, int count)
 	return (n_env);
 }
 
-// #TODO: Все коды ошибок которые не идут от сигналов не должны испольщовать глобальную переменную 
-
 int	ft_set_env(t_store *store, char *key, char *value)
 {
-	int index;
-	char *res;
+	int		index;
+	char	*res;
 
 	index = ft_get_index_variable(store->envp, key);
 	if (value == NULL)
@@ -85,11 +83,9 @@ int	ft_set_env(t_store *store, char *key, char *value)
 		index = ft_env_var_count(store->envp);
 		store->envp = ft_realloc_env_vars(store, index + 1);
 		if (!store->envp)
-		{
 			return (0);
-		}
 		store->envp[index] = ft_strjoin(key, res);
 	}
 	ft_free_pointer(res);
-	return(1);
-} 
+	return (1);
+}

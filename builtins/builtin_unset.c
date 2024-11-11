@@ -12,28 +12,6 @@
 
 #include "../header/minishell.h"
 
-int	ft_get_env_index(char **envp, char *key)
-{
-	int		i;
-	char	*res;
-
-	i = 0;
-	res = ft_strjoin(key, "=");
-	if (!res)
-		return (-1);
-	while (envp[i])
-	{
-		if (ft_strncmp(res, envp[i], ft_strlen(res)) == 0)
-		{
-			ft_free_pointer(res);
-			return (i);
-		}
-		i++;
-	}
-	ft_free_pointer(res);
-	return (-1);
-}
-
 int	builtin_unset(t_store *store, char **av)
 {
 	int	i;

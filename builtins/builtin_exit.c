@@ -6,21 +6,30 @@
 /*   By: abergman <abergman@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/12 15:49:11 by abergman          #+#    #+#             */
-/*   Updated: 2024/10/24 11:40:38 by abergman         ###   ########.fr       */
+/*   Updated: 2024/11/11 15:24:18 by abergman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../header/minishell.h"
 
-static int ft_check_out_of_range(int sign, unsigned long num, int *is_error)
+/*	Проверяет, превышает ли число LONG_MAX или LONG_MIN.*/
+/*	Устанавливает boolean ошибки в true, если число не находится в диапазоне,
+		false, если нет.*/
+
+static int	ft_check_out_of_range(int sign, unsigned long num, int *is_error)
 {
-	if ((sign == 1 && num > LONG_MAX)
-		|| (sign == -1 && num > -(unsigned long)LONG_MIN))
+	if ((sign == 1 && num > LONG_MAX) || (sign == -1 && num >
+			-(unsigned long)LONG_MIN))
 		*is_error = 1;
 	return (*is_error);
 }
 
-static int	ft_is_silent_mode(t_store *store)
+/*
+	Если exit не вызывается самостоятельно, то "exit" не должен выдаваться.
+	Возвращает true, если exit не должен быть напечатан. False,
+		если exit был вызван только и следует напечатать сообщение "exit".
+*/
+static int	ft_is_silent_exit_mode(t_store *store)
 {
 	t_cmd	*command;
 
@@ -34,6 +43,10 @@ static int	ft_is_silent_mode(t_store *store)
 	return (0);
 }
 
+/*
+	Преобразует строку, состоящую из цифр в длинное целое.
+	Возвращает длинное целое. В случае ошибки, задаёт boolean для ошибки true.
+*/
 static int	ft_atol_err(char *ascii, int *is_error)
 {
 	unsigned long long	num;
@@ -62,6 +75,12 @@ static int	ft_atol_err(char *ascii, int *is_error)
 	return (num * neg);
 }
 
+/*
+	Получает код выхода из аргументов, данных в встроенном файле вывода.
+	Возвращает 0, если не было представлено никаких аргументов.
+	Возвращает 2 в случае, если аргумент не является цифрами.
+	Возвращает цифровой код выхода при успешном завершении.
+*/
 static int	ft_get_exit_code(char *cmd, int *is_error)
 {
 	unsigned long long	i;
@@ -87,6 +106,8 @@ static int	ft_get_exit_code(char *cmd, int *is_error)
 	return (i % 256);
 }
 
+/* Очистить программу minishell,
+	закрыв все открытые fds и освободив всю выделенную память. */
 void	ft_exit_program(t_store *store, int exit_code)
 {
 	if (store)
@@ -98,15 +119,14 @@ void	ft_exit_program(t_store *store, int exit_code)
 	exit(exit_code);
 }
 
-/* Implementation builtin's EXIT */
-/* if single command - print exit */
-/*  */
-/*  */
-/*  */
-/*  */
-/*  */
-/*  */
-
+/*
+	Выполняет встроенную выходную функцию.
+	If alone, выйдет и выйдет из оболочки с указанным кодом выхода или 0.
+	Если проводка,
+		то выводится дочерний процесс с предоставленным кодом выхода и не выходит
+	minishell.
+	При отказе из-за недопустимых аргументов shell не выводится и возвращает код выхода (1 или 2).
+*/
 int	builtin_exit(t_store *store, char **av)
 {
 	int	exit_code;
@@ -114,27 +134,19 @@ int	builtin_exit(t_store *store, char **av)
 	int	is_silent_mode;
 
 	is_error = 0;
-	is_silent_mode = ft_is_silent_mode(store);
+	is_silent_mode = ft_is_silent_exit_mode(store);
 	if (!is_silent_mode && store->mode_usage == INTERACTIVE)
-	{
 		ft_putendl_fd("exit", 2);
-	}
 	if (!av || !av[1])
-	{
 		exit_code = g_exit_code;
-	}
 	else
 	{
 		exit_code = ft_get_exit_code(av[1], &is_error);
 		if (is_error)
-		{
 			exit_code = ft_error_handler("exit", av[1],
 					"numeric argument required", 2);
-		}
 		else if (av[2])
-		{
 			return (ft_error_handler("exit", NULL, "too many arguments", 1));
-		}
 	}
 	ft_exit_program(store, exit_code);
 	return (2);

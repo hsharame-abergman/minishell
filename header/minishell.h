@@ -41,11 +41,13 @@
 # include <signal.h>
 # include "../libft/libft.h"
 # include "errno.h"
+# include <sys/stat.h>
 
 # ifndef PATH_MAX
 #  define PATH_MAX 4096
 # endif
 
+# define CMD_NOT_EXECUTABLE 126
 # define CMD_NOT_FOUND 127
 
 extern int	g_exit_code;
@@ -133,8 +135,10 @@ void	ft_exit_program(t_store *store, int exit_code);
 int		ft_check_io(t_redirect *redirect);
 int		ft_set_pipe_fds(t_cmd *cmds, t_cmd *cmd);
 int		ft_execute_command(t_store *store, t_cmd *cmd);
+int		ft_check_redirect(t_redirect *redirect);
 int		ft_redirect_io(t_redirect *redirect);
-
+int		ft_command_is_dir(char *value);
+int		ft_check_command_not_found(t_store *data, t_cmd *cmd);
 /* ************************************************************************** */
 /*                     Lexer                                                  */
 /* ************************************************************************** */

@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   initial_store.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hsharame <hsharame@student.42.fr>          +#+  +:+       +#+        */
+/*   By: abergman <abergman@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/18 17:03:12 by abergman          #+#    #+#             */
-/*   Updated: 2024/10/18 18:25:03 by hsharame         ###   ########.fr       */
+/*   Updated: 2024/11/11 15:28:58 by abergman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../header/minishell.h"
 
-static int initial_envp(t_store *store, char **envp)
+static int	initial_envp(t_store *store, char **envp)
 {
 	(void)store;
 	(void)envp;

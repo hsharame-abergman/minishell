@@ -1,30 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   builtin_env.c                                      :+:      :+:    :+:   */
+/*   pipes.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: abergman <abergman@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/12 15:47:52 by abergman          #+#    #+#             */
-/*   Updated: 2024/11/11 15:23:39 by abergman         ###   ########.fr       */
+/*   Created: 2024/10/18 16:58:10 by abergman          #+#    #+#             */
+/*   Updated: 2024/11/11 15:29:04 by abergman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../header/minishell.h"
 
-int	builtin_env(t_store *store, char **av)
-{
-	int	res;
+/* Create a set of pipes for each piped command in list of commands. */
 
-	if (av && av[1])
-		return (ft_error_handler("env", NULL, "too many arguments", 2));
-	res = 0;
-	if (!store->envp)
-		return (EXIT_FAILURE);
-	while (store->envp[res])
+int	ft_create_pipes(t_store *store)
+{
+	int *fd;
+	t_cmd *response;
+
+	response = store->pars;
+	while (response)
 	{
-		ft_putendl_fd(store->envp[res], STDOUT_FILENO);
-		res++;
+		if (response->pipe || (response->left && response->left->pipe))
+		{
+			if (!(fd = malloc(sizeof(fd) * 2)) || pipe(fd) != 0)
+				return (ft_free_store(store, 0), 0);
+			response->fd_pipe = fd;
+		}
+		response = response->right;
 	}
 	return (EXIT_SUCCESS);
 }
