@@ -6,7 +6,7 @@
 /*   By: abergman <abergman@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/22 11:41:53 by hsharame          #+#    #+#             */
-/*   Updated: 2024/11/11 15:26:49 by abergman         ###   ########.fr       */
+/*   Updated: 2024/11/12 12:40:24 by abergman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,10 +20,10 @@ void	free_tab(char **tab)
 	while (tab[i])
 	{
 		if (tab[i] != NULL)
-			free(tab[i]);
+			ft_free_pointer(tab[i]);
 		i++;
 	}
-	free(tab);
+	ft_free_pointer(tab);
 }
 
 void	free_token(t_token *token_list)

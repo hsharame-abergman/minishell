@@ -6,7 +6,7 @@
 /*   By: abergman <abergman@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/25 15:24:27 by abergman          #+#    #+#             */
-/*   Updated: 2024/11/11 15:27:40 by abergman         ###   ########.fr       */
+/*   Updated: 2024/11/12 11:03:36 by abergman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@
    поддерживается: указанная строка должна быть полным именем переменной.
    Возвращает NULL, если строка не может быть найдена в окружении.
 */
-int	*ft_get_env_value(char **envp, char *search)
+char	*ft_get_env_value(char **envp, char *search)
 {
 	int		index;
 	char	*node;

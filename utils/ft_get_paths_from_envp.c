@@ -1,24 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_free_pointer.c                                  :+:      :+:    :+:   */
+/*   ft_get_paths_from_envp.c                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: abergman <abergman@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/21 19:00:34 by abergman          #+#    #+#             */
-/*   Updated: 2024/11/12 12:39:38 by abergman         ###   ########.fr       */
+/*   Created: 2024/11/12 20:44:59 by abergman          #+#    #+#             */
+/*   Updated: 2024/11/12 20:54:34 by abergman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../header/minishell.h"
 
-/* free's pointer of any types if it is not empty and sets it to NULL */
-
-void	ft_free_pointer(void *pointer)
+/* Attempts to extract paths from the PATH enviroment variable. */
+char	*ft_get_paths_from_envp(t_store *store)
 {
-	if (pointer != NULL)
-	{
-		free(pointer);
-		pointer = NULL;
-	}
+	char	**envp_paths;
+
+	if (ft_get_env_index(store->envp, "PATH") == -1)
+		return (NULL);
+	envp_paths = ft_split(ft_get_env_value(store->envp, "PATH"), ':');
+	if (!envp_paths)
+		return (NULL);
+	return (envp_paths);
 }

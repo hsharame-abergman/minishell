@@ -6,7 +6,7 @@
 /*   By: abergman <abergman@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/30 15:46:12 by abergman          #+#    #+#             */
-/*   Updated: 2024/11/11 15:26:53 by abergman         ###   ########.fr       */
+/*   Updated: 2024/11/12 11:10:57 by abergman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ int	ft_check_command_not_found(t_store *data, t_cmd *cmd)
 		return (ft_error_handler(cmd->value, NULL, strerror(errno),
 				CMD_NOT_FOUND));
 	else if (ft_command_is_dir(cmd->value))
-		return (ft_error_handler(cmd->value, NULL, "Is a directory",
+		return (ft_error_handler(cmd->value, NULL, "is a directory",
 				CMD_NOT_EXECUTABLE));
 	else if (access(cmd->value, F_OK | X_OK) != 0)
 		return (ft_error_handler(cmd->value, NULL, strerror(errno),

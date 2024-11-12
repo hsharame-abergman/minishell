@@ -6,7 +6,7 @@
 /*   By: abergman <abergman@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/10 16:59:00 by abergman          #+#    #+#             */
-/*   Updated: 2024/11/11 15:25:11 by abergman         ###   ########.fr       */
+/*   Updated: 2024/11/12 11:11:21 by abergman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,24 +22,6 @@ int	ft_command_is_dir(char *value)
 	ft_memset(&cmd_stat, 0, sizeof(cmd_stat));
 	stat(value, &cmd_stat);
 	return (S_ISDIR(cmd_stat.st_mode));
-}
-
-int	ft_get_cmd_path(t_store *store, t_cmd *cmd)
-{
-	if (ft_strchr(cmd->value, '/') == NULL && ft_get_env_index(store->envp,
-			"PATH") != -1)
-		return (ft_error_handler(cmd->value, NULL, "command not found",
-				CMD_NOT_FOUND));
-	if (access(cmd->value, F_OK) != 0)
-		return (ft_error_handler(cmd->value, NULL, strerror(errno),
-				CMD_NOT_FOUND));
-	else if (ft_command_is_dir(cmd->value))
-		return (ft_error_handler(cmd->value, NULL, "Is a directory",
-				CMD_NOT_EXECUTABLE));
-	else if (access(cmd->value, F_OK | X_OK) != 0)
-		return (ft_error_handler(cmd->value, NULL, strerror(errno),
-				CMD_NOT_EXECUTABLE));
-	return (EXIT_SUCCESS);
 }
 
 /*
