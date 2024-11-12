@@ -6,11 +6,13 @@
 /*   By: abergman <abergman@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/12 11:14:28 by abergman          #+#    #+#             */
-/*   Updated: 2024/11/12 12:35:26 by abergman         ###   ########.fr       */
+/*   Updated: 2024/11/12 21:27:28 by abergman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../header/minishell.h"
+
+/* Searches env PATH for location of given command's bin file */
 
 char *ft_parser_path(t_store *store, t_cmd *value)
 {
@@ -30,10 +32,10 @@ char *ft_parser_path(t_store *store, t_cmd *value)
 		ft_free_tab(path_of_envariment);
 		return (NULL);
 	}
-	path_of_command = ft_find_path(command, path_of_envariment);
+	path_of_command = ft_find_valid_command_path(command, path_of_envariment);
 	if (!path_of_command)
 	{
-		ft_freepointer(command);
+		ft_free_pointer(command);
 		ft_free_tab(path_of_envariment);
 		return (NULL);
 	}
