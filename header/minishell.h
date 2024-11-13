@@ -6,7 +6,7 @@
 /*   By: abergman <abergman@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/02 11:29:45 by hsharame          #+#    #+#             */
-/*   Updated: 2024/11/12 21:20:39 by abergman         ###   ########.fr       */
+/*   Updated: 2024/11/13 20:03:31 by abergman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -124,13 +124,14 @@ int					ft_count_env(char **envp);
 int					ft_remove_env(t_store *store, int index);
 int					ft_get_env_index(char **envp, char *key);
 char				*ft_get_env_value(char **envp, char *search);
-char				*ft_get_paths_from_envp(t_store *store);
+char				**ft_get_paths_from_envp(t_store *store);
 char				*ft_find_valid_command_path(char *command, char **paths);
 
 /* clear */
 void				ft_free_store(t_store *store, int history);
 /* env */
-char				*ft_get_env(char **envp, char *search);
+char				*ft_get_env_value(char **envp, char *search);
+int					ft_get_env_index(char **envp, char *key);
 /* executor */
 int					ft_executor(t_store *store);
 int					ft_restore_io(t_redirect *redirect);
@@ -139,11 +140,15 @@ void				ft_close_fds(t_cmd *cmds, bool close_backups);
 void				ft_exit_program(t_store *store, int exit_code);
 int					ft_check_io(t_redirect *redirect);
 int					ft_set_pipe_fds(t_cmd *cmds, t_cmd *cmd);
+int					ft_execute_builtin(t_store *store, t_cmd *command);
 int					ft_execute_command(t_store *store, t_cmd *cmd);
 int					ft_check_redirect(t_redirect *redirect);
 int					ft_redirect_io(t_redirect *redirect);
 int					ft_command_is_dir(char *value);
 int					ft_check_command_not_found(t_store *data, t_cmd *cmd);
+char				*ft_parser_path(t_store *store, char *value);
+/* pipes */
+int					ft_create_pipes(t_store *store);
 
 /* ************************************************************************** */
 /*                     Lexer                                                  */
@@ -229,8 +234,8 @@ char				*fill_str(char *res, char **token);
 /*                    Builtins                                                */
 /* ************************************************************************** */
 
-int					ft_builtins(t_store *store, t_cmd *command);
-int					is_builtins(t_store *store, char **args);
+// int					ft_builtins(t_store *store, t_cmd *command);
+// int					is_builtins(t_store *store, char **args);
 int					builtin_cd(t_store *store, char **args);
 int					builtin_pwd(t_store *store);
 int					builtin_echo(char **av);

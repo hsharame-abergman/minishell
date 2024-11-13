@@ -6,7 +6,7 @@
 /*   By: abergman <abergman@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/30 15:42:08 by abergman          #+#    #+#             */
-/*   Updated: 2024/11/11 15:26:29 by abergman         ###   ########.fr       */
+/*   Updated: 2024/11/13 20:08:13 by abergman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,7 +109,7 @@ int	ft_executor(t_store *store)
 		&& ft_check_redirect(store->pars->redirect))
 	{
 		ft_redirect_io(store->pars->redirect);
-		response = ft_builtins(store, store->pars);
+		response = ft_execute_builtin(store, store->pars);
 		ft_restore_io(store->pars->redirect);
 	}
 	if (response != CMD_NOT_FOUND)

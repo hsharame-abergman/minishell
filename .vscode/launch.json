@@ -2,11 +2,11 @@
     "version": "0.1.0",
     "configurations": [
         {
-            "name": "buildin's",
+            "name": "debug minishell",
             "type": "lldb",
             "request": "launch",
             "program": "${workspaceFolder}/minishell",
-            "args": [""],
+            "args": [],
             "cwd": "${workspaceFolder}",
             "preLaunchTask": "lldb re-compil",
         },

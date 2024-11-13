@@ -6,14 +6,14 @@
 /*   By: abergman <abergman@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/12 20:44:59 by abergman          #+#    #+#             */
-/*   Updated: 2024/11/12 20:54:34 by abergman         ###   ########.fr       */
+/*   Updated: 2024/11/13 19:37:29 by abergman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../header/minishell.h"
 
 /* Attempts to extract paths from the PATH enviroment variable. */
-char	*ft_get_paths_from_envp(t_store *store)
+char	**ft_get_paths_from_envp(t_store *store)
 {
 	char	**envp_paths;
 

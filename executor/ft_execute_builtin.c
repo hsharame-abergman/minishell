@@ -1,18 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_execute_builtins.c                              :+:      :+:    :+:   */
+/*   ft_execute_builtin.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: abergman <abergman@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/08 12:39:40 by abergman          #+#    #+#             */
-/*   Updated: 2024/11/11 15:24:47 by abergman         ###   ########.fr       */
+/*   Updated: 2024/11/13 20:13:03 by abergman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../header/minishell.h"
 
-int	ft_execute_builtins(t_store *store, t_cmd *command)
+static int	is_builtins(t_store *store, char **value)
+{
+	(void)store;
+	(void)value;
+	return (1);
+}
+
+/*
+Executes the given command if it is a builtin command
+Return 127 if the command not found and 0 or 1 if method was be runs
+ */
+int	ft_execute_builtin(t_store *store, t_cmd *command)
 {
 	int	res;
 
@@ -35,5 +46,5 @@ int	ft_execute_builtins(t_store *store, t_cmd *command)
 			res = builtin_unset(store, command->args);
 		return (res);
 	}
-	return (0);
+	return (res);
 }

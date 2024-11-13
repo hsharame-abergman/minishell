@@ -3,25 +3,26 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hsharame <hsharame@student.42.fr>          +#+  +:+       +#+        */
+/*   By: abergman <abergman@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/28 13:33:18 by abergman          #+#    #+#             */
-/*   Updated: 2024/10/28 18:14:58 by hsharame         ###   ########.fr       */
+/*   Updated: 2024/11/13 19:54:18 by abergman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "header/minishell.h"
 
+int	g_exit_code = 0;
+
 int	main(int ac, char **av, char **envp)
 {
 	t_store	store;
 
-	g_exit_code = 0;
 	ft_memset(&store, 0, sizeof(t_store));
-	if (!check_input_arguments(&store, ac, av, envp)
-		|| !initial_store(&store, envp))
+	if (!check_input_arguments(&store, ac, av, envp) || !initial_store(&store,
+			envp))
 		return (0);
-		// destroy_minishell(NULL, EXIT_FAILURE);
+	// destroy_minishell(NULL, EXIT_FAILURE);
 	while (1)
 	{
 		store.input = readline("minishell> ");

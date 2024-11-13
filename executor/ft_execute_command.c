@@ -6,7 +6,7 @@
 /*   By: abergman <abergman@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/10 16:59:00 by abergman          #+#    #+#             */
-/*   Updated: 2024/11/12 11:11:21 by abergman         ###   ########.fr       */
+/*   Updated: 2024/11/13 20:02:18 by abergman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ int	ft_execute_sys_bin(t_store *store, t_cmd *cmd)
 		return (CMD_NOT_FOUND);
 	if (ft_command_is_dir(cmd->value))
 		return (CMD_NOT_FOUND);
-	cmd->path = ft_get_cmd_path(store, cmd->value);
+	cmd->path = ft_parser_path(store, cmd->value);
 	if (!cmd->path)
 		return (CMD_NOT_FOUND);
 	return (EXIT_FAILURE);
@@ -86,7 +86,7 @@ int	ft_execute_command(t_store *store, t_cmd *cmd)
 	ft_close_fds(store->pars, 0);
 	if (ft_strchr(cmd->value, '/') == NULL)
 	{
-		response = ft_execute_command(store, cmd);
+		response = ft_execute_builtin(store, cmd);
 		if (response != 127)
 			ft_exit_program(store, response);
 		response = ft_execute_sys_bin(store, cmd);
