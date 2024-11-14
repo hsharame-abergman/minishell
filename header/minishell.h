@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abergman <abergman@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hsharame <hsharame@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/02 11:29:45 by hsharame          #+#    #+#             */
-/*   Updated: 2024/11/13 20:03:31 by abergman         ###   ########.fr       */
+/*   Updated: 2024/11/14 17:50:07 by hsharame         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -126,6 +126,9 @@ int					ft_get_env_index(char **envp, char *key);
 char				*ft_get_env_value(char **envp, char *search);
 char				**ft_get_paths_from_envp(t_store *store);
 char				*ft_find_valid_command_path(char *command, char **paths);
+void				ascii_welcome(void);
+char				*ft_hostname(void);
+char				*ft_create_label_for_readline(char **envp);
 
 /* clear */
 void				ft_free_store(t_store *store, int history);
