@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   find_var.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hsharame <hsharame@student.42.fr>          +#+  +:+       +#+        */
+/*   By: abergman <abergman@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/24 16:11:52 by hsharame          #+#    #+#             */
-/*   Updated: 2024/11/15 17:39:47 by hsharame         ###   ########.fr       */
+/*   Updated: 2024/11/15 18:11:18 by abergman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,10 +42,10 @@ void	expander(t_store *data, t_token **token_list)
 					&& !check_escape(token->value, i)
 					&& token->type != CHAR_QUOTE)
 					token->value = check_if_var(token->value);
-				else if (token->value[i] == '$' && token->value[i + 1] == '?')
-					&& !check_escape(token->value, i)
-					&& token->type != CHAR_QUOTE)
-					token->value = code;
+				// else if (token->value[i] == '$' && token->value[i + 1] == '?')
+				// 	&& !check_escape(token->value, i)
+				// 	&& token->type != CHAR_QUOTE)
+				// 	token->value = code;
 				i++;
 			}
 		}

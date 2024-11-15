@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: hsharame <hsharame@student.42.fr>          +#+  +:+       +#+         #
+#    By: abergman <abergman@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/05/24 18:14:09 by hsharame          #+#    #+#              #
-#    Updated: 2024/10/17 14:04:14 by hsharame         ###   ########.fr        #
+#    Updated: 2024/11/15 19:03:08 by abergman         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -43,10 +43,10 @@ $(NAME):
 	ranlib $(NAME)
 
 clean:
-	rm -f $(OBJS)
+	@rm -f $(OBJS)
 
 fclean: clean
-	rm -f $(NAME)
+	@rm -f $(NAME)
 
 re: fclean all
 

@@ -6,7 +6,7 @@
 /*   By: abergman <abergman@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/25 15:24:27 by abergman          #+#    #+#             */
-/*   Updated: 2024/11/12 11:03:36 by abergman         ###   ########.fr       */
+/*   Updated: 2024/11/15 15:57:29 by abergman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,8 +51,8 @@ char	*ft_get_env_value(char **envp, char *search)
 */
 int	ft_get_env_index(char **envp, char *key)
 {
-	int i;
-	char *res;
+	int		i;
+	char	*res;
 
 	i = 0;
 	res = ft_strjoin(key, "=");

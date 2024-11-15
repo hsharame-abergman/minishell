@@ -6,7 +6,7 @@
 /*   By: abergman <abergman@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/18 17:03:12 by abergman          #+#    #+#             */
-/*   Updated: 2024/11/11 15:28:58 by abergman         ###   ########.fr       */
+/*   Updated: 2024/11/15 15:51:14 by abergman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,19 @@
 
 static int	initial_envp(t_store *store, char **envp)
 {
-	(void)store;
-	(void)envp;
+	int	index;
+
+	store->envp = ft_calloc(ft_count_env(envp) + 1, sizeof(store->envp));
+	if (!store->envp)
+		return (0);
+	index = 0;
+	while (envp[index])
+	{
+		store->envp[index] = ft_strdup(envp[index]);
+		if (!store->envp[index])
+			return (0);
+		index++;
+	}
 	return (1);
 }
 
