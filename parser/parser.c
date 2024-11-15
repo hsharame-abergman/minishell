@@ -6,7 +6,7 @@
 /*   By: hsharame <hsharame@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/10 15:50:50 by hsharame          #+#    #+#             */
-/*   Updated: 2024/11/14 18:02:39 by hsharame         ###   ########.fr       */
+/*   Updated: 2024/11/15 12:16:23 by hsharame         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,7 +95,7 @@ void	parser(t_store *data, t_token *token_list)
 	// t_cmd	*temp;
 
 	syntax_tree = init_tree(&token_list, data);
-	while (syntax_tree->left)
+	while (syntax_tree && syntax_tree->left)
 		syntax_tree = syntax_tree->left;
 	// temp = syntax_tree;
 	//affiche_ast(syntax_tree);

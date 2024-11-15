@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   free_token.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abergman <abergman@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hsharame <hsharame@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/22 11:41:53 by hsharame          #+#    #+#             */
-/*   Updated: 2024/11/12 12:40:24 by abergman         ###   ########.fr       */
+/*   Updated: 2024/11/15 12:05:15 by hsharame         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,21 +26,25 @@ void	free_tab(char **tab)
 	ft_free_pointer(tab);
 }
 
-void	free_token(t_token *token_list)
+void	free_token(t_token **token_list)
 {
 	t_token	*temp;
 	t_token	*next;
 
-	temp = token_list;
-	while (temp->prev != NULL)
+	if (!token_list || !*token_list)
+		return ;
+	temp = *token_list;
+	while (temp && temp->prev != NULL)
 		temp = temp->prev;
 	while (temp != NULL)
 	{
 		next = temp->next;
-		free(temp->value);
+		if (temp->value)
+			free(temp->value);
 		free(temp);
 		temp = next;
 	}
+	*token_list = NULL;
 }
 
 static void	free_redirect(t_redirect *node)

@@ -6,7 +6,7 @@
 /*   By: hsharame <hsharame@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/28 13:33:18 by abergman          #+#    #+#             */
-/*   Updated: 2024/11/14 17:48:38 by hsharame         ###   ########.fr       */
+/*   Updated: 2024/11/15 14:57:29 by hsharame         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ int	main(int ac, char **av, char **envp)
 			ft_putstr_fd("Error:\nMinishell was closed", 2);
 			break ;
 		}
-		if (store.input)
+		if (store.input && store.input[0] != '\0')
 		{
 			add_history(store.input);
 			if (lexer(&store))
@@ -42,8 +42,8 @@ int	main(int ac, char **av, char **envp)
 				g_exit_code = 1;
 		}
 		free(store.input);
-		rl_clear_history();
 	}
+	rl_clear_history();
 	free(label);
 	return (0);
 }

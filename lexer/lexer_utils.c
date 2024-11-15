@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lexer_utils.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abergman <abergman@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hsharame <hsharame@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/02 11:49:32 by hsharame          #+#    #+#             */
-/*   Updated: 2024/11/13 20:26:11 by abergman         ###   ########.fr       */
+/*   Updated: 2024/11/15 12:15:41 by hsharame         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,8 @@ void	check_pipe(t_token **token_list, char *input, int *i)
 	char	*extra_input;
 
 	current = *token_list;
+	if (current->type == END)
+		return ;
 	while (current->next->type != END)
 		current = current->next;
 	if (current->type == PIPE)

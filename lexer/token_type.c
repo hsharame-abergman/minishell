@@ -6,7 +6,7 @@
 /*   By: hsharame <hsharame@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/02 14:09:39 by hsharame          #+#    #+#             */
-/*   Updated: 2024/10/28 17:54:46 by hsharame         ###   ########.fr       */
+/*   Updated: 2024/11/15 12:10:55 by hsharame         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,4 +75,5 @@ void	token_word(t_token **token_list, char *input, int *i)
 		(*i)++;
 	token = ft_substr(input, start, (size_t)(*i - start));
 	add_token(token_list, token, TOKEN_WORD);
+	free(token);
 }

@@ -6,7 +6,7 @@
 /*   By: hsharame <hsharame@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/02 11:29:45 by hsharame          #+#    #+#             */
-/*   Updated: 2024/11/14 17:50:07 by hsharame         ###   ########.fr       */
+/*   Updated: 2024/11/15 12:05:32 by hsharame         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -132,6 +132,9 @@ char				*ft_create_label_for_readline(char **envp);
 
 /* clear */
 void				ft_free_store(t_store *store, int history);
+void				free_token(t_token **token_list);
+//static void			free_redirect(t_redirect *node);
+void				free_cmd(t_cmd *cmd);
 /* env */
 char				*ft_get_env_value(char **envp, char *search);
 int					ft_get_env_index(char **envp, char *key);

@@ -6,7 +6,7 @@
 /*   By: hsharame <hsharame@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/30 15:48:48 by hsharame          #+#    #+#             */
-/*   Updated: 2024/10/29 16:46:57 by hsharame         ###   ########.fr       */
+/*   Updated: 2024/11/15 12:10:41 by hsharame         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,9 +106,7 @@ bool	lexer(t_store *data)
 		if (ft_isspace(data->input[i]))
 			i++;
 		else
-		{
 			init_tokens(&data->token, data->input, &i);
-		}
 	}	
 	if (data->input[i] == '\0')
 		add_token(&data->token, "\0", END);

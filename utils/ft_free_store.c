@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_free_store.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abergman <abergman@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hsharame <hsharame@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/04 17:21:51 by abergman          #+#    #+#             */
-/*   Updated: 2024/11/11 15:27:25 by abergman         ###   ########.fr       */
+/*   Updated: 2024/11/15 12:05:48 by hsharame         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,8 @@ void	ft_free_store(t_store *store, int history)
 		ft_free_pointer(store->input);
 		store->input = NULL;
 	}
+	if (store && store->token)
+		free_token(&store->token);
 	if (history)
 	{
 		if (store && store->working_directory)
