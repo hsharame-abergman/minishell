@@ -6,11 +6,27 @@
 /*   By: abergman <abergman@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/14 17:42:39 by hsharame          #+#    #+#             */
-/*   Updated: 2024/11/15 20:48:15 by abergman         ###   ########.fr       */
+/*   Updated: 2024/11/15 21:16:43 by abergman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../header/minishell.h"
+
+/* 
+The bash prompts are customised by setting the environment variable
+Prompt String 1 (PS1) to the desired string in the ~/.bashrc file as follows,
+    `\u`: The username of the current user
+    `\h`: The hostname up to the first.
+    `\H`: The full hostname
+    `\w`: The current working directory
+    `\W`: The basename of the current working directory
+    `\$`: This code represents the prompt symbol, which is $ for a regular user
+			and # for the root user
+
+By default, the bash prompt includes the current username, hostname, and current
+	working directory, followed by the `$` symbol for a regular user
+	or the `#` symbol for the root user.
+ */
 
 char	*ft_hostname(void)
 {
