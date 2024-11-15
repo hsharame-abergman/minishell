@@ -6,7 +6,7 @@
 /*   By: abergman <abergman@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/21 19:28:40 by abergman          #+#    #+#             */
-/*   Updated: 2024/11/11 15:28:44 by abergman         ###   ########.fr       */
+/*   Updated: 2024/11/15 20:32:15 by abergman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,7 @@ int	ft_get_index_variable(char **env, const char *variable)
 			ft_free_pointer(res);
 			return (index);
 		}
+		index++;
 	}
 	ft_free_pointer(res);
 	return (-1);

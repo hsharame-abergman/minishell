@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hsharame <hsharame@student.42.fr>          +#+  +:+       +#+        */
+/*   By: abergman <abergman@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/28 13:33:18 by abergman          #+#    #+#             */
-/*   Updated: 2024/11/15 14:57:29 by hsharame         ###   ########.fr       */
+/*   Updated: 2024/11/15 20:47:41 by abergman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,9 +24,9 @@ int	main(int ac, char **av, char **envp)
 			envp))
 		return (0);
 	ascii_welcome();
-	label = ft_create_label_for_readline(envp);
 	while (1)
 	{
+		label = ft_create_label_for_readline(envp, &store);
 		store.input = readline(label);
 		if (store.input == NULL)
 		{

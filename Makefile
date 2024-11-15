@@ -6,7 +6,7 @@
 #    By: abergman <abergman@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/09/28 13:34:37 by abergman          #+#    #+#              #
-#    Updated: 2024/11/15 19:31:09 by abergman         ###   ########.fr        #
+#    Updated: 2024/11/15 19:48:45 by abergman         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -30,7 +30,7 @@ $(OBJDIR)/%.o: ./%.c $(HEADERS)
 $(NAME): $(OBJDIR) $(HEADERS) $(OBJS)
 		$(CC) $(OBJS) -o $(NAME) -lreadline
 		@clear
-		@echo "[ ★ SUCCESS ★ ]: The program is ready. You can use file './minishell' for execute"
+		@echo "[ ★ SUCCESS ★ ]: The program is ready. You can use file './minishell' for execute."
 
 all: $(NAME)
 
@@ -40,7 +40,7 @@ $(LIBFT):
 $(OBJDIR):
 	@clear
 	@mkdir $@
-	@echo "[  PREPARING  ]: Directory '$@' is created"
+	@echo "[  PREPARING  ]: Directory '$@' is created."
 	@echo "[ COMPILATION ]: Creating files in progress..."
 
 clean:

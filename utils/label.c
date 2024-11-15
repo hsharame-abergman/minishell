@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   label.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hsharame <hsharame@student.42.fr>          +#+  +:+       +#+        */
+/*   By: abergman <abergman@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/14 17:42:39 by hsharame          #+#    #+#             */
-/*   Updated: 2024/11/14 17:54:34 by hsharame         ###   ########.fr       */
+/*   Updated: 2024/11/15 20:48:15 by abergman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ char	*ft_hostname(void)
 	fd = open("/etc/hostname", O_RDONLY);
 	i = read(fd, buf, 20);
 	buf[i] = '\0';
-	close (fd);
+	close(fd);
 	if (i > 0)
 	{
 		i = 0;
@@ -31,12 +31,12 @@ char	*ft_hostname(void)
 			i++;
 	}
 	res = ft_substr(buf, 0, i);
-	label = ft_strjoin(res, ": ");
+	label = ft_strjoin(res, ":");
 	free(res);
 	return (label);
 }
 
-char	*ft_create_label_for_readline(char **envp)
+char	*ft_create_label_for_readline(char **envp, t_store *store)
 {
 	char	*label;
 	char	*hostname;
@@ -46,6 +46,8 @@ char	*ft_create_label_for_readline(char **envp)
 	label = ft_strjoin(label, "@");
 	hostname = ft_hostname();
 	res = ft_strjoin(label, hostname);
+	res = ft_strjoin(res, ft_get_env_value(store->envp, "PWD"));
+	res = ft_strjoin(res, "$ ");
 	free(label);
 	free(hostname);
 	return (res);

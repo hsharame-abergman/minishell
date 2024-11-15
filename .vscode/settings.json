@@ -9,5 +9,9 @@
 		"__config": "c",
 		"atomic": "c"
 	},
-	"C_Cpp.errorSquiggles": "disabled"
+	"C_Cpp.errorSquiggles": "disabled",
+	"lldb.displayFormat": "auto",
+	"lldb.showDisassembly": "auto",
+	"lldb.dereferencePointers": true,
+	"lldb.consoleMode": "commands"
 }
