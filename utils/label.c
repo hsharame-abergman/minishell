@@ -6,7 +6,7 @@
 /*   By: abergman <abergman@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/14 17:42:39 by hsharame          #+#    #+#             */
-/*   Updated: 2024/11/15 21:16:43 by abergman         ###   ########.fr       */
+/*   Updated: 2024/11/15 22:42:03 by abergman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,8 +58,7 @@ char	*ft_create_label_for_readline(char **envp, t_store *store)
 	char	*hostname;
 	char	*res;
 
-	label = ft_get_env_value(envp, "USER");
-	label = ft_strjoin(label, "@");
+	label = ft_strjoin(ft_get_env_value(envp, "USER"), "@");
 	hostname = ft_hostname();
 	res = ft_strjoin(label, hostname);
 	res = ft_strjoin(res, ft_get_env_value(store->envp, "PWD"));

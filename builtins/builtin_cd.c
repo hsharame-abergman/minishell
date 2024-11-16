@@ -6,7 +6,7 @@
 /*   By: abergman <abergman@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/11 18:04:57 by abergman          #+#    #+#             */
-/*   Updated: 2024/11/13 19:41:44 by abergman         ###   ########.fr       */
+/*   Updated: 2024/11/16 16:15:15 by abergman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,8 @@ int	ft_change_directory(t_store *store, char *path)
 	char	cwd[PATH_MAX];
 
 	workdir = NULL;
+	if (path && ft_strcmp(path, "~") == 0)
+		path = ft_get_env_value(store->envp, "HOME");
 	if (chdir(path) != 0)
 		return (chdir_errno_mod(path));
 	workdir = getcwd(cwd, PATH_MAX);
