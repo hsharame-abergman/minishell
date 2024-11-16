@@ -6,7 +6,7 @@
 /*   By: abergman <abergman@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/02 11:29:45 by hsharame          #+#    #+#             */
-/*   Updated: 2024/11/15 20:49:07 by abergman         ###   ########.fr       */
+/*   Updated: 2024/11/16 19:30:20 by abergman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@
 
 # include "../libft/libft.h"
 # include "errno.h"
+# include <dirent.h>
 # include <fcntl.h>
 # include <limits.h>
 # include <readline/history.h>
@@ -133,7 +134,7 @@ char				*ft_create_label_for_readline(char **envp, t_store *store);
 /* clear */
 void				ft_free_store(t_store *store, int history);
 void				free_token(t_token **token_list);
-//static void			free_redirect(t_redirect *node);
+// static void			free_redirect(t_redirect *node);
 void				free_cmd(t_cmd *cmd);
 /* env */
 char				*ft_get_env_value(char **envp, char *search);
@@ -240,6 +241,11 @@ char				*fill_str(char *res, char **token);
 /*                    Builtins                                                */
 /* ************************************************************************** */
 
+struct				s_format
+{
+	int				counter;
+};
+
 // int					ft_builtins(t_store *store, t_cmd *command);
 // int					is_builtins(t_store *store, char **args);
 int					builtin_cd(t_store *store, char **args);
@@ -249,6 +255,7 @@ int					builtin_env(t_store *store, char **av);
 int					builtin_exit(t_store *store, char **av);
 int					builtin_export(t_store *store, char **av);
 int					builtin_unset(t_store *store, char **av);
+int					builtin_ls(t_store *store);
 
 /* ************************************************************************** */
 /*                    Signals                                                 */

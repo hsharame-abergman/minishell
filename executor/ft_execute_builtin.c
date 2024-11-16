@@ -6,7 +6,7 @@
 /*   By: abergman <abergman@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/08 12:39:40 by abergman          #+#    #+#             */
-/*   Updated: 2024/11/13 20:13:03 by abergman         ###   ########.fr       */
+/*   Updated: 2024/11/16 16:40:47 by abergman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,8 @@ int	ft_execute_builtin(t_store *store, t_cmd *command)
 			res = builtin_pwd(store);
 		else if (ft_strncmp(command->value, "unset", 6) == 0)
 			res = builtin_unset(store, command->args);
+		else if (ft_strncmp(command->value, "ls", 3) == 0)
+			res = builtin_ls(store);
 		return (res);
 	}
 	return (res);

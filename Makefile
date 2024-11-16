@@ -6,7 +6,7 @@
 #    By: abergman <abergman@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/09/28 13:34:37 by abergman          #+#    #+#              #
-#    Updated: 2024/11/15 19:48:45 by abergman         ###   ########.fr        #
+#    Updated: 2024/11/16 17:16:45 by abergman         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -30,7 +30,7 @@ $(OBJDIR)/%.o: ./%.c $(HEADERS)
 $(NAME): $(OBJDIR) $(HEADERS) $(OBJS)
 		$(CC) $(OBJS) -o $(NAME) -lreadline
 		@clear
-		@echo "[ ★ SUCCESS ★ ]: The program is ready. You can use file './minishell' for execute."
+		@echo "$(GREEN)$(BOLD)[ ★ SUCCESS ★ ]$(BOLD_R)$(RESET): The program is ready. You can use './minishell' for execute."
 
 all: $(NAME)
 
@@ -40,8 +40,8 @@ $(LIBFT):
 $(OBJDIR):
 	@clear
 	@mkdir $@
-	@echo "[  PREPARING  ]: Directory '$@' is created."
-	@echo "[ COMPILATION ]: Creating files in progress..."
+	@echo "$(YELLOW)[  PREPARING  ]$(RESET): Directory '$@' is created."
+	@echo "$(YELLOW)[ COMPILATION ]$(RESET): Creating files in progress..."
 
 clean:
 	$(RM) -rf $(OBJDIR)
@@ -55,3 +55,10 @@ re: fclean all
 
 # .SILENT:
 .PHONY: all clean fclean re
+
+BOLD	= \e[1m
+BOLD_R	= \e[0m
+
+YELLOW	= \033[0;33m
+GREEN	= \033[0;32m
+RESET	= \033[0m
