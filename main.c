@@ -6,7 +6,7 @@
 /*   By: abergman <abergman@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/28 13:33:18 by abergman          #+#    #+#             */
-/*   Updated: 2024/11/15 20:47:41 by abergman         ###   ########.fr       */
+/*   Updated: 2024/11/17 20:18:08 by abergman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,18 +14,23 @@
 
 int		g_exit_code = 0;
 
+void	ft_monitor(t_store *store)
+{
+}
+
 int	main(int ac, char **av, char **envp)
 {
 	t_store	store;
 	char	*label;
 
 	ft_memset(&store, 0, sizeof(t_store));
-	if (!check_input_arguments(&store, ac, av, envp) || !initial_store(&store,
+	if (!ft_check_input_args(&store, ac, av, envp) || !initial_store(&store,
 			envp))
 		return (0);
 	ascii_welcome();
 	while (1)
 	{
+		ft_set_signals_interactive();
 		label = ft_create_label_for_readline(envp, &store);
 		store.input = readline(label);
 		if (store.input == NULL)
@@ -41,9 +46,10 @@ int	main(int ac, char **av, char **envp)
 			else
 				g_exit_code = 1;
 		}
-		free(store.input);
+		ft_free_store(st);
 	}
 	rl_clear_history();
 	free(label);
+	ft_exit_program(store, g_exit_code);
 	return (0);
 }

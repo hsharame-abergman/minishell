@@ -6,7 +6,7 @@
 /*   By: abergman <abergman@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/02 11:29:45 by hsharame          #+#    #+#             */
-/*   Updated: 2024/11/16 19:30:20 by abergman         ###   ########.fr       */
+/*   Updated: 2024/11/17 20:37:06 by abergman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,14 +43,22 @@
 # include <sys/wait.h>
 # include <unistd.h>
 
+extern int			g_exit_code;
+
 # ifndef PATH_MAX
 #  define PATH_MAX 4096
 # endif
 
-# define CMD_NOT_EXECUTABLE 126
-# define CMD_NOT_FOUND 127
+# define CTRL_D 4
+# define CTRL_C 3
+# define ENTER_KEY 10
+# define CTRL_B 28
 
-extern int			g_exit_code;
+# define EXIT_GENERAL_ERROR 2
+# define EXIT_CMD_NOT_EXECUT 126
+# define EXIT_CMD_NOT_FOUND 127
+# define EXIT_CMD_INTERRUPTED 130
+# define EXIT_ERROR_FORMAT 258
 
 typedef struct s_redirect
 {
@@ -115,7 +123,7 @@ char				*ft_strjoin2(char *dest, char *str);
 int					ft_error_handler(char *cmd, char *detail, char *errmsg,
 						int errcode);
 int					ft_defauit_error(int res);
-int					check_input_arguments(t_store *store, int ac, char **av,
+int					ft_check_input_args(t_store *store, int ac, char **av,
 						char **envp);
 void				ft_free_pointer(void *pointer);
 int					ft_search_flag(char *str, char flag);
@@ -263,6 +271,6 @@ int					builtin_ls(t_store *store);
 
 void				signals_ignore(void);
 void				signal_ctrl_c(int sign);
-void				signals_interactive(void);
+void				ft_set_signals_interactive(void);
 
 #endif

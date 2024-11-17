@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   signals.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hsharame <hsharame@student.42.fr>          +#+  +:+       +#+        */
+/*   By: abergman <abergman@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/29 16:55:22 by hsharame          #+#    #+#             */
-/*   Updated: 2024/10/29 17:38:45 by hsharame         ###   ########.fr       */
+/*   Updated: 2024/11/17 20:14:53 by abergman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ void	signal_ctrl_c(int sign)
 	rl_redisplay();
 }
 
-void	signals_interactive(void)
+void	ft_set_signals_interactive(void)
 {
 	struct sigaction	signal;
 

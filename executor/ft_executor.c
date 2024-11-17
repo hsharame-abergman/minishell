@@ -6,7 +6,7 @@
 /*   By: abergman <abergman@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/30 15:42:08 by abergman          #+#    #+#             */
-/*   Updated: 2024/11/16 16:15:25 by abergman         ###   ########.fr       */
+/*   Updated: 2024/11/17 20:37:05 by abergman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,7 +90,7 @@ int	ft_preporation_for_execution(t_store *store)
 	}
 	if (!ft_create_pipes(store))
 		return (EXIT_FAILURE);
-	return (CMD_NOT_FOUND);
+	return (EXIT_CMD_NOT_FOUND);
 }
 
 /*
@@ -103,7 +103,7 @@ int	ft_executor(t_store *store)
 	int	response;
 
 	response = ft_preporation_for_execution(store);
-	if (response != CMD_NOT_FOUND)
+	if (response != EXIT_CMD_NOT_FOUND)
 		return (response);
 	if (!store->pars->pipe && !store->pars->left
 		&& ft_check_redirect(store->pars->redirect))
@@ -112,7 +112,7 @@ int	ft_executor(t_store *store)
 		response = ft_execute_builtin(store, store->pars);
 		ft_restore_io(store->pars->redirect);
 	}
-	if (response != CMD_NOT_FOUND)
+	if (response != EXIT_CMD_NOT_FOUND)
 		return (response);
 	return (ft_create_children_process(store));
 }

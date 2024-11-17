@@ -6,7 +6,7 @@
 /*   By: abergman <abergman@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/16 16:44:56 by abergman          #+#    #+#             */
-/*   Updated: 2024/11/16 19:42:46 by abergman         ###   ########.fr       */
+/*   Updated: 2024/11/16 20:20:37 by abergman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ int	builtin_ls(t_store *store)
 	path = ft_get_env_value(store->envp, "PWD");
 	pointer_dir = opendir(path);
 	if (pointer_dir == NULL)
-		return (printf("Cannot open directory '%s'\n", path), 1);
+		return (ft_error_handler("ls", path, "cannot open directory", 1));
 	while (1)
 	{
 		p_dirent = readdir(pointer_dir);
@@ -48,4 +48,3 @@ int	builtin_ls(t_store *store)
 		format.counter++;
 	}
 }
-

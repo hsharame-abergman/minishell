@@ -6,7 +6,7 @@
 /*   By: abergman <abergman@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/08 12:39:40 by abergman          #+#    #+#             */
-/*   Updated: 2024/11/16 16:40:47 by abergman         ###   ########.fr       */
+/*   Updated: 2024/11/17 20:37:04 by abergman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ int	ft_execute_builtin(t_store *store, t_cmd *command)
 {
 	int	res;
 
-	res = CMD_NOT_FOUND;
+	res = EXIT_CMD_NOT_FOUND;
 	if (is_builtins(store, &command->value))
 	{
 		if (ft_strncmp(command->value, "cd", 3) == 0)

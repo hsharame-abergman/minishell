@@ -6,7 +6,7 @@
 /*   By: abergman <abergman@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/10 16:59:00 by abergman          #+#    #+#             */
-/*   Updated: 2024/11/13 20:02:18 by abergman         ###   ########.fr       */
+/*   Updated: 2024/11/17 20:37:04 by abergman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,18 +27,18 @@ int	ft_command_is_dir(char *value)
 /*
  *	Executes the command's system binary file if it can be found
  *	among the environment executable paths.
- *	Returns CMD_NOT_FOUND if a path to the executable bin file cannot be
+ *	Returns EXIT_CMD_NOT_FOUND if a path to the executable bin file cannot be
  *	found. Returns 1 in case of failure to run existing, executable file.
  */
 int	ft_execute_sys_bin(t_store *store, t_cmd *cmd)
 {
 	if (!cmd->value && cmd->value[0] == '\0')
-		return (CMD_NOT_FOUND);
+		return (EXIT_CMD_NOT_FOUND);
 	if (ft_command_is_dir(cmd->value))
-		return (CMD_NOT_FOUND);
+		return (EXIT_CMD_NOT_FOUND);
 	cmd->path = ft_parser_path(store, cmd->value);
 	if (!cmd->path)
-		return (CMD_NOT_FOUND);
+		return (EXIT_CMD_NOT_FOUND);
 	return (EXIT_FAILURE);
 }
 
