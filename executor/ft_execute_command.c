@@ -6,7 +6,11 @@
 /*   By: hsharame <hsharame@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/10 16:59:00 by abergman          #+#    #+#             */
+<<<<<<< Updated upstream
 /*   Updated: 2024/11/18 17:49:39 by hsharame         ###   ########.fr       */
+=======
+/*   Updated: 2024/11/18 17:30:26 by abergman         ###   ########.fr       */
+>>>>>>> Stashed changes
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +43,8 @@ int	ft_execute_sys_bin(t_store *store, t_cmd *cmd)
 	cmd->path = ft_parser_path(store, cmd->value);
 	if (!cmd->path)
 		return (EXIT_CMD_NOT_FOUND);
+	if (execve(cmd->path, cmd->args, store->envp) == -1)
+		ft_error_handler("execve", NULL, strerror(errno), g_exit_code);
 	return (EXIT_FAILURE);
 }
 
