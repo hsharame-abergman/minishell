@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: abergman <abergman@student.42.fr>          +#+  +:+       +#+         #
+#    By: hsharame <hsharame@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/09/28 13:34:37 by abergman          #+#    #+#              #
-#    Updated: 2024/11/16 17:16:45 by abergman         ###   ########.fr        #
+#    Updated: 2024/11/18 13:19:22 by hsharame         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,7 +19,7 @@ OBJS			:= $(patsubst %.c,$(OBJDIR)/%.o,$(SRC))
 
 HEADERS 		= ./header/minishell.h
 
-CC				= @cc -g3 -Wall -Wextra -Werror -O3 -pthread
+CC				= @cc -g3 -Wall -Wextra -Werror -O3
 
 RM				= @rm -f
 

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abergman <abergman@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hsharame <hsharame@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/28 13:33:18 by abergman          #+#    #+#             */
-/*   Updated: 2024/11/18 12:54:50 by abergman         ###   ########.fr       */
+/*   Updated: 2024/11/18 13:44:41 by hsharame         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ int	main(int ac, char **av, char **envp)
 		store.input = readline(label);
 		if (store.input == NULL)
 		{
-			ft_putstr_fd("Error:\nMinishell was closed", 2);
+			ft_putstr_fd("exit\n", 2);
 			break ;
 		}
 		if (store.input && store.input[0] != '\0')
@@ -46,7 +46,7 @@ int	main(int ac, char **av, char **envp)
 			else
 				g_exit_code = 1;
 		}
-		ft_free_store(&store, 1);
+		// ft_free_store(&store, 1);
 	}
 	rl_clear_history();
 	free(label);

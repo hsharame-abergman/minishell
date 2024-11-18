@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_executor.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abergman <abergman@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hsharame <hsharame@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/30 15:42:08 by abergman          #+#    #+#             */
-/*   Updated: 2024/11/17 20:37:05 by abergman         ###   ########.fr       */
+/*   Updated: 2024/11/18 17:50:48 by hsharame         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,12 +61,12 @@ int	ft_create_children_process(t_store *store)
 	t_cmd	*command;
 
 	command = store->pars;
-	while (store->pid != 0 && command)
+	while (command && store->pid != 0)
 	{
 		store->pid = fork();
 		if (store->pid == -1)
 			return (ft_error_handler("fork", NULL, "", 1));
-		else if (store->pid == 0)
+		else if (store->pid)
 		{
 			ft_execute_command(store, command);
 		}

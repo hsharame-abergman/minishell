@@ -6,7 +6,7 @@
 /*   By: hsharame <hsharame@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/11 15:37:21 by hsharame          #+#    #+#             */
-/*   Updated: 2024/10/29 11:22:36 by hsharame         ###   ########.fr       */
+/*   Updated: 2024/11/18 13:08:18 by hsharame         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,8 @@ bool	is_builtin(char *s)
 	else if (ft_strcmp(s, "export") == 0)
 		return (true);
 	else if (ft_strcmp(s, "pwd") == 0)
+		return (true);
+	else if (ft_strcmp(s, "unset") == 0)
 		return (true);
 	return (false);
 }

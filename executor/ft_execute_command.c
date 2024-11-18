@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_execute_command.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abergman <abergman@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hsharame <hsharame@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/10 16:59:00 by abergman          #+#    #+#             */
-/*   Updated: 2024/11/17 20:37:04 by abergman         ###   ########.fr       */
+/*   Updated: 2024/11/18 17:49:39 by hsharame         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,7 @@ int	ft_execute_command(t_store *store, t_cmd *cmd)
 
 	response = 0;
 	error = 0;
-	if (!cmd || cmd->value)
+	if (!cmd || !cmd->value)
 	{
 		error = ft_error_handler("child", NULL,
 				"parsing error: command not found", EXIT_FAILURE);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abergman <abergman@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hsharame <hsharame@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/02 11:29:45 by hsharame          #+#    #+#             */
-/*   Updated: 2024/11/17 20:37:06 by abergman         ###   ########.fr       */
+/*   Updated: 2024/11/18 18:05:20 by hsharame         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,6 +117,8 @@ typedef struct s_store
 /* ************************************************************************** */
 
 void				free_tab(char **tab);
+void				handle_bracket(t_store *data, char *str);
+bool				check_bracket(t_store *data);
 int					error_syntax(char *s, int error);
 int					initial_store(t_store *store, char **envp);
 char				*ft_strjoin2(char *dest, char *str);
@@ -208,7 +210,7 @@ void				expander(t_store *data, t_token **token_list);
 bool				check_escape(char *str, int i);
 char				*get_env_value(char *input, int *i);
 char				*check_if_var(char *input);
-bool				expander_heredoc(char *input);
+bool				expander_heredoc(t_store *data, char *input);
 
 /* ************************************************************************** */
 /*                    Parser                                                  */

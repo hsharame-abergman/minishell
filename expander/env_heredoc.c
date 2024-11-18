@@ -6,7 +6,7 @@
 /*   By: hsharame <hsharame@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/28 12:06:42 by hsharame          #+#    #+#             */
-/*   Updated: 2024/11/15 13:59:40 by hsharame         ###   ########.fr       */
+/*   Updated: 2024/11/18 17:43:07 by hsharame         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,11 +66,12 @@ char	*check_if_var(char *input)
 	return (res);
 }
 
-bool	expander_heredoc(char *input)
+bool	expander_heredoc(t_store *data, char *input)
 {
 	int	i;
 
 	i = 0;
+	(void)data;
 	while (input[i])
 	{
 		if (input[i] == '$' && ft_isalpha(input[i + 1])

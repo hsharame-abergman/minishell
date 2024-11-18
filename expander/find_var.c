@@ -3,17 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   find_var.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abergman <abergman@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hsharame <hsharame@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/24 16:11:52 by hsharame          #+#    #+#             */
-/*   Updated: 2024/11/15 18:11:18 by abergman         ###   ########.fr       */
+/*   Updated: 2024/11/18 17:42:12 by hsharame         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../header/minishell.h"
 
 bool	check_escape(char *str, int i)
-{
+{		
 	if (i > 0)
 	{
 		if (str[i - 1] == '\"' && str[i + 1] == '\"')
@@ -38,14 +38,14 @@ void	expander(t_store *data, t_token **token_list)
 			i = 0;
 			while ((size_t)i < ft_strlen(token->value) && token->value[i + 1])
 			{
-				if (token->value[i] == '$' && ft_isalpha(token->value[i + 1])
-					&& !check_escape(token->value, i)
-					&& token->type != CHAR_QUOTE)
-					token->value = check_if_var(token->value);
-				// else if (token->value[i] == '$' && token->value[i + 1] == '?')
-				// 	&& !check_escape(token->value, i)
-				// 	&& token->type != CHAR_QUOTE)
-				// 	token->value = code;
+				if (token->value[i] == '$' && token->type != CHAR_QUOTE
+					&& !check_escape(token->value, i))
+				{
+					if (ft_isalpha(token->value[i + 1]))
+						token->value = check_if_var(token->value);
+					else if (token->value[i + 1] == '?')
+						token->value = ft_itoa(g_exit_code);
+				}
 				i++;
 			}
 		}

@@ -6,11 +6,36 @@
 /*   By: hsharame <hsharame@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/04 17:21:51 by abergman          #+#    #+#             */
-/*   Updated: 2024/11/15 12:05:48 by hsharame         ###   ########.fr       */
+/*   Updated: 2024/11/18 18:08:04 by hsharame         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../header/minishell.h"
+
+void	handle_bracket(t_store *data, char *str)
+{
+	(void)data;
+	printf("minishell: syntax error near unexpected token '%s'\n", str);
+}
+
+bool	check_bracket(t_store *data)
+{
+	char	*bracket;
+
+	bracket = ft_strchr(data->input, '(');
+	if (bracket != NULL)
+	{
+		handle_bracket(data, bracket);
+		return (true);
+	}
+	bracket = ft_strchr(data->input, ')');
+	if (bracket != NULL)
+	{
+		handle_bracket(data, bracket);
+		return (true);
+	}
+	return (false);
+}
 
 void	ft_free_str_tab(char **tab)
 {
