@@ -6,7 +6,7 @@
 /*   By: abergman <abergman@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/28 13:33:18 by abergman          #+#    #+#             */
-/*   Updated: 2024/11/17 20:18:08 by abergman         ###   ########.fr       */
+/*   Updated: 2024/11/18 12:54:50 by abergman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,9 @@
 
 int		g_exit_code = 0;
 
-void	ft_monitor(t_store *store)
-{
-}
+// void	ft_monitor(t_store *store)
+// {
+// }
 
 int	main(int ac, char **av, char **envp)
 {
@@ -46,10 +46,10 @@ int	main(int ac, char **av, char **envp)
 			else
 				g_exit_code = 1;
 		}
-		ft_free_store(st);
+		ft_free_store(&store, 1);
 	}
 	rl_clear_history();
 	free(label);
-	ft_exit_program(store, g_exit_code);
+	ft_exit_program(&store, g_exit_code);
 	return (0);
 }
