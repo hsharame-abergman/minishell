@@ -3,14 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hsharame <hsharame@student.42.fr>          +#+  +:+       +#+        */
+/*   By: abergman <abergman@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/28 13:33:18 by abergman          #+#    #+#             */
-<<<<<<< Updated upstream
-/*   Updated: 2024/11/18 13:44:41 by hsharame         ###   ########.fr       */
-=======
-/*   Updated: 2024/11/18 16:38:13 by abergman         ###   ########.fr       */
->>>>>>> Stashed changes
+/*   Updated: 2024/11/18 19:30:45 by abergman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 

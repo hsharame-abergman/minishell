@@ -3,28 +3,24 @@
 /*                                                        :::      ::::::::   */
 /*   label.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hsharame <hsharame@student.42.fr>          +#+  +:+       +#+        */
+/*   By: abergman <abergman@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/14 17:42:39 by hsharame          #+#    #+#             */
-<<<<<<< Updated upstream
-/*   Updated: 2024/11/18 18:10:06 by hsharame         ###   ########.fr       */
-=======
-/*   Updated: 2024/11/18 19:10:44 by abergman         ###   ########.fr       */
->>>>>>> Stashed changes
+/*   Updated: 2024/11/18 19:31:09 by abergman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../header/minishell.h"
 
-/* 
+/*
 The bash prompts are customised by setting the environment variable
 Prompt String 1 (PS1) to the desired string in the ~/.bashrc file as follows,
-    `\u`: The username of the current user
-    `\h`: The hostname up to the first.
-    `\H`: The full hostname
-    `\w`: The current working directory
-    `\W`: The basename of the current working directory
-    `\$`: This code represents the prompt symbol, which is $ for a regular user
+	`\u`: The username of the current user
+	`\h`: The hostname up to the first.
+	`\H`: The full hostname
+	`\w`: The current working directory
+	`\W`: The basename of the current working directory
+	`\$`: This code represents the prompt symbol, which is $ for a regular user
 			and # for the root user
 
 By default, the bash prompt includes the current username, hostname, and current
@@ -56,12 +52,12 @@ char	*ft_hostname(void)
 	return (label);
 }
 
-char *ft_set_pwd(t_store *store)
+char	*ft_set_pwd(t_store *store)
 {
-	char *pwd;
-	char *home;
-	char *res;
-	int	index;
+	char	*pwd;
+	char	*home;
+	char	*res;
+	int		index;
 
 	pwd = ft_get_env_value(store->envp, "PWD");
 	res = pwd;

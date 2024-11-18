@@ -3,14 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_execute_command.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hsharame <hsharame@student.42.fr>          +#+  +:+       +#+        */
+/*   By: abergman <abergman@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/10 16:59:00 by abergman          #+#    #+#             */
-<<<<<<< Updated upstream
-/*   Updated: 2024/11/18 17:49:39 by hsharame         ###   ########.fr       */
-=======
-/*   Updated: 2024/11/18 17:30:26 by abergman         ###   ########.fr       */
->>>>>>> Stashed changes
+/*   Updated: 2024/11/18 19:26:44 by abergman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,16 +70,13 @@ int	ft_execute_local_bin(t_store *data, t_cmd *cmd)
  */
 int	ft_execute_command(t_store *store, t_cmd *cmd)
 {
-	int response;
-	int error;
+	int	response;
 
 	response = 0;
-	error = 0;
 	if (!cmd || !cmd->value)
 	{
-		error = ft_error_handler("child", NULL,
-				"parsing error: command not found", EXIT_FAILURE);
-		ft_exit_program(store, error);
+		ft_exit_program(store, ft_error_handler("child", NULL,
+				"parsing error: command not found", EXIT_FAILURE));
 	}
 	if (cmd && cmd->redirect && !ft_check_io(cmd->redirect))
 		ft_exit_program(store, EXIT_FAILURE);

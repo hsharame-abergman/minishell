@@ -3,14 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_execute_builtin.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hsharame <hsharame@student.42.fr>          +#+  +:+       +#+        */
+/*   By: abergman <abergman@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/08 12:39:40 by abergman          #+#    #+#             */
-<<<<<<< Updated upstream
-/*   Updated: 2024/11/18 13:06:35 by hsharame         ###   ########.fr       */
-=======
-/*   Updated: 2024/11/18 19:16:46 by abergman         ###   ########.fr       */
->>>>>>> Stashed changes
+/*   Updated: 2024/11/18 19:30:23 by abergman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
