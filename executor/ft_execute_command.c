@@ -5,10 +5,13 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: abergman <abergman@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/10 16:59:00 by abergman          #+#    #+#             */
-/*   Updated: 2024/11/18 19:26:44 by abergman         ###   ########.fr       */
+/*   Created: Invalid date        by                   #+#    #+#             */
+/*   Updated: 2024/11/19 15:53:15 by abergman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+
+
 
 #include "../header/minishell.h"
 
@@ -71,15 +74,20 @@ int	ft_execute_local_bin(t_store *data, t_cmd *cmd)
 int	ft_execute_command(t_store *store, t_cmd *cmd)
 {
 	int	response;
+	int	response;
 
 	response = 0;
 	if (!cmd || !cmd->value)
 	{
 		ft_exit_program(store, ft_error_handler("child", NULL,
 				"parsing error: command not found", EXIT_FAILURE));
+		ft_exit_program(store, ft_error_handler("child", NULL,
+				"parsing error: command not found", EXIT_FAILURE));
 	}
 	if (cmd && cmd->redirect && !ft_check_io(cmd->redirect))
 		ft_exit_program(store, EXIT_FAILURE);
+	if (!ft_check_io(cmd->redirect))
+		ft_exit_program(store, response);
 	ft_set_pipe_fds(store->pars, cmd);
 	ft_redirect_io(cmd->redirect);
 	ft_close_fds(store->pars, 0);

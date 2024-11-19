@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_executor.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hsharame <hsharame@student.42.fr>          +#+  +:+       +#+        */
+/*   By: abergman <abergman@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/30 15:42:08 by abergman          #+#    #+#             */
-/*   Updated: 2024/11/18 17:50:48 by hsharame         ###   ########.fr       */
+/*   Updated: 2024/11/19 15:47:09 by abergman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,7 +84,7 @@ int	ft_preporation_for_execution(t_store *store)
 		return (EXIT_SUCCESS);
 	if (!store->pars->value)
 	{
-		if (store->pars->redirect && !ft_check_redirect(store->pars->redirect))
+		if (store->pars->redirect && !ft_check_io(store->pars->redirect))
 			return (EXIT_FAILURE);
 		return (EXIT_SUCCESS);
 	}
@@ -100,19 +100,19 @@ int	ft_preporation_for_execution(t_store *store)
 */
 int	ft_executor(t_store *store)
 {
-	int	response;
+	int exit_code;	
 
-	response = ft_preporation_for_execution(store);
-	if (response != EXIT_CMD_NOT_FOUND)
-		return (response);
+	exit_code = ft_preporation_for_execution(store);
+	if (exit_code != EXIT_CMD_NOT_FOUND)
+		return (exit_code);
 	if (!store->pars->pipe && !store->pars->left
-		&& ft_check_redirect(store->pars->redirect))
+		&& ft_check_io(store->pars->redirect))
 	{
 		ft_redirect_io(store->pars->redirect);
-		response = ft_execute_builtin(store, store->pars);
+		exit_code = ft_execute_builtin(store, store->pars);
 		ft_restore_io(store->pars->redirect);
 	}
-	if (response != EXIT_CMD_NOT_FOUND)
-		return (response);
+	if (exit_code != EXIT_CMD_NOT_FOUND)
+		return (exit_code);
 	return (ft_create_children_process(store));
 }

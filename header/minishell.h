@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hsharame <hsharame@student.42.fr>          +#+  +:+       +#+        */
+/*   By: abergman <abergman@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/02 11:29:45 by hsharame          #+#    #+#             */
-/*   Updated: 2024/11/18 18:05:20 by hsharame         ###   ########.fr       */
+/*   Updated: 2024/11/19 15:48:33 by abergman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -120,12 +120,12 @@ void				free_tab(char **tab);
 void				handle_bracket(t_store *data, char *str);
 bool				check_bracket(t_store *data);
 int					error_syntax(char *s, int error);
-int					initial_store(t_store *store, char **envp);
+int					ft_init_store(t_store *store, char **envp);
 char				*ft_strjoin2(char *dest, char *str);
 int					ft_error_handler(char *cmd, char *detail, char *errmsg,
 						int errcode);
 int					ft_defauit_error(int res);
-int					ft_check_input_args(t_store *store, int ac, char **av,
+int					ft_check_args(t_store *store, int ac, char **av,
 						char **envp);
 void				ft_free_pointer(void *pointer);
 int					ft_search_flag(char *str, char flag);
@@ -159,7 +159,6 @@ int					ft_check_io(t_redirect *redirect);
 int					ft_set_pipe_fds(t_cmd *cmds, t_cmd *cmd);
 int					ft_execute_builtin(t_store *store, t_cmd *command);
 int					ft_execute_command(t_store *store, t_cmd *cmd);
-int					ft_check_redirect(t_redirect *redirect);
 int					ft_redirect_io(t_redirect *redirect);
 int					ft_command_is_dir(char *value);
 int					ft_check_command_not_found(t_store *data, t_cmd *cmd);

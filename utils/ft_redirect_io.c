@@ -6,25 +6,11 @@
 /*   By: abergman <abergman@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/18 16:53:20 by abergman          #+#    #+#             */
-/*   Updated: 2024/11/11 15:27:49 by abergman         ###   ########.fr       */
+/*   Updated: 2024/11/19 15:48:23 by abergman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../header/minishell.h"
-
-/*
-	Проверяет, правильно ли настроены инфайл и outfile.
-	Возвращает 1 при успехе, 0 при неудаче.
-*/
-int	ft_check_redirect(t_redirect *redirect)
-{
-	if (!redirect || (!redirect->outfile))
-		return (1);
-	if ((redirect->infile && redirect->fd_in == -1) || (redirect->outfile
-			&& redirect->fd_out))
-		return (0);
-	return (1);
-}
 
 /* ************************************************************************ */
 /* Executes given commands by creating child processes and waiting			*/

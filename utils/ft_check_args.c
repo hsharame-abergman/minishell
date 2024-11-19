@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_check_input_args.c                              :+:      :+:    :+:   */
+/*   ft_check_args.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: abergman <abergman@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/18 17:08:21 by abergman          #+#    #+#             */
-/*   Updated: 2024/11/16 20:39:12 by abergman         ###   ########.fr       */
+/*   Updated: 2024/11/19 12:39:25 by abergman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../header/minishell.h"
 
-int	ft_check_input_args(t_store *store, int ac, char **av, char **envp)
+int	ft_check_args(t_store *store, int ac, char **av, char **envp)
 {
 	if (envp == NULL || *envp == NULL)
 		return (ft_putstr_fd("Error:\nNo environment found. Exiting.", 2), 0);

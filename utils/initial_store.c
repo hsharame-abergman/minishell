@@ -6,7 +6,7 @@
 /*   By: abergman <abergman@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/18 17:03:12 by abergman          #+#    #+#             */
-/*   Updated: 2024/11/15 20:27:50 by abergman         ###   ########.fr       */
+/*   Updated: 2024/11/19 12:42:05 by abergman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ static int	initial_working_dir_vars(t_store *store)
 	return (1);
 }
 
-int	initial_store(t_store *store, char **envp)
+int	ft_init_store(t_store *store, char **envp)
 {
 	g_exit_code = 0;
 	if (!initial_envp(store, envp))

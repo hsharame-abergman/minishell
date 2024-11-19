@@ -6,7 +6,7 @@
 /*   By: abergman <abergman@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/12 15:49:11 by abergman          #+#    #+#             */
-/*   Updated: 2024/11/11 15:24:18 by abergman         ###   ########.fr       */
+/*   Updated: 2024/11/19 12:27:48 by abergman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,19 +104,6 @@ static int	ft_get_exit_code(char *cmd, int *is_error)
 	}
 	i = ft_atol_err(cmd, is_error);
 	return (i % 256);
-}
-
-/* Очистить программу minishell,
-	закрыв все открытые fds и освободив всю выделенную память. */
-void	ft_exit_program(t_store *store, int exit_code)
-{
-	if (store)
-	{
-		if (store->pars && store->pars->redirect)
-			ft_close_fds(store->pars, 1);
-		ft_free_store(store, 1);
-	}
-	exit(exit_code);
 }
 
 /*
