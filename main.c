@@ -6,7 +6,7 @@
 /*   By: abergman <abergman@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: Invalid date        by                   #+#    #+#             */
-/*   Updated: 2024/11/19 16:17:14 by abergman         ###   ########.fr       */
+/*   Updated: 2024/11/19 16:46:05 by abergman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,9 +21,14 @@ void	ft_monitor(t_store *store, char **envp)
 
 	while (1)
 	{
-		ft_set_signals_interactive();
+		// ft_set_signals_interactive();
 		label = ft_create_label_for_readline(envp, store);
 		store->input = readline(label);
+		if (store->input == NULL)
+		{
+			ft_putstr_fd("n make exit\n", 2);
+			break ;
+		}
 		if (store->input && store->input[0] != '\0')
 		{
 			add_history(store->input);

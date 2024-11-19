@@ -6,7 +6,7 @@
 /*   By: abergman <abergman@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: Invalid date        by                   #+#    #+#             */
-/*   Updated: 2024/11/19 16:08:03 by abergman         ###   ########.fr       */
+/*   Updated: 2024/11/19 16:52:00 by abergman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,9 +73,9 @@ int	ft_execute_local_bin(t_store *data, t_cmd *cmd)
  */
 int	ft_execute_command(t_store *store, t_cmd *cmd)
 {
-	int	response;
+	int	exit_code;	
 
-	response = 0;
+	exit_code = 0;
 	if (!cmd || !cmd->value)
 	{
 		ft_exit_program(store, ft_error_handler("child", NULL,
@@ -86,20 +86,20 @@ int	ft_execute_command(t_store *store, t_cmd *cmd)
 	if (cmd && cmd->redirect && !ft_check_io(cmd->redirect))
 		ft_exit_program(store, EXIT_FAILURE);
 	if (!ft_check_io(cmd->redirect))
-		ft_exit_program(store, response);
+		ft_exit_program(store, exit_code);
 	ft_set_pipe_fds(store->pars, cmd);
 	ft_redirect_io(cmd->redirect);
 	ft_close_fds(store->pars, 0);
 	if (ft_strchr(cmd->value, '/') == NULL)
 	{
-		response = ft_execute_builtin(store, cmd);
-		if (response != 127)
-			ft_exit_program(store, response);
-		response = ft_execute_sys_bin(store, cmd);
-		if (response != 127)
-			ft_exit_program(store, response);
+		exit_code = ft_execute_builtin(store, cmd);
+		if (exit_code != 127)
+			ft_exit_program(store, exit_code);
+		exit_code = ft_execute_sys_bin(store, cmd);
+		if (exit_code != 127)
+			ft_exit_program(store, exit_code);
 	}
-	response = ft_execute_local_bin(store, cmd);
-	ft_exit_program(store, response);
-	return (response);
+	exit_code = ft_execute_local_bin(store, cmd);
+	ft_exit_program(store, exit_code);
+	return (exit_code);
 }
