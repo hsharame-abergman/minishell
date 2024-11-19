@@ -6,7 +6,7 @@
 /*   By: abergman <abergman@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/12 15:49:11 by abergman          #+#    #+#             */
-/*   Updated: 2024/11/19 12:27:48 by abergman         ###   ########.fr       */
+/*   Updated: 2024/11/19 16:12:42 by abergman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -123,17 +123,17 @@ int	builtin_exit(t_store *store, char **av)
 	is_error = 0;
 	is_silent_mode = ft_is_silent_exit_mode(store);
 	if (!is_silent_mode && store->mode_usage == INTERACTIVE)
-		ft_putendl_fd("exit", 2);
+		ft_putendl_fd("^^ exit", 2);
 	if (!av || !av[1])
 		exit_code = g_exit_code;
 	else
 	{
 		exit_code = ft_get_exit_code(av[1], &is_error);
 		if (is_error)
-			exit_code = ft_error_handler("exit", av[1],
+			exit_code = ft_error_handler("-- exit", av[1],
 					"numeric argument required", 2);
 		else if (av[2])
-			return (ft_error_handler("exit", NULL, "too many arguments", 1));
+			return (ft_error_handler("++ exit", NULL, "too many arguments", 1));
 	}
 	ft_exit_program(store, exit_code);
 	return (2);

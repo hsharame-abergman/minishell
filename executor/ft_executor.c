@@ -6,7 +6,7 @@
 /*   By: abergman <abergman@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/30 15:42:08 by abergman          #+#    #+#             */
-/*   Updated: 2024/11/19 15:47:09 by abergman         ###   ########.fr       */
+/*   Updated: 2024/11/19 16:08:21 by abergman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,7 @@ int	ft_create_children_process(t_store *store)
 	while (command && store->pid != 0)
 	{
 		store->pid = fork();
+		printf("%d", store->pid);
 		if (store->pid == -1)
 			return (ft_error_handler("fork", NULL, "", 1));
 		else if (store->pid)

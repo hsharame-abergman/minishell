@@ -6,7 +6,7 @@
 /*   By: abergman <abergman@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: Invalid date        by                   #+#    #+#             */
-/*   Updated: 2024/11/19 15:53:15 by abergman         ###   ########.fr       */
+/*   Updated: 2024/11/19 16:08:03 by abergman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,6 @@ int	ft_execute_local_bin(t_store *data, t_cmd *cmd)
  */
 int	ft_execute_command(t_store *store, t_cmd *cmd)
 {
-	int	response;
 	int	response;
 
 	response = 0;
