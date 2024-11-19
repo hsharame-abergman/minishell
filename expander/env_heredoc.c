@@ -6,7 +6,7 @@
 /*   By: hsharame <hsharame@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/28 12:06:42 by hsharame          #+#    #+#             */
-/*   Updated: 2024/11/18 17:43:07 by hsharame         ###   ########.fr       */
+/*   Updated: 2024/11/19 16:29:19 by hsharame         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,18 +49,23 @@ char	*check_if_var(char *input)
 
 	i = 0;
 	res = ft_strdup(input);
-	while (input[i] && input[i] != '$')
-		i++;
-	if (input[i + 1] && ft_isalpha(input[i + 1]))
+	while (input[i])
 	{
-		temp = ft_substr(input, 0, i++);
-		env_value = get_env_value(input, &i);
-		temp_2 = ft_substr(input, i, ft_strlen(input) - i);
-		res = ft_strjoin(temp, env_value);
-		res = ft_strjoin(res, temp_2);
-		free(temp);
-		free(env_value);
-		free(temp_2);
+		i = 0;
+		while (input[i] && input[i] != '$')
+			i++;
+		if (input[i] && ft_isalpha(input[i]))
+		{
+			temp = ft_substr(res, 0, i - 1);
+			env_value = get_env_value(res, &i);
+			temp_2 = ft_substr(res, i, ft_strlen(res) - i);
+			res = ft_strjoin(temp, env_value);
+			res = ft_strjoin(res, temp_2);
+			free(temp);
+			free(env_value);
+			free(temp_2);
+		}
+		i++;
 	}
 	free(input);
 	return (res);

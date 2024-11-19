@@ -6,7 +6,7 @@
 /*   By: hsharame <hsharame@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/30 15:48:48 by hsharame          #+#    #+#             */
-/*   Updated: 2024/11/18 18:05:34 by hsharame         ###   ########.fr       */
+/*   Updated: 2024/11/19 12:27:29 by hsharame         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@ t_token	*new_token(char *value, int type)
 		return (0);
 	token->value = ft_strdup(value);
 	token->type = type;
+	token->is_adjacent = false;
 	token->next = NULL;
 	token->prev = NULL;
 	return (token);
@@ -69,14 +70,14 @@ int	get_type(char *token)
 	redirects and words)
 */
 
-void	init_tokens(t_token **token_list, char *input, int *i)
+bool	init_tokens(t_token **token_list, char *input, int *i)
 {
 	int		start;
 	char	*value;
 
 	start = *i;
 	if (input[*i] == 34 || input[*i] == 39)
-		quotes(token_list, input, i);
+		return (quotes(token_list, input, i));
 	else if (ft_isoperator(input[*i]))
 	{
 		if (ft_isoperator(input[*i + 1]))
@@ -91,7 +92,7 @@ void	init_tokens(t_token **token_list, char *input, int *i)
 	}
 	else if (ft_isascii(input[*i]))
 		token_word(token_list, input, i);
-	return ;
+	return (true);
 }
 
 bool	lexer(t_store *data)
@@ -108,7 +109,10 @@ bool	lexer(t_store *data)
 		if (ft_isspace(data->input[i]))
 			i++;
 		else
-			init_tokens(&data->token, data->input, &i);
+		{
+			if (!init_tokens(&data->token, data->input, &i))
+				return (false);
+		}
 	}
 	if (data->input[i] == '\0')
 		add_token(&data->token, "\0", END);

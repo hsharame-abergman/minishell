@@ -6,7 +6,11 @@
 /*   By: abergman <abergman@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/02 11:29:45 by hsharame          #+#    #+#             */
+<<<<<<< Updated upstream
 /*   Updated: 2024/11/19 15:48:33 by abergman         ###   ########.fr       */
+=======
+/*   Updated: 2024/11/19 12:26:46 by hsharame         ###   ########.fr       */
+>>>>>>> Stashed changes
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,6 +93,7 @@ typedef struct s_token
 {
 	char			*value;
 	int				type;
+	bool			is_adjacent;
 	struct s_token	*next;
 	struct s_token	*prev;
 }					t_token;
@@ -191,14 +196,14 @@ int					token_quotes(t_token **token_list, char *input, int *i,
 						char quote);
 void				token_quotes_error(t_token **token_list, char *input,
 						char quote);
-void				quotes(t_token **token_list, char *input, int *i);
+bool				quotes(t_token **token_list, char *input, int *i);
 void				token_word(t_token **token_list, char *input, int *i);
 bool				ft_isspace(char c);
 bool				ft_isoperator(char c);
 t_token				*new_token(char *value, int type);
 void				add_token(t_token **token_list, char *value, int type);
 int					get_type(char *token);
-void				init_tokens(t_token **token_list, char *input, int *i);
+bool				init_tokens(t_token **token_list, char *input, int *i);
 bool				lexer(t_store *data);
 
 /* ************************************************************************** */

@@ -6,7 +6,7 @@
 /*   By: hsharame <hsharame@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/10 15:50:50 by hsharame          #+#    #+#             */
-/*   Updated: 2024/11/18 17:51:00 by hsharame         ###   ########.fr       */
+/*   Updated: 2024/11/19 15:44:55 by hsharame         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,8 @@ int	count_args(t_token *save)
 	i = 0;
 	while (save && is_word_token(save->type))
 	{
-		i++;
+		if (save->is_adjacent == false)
+			i++;
 		save = save->next;
 	}
 	return (i);
@@ -82,7 +83,13 @@ void	add_args(t_token **save, t_cmd *cmd)
 	cmd->args[0] = ft_strdup(cmd->value);
 	while (i < count - 1)
 	{
-		cmd->args[i] = ft_strdup((*save)->value);
+		if ((*save)->is_adjacent == false)
+			cmd->args[i] = ft_strdup((*save)->value);
+		else
+		{
+			cmd->args[i] = ft_strjoin((*save)->value, (*save)->next->value);
+			*save = (*save)->next;
+		}
 		*save = (*save)->next;
 		i++;
 	}
