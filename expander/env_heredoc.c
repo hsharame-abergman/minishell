@@ -6,7 +6,7 @@
 /*   By: hsharame <hsharame@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/28 12:06:42 by hsharame          #+#    #+#             */
-/*   Updated: 2024/11/19 16:29:19 by hsharame         ###   ########.fr       */
+/*   Updated: 2024/11/20 17:18:45 by hsharame         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,8 @@ char	*get_env_value(char *input, int *i)
 
 	start = *i;
 	length = 0;
-	while (input[*i + length] && ft_isalnum(input[*i + length]))
+	while (input[*i + length] && (ft_isalnum(input[*i + length])
+			|| input[*i + length] == '_'))
 		length++;
 	*i += length;
 	res = ft_substr(input, start, length);
@@ -39,33 +40,44 @@ char	*get_env_value(char *input, int *i)
 		return (ft_strdup(env_value));
 }
 
-char	*check_if_var(char *input)
+char	*replace_var(char *res, int *i)
 {
 	char	*env_value;
 	char	*temp;
 	char	*temp_2;
+	char	*new_res;
+
+	temp = ft_substr(res, 0, (*i)++);
+	env_value = get_env_value(res, i);
+	temp_2 = ft_substr(res, *i, ft_strlen(res) - *i);
+	new_res = ft_strjoin(temp, env_value);
+	new_res = ft_strjoin(new_res, temp_2);
+	if (env_value[0] != '\0')
+		*i += ft_strlen(env_value);
+	else
+		*i = 0;
+	free(temp);
+	free(env_value);
+	free(temp_2);
+	return (new_res);
+}
+
+char	*check_if_var(char *input)
+{
 	char	*res;
 	int		i;
 
 	i = 0;
 	res = ft_strdup(input);
-	while (input[i])
+	while ((size_t)i < ft_strlen(res))
 	{
-		i = 0;
-		while (input[i] && input[i] != '$')
-			i++;
-		if (input[i] && ft_isalpha(input[i]))
+		if (res[i] == '$' && (ft_isalnum(res[i + 1])
+				|| res[i + 1] == '_'))
 		{
-			temp = ft_substr(res, 0, i - 1);
-			env_value = get_env_value(res, &i);
-			temp_2 = ft_substr(res, i, ft_strlen(res) - i);
-			res = ft_strjoin(temp, env_value);
-			res = ft_strjoin(res, temp_2);
-			free(temp);
-			free(env_value);
-			free(temp_2);
+			res = replace_var(res, &i);
 		}
-		i++;
+		else
+			i++;
 	}
 	free(input);
 	return (res);

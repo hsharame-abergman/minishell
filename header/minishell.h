@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abergman <abergman@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hsharame <hsharame@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/02 11:29:45 by hsharame          #+#    #+#             */
-/*   Updated: 2024/11/19 18:30:45 by abergman         ###   ########.fr       */
+/*   Updated: 2024/11/20 17:24:36 by hsharame         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -208,6 +208,7 @@ bool				lexer(t_store *data);
 
 void				expander(t_store *data, t_token **token_list);
 bool				check_escape(char *str, int i);
+char				*replace_var(char *res, int *i);
 char				*get_env_value(char *input, int *i);
 char				*check_if_var(char *input);
 bool				expander_heredoc(t_store *data, char *input);
