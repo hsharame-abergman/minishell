@@ -6,7 +6,7 @@
 /*   By: abergman <abergman@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: Invalid date        by                   #+#    #+#             */
-/*   Updated: 2024/11/19 16:52:00 by abergman         ###   ########.fr       */
+/*   Updated: 2024/11/20 16:38:17 by abergman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ int	ft_execute_sys_bin(t_store *store, t_cmd *cmd)
 	if (!cmd->path)
 		return (EXIT_CMD_NOT_FOUND);
 	if (execve(cmd->path, cmd->args, store->envp) == -1)
-		ft_error_handler("execve", NULL, strerror(errno), g_exit_code);
+		ft_error_handler("execve", NULL, strerror(errno), errno);
 	return (EXIT_FAILURE);
 }
 
@@ -77,26 +77,20 @@ int	ft_execute_command(t_store *store, t_cmd *cmd)
 
 	exit_code = 0;
 	if (!cmd || !cmd->value)
-	{
 		ft_exit_program(store, ft_error_handler("child", NULL,
 				"parsing error: command not found", EXIT_FAILURE));
-		ft_exit_program(store, ft_error_handler("child", NULL,
-				"parsing error: command not found", EXIT_FAILURE));
-	}
-	if (cmd && cmd->redirect && !ft_check_io(cmd->redirect))
-		ft_exit_program(store, EXIT_FAILURE);
 	if (!ft_check_io(cmd->redirect))
-		ft_exit_program(store, exit_code);
+		ft_exit_program(store, EXIT_FAILURE);
 	ft_set_pipe_fds(store->pars, cmd);
 	ft_redirect_io(cmd->redirect);
 	ft_close_fds(store->pars, 0);
 	if (ft_strchr(cmd->value, '/') == NULL)
 	{
 		exit_code = ft_execute_builtin(store, cmd);
-		if (exit_code != 127)
+		if (exit_code != EXIT_CMD_NOT_FOUND)
 			ft_exit_program(store, exit_code);
 		exit_code = ft_execute_sys_bin(store, cmd);
-		if (exit_code != 127)
+		if (exit_code != EXIT_CMD_NOT_FOUND)
 			ft_exit_program(store, exit_code);
 	}
 	exit_code = ft_execute_local_bin(store, cmd);

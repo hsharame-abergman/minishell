@@ -6,7 +6,7 @@
 /*   By: abergman <abergman@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/14 17:42:39 by hsharame          #+#    #+#             */
-/*   Updated: 2024/11/18 19:31:09 by abergman         ###   ########.fr       */
+/*   Updated: 2024/11/20 16:59:46 by abergman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,14 +71,14 @@ char	*ft_set_pwd(t_store *store)
 	return (res);
 }
 
-char	*ft_create_label_for_readline(char **envp, t_store *store)
+char	*ft_create_label_for_readline(t_store *store)
 {
 	char	*label;
 	char	*hostname;
 	char	*pwd;
 	char	*res;
 
-	label = ft_strjoin(ft_get_env_value(envp, "USER"), "@");
+	label = ft_strjoin(ft_get_env_value(store->envp, "USER"), "@");
 	hostname = ft_hostname();
 	res = ft_strjoin(label, hostname);
 	pwd = ft_set_pwd(store);
@@ -96,6 +96,6 @@ void	ascii_welcome(void)
 	printf("    ||   ___||  |_| ||   ___||    |  |    |\n |     \\/   | || ");
 	printf("   ||     \\| ||    | `-.`-. |   _  ||   ___||    |_ |    |_\n");
 	printf(" |__/\\__/|__|_||____||__/\\____||____||______||__| |_||");
-	printf("______||______||______|\n     |_____|\n\n");
+	printf("______||______||______|\n     |_____|");
 	printf("Copyright (c) by abergman & hsharame\n\n");
 }

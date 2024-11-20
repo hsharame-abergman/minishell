@@ -6,11 +6,7 @@
 /*   By: abergman <abergman@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/02 11:29:45 by hsharame          #+#    #+#             */
-<<<<<<< Updated upstream
-/*   Updated: 2024/11/19 15:48:33 by abergman         ###   ########.fr       */
-=======
-/*   Updated: 2024/11/19 12:26:46 by hsharame         ###   ########.fr       */
->>>>>>> Stashed changes
+/*   Updated: 2024/11/19 18:30:45 by abergman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -144,7 +140,7 @@ char				**ft_get_paths_from_envp(t_store *store);
 char				*ft_find_valid_command_path(char *command, char **paths);
 void				ascii_welcome(void);
 char				*ft_hostname(void);
-char				*ft_create_label_for_readline(char **envp, t_store *store);
+char				*ft_create_label_for_readline(t_store *store);
 
 /* clear */
 void				ft_free_store(t_store *store, int history);
