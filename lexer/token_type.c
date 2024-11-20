@@ -6,7 +6,7 @@
 /*   By: hsharame <hsharame@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/02 14:09:39 by hsharame          #+#    #+#             */
-/*   Updated: 2024/11/19 15:57:39 by hsharame         ###   ########.fr       */
+/*   Updated: 2024/11/20 18:53:19 by hsharame         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,9 +17,12 @@ void	is_adjacent(t_token **token_list)
 	t_token	*current;
 
 	current = *token_list;
-	while (current && current->next)
-		current = current->next;
-	current->is_adjacent = true;
+	if (current)
+	{
+		while (current && current->next)
+			current = current->next;
+		current->is_adjacent = true;
+	}
 }
 
 int	token_quotes(t_token **token_list, char *input, int *i, char quote)
@@ -29,6 +32,8 @@ int	token_quotes(t_token **token_list, char *input, int *i, char quote)
 
 	(*i)++;
 	start = *i;
+	if (input[*i - 1] && !ft_isspace(input[*i - 1]))
+		is_adjacent(token_list);
 	while (input[*i] && input[*i] != quote)
 		(*i)++;
 	if (input[*i] != quote)
@@ -39,8 +44,6 @@ int	token_quotes(t_token **token_list, char *input, int *i, char quote)
 	else if (quote == 34)
 		add_token(token_list, value, CHAR_DQUOTE);
 	(*i)++;
-	//if (input[*i] == '$' && (input[*i + 1] == 34 || input[*i + 1] == 39))
-	//	(*i)++;
 	if (input[*i] && !ft_isspace(input[*i]))
 		is_adjacent(token_list);
 	return (0);

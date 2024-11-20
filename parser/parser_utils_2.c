@@ -6,7 +6,7 @@
 /*   By: hsharame <hsharame@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/22 16:03:14 by hsharame          #+#    #+#             */
-/*   Updated: 2024/11/18 16:16:01 by hsharame         ###   ########.fr       */
+/*   Updated: 2024/11/20 18:47:14 by hsharame         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,9 +75,9 @@ void	check_if_exists(t_cmd *node)
 		cmd_error(node, 1);
 	else
 	{
-		if (!access(node->value, F_OK))
+		if (access(node->path, F_OK))
 			cmd_error(node, 2);
-		else if (!access(node->value, X_OK))
+		else if (access(node->path, X_OK))
 			cmd_error(node, 3);
 	}
 }
