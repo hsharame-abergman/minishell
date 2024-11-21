@@ -6,7 +6,7 @@
 /*   By: hsharame <hsharame@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/18 17:08:21 by abergman          #+#    #+#             */
-/*   Updated: 2024/11/21 15:40:25 by hsharame         ###   ########.fr       */
+/*   Updated: 2024/11/21 18:59:51 by hsharame         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,12 +35,31 @@ bool	check_pipes(char *str)
 	return (true);
 }
 
+bool	check_several_operator(char *str)
+{
+	int	i;
+
+	i = 0;
+	while (str[i + 2] != '\0')
+	{
+		if (ft_isoperator(str[i]) && ft_isoperator(str[i + 1])
+			&& ft_isoperator(str[i + 2]))
+		{
+			printf("minishell: syntax error near unexpected token");
+			printf(" `%c%c'\n", str[i], str[i + 1]);
+			return (false);
+		}
+		i++;
+	}
+	return (true);
+}
+
 bool	check_input(char *str)
 {
 	int	i;
 
 	i = 0;
-	if (!check_pipes(str))
+	if (!check_pipes(str) || !check_several_operator(str))
 		return (false);
 	while (ft_isspace(str[i]))
 		i++;
@@ -51,7 +70,7 @@ bool	check_input(char *str)
 		printf("minishell: syntax error near unexpected token `%c'\n", str[i]);
 		return (false);
 	}
-	else if (str[i] == '/')
+	else if (str[i] == '/' && str[i + 1] == '\0')
 	{
 		printf("minishell: /: Is a directory\n");
 		return (false);

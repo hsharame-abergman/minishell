@@ -6,7 +6,7 @@
 /*   By: hsharame <hsharame@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/02 11:29:45 by hsharame          #+#    #+#             */
-/*   Updated: 2024/11/21 15:54:48 by hsharame         ###   ########.fr       */
+/*   Updated: 2024/11/21 19:00:52 by hsharame         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -121,6 +121,7 @@ void				free_tab(char **tab);
 bool				check_input(char *str);
 void				handle_bracket(t_store *data, char *str);
 bool				check_bracket(t_store *data);
+bool				check_several_operator(char *str);
 int					error_syntax(char *s, int error);
 int					ft_init_store(t_store *store, char **envp);
 char				*ft_strjoin2(char *dest, char *str);
@@ -223,6 +224,7 @@ bool				expander_heredoc(t_store *data, char *input);
 /*                    Parser                                                  */
 /* ************************************************************************** */
 
+void				cmd_error(t_cmd *node, int i);
 void				open_file_trunc(t_redirect *trunc, char *filename);
 void				open_file_append(t_redirect *trunc, char *filename);
 void				open_input(t_redirect *trunc, char *filename);
@@ -246,11 +248,10 @@ int					count_args(t_token *save);
 void				add_args(t_token **save, t_cmd *cmd);
 t_cmd				*parser_cmd(t_token *token, t_cmd *last);
 t_cmd				*init_tree(t_token **token_list, t_store *data);
-void				parser(t_store *data, t_token *token_list);
+bool				parser(t_store *data, t_token *token_list);
 void				affiche_ast(t_cmd *node);
 void				create_redirect(t_cmd *cmd);
 void				check_if_exists(t_cmd *node);
-void				cmd_error(t_cmd *node, int i);
 char				*tab_to_str(char **token);
 char				*fill_str(char *res, char **token);
 

@@ -6,7 +6,7 @@
 /*   By: hsharame <hsharame@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/22 16:03:14 by hsharame          #+#    #+#             */
-/*   Updated: 2024/11/21 14:53:45 by hsharame         ###   ########.fr       */
+/*   Updated: 2024/11/21 17:06:59 by hsharame         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,7 +91,4 @@ void	cmd_error(t_cmd *node, int i)
 		printf("minishell: %s: No such file or directory\n", node->value);
 	else if (i == 3)
 		printf("minishell: %s: Permission denied\n", node->value);
-	else if (i == 4)
-		printf("minishell: syntax error near unexpected token %s\n",
-			node->value);
 }
