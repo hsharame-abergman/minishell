@@ -6,7 +6,7 @@
 /*   By: abergman <abergman@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/12 15:44:23 by abergman          #+#    #+#             */
-/*   Updated: 2024/11/11 15:24:30 by abergman         ###   ########.fr       */
+/*   Updated: 2024/11/21 14:49:20 by abergman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,15 +24,15 @@ int	is_valid_env_key(char *argument)
 
 	index = 0;
 	if (ft_isalpha(argument[index]) == 0 && argument[index] != '_')
-		return (false);
+		return (1);
 	index++;
 	while (argument[index] && argument[index] != '=')
 	{
 		if (ft_isalnum(argument[index]) == 0 && argument[index] != '_')
-			return (false);
+			return (1);
 		index++;
 	}
-	return (true);
+	return (0);
 }
 
 /*
@@ -71,7 +71,7 @@ int	builtin_export(t_store *store, char **av)
 		return (builtin_env(store, NULL));
 	while (av[index])
 	{
-		if (!is_valid_env_key(av[index]))
+		if (is_valid_env_key(av[index]))
 		{
 			ft_error_handler("export", av[index], "not a valid identifier", 0);
 			response = EXIT_FAILURE;

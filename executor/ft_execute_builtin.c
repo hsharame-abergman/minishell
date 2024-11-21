@@ -6,18 +6,11 @@
 /*   By: abergman <abergman@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/08 12:39:40 by abergman          #+#    #+#             */
-/*   Updated: 2024/11/20 16:48:30 by abergman         ###   ########.fr       */
+/*   Updated: 2024/11/21 15:38:22 by abergman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../header/minishell.h"
-
-static int	is_builtins(t_store *store, char **value)
-{
-	(void)store;
-	(void)value;
-	return (1);
-}
 
 /*
 Executes the given command if it is a builtin command
@@ -28,7 +21,7 @@ int	ft_execute_builtin(t_store *store, t_cmd *command)
 	int	res;
 
 	res = EXIT_CMD_NOT_FOUND;
-	if (is_builtins(store, &command->value))
+	if (!command->error)
 	{
 		if (ft_strncmp(command->value, "cd", 3) == 0)
 			res = builtin_cd(store, command->args);

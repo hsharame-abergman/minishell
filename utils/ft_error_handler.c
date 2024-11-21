@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_error_handler.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hsharame <hsharame@student.42.fr>          +#+  +:+       +#+        */
+/*   By: abergman <abergman@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/18 16:53:50 by abergman          #+#    #+#             */
-/*   Updated: 2024/10/23 18:15:56 by hsharame         ###   ########.fr       */
+/*   Updated: 2024/11/21 15:33:45 by abergman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,22 +28,22 @@ int	ft_error_handler(char *cmd, char *detail, char *errmsg, int errcode)
 
 	quotes_status = ft_verify_quotes(cmd);
 	message = ft_strdup("minishell: ");
-	if (!cmd)
+	if (cmd != NULL)
 	{
-		message = ft_strjoin2(message, cmd);
-		message = ft_strjoin2(message, ": ");
+		message = ft_strjoin(message, cmd);
+		message = ft_strjoin(message, ": ");
 	}
-	if (!detail)
+	if (detail != NULL)
 	{
 		if (quotes_status)
-			ft_strjoin2(message, "`");
-		message = ft_strjoin2(message, detail);
+			ft_strjoin(message, "`");
+		message = ft_strjoin(message, detail);
 		if (quotes_status)
-			ft_strjoin2(message, "`");
-		message = ft_strjoin2(message, ": ");
+			ft_strjoin(message, "`");
+		message = ft_strjoin(message, ": ");
 	}
-	message = ft_strjoin2(message, errmsg);
-	ft_putstr_fd(message, STDERR_FILENO);
+	message = ft_strjoin(message, errmsg);
+	ft_putendl_fd(message, STDERR_FILENO);
 	ft_free_pointer(message);
 	return (errcode);
 }
