@@ -6,22 +6,63 @@
 /*   By: hsharame <hsharame@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/24 16:11:52 by hsharame          #+#    #+#             */
-/*   Updated: 2024/11/19 16:06:29 by hsharame         ###   ########.fr       */
+/*   Updated: 2024/11/21 15:02:29 by hsharame         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../header/minishell.h"
 
-bool	check_escape(char *str, int i)
-{		
-	if (i > 0)
+char	*replace_var_error(char *res, int *i)
+{
+	char	*env_value;
+	char	*temp;
+	char	*temp_2;
+	char	*new_res;
+
+	temp = ft_substr(res, 0, (*i)++);
+	env_value = ft_itoa(g_exit_code);
+	*i += ft_strlen(env_value);
+	temp_2 = ft_substr(res, *i, ft_strlen(res) - *i);
+	new_res = ft_strjoin(temp, env_value);
+	new_res = ft_strjoin(new_res, temp_2);
+	free(temp);
+	free(env_value);
+	free(temp_2);
+	return (new_res);
+}
+
+char	*var_error(char *value)
+{
+	char	*res;
+	int		i;
+
+	i = 0;
+	res = ft_strdup(value);
+	while ((size_t)i < ft_strlen(res))
 	{
-		if (str[i - 1] == '\"' && str[i + 1] == '\"')
-			return (true);
-		return (false);
+		if (res[i] == '$' && res[i + 1] == '?')
+		{
+			res = replace_var_error(res, &i);
+		}
+		else
+			i++;
 	}
-	else
-		return (false);
+	free(value);
+	return (res);
+}
+
+void	variables_expansion(t_token *token, int *i)
+{
+	if (token->value[*i] == '$' && token->type != CHAR_QUOTE
+		&& !check_escape(token->value, *i))
+	{
+		if (ft_isalpha(token->value[*i + 1]))
+			token->value = check_if_var(token->value);
+		else if (token->value[*i + 1] == '?')
+			token->value = var_error(token->value);
+		else if (ft_isdigit(token->value[*i + 1]))
+			token->value = escape_digit(token->value);
+	}
 }
 
 void	expander(t_store *data, t_token **token_list)
@@ -38,14 +79,7 @@ void	expander(t_store *data, t_token **token_list)
 			i = 0;
 			while ((size_t)i < ft_strlen(token->value) && token->value[i + 1])
 			{
-				if (token->value[i] == '$' && token->type != CHAR_QUOTE
-					&& !check_escape(token->value, i))
-				{
-					if (ft_isalpha(token->value[i + 1]))
-						token->value = check_if_var(token->value);
-					else if (token->value[i + 1] == '?')
-						token->value = ft_itoa(g_exit_code);
-				}
+				variables_expansion(token, &i);
 				i++;
 			}
 		}

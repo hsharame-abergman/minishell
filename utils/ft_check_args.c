@@ -3,14 +3,62 @@
 /*                                                        :::      ::::::::   */
 /*   ft_check_args.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abergman <abergman@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hsharame <hsharame@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/18 17:08:21 by abergman          #+#    #+#             */
-/*   Updated: 2024/11/19 12:39:25 by abergman         ###   ########.fr       */
+/*   Updated: 2024/11/21 15:40:25 by hsharame         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../header/minishell.h"
+
+bool	check_pipes(char *str)
+{
+	int	i;
+
+	i = 0;
+	while (str[i] != '\0')
+	{
+		if (str[i] == '|' && str[i + 1] == ' ')
+		{
+			i++;
+			while (ft_isspace(str[i]))
+				i++;
+			if (str[i] == '|')
+			{
+				printf("minishell: syntax error near unexpected token `|'\n");
+				return (false);
+			}
+		}
+		i++;
+	}
+	return (true);
+}
+
+bool	check_input(char *str)
+{
+	int	i;
+
+	i = 0;
+	if (!check_pipes(str))
+		return (false);
+	while (ft_isspace(str[i]))
+		i++;
+	if ((str[i] == ':' || str[i] == '!') && str[i + 1] == '\0')
+		return (false);
+	else if (str[i] == '|' || str[i] == '>' || str[i] == '<' || str[i] == '&')
+	{
+		printf("minishell: syntax error near unexpected token `%c'\n", str[i]);
+		return (false);
+	}
+	else if (str[i] == '/')
+	{
+		printf("minishell: /: Is a directory\n");
+		return (false);
+	}
+	else
+		return (true);
+}
 
 int	ft_check_args(t_store *store, int ac, char **av, char **envp)
 {

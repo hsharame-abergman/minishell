@@ -6,7 +6,7 @@
 /*   By: hsharame <hsharame@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/02 11:49:32 by hsharame          #+#    #+#             */
-/*   Updated: 2024/11/15 12:15:41 by hsharame         ###   ########.fr       */
+/*   Updated: 2024/11/21 15:44:01 by hsharame         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,36 +50,5 @@ void	affiche_tokens(t_token *token_list)
 	{
 		printf("value %s, type %d\n", token_list->value, token_list->type);
 		token_list = token_list->next;
-	}
-}
-
-/*
-	Check if input does not end with pipe.
-	If so, ask to complete the input
-*/
-
-void	check_pipe(t_token **token_list, char *input, int *i)
-{
-	t_token	*current;
-	char	*extra_input;
-
-	current = *token_list;
-	if (current->type == END)
-		return ;
-	while (current->next->type != END)
-		current = current->next;
-	if (current->type == PIPE)
-	{
-		extra_input = readline("> ");
-		input = ft_strjoin(input, extra_input);
-		free(extra_input);
-		while (input[*i])
-		{
-			if (ft_isspace(input[*i]))
-				(*i)++;
-			else
-				init_tokens(token_list, input, i);
-		}
-		free(input);
 	}
 }

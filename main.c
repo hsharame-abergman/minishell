@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abergman <abergman@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hsharame <hsharame@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: Invalid date        by                   #+#    #+#             */
-/*   Updated: 2024/11/20 16:50:49 by abergman         ###   ########.fr       */
+/*   Updated: 2024/11/21 15:56:09 by hsharame         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,11 +26,14 @@ void	ft_monitor(t_store *store)
 		store->input = readline(label);
 		if (store->input && store->input[0] != '\0')
 		{
+			if (check_input(store->input))
+			{
+				if (lexer(store))
+					g_exit_code = ft_executor(store);
+				else
+					g_exit_code = 1;
+			}			
 			add_history(store->input);
-			if (lexer(store))
-				g_exit_code = ft_executor(store);
-			else
-				g_exit_code = 1;
 		}
 		free(label);
 		ft_free_store(store, 0);

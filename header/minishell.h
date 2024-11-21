@@ -6,7 +6,7 @@
 /*   By: hsharame <hsharame@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/02 11:29:45 by hsharame          #+#    #+#             */
-/*   Updated: 2024/11/20 17:24:36 by hsharame         ###   ########.fr       */
+/*   Updated: 2024/11/21 15:54:48 by hsharame         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -118,6 +118,7 @@ typedef struct s_store
 /* ************************************************************************** */
 
 void				free_tab(char **tab);
+bool				check_input(char *str);
 void				handle_bracket(t_store *data, char *str);
 bool				check_bracket(t_store *data);
 int					error_syntax(char *s, int error);
@@ -185,8 +186,9 @@ typedef enum e_token_type
 	ERROR
 }					t_token_type;
 
+char				*check_pipe(t_token **token_list, char *input, int *i);
+char				*input_pipe(t_token **token_list, char *input, int *i);
 void				reset_tokens(t_token **token);
-void				check_pipe(t_token **token_list, char *input, int *i);
 void				affiche_tokens(t_token *token_list);
 int					token_quotes(t_token **token_list, char *input, int *i,
 						char quote);
@@ -206,6 +208,10 @@ bool				lexer(t_store *data);
 /*                     Expander                                               */
 /* ************************************************************************** */
 
+char				*escape_digit(char *str);
+char				*replace_var_error(char *res, int *i);
+char				*var_error(char *value);
+void				variables_expansion(t_token *token, int *i);
 void				expander(t_store *data, t_token **token_list);
 bool				check_escape(char *str, int i);
 char				*replace_var(char *res, int *i);
