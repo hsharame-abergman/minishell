@@ -6,7 +6,7 @@
 /*   By: hsharame <hsharame@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/22 16:03:14 by hsharame          #+#    #+#             */
-/*   Updated: 2024/11/21 17:06:59 by hsharame         ###   ########.fr       */
+/*   Updated: 2024/11/22 14:29:10 by hsharame         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,7 @@ void	create_redirect(t_cmd *cmd)
 
 void	check_if_exists(t_cmd *node)
 {
-	if (node->value && node->path == NULL)
+	if ((node->value && node->path == NULL) || node->value[0] == '\0')
 		cmd_error(node, 1);
 	else
 	{

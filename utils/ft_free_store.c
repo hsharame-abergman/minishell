@@ -3,35 +3,29 @@
 /*                                                        :::      ::::::::   */
 /*   ft_free_store.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abergman <abergman@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hsharame <hsharame@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/04 17:21:51 by abergman          #+#    #+#             */
-/*   Updated: 2024/11/19 16:18:42 by abergman         ###   ########.fr       */
+/*   Updated: 2024/11/22 18:25:03 by hsharame         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../header/minishell.h"
 
-void	handle_bracket(t_store *data, char *str)
-{
-	(void)data;
-	printf("minishell: syntax error near unexpected token '%s'\n", str);
-}
-
-bool	check_bracket(t_store *data)
+bool	check_bracket(char *str)
 {
 	char	*bracket;
 
-	bracket = ft_strchr(data->input, '(');
+	bracket = ft_strchr(str, '(');
 	if (bracket != NULL)
 	{
-		handle_bracket(data, bracket);
+		printf("minishell: syntax error near unexpected token '%s'\n", bracket);
 		return (true);
 	}
-	bracket = ft_strchr(data->input, ')');
+	bracket = ft_strchr(str, ')');
 	if (bracket != NULL)
 	{
-		handle_bracket(data, bracket);
+		printf("minishell: syntax error near unexpected token '%s'\n", bracket);
 		return (true);
 	}
 	return (false);
@@ -67,6 +61,8 @@ void	ft_free_store(t_store *store, int history)
 	}
 	if (store && store->token)
 		free_token(&store->token);
+	if (store && store->pars)
+		free_cmd(&store->pars);
 	if (history)
 	{
 		rl_clear_history();

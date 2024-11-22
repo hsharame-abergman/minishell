@@ -6,7 +6,7 @@
 /*   By: hsharame <hsharame@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/23 14:27:04 by hsharame          #+#    #+#             */
-/*   Updated: 2024/11/18 16:31:42 by hsharame         ###   ########.fr       */
+/*   Updated: 2024/11/22 15:01:27 by hsharame         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,8 @@ bool	heredoc_succes(t_store *data, t_redirect *heredoc)
 
 	(void)data;
 	fd = open(heredoc->infile, O_CREAT | O_WRONLY | O_TRUNC, 0644);
+	if (fd < 0)
+		return (false);
 	while (1)
 	{
 		input = readline("> ");
@@ -70,20 +72,27 @@ bool	heredoc_succes(t_store *data, t_redirect *heredoc)
 	implemented each time this function is called.
 */
 
-void	parse_heredoc(t_store *data, t_cmd **cmd, t_token **token)
+bool	parse_heredoc(t_store *data, t_cmd **cmd, t_token **token)
 {
 	static int	number;
 	t_token		*temp;
 
 	temp = *token;
+	if (temp->next->value[0] == '\0')
+		return (false);
 	create_redirect(*cmd);
 	(*cmd)->redirect->delimiter = ft_strdup(temp->next->value);
 	(*cmd)->redirect->infile = temp_file(number);
 	if (heredoc_succes(data, (*cmd)->redirect))
+	{
 		(*cmd)->redirect->fd_in = open((*cmd)->redirect->infile, O_RDONLY);
+		if ((*cmd)->redirect->fd_in == -1)
+			return (false);
+	}
 	else
 		(*cmd)->redirect->fd_in = -1;
 	number++;
 	temp = temp->next->next;
 	*token = temp;
+	return (true);
 }

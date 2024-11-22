@@ -6,7 +6,7 @@
 /*   By: hsharame <hsharame@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/29 16:55:22 by hsharame          #+#    #+#             */
-/*   Updated: 2024/11/18 13:36:49 by hsharame         ###   ########.fr       */
+/*   Updated: 2024/11/22 17:58:47 by hsharame         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ void	signal_ctrl_c(int sign)
 	(void)sign;
 	ft_putchar_fd('\n', 1);
 	rl_on_new_line();
+	g_exit_code = EXIT_CMD_INTERRUPTED;
 	// rl_replace_line("", 0);
 	rl_redisplay();
 }

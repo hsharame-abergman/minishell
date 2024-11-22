@@ -6,7 +6,7 @@
 /*   By: hsharame <hsharame@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: Invalid date        by                   #+#    #+#             */
-/*   Updated: 2024/11/21 15:56:09 by hsharame         ###   ########.fr       */
+/*   Updated: 2024/11/22 18:31:49 by hsharame         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,18 +21,15 @@ void	ft_monitor(t_store *store)
 
 	while (1)
 	{
-		// ft_set_signals_interactive();
+		ft_set_signals_interactive();
 		label = ft_create_label_for_readline(store);
 		store->input = readline(label);
 		if (store->input && store->input[0] != '\0')
 		{
-			if (check_input(store->input))
-			{
-				if (lexer(store))
-					g_exit_code = ft_executor(store);
-				else
-					g_exit_code = 1;
-			}			
+			if (lexer(store))
+				g_exit_code = ft_executor(store);
+			else
+				g_exit_code = 1;
 			add_history(store->input);
 		}
 		free(label);

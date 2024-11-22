@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtin_exit.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abergman <abergman@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hsharame <hsharame@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/12 15:49:11 by abergman          #+#    #+#             */
-/*   Updated: 2024/11/19 16:12:42 by abergman         ###   ########.fr       */
+/*   Updated: 2024/11/22 17:59:14 by hsharame         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -123,7 +123,7 @@ int	builtin_exit(t_store *store, char **av)
 	is_error = 0;
 	is_silent_mode = ft_is_silent_exit_mode(store);
 	if (!is_silent_mode && store->mode_usage == INTERACTIVE)
-		ft_putendl_fd("^^ exit", 2);
+		ft_putendl_fd("exit", 2);
 	if (!av || !av[1])
 		exit_code = g_exit_code;
 	else

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   label.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abergman <abergman@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hsharame <hsharame@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/14 17:42:39 by hsharame          #+#    #+#             */
-/*   Updated: 2024/11/21 12:07:44 by abergman         ###   ########.fr       */
+/*   Updated: 2024/11/22 15:41:29 by hsharame         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,8 @@ char	*ft_hostname(void)
 	char	*res;
 
 	fd = open("/etc/hostname", O_RDONLY);
+	if (fd < 0)
+		return (ft_strdup("42"));
 	i = read(fd, buf, 20);
 	buf[i] = '\0';
 	close(fd);
@@ -57,12 +59,11 @@ char	*ft_set_pwd(t_store *store)
 	char	*pwd;
 	char	*home;
 	char	*res;
-	int		index;
 
 	pwd = ft_get_env_value(store->envp, "PWD");
 	res = pwd;
 	home = ft_get_env_value(store->envp, "HOME");
-	if ((index = ft_strcmp(pwd, home)) >= 0)
+	if ((ft_strcmp(pwd, home)) >= 0)
 	{
 		res = ft_substr(pwd, ft_strlen(home), ft_strlen(pwd));
 		if (ft_strlen(res) >= 0)

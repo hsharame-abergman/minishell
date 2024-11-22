@@ -6,7 +6,7 @@
 /*   By: hsharame <hsharame@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/22 11:41:53 by hsharame          #+#    #+#             */
-/*   Updated: 2024/11/15 12:05:15 by hsharame         ###   ########.fr       */
+/*   Updated: 2024/11/22 15:49:03 by hsharame         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ void	free_token(t_token **token_list)
 	*token_list = NULL;
 }
 
-static void	free_redirect(t_redirect *node)
+void	free_redirect(t_redirect *node)
 {
 	if (node->infile != NULL)
 		free(node->infile);
@@ -58,12 +58,12 @@ static void	free_redirect(t_redirect *node)
 	free(node);
 }
 
-void	free_cmd(t_cmd *cmd)
+void	free_cmd(t_cmd **cmd)
 {
 	t_cmd	*temp;
 	t_cmd	*next;
 
-	temp = cmd;
+	temp = *cmd;
 	while (temp && temp->left != NULL)
 		temp = temp->left;
 	while (temp != NULL)
@@ -71,10 +71,12 @@ void	free_cmd(t_cmd *cmd)
 		next = temp->right;
 		free(temp->value);
 		free(temp->path);
-		free_tab(temp->args);
+		if (temp->args != NULL)
+			free_tab(temp->args);
 		if (temp->redirect != NULL)
 			free_redirect(temp->redirect);
 		free(temp);
 		temp = next;
 	}
+	*cmd = NULL;
 }

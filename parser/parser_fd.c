@@ -6,7 +6,7 @@
 /*   By: hsharame <hsharame@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/23 17:21:07 by hsharame          #+#    #+#             */
-/*   Updated: 2024/11/21 18:53:28 by hsharame         ###   ########.fr       */
+/*   Updated: 2024/11/22 14:32:43 by hsharame         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,19 +25,28 @@
 	open_file_append
 */
 
-void	open_file_trunc(t_redirect *trunc, char *filename)
+bool	open_file_trunc(t_redirect *trunc, char *filename)
 {
 	trunc->outfile = ft_strdup(filename);
 	trunc->fd_out = open(filename, O_CREAT | O_WRONLY | O_TRUNC, 0644);
-	if (trunc->fd_out == -1)
+	if (trunc->fd_out == -1 && filename[0] != '\0')
+	{
 		ft_putstr_fd("Error\n", 2);
+		return (false);
+	}
+	return (true);
 }
 
-void	open_file_append(t_redirect *trunc, char *filename)
+bool	open_file_append(t_redirect *append, char *filename)
 {
-	trunc->outfile = ft_strdup(filename);
-	trunc->fd_out = open(filename, O_CREAT | O_WRONLY | O_APPEND, 0644);
+	append->outfile = ft_strdup(filename);
+	append->fd_out = open(filename, O_CREAT | O_WRONLY | O_APPEND, 0644);
+	if (append->fd_out == -1 && filename[0] != '\0')
+	{
 		ft_putstr_fd("Error\n", 2);
+		return (false);
+	}
+	return (true);
 }
 
 /*
@@ -46,9 +55,14 @@ void	open_file_append(t_redirect *trunc, char *filename)
 	bash: [filename]: No such file or directory
 */
 
-void	open_input(t_redirect *trunc, char *filename)
+bool	open_input(t_redirect *input, char *filename)
 {
-	trunc->infile = ft_strdup(filename);
-	trunc->fd_in = open(filename, O_RDONLY);
+	input->infile = ft_strdup(filename);
+	input->fd_in = open(filename, O_RDONLY);
+	if (input->fd_in == -1 && filename[0] != '\0')
+	{
 		ft_putstr_fd("No such file or directory\n", 2);
+		return (false);
+	}
+	return (true);
 }

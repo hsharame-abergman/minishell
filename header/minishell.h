@@ -6,7 +6,7 @@
 /*   By: hsharame <hsharame@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/02 11:29:45 by hsharame          #+#    #+#             */
-/*   Updated: 2024/11/21 19:00:52 by hsharame         ###   ########.fr       */
+/*   Updated: 2024/11/22 18:25:25 by hsharame         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -118,9 +118,8 @@ typedef struct s_store
 /* ************************************************************************** */
 
 void				free_tab(char **tab);
-bool				check_input(char *str);
-void				handle_bracket(t_store *data, char *str);
-bool				check_bracket(t_store *data);
+int					check_input(char *str);
+bool				check_bracket(char *str);
 bool				check_several_operator(char *str);
 int					error_syntax(char *s, int error);
 int					ft_init_store(t_store *store, char **envp);
@@ -147,8 +146,8 @@ char				*ft_create_label_for_readline(t_store *store);
 /* clear */
 void				ft_free_store(t_store *store, int history);
 void				free_token(t_token **token_list);
-// static void			free_redirect(t_redirect *node);
-void				free_cmd(t_cmd *cmd);
+void				free_redirect(t_redirect *node);
+void				free_cmd(t_cmd **cmd);
 /* env */
 char				*ft_get_env_value(char **envp, char *search);
 int					ft_get_env_index(char **envp, char *key);
@@ -225,15 +224,15 @@ bool				expander_heredoc(t_store *data, char *input);
 /* ************************************************************************** */
 
 void				cmd_error(t_cmd *node, int i);
-void				open_file_trunc(t_redirect *trunc, char *filename);
-void				open_file_append(t_redirect *trunc, char *filename);
-void				open_input(t_redirect *trunc, char *filename);
-void				parse_append(t_cmd **cmd, t_token **token);
-void				parse_input(t_cmd **cmd, t_token **token);
-void				parse_trunc(t_cmd **cmd, t_token **token);
+bool				open_file_trunc(t_redirect *trunc, char *filename);
+bool				open_file_append(t_redirect *append, char *filename);
+bool				open_input(t_redirect *input, char *filename);
+bool				parse_append(t_cmd **cmd, t_token **token);
+bool				parse_input(t_cmd **cmd, t_token **token);
+bool				parse_trunc(t_cmd **cmd, t_token **token);
 char				*temp_file(int number);
 bool				heredoc_succes(t_store *data, t_redirect *heredoc);
-void				parse_heredoc(t_store *data, t_cmd **cmd, t_token **token);
+bool				parse_heredoc(t_store *data, t_cmd **cmd, t_token **token);
 bool				is_builtin(char *s);
 char				*find_path(char **env, char *cmd);
 char				*define_path(char *cmd);

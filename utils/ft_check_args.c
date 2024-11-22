@@ -6,7 +6,7 @@
 /*   By: hsharame <hsharame@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/18 17:08:21 by abergman          #+#    #+#             */
-/*   Updated: 2024/11/21 18:59:51 by hsharame         ###   ########.fr       */
+/*   Updated: 2024/11/22 18:29:50 by hsharame         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,43 +40,47 @@ bool	check_several_operator(char *str)
 	int	i;
 
 	i = 0;
-	while (str[i + 2] != '\0')
+	if (ft_strlen(str) > 2)
 	{
-		if (ft_isoperator(str[i]) && ft_isoperator(str[i + 1])
-			&& ft_isoperator(str[i + 2]))
+		while (str[i + 2] != '\0')
 		{
-			printf("minishell: syntax error near unexpected token");
-			printf(" `%c%c'\n", str[i], str[i + 1]);
-			return (false);
+			if (ft_isoperator(str[i]) && ft_isoperator(str[i + 1])
+				&& ft_isoperator(str[i + 2]))
+			{
+				printf("minishell: syntax error near unexpected token");
+				printf(" `%c%c'\n", str[i], str[i + 1]);
+				return (false);
+			}
+			i++;
 		}
-		i++;
 	}
 	return (true);
 }
 
-bool	check_input(char *str)
+int	check_input(char *str)
 {
 	int	i;
 
 	i = 0;
-	if (!check_pipes(str) || !check_several_operator(str))
-		return (false);
+	if (!check_pipes(str) || !check_several_operator(str)
+		|| !check_bracket(str))
+		return (EXIT_GENERAL_ERROR);
 	while (ft_isspace(str[i]))
 		i++;
 	if ((str[i] == ':' || str[i] == '!') && str[i + 1] == '\0')
-		return (false);
+		return (1);
 	else if (str[i] == '|' || str[i] == '>' || str[i] == '<' || str[i] == '&')
 	{
 		printf("minishell: syntax error near unexpected token `%c'\n", str[i]);
-		return (false);
+		return (EXIT_GENERAL_ERROR);
 	}
 	else if (str[i] == '/' && str[i + 1] == '\0')
 	{
 		printf("minishell: /: Is a directory\n");
-		return (false);
+		return (EXIT_CMD_NOT_EXECUT);
 	}
 	else
-		return (true);
+		return (0);
 }
 
 int	ft_check_args(t_store *store, int ac, char **av, char **envp)
