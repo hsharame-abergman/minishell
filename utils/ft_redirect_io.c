@@ -6,7 +6,7 @@
 /*   By: abergman <abergman@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/18 16:53:20 by abergman          #+#    #+#             */
-/*   Updated: 2024/11/19 15:48:23 by abergman         ###   ########.fr       */
+/*   Updated: 2024/11/21 18:41:26 by abergman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,16 +25,17 @@ int	ft_redirect_io(t_redirect *redirect)
 		return (0);
 	redirect->stdin_backup = dup(STDIN_FILENO);
 	if (redirect->stdin_backup == -1)
-		response = ft_error_handler("dup", "stdin backup", strerror(errno), 1);
+		response = ft_error_handler("dup", "stdin backup", strerror(errno), 0);
+	redirect->stdout_backup = dup(STDOUT_FILENO);
 	if (redirect->stdout_backup == -1)
-		response = ft_error_handler("dup", "stdout backup", strerror(errno), 1);
+		response = ft_error_handler("dup", "stdout backup", strerror(errno), 0);
 	if (redirect->fd_in != -1)
 		if (dup2(redirect->fd_in, STDIN_FILENO) == -1)
 			response = ft_error_handler("dup2", redirect->infile,
-					strerror(errno), 1);
+					strerror(errno), 0);
 	if (redirect->fd_out != -1)
 		if (dup2(redirect->fd_out, STDOUT_FILENO) == -1)
 			response = ft_error_handler("dup2", redirect->outfile,
-					strerror(errno), 1);
+					strerror(errno), 0);
 	return (response);
 }

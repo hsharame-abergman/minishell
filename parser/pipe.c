@@ -6,7 +6,7 @@
 /*   By: abergman <abergman@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/29 11:25:37 by hsharame          #+#    #+#             */
-/*   Updated: 2024/11/16 20:34:16 by abergman         ###   ########.fr       */
+/*   Updated: 2024/11/21 19:45:18 by abergman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ void	ft_close_pipe_fds(t_cmd *cmds, t_cmd *skip_cmd)
 {
 	while (cmds)
 	{
-		if (cmds != skip_cmd && cmds->redirect)
+		if (cmds != skip_cmd && cmds->pipe)
 		{
 			close(cmds->fd_pipe[0]);
 			close(cmds->fd_pipe[1]);
