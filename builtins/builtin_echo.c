@@ -6,7 +6,7 @@
 /*   By: abergman <abergman@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/11 17:46:04 by abergman          #+#    #+#             */
-/*   Updated: 2024/11/05 11:33:24 by abergman         ###   ########.fr       */
+/*   Updated: 2024/11/24 23:10:21 by abergman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,8 @@ int	builtin_echo(char **av)
 
 	index = 1;
 	is_n = 0;
+	if (!av)
+		return (ft_putchar_fd('\n', 1), EXIT_SUCCESS);
 	while (av[index] && ft_search_flag(av[index], 'n'))
 	{
 		is_n = 1;
