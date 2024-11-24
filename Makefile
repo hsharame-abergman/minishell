@@ -6,7 +6,7 @@
 #    By: abergman <abergman@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/09/28 13:34:37 by abergman          #+#    #+#              #
-#    Updated: 2024/11/24 23:38:45 by abergman         ###   ########.fr        #
+#    Updated: 2024/11/25 00:07:11 by abergman         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -28,7 +28,7 @@ $(OBJDIR)/%.o: ./%.c $(HEADERS)
 		$(CC) -c $< -o $@
 
 $(NAME): $(OBJDIR) $(HEADERS) $(OBJS)
-		$(shell hostname >> hostname)
+		$(shell hostname > /goinfre/hostname)
 		$(CC) $(OBJS) -o $(NAME) -lreadline
 		@clear
 		@echo "$(GREEN)$(BOLD)[ ★ SUCCESS ★ ]$(BOLD_R)$(RESET): The program is ready. You can use './minishell' for execute."
@@ -50,6 +50,7 @@ clean:
 
 fclean: clean
 	$(RM) $(NAME)
+	$(RM) /goinfre/hostname
 	@make -C ./libft fclean --no-print-directory
 
 re: fclean all

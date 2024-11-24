@@ -6,7 +6,7 @@
 /*   By: abergman <abergman@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/14 17:42:39 by hsharame          #+#    #+#             */
-/*   Updated: 2024/11/24 23:39:32 by abergman         ###   ########.fr       */
+/*   Updated: 2024/11/25 00:10:26 by abergman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ char	*ft_hostname(void)
 	char	*label;
 	char	*res;
 
-	fd = open("hostname", O_RDONLY);
+	fd = open("/goinfre/hostname", O_RDONLY);
 	if (fd < 0)
 		return (ft_strdup("42"));
 	i = read(fd, buf, 20);
