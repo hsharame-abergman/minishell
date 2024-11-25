@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hsharame <hsharame@student.42.fr>          +#+  +:+       +#+        */
+/*   By: abergman <abergman@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: Invalid date        by                   #+#    #+#             */
-/*   Updated: 2024/11/22 18:31:49 by hsharame         ###   ########.fr       */
+/*   Updated: 2024/11/25 00:54:47 by abergman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@ void	ft_monitor(t_store *store)
 		ft_set_signals_interactive();
 		label = ft_create_label_for_readline(store);
 		store->input = readline(label);
+		free(label);
 		if (store->input && store->input[0] != '\0')
 		{
 			if (lexer(store))
@@ -32,7 +33,6 @@ void	ft_monitor(t_store *store)
 				g_exit_code = 1;
 			add_history(store->input);
 		}
-		free(label);
 		ft_free_store(store, 0);
 	}
 }

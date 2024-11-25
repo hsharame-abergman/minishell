@@ -6,7 +6,7 @@
 /*   By: abergman <abergman@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/14 17:42:39 by hsharame          #+#    #+#             */
-/*   Updated: 2024/11/25 00:10:26 by abergman         ###   ########.fr       */
+/*   Updated: 2024/11/25 01:15:25 by abergman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,18 +58,24 @@ char	*ft_set_pwd(t_store *store)
 {
 	char	*pwd;
 	char	*home;
-	char	*res;
+	char	*res[2];
 
 	pwd = ft_get_env_value(store->envp, "PWD");
-	res = pwd;
+	res[0] = ft_strdup(pwd);
 	home = ft_get_env_value(store->envp, "HOME");
 	if ((ft_strcmp(pwd, home)) >= 0)
 	{
-		res = ft_substr(pwd, ft_strlen(home), ft_strlen(pwd));
-		if (ft_strlen(res) >= 0)
-			res = ft_strjoin("~", res);
+		res[1] = ft_substr(pwd, ft_strlen(home), ft_strlen(pwd));
+		if (ft_strlen(res[1]) >= 0)
+		{
+			free(res[0]);
+			res[0] = ft_strjoin("~", res[1]);
+			if (res[1])
+				free(res[1]);
+			return (res[0]);
+		}
 	}
-	return (res);
+	return (res[0]);
 }
 
 char	*ft_create_label_for_readline(t_store *store)
@@ -77,17 +83,20 @@ char	*ft_create_label_for_readline(t_store *store)
 	char	*label;
 	char	*hostname;
 	char	*pwd;
-	char	*res;
+	char	*res[2];
 
 	label = ft_strjoin(ft_get_env_value(store->envp, "USER"), "@");
 	hostname = ft_hostname();
-	res = ft_strjoin(label, hostname);
+	res[0] = ft_strjoin(label, hostname);
 	pwd = ft_set_pwd(store);
-	res = ft_strjoin(res, pwd);
-	res = ft_strjoin(res, "$ ");
+	res[1] = ft_strjoin(res[0], pwd);
+	free(res[0]);
+	res[0] = ft_strjoin(res[1], "$ ");
+	free(res[1]);
 	free(label);
 	free(hostname);
-	return (res);
+	free(pwd);
+	return (res[0]);
 }
 
 void	ascii_welcome(void)
