@@ -6,7 +6,7 @@
 /*   By: hsharame <hsharame@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/04 17:21:51 by abergman          #+#    #+#             */
-/*   Updated: 2024/11/22 18:25:03 by hsharame         ###   ########.fr       */
+/*   Updated: 2024/11/25 13:06:39 by hsharame         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,15 +20,15 @@ bool	check_bracket(char *str)
 	if (bracket != NULL)
 	{
 		printf("minishell: syntax error near unexpected token '%s'\n", bracket);
-		return (true);
+		return (false);
 	}
 	bracket = ft_strchr(str, ')');
 	if (bracket != NULL)
 	{
 		printf("minishell: syntax error near unexpected token '%s'\n", bracket);
-		return (true);
+		return (false);
 	}
-	return (false);
+	return (true);
 }
 
 void	ft_free_str_tab(char **tab)

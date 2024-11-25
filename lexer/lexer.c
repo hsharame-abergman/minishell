@@ -6,7 +6,7 @@
 /*   By: hsharame <hsharame@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/30 15:48:48 by hsharame          #+#    #+#             */
-/*   Updated: 2024/11/22 18:32:54 by hsharame         ###   ########.fr       */
+/*   Updated: 2024/11/25 13:03:43 by hsharame         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,10 +98,15 @@ bool	init_tokens(t_token **token_list, char *input, int *i)
 bool	lexer(t_store *data)
 {
 	int		i;
+	int		input_check;
 
 	i = 0;
-	//if (check_input(data->input) > 0)
-	//	return (false);
+	input_check = check_input(data->input);
+	if (input_check != 0)
+	{
+		g_exit_code = input_check;
+		return (false);
+	}
 	if (data->token)
 		reset_tokens(&data->token);
 	while (data->input[i])

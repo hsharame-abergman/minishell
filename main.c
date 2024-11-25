@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abergman <abergman@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hsharame <hsharame@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: Invalid date        by                   #+#    #+#             */
-/*   Updated: 2024/11/25 00:54:47 by abergman         ###   ########.fr       */
+/*   Updated: 2024/11/25 13:08:15 by hsharame         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ void	ft_monitor(t_store *store)
 		{
 			if (lexer(store))
 				g_exit_code = ft_executor(store);
-			else
+			else if (g_exit_code == 0)
 				g_exit_code = 1;
 			add_history(store->input);
 		}

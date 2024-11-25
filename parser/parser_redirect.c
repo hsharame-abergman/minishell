@@ -6,7 +6,7 @@
 /*   By: hsharame <hsharame@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/21 16:46:32 by hsharame          #+#    #+#             */
-/*   Updated: 2024/11/22 14:21:10 by hsharame         ###   ########.fr       */
+/*   Updated: 2024/11/25 13:26:06 by hsharame         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ void	add_redirect(t_token **save, t_cmd **current, t_store *data)
 {
 	if ((*save)->next->type == END)
 	{
-		error_syntax("syntax error near unexpected token `newline'\n", 2);
+		error_syntax("syntax error near unexpected token `newline'\n", 2, true);
 		(*current)->error = true;
 	}
 	if ((*save)->type == REDIRECT_INPUT)

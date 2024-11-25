@@ -6,7 +6,7 @@
 /*   By: hsharame <hsharame@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/23 14:27:04 by hsharame          #+#    #+#             */
-/*   Updated: 2024/11/22 15:01:27 by hsharame         ###   ########.fr       */
+/*   Updated: 2024/11/25 12:38:08 by hsharame         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,10 +44,14 @@ char	*temp_file(int number)
 
 bool	heredoc_succes(t_store *data, t_redirect *heredoc)
 {
-	int		fd;
-	char	*input;
+	int			fd;
+	char		*input;
+	t_redirect	*redir;
 
 	(void)data;
+	redir = heredoc;
+	if (!reset_redirect(redir, true))
+		return (false);
 	fd = open(heredoc->infile, O_CREAT | O_WRONLY | O_TRUNC, 0644);
 	if (fd < 0)
 		return (false);

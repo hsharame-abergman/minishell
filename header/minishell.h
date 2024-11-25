@@ -6,7 +6,7 @@
 /*   By: hsharame <hsharame@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/02 11:29:45 by hsharame          #+#    #+#             */
-/*   Updated: 2024/11/22 18:25:25 by hsharame         ###   ########.fr       */
+/*   Updated: 2024/11/25 13:27:15 by hsharame         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -121,7 +121,7 @@ void				free_tab(char **tab);
 int					check_input(char *str);
 bool				check_bracket(char *str);
 bool				check_several_operator(char *str);
-int					error_syntax(char *s, int error);
+int					error_syntax(char *s, int error, bool code);
 int					ft_init_store(t_store *store, char **envp);
 char				*ft_strjoin2(char *dest, char *str);
 int					ft_error_handler(char *cmd, char *detail, char *errmsg,
@@ -224,6 +224,7 @@ bool				expander_heredoc(t_store *data, char *input);
 /* ************************************************************************** */
 
 void				cmd_error(t_cmd *node, int i);
+bool				reset_redirect(t_redirect *redir, bool infile);
 bool				open_file_trunc(t_redirect *trunc, char *filename);
 bool				open_file_append(t_redirect *append, char *filename);
 bool				open_input(t_redirect *input, char *filename);

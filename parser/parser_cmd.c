@@ -6,7 +6,7 @@
 /*   By: hsharame <hsharame@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/11 15:37:39 by hsharame          #+#    #+#             */
-/*   Updated: 2024/11/01 15:35:11 by hsharame         ###   ########.fr       */
+/*   Updated: 2024/11/25 13:28:18 by hsharame         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,7 +104,7 @@ void	handle_pipe(t_token **save, t_cmd **current, int *first)
 {
 	if (*first == 1)
 	{
-		error_syntax("syntax error near unexpected token `|'\n", 2);
+		error_syntax("syntax error near unexpected token `|'\n", 2, true);
 		(*current)->error = true;
 		return ;
 	}

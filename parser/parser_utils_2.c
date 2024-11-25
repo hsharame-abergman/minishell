@@ -6,7 +6,7 @@
 /*   By: hsharame <hsharame@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/22 16:03:14 by hsharame          #+#    #+#             */
-/*   Updated: 2024/11/22 14:29:10 by hsharame         ###   ########.fr       */
+/*   Updated: 2024/11/25 13:15:29 by hsharame         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,9 +86,18 @@ void	cmd_error(t_cmd *node, int i)
 {
 	node->error = true;
 	if (i == 1)
+	{
 		printf("minishell: %s: command not found\n", node->value);
+		g_exit_code = EXIT_CMD_NOT_FOUND;
+	}
 	else if (i == 2)
+	{
 		printf("minishell: %s: No such file or directory\n", node->value);
+		g_exit_code = EXIT_CMD_NOT_FOUND;
+	}
 	else if (i == 3)
+	{
 		printf("minishell: %s: Permission denied\n", node->value);
+		g_exit_code = EXIT_CMD_NOT_EXECUT;
+	}
 }

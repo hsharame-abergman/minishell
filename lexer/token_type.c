@@ -6,7 +6,7 @@
 /*   By: hsharame <hsharame@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/02 14:09:39 by hsharame          #+#    #+#             */
-/*   Updated: 2024/11/21 13:46:00 by hsharame         ###   ########.fr       */
+/*   Updated: 2024/11/25 13:28:42 by hsharame         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,7 @@ bool	quotes(t_token **token_list, char *input, int *i)
 	quote = input[*i];
 	if (token_quotes(token_list, input, i, quote) == -1)
 	{
-		error_syntax("error: unclosed quotes\n", 2);
+		error_syntax("error: unclosed quotes\n", 2, true);
 		return (false);
 	}
 	return (true);
