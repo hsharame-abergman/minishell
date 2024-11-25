@@ -6,7 +6,7 @@
 /*   By: abergman <abergman@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/14 17:42:39 by hsharame          #+#    #+#             */
-/*   Updated: 2024/11/25 01:15:25 by abergman         ###   ########.fr       */
+/*   Updated: 2024/11/25 16:27:10 by abergman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ char	*ft_hostname(void)
 	if (i > 0)
 	{
 		i = 0;
-		while (buf[i] && buf[i] != '.')
+		while (buf[i] && buf[i] != '.' && buf[i] != '\n')
 			i++;
 	}
 	res = ft_substr(buf, 0, i);

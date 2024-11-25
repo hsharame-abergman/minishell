@@ -6,7 +6,7 @@
 /*   By: abergman <abergman@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/11 18:04:57 by abergman          #+#    #+#             */
-/*   Updated: 2024/11/16 16:15:15 by abergman         ###   ########.fr       */
+/*   Updated: 2024/11/25 14:48:41 by abergman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ static int	chdir_errno_mod(char *path)
 	(void)path;
 	if (g_exit_code == ESTALE)
 		g_exit_code = ENOENT;
-	ft_error_handler("cd", path, strerror(g_exit_code), g_exit_code);
+	ft_error_handler("cd", path, strerror(ENOENT), g_exit_code);
 	return (0);
 }
 
