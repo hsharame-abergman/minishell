@@ -6,7 +6,7 @@
 /*   By: hsharame <hsharame@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/02 11:29:45 by hsharame          #+#    #+#             */
-/*   Updated: 2024/11/25 13:27:15 by hsharame         ###   ########.fr       */
+/*   Updated: 2024/11/25 16:02:25 by hsharame         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -186,6 +186,7 @@ typedef enum e_token_type
 	ERROR
 }					t_token_type;
 
+bool				init_lexer(t_store *data);
 char				*check_pipe(t_token **token_list, char *input, int *i);
 char				*input_pipe(t_token **token_list, char *input, int *i);
 void				reset_tokens(t_token **token);

@@ -6,7 +6,7 @@
 /*   By: hsharame <hsharame@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/24 16:11:52 by hsharame          #+#    #+#             */
-/*   Updated: 2024/11/21 15:02:29 by hsharame         ###   ########.fr       */
+/*   Updated: 2024/11/25 16:33:53 by hsharame         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,24 +16,26 @@ char	*replace_var_error(char *res, int *i)
 {
 	char	*env_value;
 	char	*temp;
-	char	*temp_2;
+	char	*temp_2[2];
 	char	*new_res;
 
 	temp = ft_substr(res, 0, (*i)++);
 	env_value = ft_itoa(g_exit_code);
 	*i += ft_strlen(env_value);
-	temp_2 = ft_substr(res, *i, ft_strlen(res) - *i);
-	new_res = ft_strjoin(temp, env_value);
-	new_res = ft_strjoin(new_res, temp_2);
+	temp_2[0] = ft_substr(res, *i, ft_strlen(res) - *i);
+	temp_2[1] = ft_strjoin(temp, env_value);
+	new_res = ft_strjoin(temp_2[1], temp_2[0]);
 	free(temp);
 	free(env_value);
-	free(temp_2);
+	free(temp_2[0]);
+	free(temp_2[1]);
 	return (new_res);
 }
 
 char	*var_error(char *value)
 {
 	char	*res;
+	char	*tmp;
 	int		i;
 
 	i = 0;
@@ -42,7 +44,9 @@ char	*var_error(char *value)
 	{
 		if (res[i] == '$' && res[i + 1] == '?')
 		{
+			tmp = res;
 			res = replace_var_error(res, &i);
+			free(tmp);
 		}
 		else
 			i++;

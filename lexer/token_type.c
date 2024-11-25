@@ -6,7 +6,7 @@
 /*   By: hsharame <hsharame@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/02 14:09:39 by hsharame          #+#    #+#             */
-/*   Updated: 2024/11/25 13:28:42 by hsharame         ###   ########.fr       */
+/*   Updated: 2024/11/25 16:24:38 by hsharame         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,7 @@ int	token_quotes(t_token **token_list, char *input, int *i, char quote)
 	(*i)++;
 	if (input[*i] && !ft_isspace(input[*i]))
 		is_adjacent(token_list);
+	free(value);
 	return (0);
 }
 

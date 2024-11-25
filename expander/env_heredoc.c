@@ -6,7 +6,7 @@
 /*   By: hsharame <hsharame@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/28 12:06:42 by hsharame          #+#    #+#             */
-/*   Updated: 2024/11/21 13:58:58 by hsharame         ###   ########.fr       */
+/*   Updated: 2024/11/25 16:33:26 by hsharame         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,27 +44,29 @@ char	*replace_var(char *res, int *i)
 {
 	char	*env_value;
 	char	*temp;
-	char	*temp_2;
+	char	*temp_2[2];
 	char	*new_res;
 
 	temp = ft_substr(res, 0, (*i)++);
 	env_value = get_env_value(res, i);
-	temp_2 = ft_substr(res, *i, ft_strlen(res) - *i);
-	new_res = ft_strjoin(temp, env_value);
-	new_res = ft_strjoin(new_res, temp_2);
+	temp_2[0] = ft_substr(res, *i, ft_strlen(res) - *i);
+	temp_2[1] = ft_strjoin(temp, env_value);
+	new_res = ft_strjoin(temp_2[1], temp_2[0]);
 	if (env_value[0] != '\0')
 		*i += ft_strlen(env_value);
 	else
 		*i = 0;
 	free(temp);
 	free(env_value);
-	free(temp_2);
+	free(temp_2[0]);
+	free(temp_2[1]);
 	return (new_res);
 }
 
 char	*check_if_var(char *input)
 {
 	char	*res;
+	char	*tmp;
 	int		i;
 
 	i = 0;
@@ -74,7 +76,9 @@ char	*check_if_var(char *input)
 		if (res[i] == '$' && (ft_isalnum(res[i + 1])
 				|| res[i + 1] == '_'))
 		{
+			tmp = res;
 			res = replace_var(res, &i);
+			free(tmp);
 		}
 		else
 			i++;
