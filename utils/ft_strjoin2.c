@@ -6,7 +6,7 @@
 /*   By: abergman <abergman@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/21 18:39:35 by abergman          #+#    #+#             */
-/*   Updated: 2024/11/26 14:48:20 by abergman         ###   ########.fr       */
+/*   Updated: 2024/11/26 17:00:49 by abergman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ char	*ft_strjoin2(char *dest, char *str)
 	return (str);
 }
 
-char	*ft_strjoin_freed(char *dest, char *str, t_free_arg index_free)
+char	*ft_strjoin_free(char *dest, char *str, t_free_arg index_free)
 {
 	char	*res;
 
