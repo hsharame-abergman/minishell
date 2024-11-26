@@ -6,7 +6,11 @@
 /*   By: hsharame <hsharame@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/21 18:39:35 by abergman          #+#    #+#             */
+<<<<<<< HEAD
 /*   Updated: 2024/11/26 17:03:14 by hsharame         ###   ########.fr       */
+=======
+/*   Updated: 2024/11/26 17:00:49 by abergman         ###   ########.fr       */
+>>>>>>> 13d52715c094f44b2ebf9ac532b288d5a499fdea
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +31,7 @@ char	*ft_strjoin2(char *dest, char *str)
 	return (str);
 }
 
-char	*ft_strjoin_freed(char *dest, char *str, t_free_arg index_free)
+char	*ft_strjoin_free(char *dest, char *str, t_free_arg index_free)
 {
 	char	*res;
 

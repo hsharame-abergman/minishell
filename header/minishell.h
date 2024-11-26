@@ -6,7 +6,11 @@
 /*   By: hsharame <hsharame@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/02 11:29:45 by hsharame          #+#    #+#             */
+<<<<<<< HEAD
 /*   Updated: 2024/11/26 17:27:04 by hsharame         ###   ########.fr       */
+=======
+/*   Updated: 2024/11/26 17:00:39 by abergman         ###   ########.fr       */
+>>>>>>> 13d52715c094f44b2ebf9ac532b288d5a499fdea
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,13 +98,13 @@ typedef struct s_token
 	struct s_token	*prev;
 }					t_token;
 
-typedef enum s_mode
+typedef enum e_mode
 {
 	SINDLE_COMMAND,
 	INTERACTIVE
 }					t_mode;
 
-typedef enum s_free_arg
+typedef enum e_free_arg
 {
 	FREE_DEST,
 	FREE_SRC
@@ -148,7 +152,7 @@ char				*ft_find_valid_command_path(char *command, char **paths);
 void				ascii_welcome(void);
 char				*ft_hostname(void);
 char				*ft_create_label_for_readline(t_store *store);
-char				*ft_strjoin_freed(char *dest, char *str,  t_free_arg  index_free);
+char				*ft_strjoin_free(char *dest, char *str,  t_free_arg  index_free);
 
 /* clear */
 void				ft_free_store(t_store *store, int history);
