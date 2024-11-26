@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtin_echo.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abergman <abergman@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hsharame <hsharame@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/11 17:46:04 by abergman          #+#    #+#             */
-/*   Updated: 2024/11/26 16:48:44 by abergman         ###   ########.fr       */
+/*   Updated: 2024/11/26 17:12:06 by hsharame         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,13 +28,7 @@ static void	ft_echo_util(char **av, int is_newline, int index)
 	}
 	while (av[index])
 	{
-		while (av[index][ii])
-		{
-			if ((int)(av[index][ii]) == 92)
-				ii++;
-			ft_putchar_fd(av[index][ii], STDOUT_FILENO);
-			ii++;
-		}
+		ft_putstr_fd(av[index], STDIN_FILENO);
 		if (av[index + 1])
 		{
 			ft_putchar_fd(' ', STDOUT_FILENO);

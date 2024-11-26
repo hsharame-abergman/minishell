@@ -6,7 +6,7 @@
 /*   By: hsharame <hsharame@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/28 12:06:42 by hsharame          #+#    #+#             */
-/*   Updated: 2024/11/25 16:33:26 by hsharame         ###   ########.fr       */
+/*   Updated: 2024/11/26 17:02:31 by hsharame         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
 	returns the initial value of input
 */
 
-char	*get_env_value(char *input, int *i)
+char	*get_env_value(t_store *data, char *input, int *i)
 {
 	char	*env_value;
 	char	*res;
@@ -32,7 +32,7 @@ char	*get_env_value(char *input, int *i)
 		length++;
 	*i += length;
 	res = ft_substr(input, start, length);
-	env_value = getenv(res);
+	env_value = ft_get_env_value(data->envp, res);
 	free(res);
 	if (!env_value)
 		return (ft_strdup(""));
@@ -40,7 +40,7 @@ char	*get_env_value(char *input, int *i)
 		return (ft_strdup(env_value));
 }
 
-char	*replace_var(char *res, int *i)
+char	*replace_var(t_store *data, char *res, int *i)
 {
 	char	*env_value;
 	char	*temp;
@@ -48,7 +48,7 @@ char	*replace_var(char *res, int *i)
 	char	*new_res;
 
 	temp = ft_substr(res, 0, (*i)++);
-	env_value = get_env_value(res, i);
+	env_value = get_env_value(data, res, i);
 	temp_2[0] = ft_substr(res, *i, ft_strlen(res) - *i);
 	temp_2[1] = ft_strjoin(temp, env_value);
 	new_res = ft_strjoin(temp_2[1], temp_2[0]);
@@ -63,7 +63,7 @@ char	*replace_var(char *res, int *i)
 	return (new_res);
 }
 
-char	*check_if_var(char *input)
+char	*check_if_var(t_store *data, char *input)
 {
 	char	*res;
 	char	*tmp;
@@ -77,7 +77,7 @@ char	*check_if_var(char *input)
 				|| res[i + 1] == '_'))
 		{
 			tmp = res;
-			res = replace_var(res, &i);
+			res = replace_var(data, res, &i);
 			free(tmp);
 		}
 		else

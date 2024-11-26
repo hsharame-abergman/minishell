@@ -6,7 +6,7 @@
 /*   By: hsharame <hsharame@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/24 16:11:52 by hsharame          #+#    #+#             */
-/*   Updated: 2024/11/25 16:33:53 by hsharame         ###   ########.fr       */
+/*   Updated: 2024/11/26 16:47:05 by hsharame         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,13 +55,14 @@ char	*var_error(char *value)
 	return (res);
 }
 
-void	variables_expansion(t_token *token, int *i)
+void	variables_expansion(t_store *data, t_token *token, int *i)
 {
 	if (token->value[*i] == '$' && token->type != CHAR_QUOTE
 		&& !check_escape(token->value, *i))
 	{
-		if (ft_isalpha(token->value[*i + 1]))
-			token->value = check_if_var(token->value);
+		if (ft_isalpha(token->value[*i + 1])
+			|| (token->value[*i + 1]) == '_')
+			token->value = check_if_var(data, token->value);
 		else if (token->value[*i + 1] == '?')
 			token->value = var_error(token->value);
 		else if (ft_isdigit(token->value[*i + 1]))
@@ -83,7 +84,7 @@ void	expander(t_store *data, t_token **token_list)
 			i = 0;
 			while ((size_t)i < ft_strlen(token->value) && token->value[i + 1])
 			{
-				variables_expansion(token, &i);
+				variables_expansion(data, token, &i);
 				i++;
 			}
 		}

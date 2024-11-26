@@ -6,7 +6,7 @@
 /*   By: hsharame <hsharame@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/23 14:27:04 by hsharame          #+#    #+#             */
-/*   Updated: 2024/11/25 12:38:08 by hsharame         ###   ########.fr       */
+/*   Updated: 2024/11/26 17:01:57 by hsharame         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,6 @@ bool	heredoc_succes(t_store *data, t_redirect *heredoc)
 	char		*input;
 	t_redirect	*redir;
 
-	(void)data;
 	redir = heredoc;
 	if (!reset_redirect(redir, true))
 		return (false);
@@ -61,7 +60,7 @@ bool	heredoc_succes(t_store *data, t_redirect *heredoc)
 		if (ft_strcmp(input, heredoc->delimiter) == 0)
 			break ;
 		if (expander_heredoc(data, input))
-			input = check_if_var(input);
+			input = check_if_var(data, input);
 		ft_putendl_fd(input, fd);
 		free(input);
 	}

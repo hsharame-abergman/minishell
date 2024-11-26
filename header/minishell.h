@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abergman <abergman@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hsharame <hsharame@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/02 11:29:45 by hsharame          #+#    #+#             */
-/*   Updated: 2024/11/26 14:49:55 by abergman         ###   ########.fr       */
+/*   Updated: 2024/11/26 17:27:04 by hsharame         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -219,12 +219,12 @@ bool				lexer(t_store *data);
 char				*escape_digit(char *str);
 char				*replace_var_error(char *res, int *i);
 char				*var_error(char *value);
-void				variables_expansion(t_token *token, int *i);
+void				variables_expansion(t_store *data, t_token *token, int *i);
 void				expander(t_store *data, t_token **token_list);
 bool				check_escape(char *str, int i);
-char				*replace_var(char *res, int *i);
-char				*get_env_value(char *input, int *i);
-char				*check_if_var(char *input);
+char				*replace_var(t_store *data, char *res, int *i);
+char				*get_env_value(t_store *data, char *input, int *i);
+char				*check_if_var(t_store *data, char *input);
 bool				expander_heredoc(t_store *data, char *input);
 
 /* ************************************************************************** */
