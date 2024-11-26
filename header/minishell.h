@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hsharame <hsharame@student.42.fr>          +#+  +:+       +#+        */
+/*   By: abergman <abergman@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/02 11:29:45 by hsharame          #+#    #+#             */
-/*   Updated: 2024/11/25 16:02:25 by hsharame         ###   ########.fr       */
+/*   Updated: 2024/11/26 14:49:55 by abergman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,6 +100,12 @@ typedef enum s_mode
 	INTERACTIVE
 }					t_mode;
 
+typedef enum s_free_arg
+{
+	FREE_DEST,
+	FREE_SRC
+}		t_free_arg;
+
 typedef struct s_store
 {
 	char			**envp;
@@ -142,6 +148,7 @@ char				*ft_find_valid_command_path(char *command, char **paths);
 void				ascii_welcome(void);
 char				*ft_hostname(void);
 char				*ft_create_label_for_readline(t_store *store);
+char				*ft_strjoin_freed(char *dest, char *str,  t_free_arg  index_free);
 
 /* clear */
 void				ft_free_store(t_store *store, int history);

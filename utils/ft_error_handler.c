@@ -6,44 +6,29 @@
 /*   By: abergman <abergman@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/18 16:53:50 by abergman          #+#    #+#             */
-/*   Updated: 2024/11/21 15:33:45 by abergman         ###   ########.fr       */
+/*   Updated: 2024/11/26 16:53:45 by abergman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../header/minishell.h"
 
-static int	ft_verify_quotes(char *cmd)
-{
-	if (ft_strncmp(cmd, "unset", 6) == 0)
-		return (1);
-	if (ft_strncmp(cmd, "export", 7) == 0)
-		return (1);
-	return (0);
-}
-
 int	ft_error_handler(char *cmd, char *detail, char *errmsg, int errcode)
 {
-	char	*message;
-	int		quotes_status;
+	char	*message[2];
 
-	quotes_status = ft_verify_quotes(cmd);
-	message = ft_strdup("minishell: ");
+	message[0] = ft_strdup("minishell: ");
 	if (cmd != NULL)
 	{
-		message = ft_strjoin(message, cmd);
-		message = ft_strjoin(message, ": ");
+		message[1] = ft_strjoin_freed(message[0], cmd, FREE_DEST);
+		message[0] = ft_strjoin_freed(message[1], ": ", FREE_DEST);
 	}
 	if (detail != NULL)
 	{
-		if (quotes_status)
-			ft_strjoin(message, "`");
-		message = ft_strjoin(message, detail);
-		if (quotes_status)
-			ft_strjoin(message, "`");
-		message = ft_strjoin(message, ": ");
+		message[1] = ft_strjoin_freed(message[0], detail, FREE_DEST);
+		message[0] = ft_strjoin_freed(message[1], ":", FREE_DEST);
 	}
-	message = ft_strjoin(message, errmsg);
-	ft_putendl_fd(message, STDERR_FILENO);
-	ft_free_pointer(message);
+	message[1] = ft_strjoin_freed(message[0], errmsg, FREE_DEST);
+	ft_putendl_fd(message[1], STDERR_FILENO);
+	ft_free_pointer(message[1]);
 	return (errcode);
 }

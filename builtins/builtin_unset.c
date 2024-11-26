@@ -6,7 +6,7 @@
 /*   By: abergman <abergman@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/12 15:46:28 by abergman          #+#    #+#             */
-/*   Updated: 2024/11/04 17:28:56 by abergman         ###   ########.fr       */
+/*   Updated: 2024/11/26 16:52:06 by abergman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,26 +16,18 @@ int	builtin_unset(t_store *store, char **av)
 {
 	int	i;
 	int	j;
-	int	response;
 
-	response = EXIT_SUCCESS;
 	i = 1;
+	if (!av)
+		return (EXIT_SUCCESS);
 	while (av[i])
 	{
-		if (!ft_env_is_valid(av[i]) || ft_strchr(av[i], '=') != NULL)
+		j = ft_get_env_index(store->envp, av[i]);
+		if (j != -1)
 		{
-			ft_error_handler("unset", av[i], "not a valid identifier", 1);
-			response = EXIT_FAILURE;
-		}
-		else
-		{
-			j = ft_get_env_index(store->envp, av[i]);
-			if (j != -1)
-			{
-				ft_remove_env(store, j);
-			}
+			ft_remove_env(store, j);
 		}
 		i++;
 	}
-	return (response);
+	return (EXIT_SUCCESS);
 }
