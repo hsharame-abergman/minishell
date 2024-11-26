@@ -6,7 +6,7 @@
 /*   By: abergman <abergman@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/11 18:04:57 by abergman          #+#    #+#             */
-/*   Updated: 2024/11/25 14:48:41 by abergman         ###   ########.fr       */
+/*   Updated: 2024/11/26 11:46:44 by abergman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,6 +75,8 @@ int	builtin_cd(t_store *store, char **args)
 {
 	char	*path;
 
+	if (ft_isspace(args[1][0]))
+		return(ft_error_handler("cd", args[1], strerror(STDERR_FILENO), STDERR_FILENO));
 	if (!args || !args[1] || ft_isspace(args[1][0]))
 	{
 		path = ft_get_env_value(store->envp, "HOME");

@@ -6,7 +6,7 @@
 /*   By: abergman <abergman@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: Invalid date        by                   #+#    #+#             */
-/*   Updated: 2024/11/25 19:54:53 by abergman         ###   ########.fr       */
+/*   Updated: 2024/11/25 20:54:10 by abergman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,7 @@ void	ft_monitor(t_store *store)
 		label = ft_create_label_for_readline(store);
 		store->input = readline(label);
 		free(label);
+		label = NULL;
 		if (store->input && store->input[0] != '\0')
 		{
 			if (lexer(store))
