@@ -6,7 +6,7 @@
 /*   By: abergman <abergman@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/18 16:53:20 by abergman          #+#    #+#             */
-/*   Updated: 2024/11/21 18:41:26 by abergman         ###   ########.fr       */
+/*   Updated: 2024/11/27 16:33:04 by abergman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
 /* Returns exit code 1 if creating a child process fails. 					*/
 int	ft_redirect_io(t_redirect *redirect)
 {
-	int response;
+	int	response;
 
 	response = 1;
 	if (!redirect)

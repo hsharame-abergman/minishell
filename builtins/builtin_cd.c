@@ -6,7 +6,7 @@
 /*   By: abergman <abergman@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/11 18:04:57 by abergman          #+#    #+#             */
-/*   Updated: 2024/11/26 13:55:24 by abergman         ###   ########.fr       */
+/*   Updated: 2024/11/27 16:24:33 by abergman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,9 +55,8 @@ int	ft_change_directory(t_store *store, char *path)
 	workdir = getcwd(cwd, PATH_MAX);
 	if (!workdir)
 	{
-		ft_error_handler("Error\ncd: fail with retrieving current directory",
-			"getcwd: cannot access parent directories", strerror(g_exit_code),
-			g_exit_code);
+		ft_error_handler(B_CD, EMSG_FR, strerror(g_exit_code), g_exit_code);
+		ft_error_handler("getcwd", EMSG_AC, strerror(g_exit_code), g_exit_code);
 		workdir = ft_strjoin(store->working_directory, "/");
 		tempory = workdir;
 		workdir = ft_strjoin(tempory, path);
@@ -73,24 +72,24 @@ int	builtin_cd(t_store *store, char **args)
 {
 	char	*path;
 
-	if (ft_isspace(args[1][0]))
-		return(ft_error_handler("cd", args[1], strerror(STDERR_FILENO), STDOUT_FILENO));
 	if (!args || !args[1] || ft_isspace(args[1][0]))
 	{
 		path = ft_get_env_value(store->envp, "HOME");
 		if (!path || *path == '\0' || ft_isspace(*path))
-			return (ft_error_handler("cd", NULL, "Error\n$HOME is empty",
+			return (ft_error_handler(B_CD, NULL, "Error\n$HOME is empty",
 					EXIT_FAILURE));
 		return (!ft_change_directory(store, path));
 	}
+	if (ft_isspace(args[1][0]))
+		return (ft_error_handler(B_CD, args[1], strerror(STDERR_FILENO), 1));
 	if (args[2])
-		return (ft_error_handler("cd", NULL, "Error\ntoo many arguments",
+		return (ft_error_handler(B_CD, NULL, "Error\ntoo many arguments",
 				EXIT_FAILURE));
 	if (ft_strncmp(args[1], "-", 2) == 0)
 	{
 		path = ft_get_env_value(store->envp, "OLDPWD");
 		if (!path)
-			return (ft_error_handler("cd", NULL, "Error\nOLDPWD is empty",
+			return (ft_error_handler(B_CD, NULL, "Error\nOLDPWD is empty",
 					EXIT_FAILURE));
 		return (!ft_change_directory(store, path));
 	}

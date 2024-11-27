@@ -6,7 +6,7 @@
 /*   By: abergman <abergman@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/14 17:42:39 by hsharame          #+#    #+#             */
-/*   Updated: 2024/11/25 16:27:10 by abergman         ###   ########.fr       */
+/*   Updated: 2024/11/27 16:37:06 by abergman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,10 +89,8 @@ char	*ft_create_label_for_readline(t_store *store)
 	hostname = ft_hostname();
 	res[0] = ft_strjoin(label, hostname);
 	pwd = ft_set_pwd(store);
-	res[1] = ft_strjoin(res[0], pwd);
-	free(res[0]);
-	res[0] = ft_strjoin(res[1], "$ ");
-	free(res[1]);
+	res[1] = ft_strjoin_free(res[0], pwd, FREE_DEST);
+	res[0] = ft_strjoin_free(res[1], "$ ", FREE_DEST);
 	free(label);
 	free(hostname);
 	free(pwd);

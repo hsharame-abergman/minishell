@@ -6,7 +6,7 @@
 /*   By: abergman <abergman@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/18 17:03:12 by abergman          #+#    #+#             */
-/*   Updated: 2024/11/19 12:42:05 by abergman         ###   ########.fr       */
+/*   Updated: 2024/11/27 16:35:48 by abergman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,14 +34,15 @@ static int	initial_working_dir_vars(t_store *store)
 {
 	char	buffer[PATH_MAX];
 	char	*workdir;
-	
+
 	workdir = getcwd(buffer, PATH_MAX);
 	store->working_directory = ft_strdup(workdir);
 	if (!store->working_directory)
 		return (0);
 	if (ft_get_env_index(store->envp, "OLDPWD") != -1)
 	{
-		store->old_working_directory = ft_strdup(ft_get_env_value(store->envp, "OLDPWD"));
+		store->old_working_directory = ft_strdup(
+				ft_get_env_value(store->envp, "OLDPWD"));
 		if (!store->old_working_directory)
 			return (0);
 	}

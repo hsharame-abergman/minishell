@@ -6,7 +6,7 @@
 /*   By: abergman <abergman@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/27 20:49:12 by abergman          #+#    #+#             */
-/*   Updated: 2024/11/11 15:27:55 by abergman         ###   ########.fr       */
+/*   Updated: 2024/11/27 16:33:42 by abergman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,10 +22,10 @@ int	ft_count_env(char **envp)
 	return (i);
 }
 
-static char	**ft_realloc_envs(t_store *store, int counter) // wip
+static char	**ft_realloc_envs(t_store *store, int counter)
 {
-	char **new_envs;
-	int i;
+	char	**new_envs;
+	int		i;
 
 	i = 0;
 	if ((new_envs = malloc(sizeof(char *) * (counter + 1))) == NULL)

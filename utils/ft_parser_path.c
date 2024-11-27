@@ -6,7 +6,7 @@
 /*   By: abergman <abergman@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/12 11:14:28 by abergman          #+#    #+#             */
-/*   Updated: 2024/11/13 19:46:23 by abergman         ###   ########.fr       */
+/*   Updated: 2024/11/27 16:32:54 by abergman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,15 +14,14 @@
 
 /* Searches env PATH for location of given command's bin file */
 
-char *ft_parser_path(t_store *store, char *value)
+char	*ft_parser_path(t_store *store, char *value)
 {
-	char **path_of_envariment;
-	char *command;
-	char *path_of_command;
+	char	**path_of_envariment;
+	char	*command;
+	char	*path_of_command;
 
 	if (!value)
 		return (NULL);
-	
 	path_of_envariment = ft_get_paths_from_envp(store);
 	if (!path_of_envariment)
 		return (NULL);

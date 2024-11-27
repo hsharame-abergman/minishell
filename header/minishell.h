@@ -6,7 +6,7 @@
 /*   By: abergman <abergman@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/02 11:29:45 by hsharame          #+#    #+#             */
-/*   Updated: 2024/11/27 16:03:24 by abergman         ###   ########.fr       */
+/*   Updated: 2024/11/27 16:22:41 by abergman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -274,6 +274,9 @@ struct				s_format
 # define B_EXPORT "export"
 # define B_UNSET "unset"
 # define B_LS "ls"
+
+# define EMSG_FR "fail with retrieving current directory"
+# define EMSG_AC "cannot access parent directories"
 
 // int					ft_builtins(t_store *store, t_cmd *command);
 // int					is_builtins(t_store *store, char **args);

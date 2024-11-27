@@ -6,13 +6,14 @@
 /*   By: abergman <abergman@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/12 21:10:00 by abergman          #+#    #+#             */
-/*   Updated: 2024/11/12 21:24:05 by abergman         ###   ########.fr       */
+/*   Updated: 2024/11/27 16:32:28 by abergman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../header/minishell.h"
 
-/* Check access and permissions for each possible command to find a valid path to binary files for a cmd.
+/* Check access and permissions for each possible command to find a valid
+	path to binary files for a cmd.
 if the valid path not found - return NULL */
 char	*ft_find_valid_command_path(char *command, char **paths)
 {

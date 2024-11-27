@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtin_exit.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hsharame <hsharame@student.42.fr>          +#+  +:+       +#+        */
+/*   By: abergman <abergman@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/12 15:49:11 by abergman          #+#    #+#             */
-/*   Updated: 2024/11/26 17:53:04 by hsharame         ###   ########.fr       */
+/*   Updated: 2024/11/27 16:27:00 by abergman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,8 @@
 
 static int	ft_check_out_of_range(int sign, unsigned long num, int *is_error)
 {
-	if ((sign == 1 && num > LONG_MAX) || (sign == -1 && num >
-			-(unsigned long)LONG_MIN))
+	if ((sign == 1 && num > LONG_MAX)
+		|| (sign == -1 && num > -(unsigned long)LONG_MIN))
 		*is_error = 1;
 	return (*is_error);
 }
@@ -106,14 +106,6 @@ static int	ft_get_exit_code(char *cmd, int *is_error)
 	return (i % 256);
 }
 
-/*
-	Выполняет встроенную выходную функцию.
-	If alone, выйдет и выйдет из оболочки с указанным кодом выхода или 0.
-	Если проводка,
-		то выводится дочерний процесс с предоставленным кодом выхода и не выходит
-	minishell.
-	При отказе из-за недопустимых аргументов shell не выводится и возвращает код выхода (1 или 2).
-*/
 int	builtin_exit(t_store *store, char **av)
 {
 	int	exit_code;
@@ -123,17 +115,17 @@ int	builtin_exit(t_store *store, char **av)
 	is_error = 0;
 	is_silent_mode = ft_is_silent_exit_mode(store);
 	if (!is_silent_mode && store->mode_usage == INTERACTIVE)
-		ft_putendl_fd("exit", 2);
+		ft_putendl_fd(B_EXIT, 2);
 	if (!av || !av[1])
 		exit_code = g_exit_code;
 	else
 	{
 		exit_code = ft_get_exit_code(av[1], &is_error);
 		if (is_error)
-			exit_code = ft_error_handler("exit", av[1],
+			exit_code = ft_error_handler(B_EXIT, av[1],
 					"numeric argument required", 2);
 		else if (av[2])
-			return (ft_error_handler("exit", NULL, "too many arguments", 1));
+			return (ft_error_handler(B_EXIT, NULL, "too many arguments", 1));
 	}
 	ft_exit_program(store, exit_code);
 	return (2);

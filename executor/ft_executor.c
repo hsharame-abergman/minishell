@@ -6,7 +6,7 @@
 /*   By: abergman <abergman@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/30 15:42:08 by abergman          #+#    #+#             */
-/*   Updated: 2024/11/20 16:52:30 by abergman         ###   ########.fr       */
+/*   Updated: 2024/11/27 16:31:32 by abergman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ int	ft_get_children(t_store *store)
 		wpid = waitpid(-1, &status, 0);
 		if (wpid == store->pid)
 			save_status = status;
-		continue;
+		continue ;
 	}
 	if (WIFSIGNALED(save_status))
 		status = 128 + WTERMSIG(save_status);
@@ -52,9 +52,11 @@ int	ft_get_children(t_store *store)
 /*
 	Создаёт дочерний процесс для каждой исполняемой команды,
 		за исключением встроенной команды,
-		которая не будет запущена и будет выполняться в основном процессе (в данном случае не создано дочерних).
+		которая не будет запущена и будет выполняться в основном процессе
+		(в данном случае не создано дочерних).
 	Возвращает true,
-		когда процесс был создан для каждой команды или когда встроенный файл был выполнен самостоятельно.
+		когда процесс был создан для каждой команды или когда встроенный
+		файл был выполнен самостоятельно.
 	Возвращает false, если была ошибка в ответвлении.
 */
 int	ft_create_children_process(t_store *store)
@@ -66,7 +68,8 @@ int	ft_create_children_process(t_store *store)
 	{
 		store->pid = fork();
 		if (store->pid == -1)
-			return (ft_error_handler("fork", NULL, strerror(errno), EXIT_FAILURE));
+			return (ft_error_handler("fork", NULL, strerror(errno),
+					EXIT_FAILURE));
 		else if (store->pid == 0)
 		{
 			ft_execute_command(store, command);
@@ -97,11 +100,11 @@ int	ft_preporation_for_execution(t_store *store)
 /*
 	Выполняет указанные команды, создавая дочерние процессы и ожидая
 	их завершения. Возвращает код выхода последнего из числа подлежащих
-	удалению. Или код выхода 1 в случае провала процесса создания подлежащего удалению.
+	удалению. Или код выхода 1 в случае провала процесса создания удалению.
 */
 int	ft_executor(t_store *store)
 {
-	int exit_code;	
+	int	exit_code;
 
 	exit_code = ft_preporation_for_execution(store);
 	if (exit_code != EXIT_CMD_NOT_FOUND)
