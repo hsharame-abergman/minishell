@@ -6,7 +6,7 @@
 /*   By: abergman <abergman@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/02 11:29:45 by hsharame          #+#    #+#             */
-/*   Updated: 2024/11/27 16:22:41 by abergman         ###   ########.fr       */
+/*   Updated: 2024/11/27 17:01:36 by abergman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -118,7 +118,6 @@ typedef struct s_store
 /*                     Utils                                                  */
 /* ************************************************************************** */
 
-void				free_tab(char **tab);
 int					check_input(char *str);
 bool				check_bracket(char *str);
 bool				check_several_operator(char *str);
@@ -131,27 +130,28 @@ int					ft_check_args(t_store *store, int ac, char **av,
 						char **envp);
 void				ft_free_pointer(void *pointer);
 int					ft_search_flag(char *str, char flag);
-int					ft_set_env(t_store *store, char *key, char *value);
 int					ft_env_is_valid(char *node);
 int					ft_count_env(char **envp);
 int					ft_remove_env(t_store *store, int index);
-int					ft_get_env_index(char **envp, char *key);
-char				*ft_get_env_value(char **envp, char *search);
 char				**ft_get_paths_from_envp(t_store *store);
 char				*ft_find_valid_command_path(char *command, char **paths);
 void				ascii_welcome(void);
 char				*ft_hostname(void);
 char				*ft_create_label_for_readline(t_store *store);
-char				*ft_strjoin_free(char *dest, char *str, t_free_arg i);
 
 /* clear */
+void				free_tab(char **tab);
 void				ft_free_store(t_store *store, int history);
 void				free_token(t_token **token_list);
 void				free_redirect(t_redirect *node);
 void				free_cmd(t_cmd **cmd);
+char				*ft_strjoin_free(char *dest, char *str, t_free_arg i);
+
 /* env */
 char				*ft_get_env_value(char **envp, char *search);
 int					ft_get_env_index(char **envp, char *key);
+int					ft_set_env(t_store *store, char *key, char *value);
+
 /* executor */
 int					ft_executor(t_store *store);
 int					ft_restore_io(t_redirect *redirect);
@@ -278,8 +278,6 @@ struct				s_format
 # define EMSG_FR "fail with retrieving current directory"
 # define EMSG_AC "cannot access parent directories"
 
-// int					ft_builtins(t_store *store, t_cmd *command);
-// int					is_builtins(t_store *store, char **args);
 int					builtin_cd(t_store *store, char **args);
 int					builtin_pwd(t_store *store);
 int					builtin_echo(char **av);
