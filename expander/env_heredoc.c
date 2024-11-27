@@ -6,7 +6,7 @@
 /*   By: hsharame <hsharame@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/28 12:06:42 by hsharame          #+#    #+#             */
-/*   Updated: 2024/11/26 17:02:31 by hsharame         ###   ########.fr       */
+/*   Updated: 2024/11/27 18:12:05 by hsharame         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,6 +80,8 @@ char	*check_if_var(t_store *data, char *input)
 			res = replace_var(data, res, &i);
 			free(tmp);
 		}
+		else if (res[i] == '$' && res[i + 1] == '?')
+			res = replace_var_error(res, &i);
 		else
 			i++;
 	}

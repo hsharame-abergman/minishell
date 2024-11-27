@@ -6,7 +6,7 @@
 /*   By: hsharame <hsharame@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/23 14:27:04 by hsharame          #+#    #+#             */
-/*   Updated: 2024/11/26 17:01:57 by hsharame         ###   ########.fr       */
+/*   Updated: 2024/11/27 17:00:24 by hsharame         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,8 +49,7 @@ bool	heredoc_succes(t_store *data, t_redirect *heredoc)
 	t_redirect	*redir;
 
 	redir = heredoc;
-	if (!reset_redirect(redir, true))
-		return (false);
+	reset_redirect(redir, true);
 	fd = open(heredoc->infile, O_CREAT | O_WRONLY | O_TRUNC, 0644);
 	if (fd < 0)
 		return (false);

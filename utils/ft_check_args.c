@@ -6,7 +6,7 @@
 /*   By: hsharame <hsharame@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/18 17:08:21 by abergman          #+#    #+#             */
-/*   Updated: 2024/11/26 17:45:33 by hsharame         ###   ########.fr       */
+/*   Updated: 2024/11/27 16:35:04 by hsharame         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,4 +101,18 @@ int	ft_check_args(t_store *store, int ac, char **av, char **envp)
 	else
 		store->mode_usage = INTERACTIVE;
 	return (1);
+}
+
+bool	void_input(t_store *data)
+{
+	int	i;
+
+	i = 0;
+	while (data->input[i] != '\0')
+	{
+		if (!ft_isspace(data->input[i]))
+			return (false);
+		i++;
+	}
+	return (true);
 }

@@ -6,7 +6,7 @@
 /*   By: hsharame <hsharame@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/22 11:41:53 by hsharame          #+#    #+#             */
-/*   Updated: 2024/11/22 15:49:03 by hsharame         ###   ########.fr       */
+/*   Updated: 2024/11/27 17:15:34 by hsharame         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,10 +49,12 @@ void	free_token(t_token **token_list)
 
 void	free_redirect(t_redirect *node)
 {
-	if (node->infile != NULL)
-		free(node->infile);
 	if (node->outfile != NULL)
 		free(node->outfile);
+	if (node->delimiter && node->infile)
+		unlink(node->infile);
+	if (node->infile != NULL)
+		free(node->infile);
 	if (node->delimiter != NULL)
 		free(node->delimiter);
 	free(node);

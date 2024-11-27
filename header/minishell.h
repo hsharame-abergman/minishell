@@ -3,10 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abergman <abergman@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hsharame <hsharame@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/02 11:29:45 by hsharame          #+#    #+#             */
+<<<<<<< Updated upstream
 /*   Updated: 2024/11/27 17:01:36 by abergman         ###   ########.fr       */
+=======
+/*   Updated: 2024/11/27 16:34:24 by hsharame         ###   ########.fr       */
+>>>>>>> Stashed changes
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,6 +123,7 @@ typedef struct s_store
 /* ************************************************************************** */
 
 int					check_input(char *str);
+bool				void_input(t_store *data);
 bool				check_bracket(char *str);
 bool				check_several_operator(char *str);
 int					error_syntax(char *s, int error, bool code);

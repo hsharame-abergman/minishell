@@ -3,10 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abergman <abergman@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hsharame <hsharame@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: Invalid date        by                   #+#    #+#             */
+<<<<<<< Updated upstream
 /*   Updated: 2024/11/27 16:05:32 by abergman         ###   ########.fr       */
+=======
+/*   Updated: 2024/11/27 17:25:45 by hsharame         ###   ########.fr       */
+>>>>>>> Stashed changes
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,15 +55,21 @@ void	ft_monitor(t_store *store)
 		ft_set_signals_interactive();
 		label = ft_create_label_for_readline(store);
 		store->input = readline(label);
+<<<<<<< Updated upstream
 		if (!store->input)
 			ft_ctrl_d_handler(store);
+=======
+>>>>>>> Stashed changes
 		free(label);
 		label = NULL;
+		if (!store->input)
+			return (ft_ctrl_d_handler(store));
+
 		if (store->input && store->input[0] != '\0')
 		{
 			if (lexer(store))
 				g_exit_code = ft_executor(store);
-			else if (g_exit_code == 0)
+			else if (g_exit_code == 0 && !void_input(store))
 				g_exit_code = 1;
 			add_history(store->input);
 		}

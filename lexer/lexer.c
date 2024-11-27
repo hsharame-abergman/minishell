@@ -6,7 +6,7 @@
 /*   By: hsharame <hsharame@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/30 15:48:48 by hsharame          #+#    #+#             */
-/*   Updated: 2024/11/25 16:01:48 by hsharame         ###   ########.fr       */
+/*   Updated: 2024/11/27 17:10:23 by hsharame         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,6 +76,7 @@ bool	init_tokens(t_token **token_list, char *input, int *i)
 	char	*value;
 
 	start = *i;
+	value = NULL;
 	if (input[*i] == 34 || input[*i] == 39)
 		return (quotes(token_list, input, i));
 	else if (ft_isoperator(input[*i]))
@@ -92,6 +93,8 @@ bool	init_tokens(t_token **token_list, char *input, int *i)
 	}
 	else if (ft_isascii(input[*i]))
 		token_word(token_list, input, i);
+	if (value)
+		free(value);
 	return (true);
 }
 
