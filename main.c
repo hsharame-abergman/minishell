@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hsharame <hsharame@student.42.fr>          +#+  +:+       +#+        */
+/*   By: abergman <abergman@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: Invalid date        by                   #+#    #+#             */
-/*   Updated: 2024/11/26 18:15:26 by hsharame         ###   ########.fr       */
+/*   Updated: 2024/11/27 14:22:57 by abergman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,12 @@ void	ft_monitor_singleline(t_store *store, char **args)
 	}
 }
 
+void	ft_ctrl_d_handler(t_store *store)
+{
+	(void)store;
+	printf("---");
+}
+
 void	ft_monitor(t_store *store)
 {
 	char	*label;
@@ -44,6 +50,8 @@ void	ft_monitor(t_store *store)
 		ft_set_signals_interactive();
 		label = ft_create_label_for_readline(store);
 		store->input = readline(label);
+		if (!store->input)
+			return (ft_ctrl_d_handler(store));
 		free(label);
 		label = NULL;
 		if (store->input && store->input[0] != '\0')
@@ -65,7 +73,7 @@ int	main(int ac, char **av, char **env)
 	ft_memset(&st, 0, sizeof(t_store));
 	if (!ft_check_args(&st, ac, av, env) || !ft_init_store(&st, env))
 		return (0);
-	// ascii_welcome();
+	ascii_welcome();
 	if (st.mode_usage == SINDLE_COMMAND)
 		ft_monitor_singleline(&st, av);
 	else

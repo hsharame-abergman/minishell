@@ -3,14 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hsharame <hsharame@student.42.fr>          +#+  +:+       +#+        */
+/*   By: abergman <abergman@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/02 11:29:45 by hsharame          #+#    #+#             */
-<<<<<<< HEAD
-/*   Updated: 2024/11/26 17:27:04 by hsharame         ###   ########.fr       */
-=======
-/*   Updated: 2024/11/26 17:00:39 by abergman         ###   ########.fr       */
->>>>>>> 13d52715c094f44b2ebf9ac532b288d5a499fdea
+/*   Updated: 2024/11/27 14:20:48 by abergman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,11 +48,6 @@ extern int			g_exit_code;
 # ifndef PATH_MAX
 #  define PATH_MAX 4096
 # endif
-
-# define CTRL_D 4
-# define CTRL_C 3
-# define ENTER_KEY 10
-# define CTRL_B 28
 
 # define EXIT_GENERAL_ERROR 2
 # define EXIT_CMD_NOT_EXECUT 126
@@ -133,7 +124,6 @@ bool				check_bracket(char *str);
 bool				check_several_operator(char *str);
 int					error_syntax(char *s, int error, bool code);
 int					ft_init_store(t_store *store, char **envp);
-char				*ft_strjoin2(char *dest, char *str);
 int					ft_error_handler(char *cmd, char *detail, char *errmsg,
 						int errcode);
 int					ft_defauit_error(int res);
