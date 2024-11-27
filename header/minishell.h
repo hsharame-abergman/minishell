@@ -6,7 +6,7 @@
 /*   By: abergman <abergman@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/02 11:29:45 by hsharame          #+#    #+#             */
-/*   Updated: 2024/11/27 14:20:48 by abergman         ###   ########.fr       */
+/*   Updated: 2024/11/27 16:03:24 by abergman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -142,7 +142,7 @@ char				*ft_find_valid_command_path(char *command, char **paths);
 void				ascii_welcome(void);
 char				*ft_hostname(void);
 char				*ft_create_label_for_readline(t_store *store);
-char				*ft_strjoin_free(char *dest, char *str,  t_free_arg  index_free);
+char				*ft_strjoin_free(char *dest, char *str, t_free_arg i);
 
 /* clear */
 void				ft_free_store(t_store *store, int history);
@@ -265,6 +265,15 @@ struct				s_format
 {
 	int				counter;
 };
+
+# define B_CD "cd"
+# define B_PWD "pwd"
+# define B_ECHO "echo"
+# define B_ENV "env"
+# define B_EXIT "exit"
+# define B_EXPORT "export"
+# define B_UNSET "unset"
+# define B_LS "ls"
 
 // int					ft_builtins(t_store *store, t_cmd *command);
 // int					is_builtins(t_store *store, char **args);

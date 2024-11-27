@@ -6,7 +6,7 @@
 /*   By: abergman <abergman@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: Invalid date        by                   #+#    #+#             */
-/*   Updated: 2024/11/27 14:22:57 by abergman         ###   ########.fr       */
+/*   Updated: 2024/11/27 16:05:32 by abergman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,8 +37,9 @@ void	ft_monitor_singleline(t_store *store, char **args)
 
 void	ft_ctrl_d_handler(t_store *store)
 {
-	(void)store;
-	printf("---");
+	ft_putendl_fd(B_EXIT, 2);
+	ft_free_store(store, 1);
+	ft_exit_program(store, g_exit_code);
 }
 
 void	ft_monitor(t_store *store)
@@ -51,7 +52,7 @@ void	ft_monitor(t_store *store)
 		label = ft_create_label_for_readline(store);
 		store->input = readline(label);
 		if (!store->input)
-			return (ft_ctrl_d_handler(store));
+			ft_ctrl_d_handler(store);
 		free(label);
 		label = NULL;
 		if (store->input && store->input[0] != '\0')
