@@ -6,7 +6,7 @@
 /*   By: hsharame <hsharame@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/10 15:50:50 by hsharame          #+#    #+#             */
-/*   Updated: 2024/11/26 17:23:29 by hsharame         ###   ########.fr       */
+/*   Updated: 2024/11/28 15:10:45 by hsharame         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,55 +45,6 @@ t_cmd	*init_tree(t_token **token_list, t_store *data)
 		last_node = current;
 	}
 	return (current);
-}
-
-int	count_args(t_token *save)
-{
-	int	i;
-
-	i = 0;
-	while (save && is_word_token(save->type))
-	{
-		if (save->is_adjacent == false)
-			i++;
-		save = save->next;
-	}
-	return (i);
-}
-
-/*
-	Creates an argument table, where args[0] is always equal to the value
-	(the command name) stored in the current node, the last element is
-	always NULL, which allows to traverse the list of argument of a command
-	from args[1] to args[count - 1].
-*/
-
-void	add_args(t_token **save, t_cmd *cmd)
-{
-	int		count;
-	int		i;
-	t_token	*temp;
-
-	temp = *save;
-	i = 1;
-	count = count_args(temp) + 2;
-	cmd->args = (char **)malloc(sizeof(char *) * count);
-	if (!cmd->args)
-		return ;
-	cmd->args[0] = ft_strdup(cmd->value);
-	while (i < count - 1)
-	{
-		if ((*save)->is_adjacent == false)
-			cmd->args[i] = ft_strdup((*save)->value);
-		else
-		{
-			cmd->args[i] = ft_strjoin((*save)->value, (*save)->next->value);
-			*save = (*save)->next;
-		}
-		*save = (*save)->next;
-		i++;
-	}
-	cmd->args[count - 1] = NULL;
 }
 
 bool	parser(t_store *data, t_token *token_list)

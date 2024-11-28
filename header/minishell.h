@@ -6,11 +6,7 @@
 /*   By: hsharame <hsharame@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/02 11:29:45 by hsharame          #+#    #+#             */
-<<<<<<< Updated upstream
-/*   Updated: 2024/11/27 17:01:36 by abergman         ###   ########.fr       */
-=======
-/*   Updated: 2024/11/27 16:34:24 by hsharame         ###   ########.fr       */
->>>>>>> Stashed changes
+/*   Updated: 2024/11/28 15:11:41 by hsharame         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -217,7 +213,9 @@ bool				lexer(t_store *data);
 
 char				*escape_digit(char *str);
 char				*replace_var_error(char *res, int *i);
-char				*var_error(char *value);
+char				*process_var(t_store *data, char *res, int *i);
+char				*process_var_error(char *res, int *i);
+char				*process_digit_escape(char *res, int *i);
 void				variables_expansion(t_store *data, t_token *token, int *i);
 void				expander(t_store *data, t_token **token_list);
 bool				check_escape(char *str, int i);
@@ -261,6 +259,8 @@ void				create_redirect(t_cmd *cmd);
 void				check_if_exists(t_cmd *node);
 char				*tab_to_str(char **token);
 char				*fill_str(char *res, char **token);
+char				*join_args(char *stash, char *str, char *str2);
+void				fill_args(t_token **save, t_cmd *cmd, int count);
 
 /* ************************************************************************** */
 /*                    Builtins                                                */

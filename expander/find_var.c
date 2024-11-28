@@ -6,52 +6,38 @@
 /*   By: hsharame <hsharame@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/24 16:11:52 by hsharame          #+#    #+#             */
-/*   Updated: 2024/11/26 16:47:05 by hsharame         ###   ########.fr       */
+/*   Updated: 2024/11/28 13:52:32 by hsharame         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../header/minishell.h"
 
-char	*replace_var_error(char *res, int *i)
-{
-	char	*env_value;
-	char	*temp;
-	char	*temp_2[2];
-	char	*new_res;
-
-	temp = ft_substr(res, 0, (*i)++);
-	env_value = ft_itoa(g_exit_code);
-	*i += ft_strlen(env_value);
-	temp_2[0] = ft_substr(res, *i, ft_strlen(res) - *i);
-	temp_2[1] = ft_strjoin(temp, env_value);
-	new_res = ft_strjoin(temp_2[1], temp_2[0]);
-	free(temp);
-	free(env_value);
-	free(temp_2[0]);
-	free(temp_2[1]);
-	return (new_res);
-}
-
-char	*var_error(char *value)
+char	*check_if_var(t_store *data, char *input)
 {
 	char	*res;
-	char	*tmp;
 	int		i;
 
 	i = 0;
-	res = ft_strdup(value);
+	res = ft_strdup(input);
 	while ((size_t)i < ft_strlen(res))
 	{
-		if (res[i] == '$' && res[i + 1] == '?')
+		if (res[i] == '$' && (ft_isalpha(res[i + 1])
+				|| res[i + 1] == '_'))
 		{
-			tmp = res;
-			res = replace_var_error(res, &i);
-			free(tmp);
+			res = process_var(data, res, &i);
+		}
+		else if (res[i] == '$' && res[i + 1] == '?')
+		{
+			res = process_var_error(res, &i);
+		}
+		else if (res[i] == '$' && ft_isdigit(res[i + 1]))
+		{
+			res = process_digit_escape(res, &i);
 		}
 		else
 			i++;
 	}
-	free(value);
+	free(input);
 	return (res);
 }
 
@@ -64,9 +50,9 @@ void	variables_expansion(t_store *data, t_token *token, int *i)
 			|| (token->value[*i + 1]) == '_')
 			token->value = check_if_var(data, token->value);
 		else if (token->value[*i + 1] == '?')
-			token->value = var_error(token->value);
+			token->value = check_if_var(data, token->value);
 		else if (ft_isdigit(token->value[*i + 1]))
-			token->value = escape_digit(token->value);
+			token->value = check_if_var(data, token->value);
 	}
 }
 
@@ -90,4 +76,20 @@ void	expander(t_store *data, t_token **token_list)
 		}
 		token = token->next;
 	}
+}
+
+bool	expander_heredoc(t_store *data, char *input)
+{
+	int	i;
+
+	i = 0;
+	(void)data;
+	while (input[i])
+	{
+		if (input[i] == '$' && !check_escape(input, i)
+			&& (ft_isalpha(input[i + 1]) || input[i + 1] == '_'))
+			return (true);
+		i++;
+	}
+	return (false);
 }
