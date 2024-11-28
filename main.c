@@ -6,7 +6,7 @@
 /*   By: abergman <abergman@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: Invalid date        by                   #+#    #+#             */
-/*   Updated: 2024/11/28 16:50:15 by abergman         ###   ########.fr       */
+/*   Updated: 2024/11/28 17:50:45 by abergman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,7 @@ void	ft_monitor(t_store *store)
 	{
 		ft_set_signals_interactive();
 		label = ft_create_label_for_readline(store);
+		free(store->input);
 		store->input = readline(label);
 		free(label);
 		label = NULL;

@@ -6,7 +6,7 @@
 /*   By: abergman <abergman@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: Invalid date        by                   #+#    #+#             */
-/*   Updated: 2024/11/27 20:50:08 by abergman         ###   ########.fr       */
+/*   Updated: 2024/11/28 17:46:13 by abergman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,6 @@ int	ft_command_is_dir(char *value)
  */
 int	ft_execute_sys_bin(t_store *store, t_cmd *cmd)
 {
-	printf ("sys bin: [%s]\n", cmd->path);
 	if (!cmd->value && cmd->value[0] == '\0')
 		return (EXIT_CMD_NOT_FOUND);
 	if (ft_command_is_dir(cmd->value))
@@ -45,7 +44,6 @@ int	ft_execute_sys_bin(t_store *store, t_cmd *cmd)
 int	ft_execute_local_bin(t_store *data, t_cmd *cmd)
 {
 	int	res;
-	printf ("local bin: [%s]\n", cmd->value);
 	res = ft_check_command_not_found(data, cmd);
 	if (res != 0)
 		return (res);
