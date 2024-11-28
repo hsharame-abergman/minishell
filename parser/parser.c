@@ -6,11 +6,26 @@
 /*   By: hsharame <hsharame@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/10 15:50:50 by hsharame          #+#    #+#             */
-/*   Updated: 2024/11/28 15:10:45 by hsharame         ###   ########.fr       */
+/*   Updated: 2024/11/28 16:51:30 by hsharame         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../header/minishell.h"
+
+void	add_args_default(t_cmd *node)
+{
+	if (!node)
+		return ;
+	if (!node->args)
+	{
+		node->args = malloc(sizeof(char *) * 2);
+		if (!node->args)
+			return ;
+		node->args[0] = ft_strdup(node->value);
+		node->args[1] = NULL;
+	}
+	add_args_default(node->right);
+}
 
 /*
 	The integer first is used to indicate that this is the first token that must
@@ -52,6 +67,7 @@ bool	parser(t_store *data, t_token *token_list)
 	t_cmd	*syntax_tree;
 
 	syntax_tree = init_tree(&token_list, data);
+	add_args_default(syntax_tree);
 	if (!syntax_tree || syntax_tree->error == true)
 	{
 		if (syntax_tree)
