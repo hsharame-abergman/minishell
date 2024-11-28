@@ -6,11 +6,7 @@
 /*   By: hsharame <hsharame@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/02 11:29:45 by hsharame          #+#    #+#             */
-<<<<<<< Updated upstream
-/*   Updated: 2024/11/28 17:11:53 by abergman         ###   ########.fr       */
-=======
-/*   Updated: 2024/11/28 17:43:08 by hsharame         ###   ########.fr       */
->>>>>>> Stashed changes
+/*   Updated: 2024/11/28 18:07:33 by hsharame         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 

@@ -6,11 +6,7 @@
 /*   By: hsharame <hsharame@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: Invalid date        by                   #+#    #+#             */
-<<<<<<< Updated upstream
-/*   Updated: 2024/11/28 17:50:45 by abergman         ###   ########.fr       */
-=======
-/*   Updated: 2024/11/28 17:56:31 by hsharame         ###   ########.fr       */
->>>>>>> Stashed changes
+/*   Updated: 2024/11/28 18:21:59 by hsharame         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +38,6 @@ void	ft_monitor_singleline(t_store *store, char **args)
 void	ft_ctrl_d_handler(t_store *store)
 {
 	ft_putendl_fd(B_EXIT, 2);
-	ft_free_store(store, 1);
 	ft_exit_program(store, g_exit_code);
 }
 
@@ -54,7 +49,6 @@ void	ft_monitor(t_store *store)
 	{
 		ft_set_signals_interactive();
 		label = ft_create_label_for_readline(store);
-		free(store->input);
 		store->input = readline(label);
 		free(label);
 		label = NULL;

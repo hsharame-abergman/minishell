@@ -6,7 +6,7 @@
 /*   By: hsharame <hsharame@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/24 16:11:52 by hsharame          #+#    #+#             */
-/*   Updated: 2024/11/28 17:43:21 by hsharame         ###   ########.fr       */
+/*   Updated: 2024/11/28 19:26:29 by hsharame         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,8 @@ void	expander(t_store *data, t_token **token_list)
 			{
 				if (token->value[i + 1])
 					variables_expansion(data, token, &i);
-				else if (token->value[i] == '$' && token->is_adjacent)
+				else if (token->value[i] == '$' && token->is_adjacent
+					&& token->type == TOKEN_WORD)
 					token->value = escape_dollar(token, &i);
 				i++;
 			}

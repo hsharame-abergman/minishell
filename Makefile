@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: abergman <abergman@student.42.fr>          +#+  +:+       +#+         #
+#    By: hsharame <hsharame@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/09/28 13:34:37 by abergman          #+#    #+#              #
-#    Updated: 2024/11/27 20:03:17 by abergman         ###   ########.fr        #
+#    Updated: 2024/11/28 18:19:27 by hsharame         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,7 +19,9 @@ OBJS			:= $(patsubst %.c,$(OBJDIR)/%.o,$(SRC))
 
 HEADERS 		= ./header/minishell.h
 
-CC				= @cc -g3 -Wall -Wextra -Werror -fsanitize=address,leak,undefined 
+DEBUG			= -fsanitize=address,leak,undefined -g3
+
+CC				= @cc -o3 -Wall -Wextra -Werror $(DEBUG)
 
 RM				= @rm -f
 
