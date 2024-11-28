@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   free_token.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hsharame <hsharame@student.42.fr>          +#+  +:+       +#+        */
+/*   By: abergman <abergman@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/22 11:41:53 by hsharame          #+#    #+#             */
-/*   Updated: 2024/11/27 17:15:34 by hsharame         ###   ########.fr       */
+/*   Updated: 2024/11/28 17:26:01 by abergman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,6 +73,7 @@ void	free_cmd(t_cmd **cmd)
 		next = temp->right;
 		free(temp->value);
 		free(temp->path);
+		free(temp->fd_pipe);
 		if (temp->args != NULL)
 			free_tab(temp->args);
 		if (temp->redirect != NULL)
