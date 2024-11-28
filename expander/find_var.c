@@ -6,7 +6,7 @@
 /*   By: hsharame <hsharame@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/24 16:11:52 by hsharame          #+#    #+#             */
-/*   Updated: 2024/11/28 13:52:32 by hsharame         ###   ########.fr       */
+/*   Updated: 2024/11/28 17:43:21 by hsharame         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,15 +62,17 @@ void	expander(t_store *data, t_token **token_list)
 	int		i;
 
 	token = *token_list;
-	(void)data;
 	while (token)
 	{
 		if (is_word_token(token->type))
 		{
 			i = 0;
-			while ((size_t)i < ft_strlen(token->value) && token->value[i + 1])
+			while ((size_t)i < ft_strlen(token->value))
 			{
-				variables_expansion(data, token, &i);
+				if (token->value[i + 1])
+					variables_expansion(data, token, &i);
+				else if (token->value[i] == '$' && token->is_adjacent)
+					token->value = escape_dollar(token, &i);
 				i++;
 			}
 		}

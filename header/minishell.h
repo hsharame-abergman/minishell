@@ -3,10 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abergman <abergman@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hsharame <hsharame@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/02 11:29:45 by hsharame          #+#    #+#             */
+<<<<<<< Updated upstream
 /*   Updated: 2024/11/28 17:11:53 by abergman         ###   ########.fr       */
+=======
+/*   Updated: 2024/11/28 17:43:08 by hsharame         ###   ########.fr       */
+>>>>>>> Stashed changes
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -211,6 +215,7 @@ bool				lexer(t_store *data);
 /*                     Expander                                               */
 /* ************************************************************************** */
 
+char				*escape_dollar(t_token *token, int *i);
 char				*escape_digit(char *str);
 char				*replace_var_error(char *res, int *i);
 char				*process_var(t_store *data, char *res, int *i);

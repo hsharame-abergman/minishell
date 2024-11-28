@@ -6,7 +6,7 @@
 /*   By: hsharame <hsharame@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/21 14:56:03 by hsharame          #+#    #+#             */
-/*   Updated: 2024/11/21 14:56:47 by hsharame         ###   ########.fr       */
+/*   Updated: 2024/11/28 18:04:27 by hsharame         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,23 @@ bool	check_escape(char *str, int i)
 	}
 	else
 		return (false);
+}
+
+char	*escape_dollar(t_token *token, int *i)
+{
+	char	*temp;
+	char	*temp_2;
+	char	*res;
+
+	temp = ft_substr(token->value, 0, *i);
+	*i += 2;
+	temp_2 = ft_substr(token->value, *i,
+			ft_strlen(token->value) - *i);
+	res = ft_strjoin(temp, temp_2);
+	free(temp);
+	free(temp_2);
+	free(token->value);
+	return (res);
 }
 
 char	*escape_digit(char *str)
