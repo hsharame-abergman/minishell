@@ -6,7 +6,7 @@
 /*   By: hsharame <hsharame@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/23 14:27:04 by hsharame          #+#    #+#             */
-/*   Updated: 2024/11/29 16:28:29 by hsharame         ###   ########.fr       */
+/*   Updated: 2024/11/29 17:13:29 by hsharame         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,8 @@ bool	heredoc_succes(t_store *data, t_redirect *heredoc)
 	fd = open(heredoc->infile, O_CREAT | O_WRONLY | O_TRUNC, 0644);
 	if (fd < 0)
 		return (false);
+	//data->pid = fork();
+	//if (data == 0) // si processus enfant
 	while (1)
 	{
 		input = readline("> ");

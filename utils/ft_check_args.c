@@ -6,7 +6,7 @@
 /*   By: hsharame <hsharame@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/18 17:08:21 by abergman          #+#    #+#             */
-/*   Updated: 2024/11/28 15:54:45 by hsharame         ###   ########.fr       */
+/*   Updated: 2024/11/29 17:57:17 by hsharame         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,8 +69,7 @@ int	check_input(char *str)
 		i++;
 	if ((str[i] == ':' || str[i] == '!') && str[i + 1] == '\0')
 		return (1);
-	else if (str[i] == '>' || str[i] == '<' || str[i] == '&'
-		|| (str[i] > 122 && str[i] < 126))
+	else if (str[i] == '&' || (str[i] > 122 && str[i] < 126))
 	{
 		printf("minishell: syntax error near unexpected token `%c'\n", str[i]);
 		return (EXIT_GENERAL_ERROR);
@@ -111,7 +110,11 @@ bool	void_input(t_store *data)
 	while (data->input[i] != '\0')
 	{
 		if (!ft_isspace(data->input[i]))
+		{
+			if (data->input[i] == '>')
+				return (true);
 			return (false);
+		}
 		i++;
 	}
 	return (true);

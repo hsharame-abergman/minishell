@@ -6,7 +6,7 @@
 /*   By: hsharame <hsharame@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/24 16:11:52 by hsharame          #+#    #+#             */
-/*   Updated: 2024/11/28 19:26:29 by hsharame         ###   ########.fr       */
+/*   Updated: 2024/11/29 17:19:48 by hsharame         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,16 @@ void	variables_expansion(t_store *data, t_token *token, int *i)
 	}
 }
 
+bool	is_heredoc(t_token *token)
+{
+	if (token->prev)
+	{
+		if (token->prev->type == HEREDOC)
+			return (true);
+	}
+	return (false);
+}
+
 void	expander(t_store *data, t_token **token_list)
 {
 	t_token	*token;
@@ -64,7 +74,7 @@ void	expander(t_store *data, t_token **token_list)
 	token = *token_list;
 	while (token)
 	{
-		if (is_word_token(token->type))
+		if (is_word_token(token->type) && !is_heredoc(token))
 		{
 			i = 0;
 			while ((size_t)i < ft_strlen(token->value))
