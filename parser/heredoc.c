@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   heredoc.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abergman <abergman@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hsharame <hsharame@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/23 14:27:04 by hsharame          #+#    #+#             */
-/*   Updated: 2024/11/29 01:31:54 by abergman         ###   ########.fr       */
+/*   Updated: 2024/11/29 16:28:29 by hsharame         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,16 +46,20 @@ bool	heredoc_succes(t_store *data, t_redirect *heredoc)
 {
 	int			fd;
 	char		*input;
-	t_redirect	*redir;
 
-	redir = heredoc;
-	reset_redirect(redir, true);
+	reset_redirect(heredoc, true);
 	fd = open(heredoc->infile, O_CREAT | O_WRONLY | O_TRUNC, 0644);
 	if (fd < 0)
 		return (false);
 	while (1)
 	{
 		input = readline("> ");
+		if (!input)
+		{
+			printf("minishell: warning: here-document delimited ");
+			printf("by end-of-file (wanted `%s')\n", heredoc->delimiter);
+			break ;
+		}
 		if (ft_strcmp(input, heredoc->delimiter) == 0)
 			break ;
 		if (expander_heredoc(data, input))
@@ -63,9 +67,7 @@ bool	heredoc_succes(t_store *data, t_redirect *heredoc)
 		ft_putendl_fd(input, fd);
 		free(input);
 	}
-	free(input);
-	close(fd);
-	return (true);
+	return (free(input), close(fd), true);
 }
 
 /*
