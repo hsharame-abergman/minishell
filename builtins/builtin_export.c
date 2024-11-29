@@ -6,18 +6,15 @@
 /*   By: abergman <abergman@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/12 15:44:23 by abergman          #+#    #+#             */
-/*   Updated: 2024/11/21 14:49:20 by abergman         ###   ########.fr       */
+/*   Updated: 2024/11/29 01:44:36 by abergman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../header/minishell.h"
 
-/* ****************************************************** */
 /* Adds the given variables to the enviroment variables.  */
 /* Return 1 if one or more arguments were not added       */
 /* and return 0 if all arguments were successfully added. */
-/* ****************************************************** */
-
 int	is_valid_env_key(char *argument)
 {
 	int	index;
@@ -35,30 +32,27 @@ int	is_valid_env_key(char *argument)
 	return (0);
 }
 
-/*
-	Разделяет данный аргумент на пару ключа-значения для переменной среды.
-	Возвращает массив из 2 строк,
-		содержащих ключ и значение новой переменной среды.
-	Возвращает NULL в случае ошибки.
-*/
+/* Divides the argument into a value-key pair for the environment variable. */
+/* Returns a 2-line array, containing the key and value  */
+/* 	of the new environment variable. */
+/* Returns NULL in case of error. */
 static char	**ft_separate_values(char *argument)
 {
 	char	**response;
 	char	*node;
 
 	node = ft_strchr(argument, '=');
-	response = malloc(sizeof *response * (2 + 1));
+	response = malloc(sizeof(*response) * (2 + 1));
 	response[0] = ft_substr(argument, 0, node - argument);
 	response[1] = ft_substr(node, 1, ft_strlen(node));
 	response[2] = NULL;
 	return (response);
 }
 
-/* j'initialiser l'index pour iteration                  */
-/* j'initialiser le statut de sortie du programme        */
-/* S'il n'y a pas de premier paramètre,                  */
-/* alors nous renvoyons l'erreur de la builtin_env       */
-
+/* i initialize the index for iteration					*/
+/* I initialize the program exit status   				*/
+/* If there is no first parameter,           	        */
+/* then we return the error of builtin_env				*/
 int	builtin_export(t_store *store, char **av)
 {
 	int		index;

@@ -6,17 +6,17 @@
 /*   By: abergman <abergman@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/18 16:51:16 by abergman          #+#    #+#             */
-/*   Updated: 2024/11/27 16:34:35 by abergman         ###   ########.fr       */
+/*   Updated: 2024/11/29 01:53:58 by abergman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../header/minishell.h"
 
 /*
-	Восстанавливает исходный стандартный вход и выход до исходных значений 0 и 1
-	Используется для удаления входных/выходных значений после выполнения 
-	в качестве подготовки к следующему набору команд пользователя.
-	Возвращает 1, если копирование было успешным, 0, если нет.
+Restores the original default input and output to the original values 0 and 1
+	Used to delete input/output values after execution 
+	as preparation for the next set of user commands.
+	Returns 1 if the copy was successful, 0 if not.
 */
 int	ft_restore_io(t_redirect *redirect)
 {
@@ -30,7 +30,7 @@ int	ft_restore_io(t_redirect *redirect)
 		if (dup2(redirect->stdin_backup, STDIN_FILENO) == -1)
 			response = 0;
 		close(redirect->stdin_backup);
-		redirect->stdout_backup = -1;
+		redirect->stdin_backup = -1;
 	}
 	if (redirect->stdout_backup != -1)
 	{

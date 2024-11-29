@@ -6,16 +6,14 @@
 /*   By: abergman <abergman@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/08 12:39:40 by abergman          #+#    #+#             */
-/*   Updated: 2024/11/27 20:20:31 by abergman         ###   ########.fr       */
+/*   Updated: 2024/11/29 01:49:06 by abergman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../header/minishell.h"
 
-/*
-Executes the given command if it is a builtin command
-Return 127 if the command not found and 0 or 1 if method was be runs
- */
+/* Executes the given command if it is a builtin command */
+/* Return 127 if the command not found and 0 or 1 if method was be runs */
 int	ft_execute_builtin(t_store *store, t_cmd *command)
 {
 	int	res;

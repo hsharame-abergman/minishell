@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: abergman <abergman@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: Invalid date        by                   #+#    #+#             */
-/*   Updated: 2024/11/28 17:46:13 by abergman         ###   ########.fr       */
+/*   Created: 2024/10/08 12:44:42 by abergman          #+#    #+#             */
+/*   Updated: 2024/11/29 01:27:19 by abergman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,7 @@ int	ft_execute_sys_bin(t_store *store, t_cmd *cmd)
 int	ft_execute_local_bin(t_store *data, t_cmd *cmd)
 {
 	int	res;
+
 	res = ft_check_command_not_found(data, cmd);
 	if (res != 0)
 		return (res);

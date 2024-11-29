@@ -3,22 +3,12 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hsharame <hsharame@student.42.fr>          +#+  +:+       +#+        */
+/*   By: abergman <abergman@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/02 11:29:45 by hsharame          #+#    #+#             */
-/*   Updated: 2024/11/28 18:07:33 by hsharame         ###   ########.fr       */
+/*   Updated: 2024/11/29 01:34:10 by abergman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
-/*
- *      _____
- *  ___|    _|__  ____  ____   _  ____  ______  __   _  ______  ____    ____
- * |    \  /  | ||    ||    \ | ||    ||   ___||  |_| ||   ___||    |  |    |
- * |     \/   | ||    ||     \| ||    | `-.`-. |   _  ||   ___||    |_ |    |_
- * |__/\__/|__|_||____||__/\____||____||______||__| |_||______||______||______|
- *     |_____|
- *
- */
 
 #ifndef MINISHELL_H
 # define MINISHELL_H
@@ -167,6 +157,7 @@ int					ft_redirect_io(t_redirect *redirect);
 int					ft_command_is_dir(char *value);
 int					ft_check_command_not_found(t_store *data, t_cmd *cmd);
 char				*ft_parser_path(t_store *store, char *value);
+
 /* pipes */
 int					ft_create_pipes(t_store *store);
 

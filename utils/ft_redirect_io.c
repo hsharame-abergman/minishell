@@ -6,13 +6,12 @@
 /*   By: abergman <abergman@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/18 16:53:20 by abergman          #+#    #+#             */
-/*   Updated: 2024/11/27 16:33:04 by abergman         ###   ########.fr       */
+/*   Updated: 2024/11/29 01:53:41 by abergman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../header/minishell.h"
 
-/* ************************************************************************ */
 /* Executes given commands by creating child processes and waiting			*/
 /* for them to finish. Returns the exit code of the last child to finish.	*/
 /* Returns exit code 1 if creating a child process fails. 					*/
@@ -22,7 +21,7 @@ int	ft_redirect_io(t_redirect *redirect)
 
 	response = 1;
 	if (!redirect)
-		return (0);
+		return (1);
 	redirect->stdin_backup = dup(STDIN_FILENO);
 	if (redirect->stdin_backup == -1)
 		response = ft_error_handler("dup", "stdin backup", strerror(errno), 0);

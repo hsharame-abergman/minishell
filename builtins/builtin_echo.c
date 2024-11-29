@@ -6,7 +6,7 @@
 /*   By: abergman <abergman@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/11 17:46:04 by abergman          #+#    #+#             */
-/*   Updated: 2024/11/27 17:23:15 by abergman         ###   ########.fr       */
+/*   Updated: 2024/11/28 23:23:44 by abergman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,12 +20,12 @@ static void	ft_echo_util(char **av, int is_newline, int index)
 	if (!av[index])
 	{
 		if (!is_newline)
-			ft_putchar_fd('\n', STDERR_FILENO);
+			ft_putchar_fd('\n', STDOUT_FILENO);
 		return ;
 	}
 	while (av[index])
 	{
-		ft_putstr_fd(av[index], STDIN_FILENO);
+		ft_putstr_fd(av[index], STDOUT_FILENO);
 		if (av[index + 1])
 		{
 			ft_putchar_fd(' ', STDOUT_FILENO);

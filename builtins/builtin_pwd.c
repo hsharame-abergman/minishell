@@ -6,16 +6,14 @@
 /*   By: abergman <abergman@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/11 18:53:36 by abergman          #+#    #+#             */
-/*   Updated: 2024/10/21 19:18:19 by abergman         ###   ########.fr       */
+/*   Updated: 2024/11/29 01:48:40 by abergman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../header/minishell.h"
 
-/*
-	Выполняет встроенную команду pwd и отображает текущий путь к рабочей директории.
-	Возвращает 0, если успешно, 1, если ошибка обнаружена.
-*/
+/* 	Executes built-in pwd command and displays current path to working dir. */
+/* 	Returns 0 if successful, 1 if error found. */
 int	builtin_pwd(t_store *store)
 {
 	char	buffer[PATH_MAX];

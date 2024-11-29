@@ -6,14 +6,12 @@
 /*   By: abergman <abergman@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/19 12:27:16 by abergman          #+#    #+#             */
-/*   Updated: 2024/11/19 12:29:50 by abergman         ###   ########.fr       */
+/*   Updated: 2024/11/29 01:52:44 by abergman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../header/minishell.h"
 
-/* Очистить программу minishell,
-	закрыв все открытые fds и освободив всю выделенную память. */
 void	ft_exit_program(t_store *store, int exit_code)
 {
 	if (store)

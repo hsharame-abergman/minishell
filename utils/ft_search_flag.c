@@ -6,17 +6,15 @@
 /*   By: abergman <abergman@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/23 13:04:28 by abergman          #+#    #+#             */
-/*   Updated: 2024/10/25 15:16:30 by abergman         ###   ########.fr       */
+/*   Updated: 2024/11/29 01:54:21 by abergman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../header/minishell.h"
 
-/* ****************************************************** */
-/* Vérifie si un argument est un indicateur d'option -n.  */
-/* Si la valeur est -n ou -nnnn on returns 1 egalement    */
-/* Si la valeur est - ou n ou -nnnm on returns 0, error   */
-
+/* Checks if an argument is an option flag -n.  */
+/* If the value is -n or -nnnn on returns 1 also */
+/* If the value is - or n or -nnnm on returns 0, error   */
 int	ft_search_flag(char *str, char flag)
 {
 	int	index;

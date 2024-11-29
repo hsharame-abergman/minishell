@@ -6,16 +6,14 @@
 /*   By: abergman <abergman@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/12 15:49:11 by abergman          #+#    #+#             */
-/*   Updated: 2024/11/27 17:28:37 by abergman         ###   ########.fr       */
+/*   Updated: 2024/11/29 01:55:15 by abergman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../header/minishell.h"
 
-/*	Проверяет, превышает ли число LONG_MAX или LONG_MIN.*/
-/*	Устанавливает boolean ошибки в true, если число не находится в диапазоне,
-		false, если нет.*/
-
+/* Checks whether the number LONG_MAX or LONG_MIN is exceeded. Sets boolean */
+/* errors to true if the number is not in the range. false if it is not. */
 static int	ft_check_out_of_range(int sign, unsigned long num, int *is_error)
 {
 	if ((sign == 1 && num > LONG_MAX)
@@ -24,11 +22,9 @@ static int	ft_check_out_of_range(int sign, unsigned long num, int *is_error)
 	return (*is_error);
 }
 
-/*
-	Если exit не вызывается самостоятельно, то "exit" не должен выдаваться.
-	Возвращает true, если exit не должен быть напечатан. False,
-		если exit был вызван только и следует напечатать сообщение "exit".
-*/
+/* If exit is not called automatically, "exit" should not be issued. */
+/* Returns true if exit should not be typed. False if exit was only called  */
+/* and you should print "exit" message. */
 static int	ft_is_silent_exit_mode(t_store *store)
 {
 	t_cmd	*command;
@@ -43,10 +39,8 @@ static int	ft_is_silent_exit_mode(t_store *store)
 	return (0);
 }
 
-/*
-	Преобразует строку, состоящую из цифр в длинное целое.
-	Возвращает длинное целое. В случае ошибки, задаёт boolean для ошибки true.
-*/
+/* Converts a string of numbers into a long integer. */
+/* Returns a long integer. If an error occurs, sets boolean to true. */
 static int	ft_atol_err(char *ascii, int *is_error)
 {
 	unsigned long long	num;
@@ -75,12 +69,10 @@ static int	ft_atol_err(char *ascii, int *is_error)
 	return (num * neg);
 }
 
-/*
-	Получает код выхода из аргументов, данных в встроенном файле вывода.
-	Возвращает 0, если не было представлено никаких аргументов.
-	Возвращает 2 в случае, если аргумент не является цифрами.
-	Возвращает цифровой код выхода при успешном завершении.
-*/
+/* Gets the exit code from arguments given in the built-in output file. */
+/* Returns 0 if no arguments were presented. */
+/* Returns 2 if the argument is not a number. */
+/* Returns the digital exit code when successful. */
 static int	ft_get_exit_code(char *cmd, int *is_error)
 {
 	unsigned long long	i;

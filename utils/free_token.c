@@ -6,7 +6,7 @@
 /*   By: abergman <abergman@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/22 11:41:53 by hsharame          #+#    #+#             */
-/*   Updated: 2024/11/28 17:26:01 by abergman         ###   ########.fr       */
+/*   Updated: 2024/11/28 22:35:17 by abergman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,15 +49,19 @@ void	free_token(t_token **token_list)
 
 void	free_redirect(t_redirect *node)
 {
+	if (!node)
+		return ;
+	ft_restore_io(node);
 	if (node->outfile != NULL)
-		free(node->outfile);
-	if (node->delimiter && node->infile)
+		ft_free_pointer(node->outfile);
+	if (node->delimiter)
+	{
+		ft_free_pointer(node->delimiter);
 		unlink(node->infile);
+	}
 	if (node->infile != NULL)
-		free(node->infile);
-	if (node->delimiter != NULL)
-		free(node->delimiter);
-	free(node);
+		ft_free_pointer(node->infile);
+	ft_free_pointer(node);
 }
 
 void	free_cmd(t_cmd **cmd)

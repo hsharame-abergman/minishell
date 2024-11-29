@@ -6,18 +6,18 @@
 /*   By: abergman <abergman@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/25 15:24:27 by abergman          #+#    #+#             */
-/*   Updated: 2024/11/15 15:57:29 by abergman         ###   ########.fr       */
+/*   Updated: 2024/11/29 01:53:31 by abergman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../header/minishell.h"
 
 /*
-   Поиск данной переменной в переменных среды.
-   Возвращает указатель на значение переменной в окружении
-   совпадает с данной строкой. Имена частичных переменных не
-   поддерживается: указанная строка должна быть полным именем переменной.
-   Возвращает NULL, если строка не может быть найдена в окружении.
+   Search for this variable in environment variables.
+   Returns the pointer to the value of a variable in the environment
+   matches the string. Partial variable names are not
+   supported: the specified string must be a full variable name.
+   Returns NULL if the string cannot be found in the environment.
 */
 char	*ft_get_env_value(char **envp, char *search)
 {
@@ -42,12 +42,12 @@ char	*ft_get_env_value(char **envp, char *search)
 }
 
 /*
-	Поиск данной переменной в переменных среды.
+	Search for this variable in environment variables.
 
-	Возвращает индекс переменной в окружении
-	совпадает с данной строкой. Имена частичных переменных не
-	поддерживается: указанная строка должна быть полным именем переменной.
-	Возвращает -1, если строка не может быть найдена в окружении.
+	Returns the index of the variable in the environment
+	matches the string. Partial variable names are not
+	supported: the specified string must be a full variable name.
+	Returns -1 if the string cannot be found in the surrounding.
 */
 int	ft_get_env_index(char **envp, char *key)
 {

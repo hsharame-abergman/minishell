@@ -6,23 +6,22 @@
 /*   By: abergman <abergman@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/30 15:42:08 by abergman          #+#    #+#             */
-/*   Updated: 2024/11/27 16:31:32 by abergman         ###   ########.fr       */
+/*   Updated: 2024/11/29 01:50:57 by abergman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../header/minishell.h"
 
 /*
-	Ждет, пока дети закончат после очистки фдс и списка команд.
-	Возвращает статус выхода из программы как и bash:
-		"Статус возврата (см. Exit Status) простой команды
-			- это её статус выхода,
-			как это предусмотрено функцией POSIX 1003.1 waitpid, или 128+n,
-			если команда была закончена сигналом n."
+	Wait for the children to finish after cleaning the FDS and the command list.
+	Returns the program exit status like bash:
+		"Return status (see Exit Status) simple command
+			- is its status as an output,
+			as provided by the POSIX 1003.1 waitpid function, or 128+n,
+			if the command was terminated by n."
 
-	Если в конвейере имеется несколько команд:
-		"Статус вывода трубопровода
-			- это статус вывода последней команды в трубопроводе"
+	If there are more than one command in the pipeline:
+		"Pipeline exit status is the state of the last command in the pipeline"
 */
 int	ft_get_children(t_store *store)
 {
@@ -50,14 +49,13 @@ int	ft_get_children(t_store *store)
 }
 
 /*
-	Создаёт дочерний процесс для каждой исполняемой команды,
-		за исключением встроенной команды,
-		которая не будет запущена и будет выполняться в основном процессе
-		(в данном случае не создано дочерних).
-	Возвращает true,
-		когда процесс был создан для каждой команды или когда встроенный
-		файл был выполнен самостоятельно.
-	Возвращает false, если была ошибка в ответвлении.
+	Creates a child process for each command,
+		except for the built-in command,
+		that will not be run and will be executed in the main process
+		(no child is created in this case).
+	Returns true when the process was created for each command 
+	or when the embedded file was run by itself.
+	Returns false if there was an error in the branch.
 */
 int	ft_create_children_process(t_store *store)
 {
@@ -79,7 +77,6 @@ int	ft_create_children_process(t_store *store)
 	return (ft_get_children(store));
 }
 
-/* ******************************** */
 /* Prepares command list execution. */
 /* Create pipes and check files.	*/
 int	ft_preporation_for_execution(t_store *store)
@@ -98,9 +95,9 @@ int	ft_preporation_for_execution(t_store *store)
 }
 
 /*
-	Выполняет указанные команды, создавая дочерние процессы и ожидая
-	их завершения. Возвращает код выхода последнего из числа подлежащих
-	удалению. Или код выхода 1 в случае провала процесса создания удалению.
+	Executes the specified commands, creating child processes and waiting for
+	The end of each sequence. Returns the code of the last number to be
+	to delete. Or exit code 1 if the process of creating a deletion has failed.
 */
 int	ft_executor(t_store *store)
 {
