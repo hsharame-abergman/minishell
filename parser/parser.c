@@ -6,7 +6,7 @@
 /*   By: hsharame <hsharame@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/10 15:50:50 by hsharame          #+#    #+#             */
-/*   Updated: 2024/11/28 16:51:30 by hsharame         ###   ########.fr       */
+/*   Updated: 2024/11/29 11:55:06 by hsharame         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,6 +67,8 @@ bool	parser(t_store *data, t_token *token_list)
 	t_cmd	*syntax_tree;
 
 	syntax_tree = init_tree(&token_list, data);
+	while (syntax_tree && syntax_tree->left)
+		syntax_tree = syntax_tree->left;
 	add_args_default(syntax_tree);
 	if (!syntax_tree || syntax_tree->error == true)
 	{

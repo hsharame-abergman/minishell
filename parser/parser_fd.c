@@ -6,7 +6,7 @@
 /*   By: hsharame <hsharame@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/23 17:21:07 by hsharame          #+#    #+#             */
-/*   Updated: 2024/11/25 12:47:03 by hsharame         ###   ########.fr       */
+/*   Updated: 2024/11/29 11:39:57 by hsharame         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@
 
 bool	reset_redirect(t_redirect *redir, bool infile)
 {
-	if (infile && redir->infile)
+	if (infile == true && redir->infile)
 	{
 		if (redir->fd_in == -1 || (redir->outfile && redir->fd_out == -1))
 			return (false);
@@ -40,7 +40,7 @@ bool	reset_redirect(t_redirect *redir, bool infile)
 		free(redir->infile);
 		close(redir->fd_in);
 	}
-	else if (!infile && redir->outfile)
+	else if (infile == false && redir->outfile)
 	{
 		if (redir->fd_out == -1 || (redir->infile && redir->fd_in == -1))
 			return (false);

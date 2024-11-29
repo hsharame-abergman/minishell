@@ -6,7 +6,7 @@
 /*   By: hsharame <hsharame@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/22 16:03:14 by hsharame          #+#    #+#             */
-/*   Updated: 2024/11/25 13:15:29 by hsharame         ###   ########.fr       */
+/*   Updated: 2024/11/29 11:47:15 by hsharame         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,14 +59,20 @@ char	*tab_to_str(char **token)
 
 void	create_redirect(t_cmd *cmd)
 {
-	cmd->redirect = (t_redirect *)malloc(sizeof(t_redirect));
 	if (!cmd->redirect)
-		return ;
-	cmd->redirect->fd_in = -1;
-	cmd->redirect->fd_out = -1;
-	cmd->redirect->infile = NULL;
-	cmd->redirect->outfile = NULL;
-	cmd->redirect->delimiter = NULL;
+	{
+		cmd->redirect = (t_redirect *)malloc(sizeof(t_redirect));
+		if (!cmd->redirect)
+			return ;
+		cmd->redirect->fd_in = -1;
+		cmd->redirect->fd_out = -1;
+		cmd->redirect->infile = NULL;
+		cmd->redirect->outfile = NULL;
+		cmd->redirect->delimiter = NULL;
+		cmd->redirect->stdin_backup = -1;
+		cmd->redirect->stdout_backup = -1;
+		cmd->redirect->heredoc_quotes = -1;
+	}
 }
 
 void	check_if_exists(t_cmd *node)
