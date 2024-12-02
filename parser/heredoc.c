@@ -6,7 +6,7 @@
 /*   By: hsharame <hsharame@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/23 14:27:04 by hsharame          #+#    #+#             */
-/*   Updated: 2024/12/02 12:49:11 by hsharame         ###   ########.fr       */
+/*   Updated: 2024/12/02 13:52:06 by hsharame         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,7 @@ bool	heredoc_succes(t_store *data, t_redirect *heredoc)
 			input = readline("> ");
 			if (!input)
 			{
-				close(fd);
+				//close(fd);
 				printf("minishell: warning: here-document delimited ");
 				printf("by end-of-file (wanted `%s')\n", heredoc->delimiter);
 				exit(0);
@@ -77,29 +77,23 @@ bool	heredoc_succes(t_store *data, t_redirect *heredoc)
 				free(input);
 				break ;
 			}
-			if (ft_strlen(input) > PATH_MAX)
-			{
-				free(input);
-				close(fd);
-				exit(1);
-			}
 			if (expander_heredoc(data, input))
 				input = check_if_var(data, input);
 			ft_putendl_fd(input, fd);
 			free(input);
 		}
-		close(fd);
+		//close(fd);
 		exit(0);
 	}
 	signal(SIGINT, SIG_IGN);
 	waitpid(pid, &status, 0);
 	signal(SIGINT, SIG_DFL);
 	close(fd);
-	if (WIFSIGNALED(status))
+	/*if (WIFSIGNALED(status))
 		return (false);
 	if (WIFEXITED(status))
-		return (WEXITSTATUS(status) == 0);
-	return (false);
+		return (WEXITSTATUS(status) == 0);*/
+	return (true);
 }
 
 /*

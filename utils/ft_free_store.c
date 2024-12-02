@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_free_store.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abergman <abergman@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hsharame <hsharame@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/04 17:21:51 by abergman          #+#    #+#             */
-/*   Updated: 2024/11/28 17:25:51 by abergman         ###   ########.fr       */
+/*   Updated: 2024/12/02 13:31:12 by hsharame         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,10 +55,7 @@ void	ft_free_str_tab(char **tab)
 void	ft_free_store(t_store *store, int history)
 {
 	if (store && store->input)
-	{
 		ft_free_pointer(store->input);
-		store->input = NULL;
-	}
 	if (store && store->token)
 		free_token(&store->token);
 	if (store && store->pars)
