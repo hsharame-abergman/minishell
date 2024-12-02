@@ -6,7 +6,7 @@
 /*   By: hsharame <hsharame@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/10 15:50:50 by hsharame          #+#    #+#             */
-/*   Updated: 2024/11/29 17:50:55 by hsharame         ###   ########.fr       */
+/*   Updated: 2024/12/02 12:36:50 by hsharame         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ t_cmd	*init_tree(t_token **token_list, t_store *data)
 	while (save && save->type != END)
 	{
 		if (first == 1 && save->type != PIPE)
-			current = handle_cmd(&save, &last_node, &first);
+			current = handle_cmd(&save, &last_node, &first, data);
 		else if (is_word_token(save->type))
 			add_args(&save, current);
 		else if (save->type == PIPE)

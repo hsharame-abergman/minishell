@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_execute_command.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abergman <abergman@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hsharame <hsharame@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/08 12:44:42 by abergman          #+#    #+#             */
-/*   Updated: 2024/11/29 01:27:19 by abergman         ###   ########.fr       */
+/*   Updated: 2024/12/02 12:21:07 by hsharame         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,9 @@ int	ft_execute_local_bin(t_store *data, t_cmd *cmd)
 {
 	int	res;
 
+	if (ft_strchr(cmd->value, '<') != NULL
+		|| ft_strchr(cmd->value, '>') != NULL)
+		return (EXIT_SUCCESS);
 	res = ft_check_command_not_found(data, cmd);
 	if (res != 0)
 		return (res);

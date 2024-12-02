@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_check_command_not_found.c                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abergman <abergman@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hsharame <hsharame@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/30 15:46:12 by abergman          #+#    #+#             */
-/*   Updated: 2024/11/27 20:12:40 by abergman         ###   ########.fr       */
+/*   Updated: 2024/12/02 12:20:57 by hsharame         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 

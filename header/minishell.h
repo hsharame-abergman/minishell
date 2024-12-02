@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abergman <abergman@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hsharame <hsharame@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/02 11:29:45 by hsharame          #+#    #+#             */
-/*   Updated: 2024/11/29 01:34:10 by abergman         ###   ########.fr       */
+/*   Updated: 2024/12/02 11:33:52 by hsharame         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -237,7 +237,8 @@ char				*find_path(char **env, char *cmd);
 char				*define_path(char *cmd);
 void				add_redirect(t_token **save, t_cmd **current,
 						t_store *data);
-t_cmd				*handle_cmd(t_token **save, t_cmd **last, int *first);
+t_cmd				*handle_cmd(t_token **save, t_cmd **last, int *first, 
+						t_store *data);
 void				handle_pipe(t_token **save, t_cmd **current, int *first);
 bool				is_redirection_token(int type);
 bool				is_word_token(int type);

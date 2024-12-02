@@ -6,7 +6,7 @@
 /*   By: hsharame <hsharame@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/24 16:11:52 by hsharame          #+#    #+#             */
-/*   Updated: 2024/11/29 17:19:48 by hsharame         ###   ########.fr       */
+/*   Updated: 2024/12/02 12:02:44 by hsharame         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,7 +100,8 @@ bool	expander_heredoc(t_store *data, char *input)
 	while (input[i])
 	{
 		if (input[i] == '$' && !check_escape(input, i)
-			&& (ft_isalpha(input[i + 1]) || input[i + 1] == '_'))
+			&& (ft_isalnum(input[i + 1]) || input[i + 1] == '_'
+				|| input[i + 1] == '?'))
 			return (true);
 		i++;
 	}
