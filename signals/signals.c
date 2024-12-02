@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   signals.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hsharame <hsharame@student.42.fr>          +#+  +:+       +#+        */
+/*   By: abergman <abergman@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/29 16:55:22 by hsharame          #+#    #+#             */
-/*   Updated: 2024/12/02 17:08:55 by hsharame         ###   ########.fr       */
+/*   Updated: 2024/12/02 17:56:17 by abergman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,5 +55,6 @@ void	heredoc_signal_handler(int sig)
 {
 	(void)sig;
 	write(1, "\n", 1);
+	g_exit_code = 130;
 	exit(130);
 }
