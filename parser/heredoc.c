@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   heredoc.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hsharame <hsharame@student.42.fr>          +#+  +:+       +#+        */
+/*   By: abergman <abergman@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/23 14:27:04 by hsharame          #+#    #+#             */
-/*   Updated: 2024/11/29 17:13:29 by hsharame         ###   ########.fr       */
+/*   Updated: 2024/12/02 01:42:50 by abergman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,8 @@
 	> $HOME
 	> EOF
 	hello
-	/home/hsharame 
-		! when writing to the temporary file, variables must already 
+	/home/hsharame
+		! when writing to the temporary file, variables must already
 		be handled correctly
 */
 
@@ -44,37 +44,75 @@ char	*temp_file(int number)
 
 bool	heredoc_succes(t_store *data, t_redirect *heredoc)
 {
-	int			fd;
-	char		*input;
+	int		fd;
+	char	*input;
+	int		pid;
+	int		status;
+	char	*expanded;
 
 	reset_redirect(heredoc, true);
 	fd = open(heredoc->infile, O_CREAT | O_WRONLY | O_TRUNC, 0644);
 	if (fd < 0)
 		return (false);
-	//data->pid = fork();
-	//if (data == 0) // si processus enfant
-	while (1)
+	pid = fork();
+	if (pid < 0)
 	{
-		input = readline("> ");
-		if (!input)
-		{
-			printf("minishell: warning: here-document delimited ");
-			printf("by end-of-file (wanted `%s')\n", heredoc->delimiter);
-			break ;
-		}
-		if (ft_strcmp(input, heredoc->delimiter) == 0)
-			break ;
-		if (expander_heredoc(data, input))
-			input = check_if_var(data, input);
-		ft_putendl_fd(input, fd);
-		free(input);
+		close(fd);
+		return (false);
 	}
-	return (free(input), close(fd), true);
+	if (pid == 0)
+	{
+		signal(SIGINT, heredoc_signal_handler);
+		while (1)
+		{
+			input = readline("> ");
+			if (!input)
+			{
+				close(fd);
+				printf("minishell: warning: here-document delimited ");
+				printf("by end-of-file (wanted `%s')\n", heredoc->delimiter);
+				exit(1);
+			}
+			if (ft_strcmp(input, heredoc->delimiter) == 0)
+			{
+				free(input);
+				break ;
+			}
+			if (ft_strlen(input) > PATH_MAX)
+			{
+				free(input);
+				close(fd);
+				exit(1);
+			}
+			if (expander_heredoc(data, input))
+			{
+				expanded = check_if_var(data, input);
+				if (expanded)
+				{
+					free(input);
+					input = expanded;
+				}
+			}
+			ft_putendl_fd(input, fd);
+			free(input);
+		}
+		close(fd);
+		exit(0);
+	}
+	signal(SIGINT, SIG_IGN);
+	waitpid(pid, &status, 0);
+	signal(SIGINT, SIG_DFL);
+	close(fd);
+	if (WIFSIGNALED(status))
+		return (false);
+	if (WIFEXITED(status))
+		return (WEXITSTATUS(status) == 0);
+	return (false);
 }
 
 /*
 	This function is used to manage the heredoc and create a temporary
-	file that will have a unique name thanks to static int, which is 
+	file that will have a unique name thanks to static int, which is
 	implemented each time this function is called.
 */
 

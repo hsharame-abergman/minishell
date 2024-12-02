@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   signals.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hsharame <hsharame@student.42.fr>          +#+  +:+       +#+        */
+/*   By: abergman <abergman@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/29 16:55:22 by hsharame          #+#    #+#             */
-/*   Updated: 2024/11/25 16:09:56 by hsharame         ###   ########.fr       */
+/*   Updated: 2024/12/02 01:46:51 by abergman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 	SIGINT (Ctrl-C): Interrupts the current command and displays a new prompt
 	on a new line.
 	SIGQUIT (Ctrl-\): Ignored, so it should do nothing.
-	Ctrl-D (exits the shell): Cannot be caught as a signal, but is detected by 
+	Ctrl-D (exits the shell): Cannot be caught as a signal, but is detected by
 	checking if readline returns NULL.
 */
 
@@ -49,4 +49,11 @@ void	signals_ignore(void)
 	signal.sa_handler = SIG_IGN;
 	signal.sa_flags = SA_RESTART;
 	sigaction(SIGQUIT, &signal, NULL);
+}
+
+void	heredoc_signal_handler(int sig)
+{
+	(void)sig;
+	write(1, "\n", 1);
+	exit(130);
 }

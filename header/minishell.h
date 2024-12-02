@@ -292,5 +292,6 @@ int					builtin_ls(t_store *store);
 void				signals_ignore(void);
 void				signal_ctrl_c(int sign);
 void				ft_set_signals_interactive(void);
+void				heredoc_signal_handler(int sig);
 
 #endif

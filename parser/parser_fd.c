@@ -3,17 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   parser_fd.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hsharame <hsharame@student.42.fr>          +#+  +:+       +#+        */
+/*   By: abergman <abergman@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/23 17:21:07 by hsharame          #+#    #+#             */
-/*   Updated: 2024/11/29 11:39:57 by hsharame         ###   ########.fr       */
+/*   Updated: 2024/12/02 01:14:47 by abergman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../header/minishell.h"
 
 /*
- 	<		-	fd_in - stores the file descriptor
+	<		-	fd_in - stores the file descriptor
 				infile - the name of the file to open
 	open_input
 	<<		-	fd_in - the file descriptor of the temporary file
@@ -79,7 +79,7 @@ bool	open_file_append(t_redirect *append, char *filename)
 }
 
 /*
-	In case of input redirection, if the file does not already exist, 
+	In case of input redirection, if the file does not already exist,
 	it does not create a new file and displays the error.
 	bash: [filename]: No such file or directory
 */
@@ -92,7 +92,7 @@ bool	open_input(t_redirect *input, char *filename)
 	input->fd_in = open(filename, O_RDONLY);
 	if (input->fd_in == -1 && filename[0] != '\0')
 	{
-		ft_putstr_fd("No such file or directory\n", 2);
+		ft_error_handler(filename, NULL, strerror(errno), 0);
 		return (false);
 	}
 	return (true);

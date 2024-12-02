@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: hsharame <hsharame@student.42.fr>          +#+  +:+       +#+         #
+#    By: abergman <abergman@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/09/28 13:34:37 by abergman          #+#    #+#              #
-#    Updated: 2024/11/29 18:02:48 by hsharame         ###   ########.fr        #
+#    Updated: 2024/12/02 01:15:35 by abergman         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,19 +21,18 @@ HEADERS 		= ./header/minishell.h
 
 DEBUG			= -fsanitize=address,leak,undefined -g3
 
-CC				= cc -o3 -Wall -Wextra -Werror $(DEBUG)
+CC				= cc -o3 -Wall -Wextra -Werror
 
 RM				= @rm -f
 
 $(OBJDIR)/%.o: ./%.c $(HEADERS)
 		@mkdir -p $(dir $@)
 		$(CC) -c $< -o $@
-		@echo "\n$(YELLOW)$(BOLD)[ COMPILATION ]: Creating file $< $(RESET)"
 
 $(NAME): $(OBJDIR) $(HEADERS) $(OBJS)
 		$(shell hostname > /goinfre/hostname)
 		$(CC) $(OBJS) -o $(NAME) -lreadline
-		@echo "\n$(GREEN)$(BOLD)[ ★ SUCCESS ★ ]$(BOLD_R)$(RESET): The program is ready. You can use './minishell' for execute."
+		@echo "\n$(GREEN)$(BOLD)[ ★ SUCCESS ★ ]$(BOLD_R)$(RESET): The program is ready. You can use './minishell' for execute.\n"
 
 all: $(NAME)
 
