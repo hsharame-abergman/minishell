@@ -81,16 +81,23 @@ int	ft_execute_command(t_store *store, t_cmd *cmd)
 	ft_set_pipe_fds(store->pars, cmd);
 	ft_redirect_io(cmd->redirect);
 	ft_close_fds(store->pars, 0);
+	signal(SIGINT, SIG_DFL);
+	signal(SIGQUIT, SIG_DFL);
 	if (ft_strchr(cmd->value, '/') == NULL)
 	{
 		exit_code = ft_execute_builtin(store, cmd);
-		if (exit_code != EXIT_CMD_NOT_FOUND)
+		if (exit_code != EXIT_CMD_NOT_FOUND) {
+			ft_close_fds(store->pars, 1);
 			ft_exit_program(store, exit_code);
+		}
 		exit_code = ft_execute_sys_bin(store, cmd);
-		if (exit_code != EXIT_CMD_NOT_FOUND)
+		if (exit_code != EXIT_CMD_NOT_FOUND) {
+			ft_close_fds(store->pars, 1);
 			ft_exit_program(store, exit_code);
+		}
 	}
 	exit_code = ft_execute_local_bin(store, cmd);
+	ft_close_fds(store->pars, 1);
 	ft_exit_program(store, exit_code);
 	return (exit_code);
 }
