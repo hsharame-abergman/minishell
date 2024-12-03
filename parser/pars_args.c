@@ -6,7 +6,7 @@
 /*   By: hsharame <hsharame@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/28 15:10:17 by hsharame          #+#    #+#             */
-/*   Updated: 2024/11/28 15:10:52 by hsharame         ###   ########.fr       */
+/*   Updated: 2024/12/03 09:00:41 by abergman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,11 +75,9 @@ void	fill_args(t_token **save, t_cmd *cmd, int count)
 void	add_args(t_token **save, t_cmd *cmd)
 {
 	int		count;
-	int		i;
 	t_token	*temp;
 
 	temp = *save;
-	i = 1;
 	count = count_args(temp) + 2;
 	cmd->args = (char **)ft_calloc(count, sizeof(char *));
 	if (!cmd->args)

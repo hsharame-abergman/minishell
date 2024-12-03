@@ -6,7 +6,7 @@
 /*   By: hsharame <hsharame@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/30 15:42:08 by abergman          #+#    #+#             */
-/*   Updated: 2024/12/02 17:08:29 by hsharame         ###   ########.fr       */
+/*   Updated: 2024/12/03 10:07:19 by abergman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,17 +34,18 @@ int	ft_get_children(t_store *store)
 	wpid = 0;
 	while (wpid != -1 || errno != ECHILD)
 	{
+		signal(SIGINT, SIG_IGN);
 		wpid = waitpid(-1, &status, 0);
 		if (wpid == store->pid)
 			save_status = status;
 		continue ;
 	}
-	if (WIFSIGNALED(save_status))
-		status = 128 + WTERMSIG(save_status);
-	else if (WEXITSTATUS(save_status))
-		status = WEXITSTATUS(save_status);
-	else
-		status = save_status;
+	status = save_status;
+	if (status == 2)
+	{
+		save_status = 130;
+		printf("\n");
+	}
 	return (save_status);
 }
 
