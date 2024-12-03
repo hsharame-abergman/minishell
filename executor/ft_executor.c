@@ -39,12 +39,7 @@ int	ft_get_children(t_store *store)
 			save_status = status;
 		continue ;
 	}
-	if (WIFSIGNALED(save_status))
-		status = 128 + WTERMSIG(save_status);
-	else if (WEXITSTATUS(save_status))
-		status = WEXITSTATUS(save_status);
-	else
-		status = save_status;
+	status = save_status;
 	return (save_status);
 }
 
