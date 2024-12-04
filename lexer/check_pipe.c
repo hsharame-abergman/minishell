@@ -6,7 +6,7 @@
 /*   By: hsharame <hsharame@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/21 15:43:42 by hsharame          #+#    #+#             */
-/*   Updated: 2024/11/27 16:47:18 by hsharame         ###   ########.fr       */
+/*   Updated: 2024/12/04 16:09:04 by hsharame         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,14 @@ char	*input_pipe(t_token **token_list, char *input, int *i)
 	if (data_input[*i] == '\0')
 		add_token(token_list, "\0", END);
 	return (data_input);
+}
+
+static void	ft_free_node(t_token *cmd)
+{
+	if (cmd->value)
+		free(cmd->value);
+	free(cmd);
+	cmd = NULL;
 }
 
 char	*check_pipe(t_token **token_list, char *input, int *i)

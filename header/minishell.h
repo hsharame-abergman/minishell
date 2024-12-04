@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abergman <abergman@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hsharame <hsharame@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/02 11:29:45 by hsharame          #+#    #+#             */
-/*   Updated: 2024/12/04 15:34:34 by abergman         ###   ########.fr       */
+/*   Updated: 2024/12/04 16:08:13 by hsharame         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -198,6 +198,7 @@ void				add_token(t_token **token_list, char *value, int type);
 int					get_type(char *token);
 bool				init_tokens(t_token **token_list, char *input, int *i);
 bool				lexer(t_store *data);
+bool				syntax_pipe(t_token **token);
 
 /* ************************************************************************** */
 /*                     Expander                                               */
