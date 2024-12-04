@@ -6,7 +6,7 @@
 /*   By: abergman <abergman@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/14 17:42:39 by hsharame          #+#    #+#             */
-/*   Updated: 2024/12/03 08:59:16 by abergman         ###   ########.fr       */
+/*   Updated: 2024/12/04 16:35:04 by abergman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,6 +74,7 @@ char	*ft_set_pwd(t_store *store)
 				free(res[1]);
 			return (res[0]);
 		}
+		free(res[1]);
 	}
 	return (res[0]);
 }
