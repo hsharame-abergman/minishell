@@ -6,7 +6,7 @@
 /*   By: hsharame <hsharame@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/21 15:43:42 by hsharame          #+#    #+#             */
-/*   Updated: 2024/12/04 16:19:43 by hsharame         ###   ########.fr       */
+/*   Updated: 2024/12/04 16:47:02 by hsharame         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,27 @@ static void	ft_free_node(t_token *cmd)
 		free(cmd->value);
 	free(cmd);
 	cmd = NULL;
+}
+
+bool	syntax_redir(t_token **token)
+{
+	t_token	*current;
+
+	current = *token;
+	if (current->type == END)
+		return (true);
+	while (current->type != END)
+	{
+		if (is_redirection_token(current->type)
+			&& is_redirection_token(current->next->type))
+		{
+			printf("minishell: syntax error near unexpected token");
+			printf(" `%s'\n", current->next->value);
+			return (false);
+		}
+		current = current->next;
+	}
+	return (true);
 }
 
 bool	syntax_pipe(t_token **token)
