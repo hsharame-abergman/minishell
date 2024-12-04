@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hsharame <hsharame@student.42.fr>          +#+  +:+       +#+        */
+/*   By: abergman <abergman@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/02 11:29:45 by hsharame          #+#    #+#             */
-/*   Updated: 2024/12/02 11:33:52 by hsharame         ###   ########.fr       */
+/*   Updated: 2024/12/04 15:34:34 by abergman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,7 +89,7 @@ typedef enum e_free_arg
 {
 	FREE_DEST,
 	FREE_SRC
-}		t_free_arg;
+}					t_free_arg;
 
 typedef struct s_store
 {
@@ -157,7 +157,8 @@ int					ft_redirect_io(t_redirect *redirect);
 int					ft_command_is_dir(char *value);
 int					ft_check_command_not_found(t_store *data, t_cmd *cmd);
 char				*ft_parser_path(t_store *store, char *value);
-
+void				ft_close_executer(int exit_code, t_store *store);
+int					ft_command_is_dir(char *value);
 /* pipes */
 int					ft_create_pipes(t_store *store);
 
@@ -237,7 +238,7 @@ char				*find_path(char **env, char *cmd);
 char				*define_path(char *cmd);
 void				add_redirect(t_token **save, t_cmd **current,
 						t_store *data);
-t_cmd				*handle_cmd(t_token **save, t_cmd **last, int *first, 
+t_cmd				*handle_cmd(t_token **save, t_cmd **last, int *first,
 						t_store *data);
 void				handle_pipe(t_token **save, t_cmd **current, int *first);
 bool				is_redirection_token(int type);

@@ -6,7 +6,7 @@
 /*   By: abergman <abergman@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/29 16:55:22 by hsharame          #+#    #+#             */
-/*   Updated: 2024/12/02 17:56:17 by abergman         ###   ########.fr       */
+/*   Updated: 2024/12/04 15:21:35 by abergman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ void	ft_set_signals_interactive(void)
 	signals_ignore();
 	sigemptyset(&signal.sa_mask);
 	signal.sa_handler = &signal_ctrl_c;
-	// signal.sa_flags = SA_RESTART;
+	signal.sa_flags = SA_RESTART;
 	sigaction(SIGINT, &signal, NULL);
 }
 
@@ -47,7 +47,7 @@ void	signals_ignore(void)
 
 	sigemptyset(&signal.sa_mask);
 	signal.sa_handler = SIG_IGN;
-	// signal.sa_flags = SA_RESTART;
+	signal.sa_flags = SA_RESTART;
 	sigaction(SIGQUIT, &signal, NULL);
 }
 

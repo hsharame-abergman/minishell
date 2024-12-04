@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: hsharame <hsharame@student.42.fr>          +#+  +:+       +#+         #
+#    By: abergman <abergman@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/09/28 13:34:37 by abergman          #+#    #+#              #
-#    Updated: 2024/12/02 14:07:15 by hsharame         ###   ########.fr        #
+#    Updated: 2024/12/04 15:55:34 by abergman         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -58,6 +58,5 @@ re: fclean all
 BOLD	= \e[1m
 BOLD_R	= \e[0m
 
-YELLOW	= \033[0;33m
 GREEN	= \033[0;32m
 RESET	= \033[0m

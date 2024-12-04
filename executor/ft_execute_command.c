@@ -3,23 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   ft_execute_command.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hsharame <hsharame@student.42.fr>          +#+  +:+       +#+        */
+/*   By: abergman <abergman@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/08 12:44:42 by abergman          #+#    #+#             */
-/*   Updated: 2024/12/02 12:21:07 by hsharame         ###   ########.fr       */
+/*   Updated: 2024/12/04 15:51:04 by abergman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../header/minishell.h"
-
-int	ft_command_is_dir(char *value)
-{
-	struct stat	cmd_stat;
-
-	ft_memset(&cmd_stat, 0, sizeof(cmd_stat));
-	stat(value, &cmd_stat);
-	return (S_ISDIR(cmd_stat.st_mode));
-}
 
 /*
  *	Executes the command's system binary file if it can be found
@@ -45,8 +36,8 @@ int	ft_execute_local_bin(t_store *data, t_cmd *cmd)
 {
 	int	res;
 
-	if (ft_strchr(cmd->value, '<') != NULL
-		|| ft_strchr(cmd->value, '>') != NULL)
+	if (ft_strchr(cmd->value, '<') != NULL || ft_strchr(cmd->value,
+			'>') != NULL)
 		return (EXIT_SUCCESS);
 	res = ft_check_command_not_found(data, cmd);
 	if (res != 0)
@@ -70,7 +61,7 @@ int	ft_execute_local_bin(t_store *data, t_cmd *cmd)
  */
 int	ft_execute_command(t_store *store, t_cmd *cmd)
 {
-	int	exit_code;	
+	int	exit_code;
 
 	exit_code = 0;
 	if (!cmd || !cmd->value)
@@ -86,18 +77,13 @@ int	ft_execute_command(t_store *store, t_cmd *cmd)
 	if (ft_strchr(cmd->value, '/') == NULL)
 	{
 		exit_code = ft_execute_builtin(store, cmd);
-		if (exit_code != EXIT_CMD_NOT_FOUND) {
-			ft_close_fds(store->pars, 1);
-			ft_exit_program(store, exit_code);
-		}
+		if (exit_code != EXIT_CMD_NOT_FOUND)
+			ft_close_executer(exit_code, store);
 		exit_code = ft_execute_sys_bin(store, cmd);
-		if (exit_code != EXIT_CMD_NOT_FOUND) {
-			ft_close_fds(store->pars, 1);
-			ft_exit_program(store, exit_code);
-		}
+		if (exit_code != EXIT_CMD_NOT_FOUND)
+			ft_close_executer(exit_code, store);
 	}
 	exit_code = ft_execute_local_bin(store, cmd);
-	ft_close_fds(store->pars, 1);
-	ft_exit_program(store, exit_code);
+	ft_close_executer(exit_code, store);
 	return (exit_code);
 }

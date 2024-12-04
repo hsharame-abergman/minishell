@@ -6,7 +6,7 @@
 /*   By: abergman <abergman@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/23 14:27:04 by hsharame          #+#    #+#             */
-/*   Updated: 2024/12/02 17:55:52 by abergman         ###   ########.fr       */
+/*   Updated: 2024/12/04 15:51:28 by abergman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,33 @@ char	*temp_file(int number)
 	return (res);
 }
 
+void	ft_heredoc_routine(t_store *store, t_redirect *heredoc, int fd)
+{
+	char	*input;
+
+	signal(SIGINT, heredoc_signal_handler);
+	while (1)
+	{
+		input = readline("> ");
+		if (!input)
+		{
+			printf("minishell: warning: here-document delimited ");
+			printf("by end-of-file (wanted `%s')\n", heredoc->delimiter);
+			exit(0);
+		}
+		if (ft_strcmp(input, heredoc->delimiter) == 0)
+		{
+			free(input);
+			break ;
+		}
+		if (expander_heredoc(store, input))
+			input = check_if_var(store, input);
+		ft_putendl_fd(input, fd);
+		free(input);
+	}
+	exit(0);
+}
+
 /*
 	Heredoc creates a temporary file. The string or character passed
 	after the heredoc sign << is called delimiter and is stored in the
@@ -42,12 +69,11 @@ char	*temp_file(int number)
 	input with the return line until we find the delimiter.
 */
 
-bool	heredoc_succes(t_store *data, t_redirect *heredoc)
+bool	heredoc_succes(t_store *store, t_redirect *heredoc)
 {
-	int		fd;
-	char	*input;
-	int		pid;
-	int		status;
+	int	fd;
+	int	pid;
+	int	status;
 
 	reset_redirect(heredoc, true);
 	fd = open(heredoc->infile, O_CREAT | O_WRONLY | O_TRUNC, 0644);
@@ -60,31 +86,7 @@ bool	heredoc_succes(t_store *data, t_redirect *heredoc)
 		return (false);
 	}
 	if (pid == 0)
-	{
-		signal(SIGINT, heredoc_signal_handler);
-		while (1)
-		{
-			input = readline("> ");
-			if (!input)
-			{
-				// close(fd);
-				printf("minishell: warning: here-document delimited ");
-				printf("by end-of-file (wanted `%s')\n", heredoc->delimiter);
-				exit(0);
-			}
-			if (ft_strcmp(input, heredoc->delimiter) == 0)
-			{
-				free(input);
-				break ;
-			}
-			if (expander_heredoc(data, input))
-				input = check_if_var(data, input);
-			ft_putendl_fd(input, fd);
-			free(input);
-		}
-		// close(fd);
-		exit(0);
-	}
+		ft_heredoc_routine(store, heredoc, fd);
 	signal(SIGINT, SIG_IGN);
 	waitpid(pid, &status, 0);
 	signal(SIGINT, SIG_DFL);
