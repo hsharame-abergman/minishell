@@ -6,7 +6,7 @@
 /*   By: abergman <abergman@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/28 13:34:37 by abergman          #+#    #+#             */
-/*   Updated: 2024/12/04 16:41:53 by abergman         ###   ########.fr       */
+/*   Updated: 2024/12/04 18:04:31 by abergman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,6 @@ int	main(int ac, char **av, char **env)
 	ft_memset(&st, 0, sizeof(t_store));
 	if (!ft_check_args(&st, ac, av, env) || !ft_init_store(&st, env))
 		return (0);
-	// ascii_welcome();
 	if (st.mode_usage == SINDLE_COMMAND)
 		ft_monitor_singleline(&st, av);
 	else

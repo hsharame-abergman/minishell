@@ -6,7 +6,7 @@
 /*   By: abergman <abergman@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/14 17:42:39 by hsharame          #+#    #+#             */
-/*   Updated: 2024/12/04 16:35:04 by abergman         ###   ########.fr       */
+/*   Updated: 2024/12/04 17:21:54 by abergman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,8 +61,12 @@ char	*ft_set_pwd(t_store *store)
 	char	*res[2];
 
 	pwd = ft_get_env_value(store->envp, "PWD");
+	if (!pwd)
+		pwd = ft_strdup("");
 	res[0] = ft_strdup(pwd);
 	home = ft_get_env_value(store->envp, "HOME");
+	if (!home)
+		home = ft_strdup("");
 	if ((ft_strcmp(pwd, home)) >= 0)
 	{
 		res[1] = ft_substr(pwd, ft_strlen(home), ft_strlen(pwd));
@@ -85,8 +89,12 @@ char	*ft_create_label_for_readline(t_store *store)
 	char	*hostname;
 	char	*pwd;
 	char	*res[2];
+	char	*user;
 
-	label = ft_strjoin(ft_get_env_value(store->envp, "USER"), "@");
+	user = ft_get_env_value(store->envp, "USER");
+	if (!user)
+		user = ft_strdup("");
+	label = ft_strjoin(user, "@");
 	hostname = ft_hostname();
 	res[0] = ft_strjoin(label, hostname);
 	pwd = ft_set_pwd(store);

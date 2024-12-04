@@ -6,7 +6,7 @@
 #    By: abergman <abergman@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/09/28 13:34:37 by abergman          #+#    #+#              #
-#    Updated: 2024/12/04 16:24:02 by abergman         ###   ########.fr        #
+#    Updated: 2024/12/04 16:56:47 by abergman         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,7 +21,7 @@ HEADERS 		= ./header/minishell.h
 
 DEBUG			= -fsanitize=address,leak,undefined
 
-CC				= cc -o3 -Wall -Wextra -Werror -g3 $(DEBUG)
+CC				= cc -o3 -Wall -Wextra -Werror -g3
 
 RM				= @rm -f
 
