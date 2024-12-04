@@ -6,7 +6,7 @@
 /*   By: hsharame <hsharame@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/04 17:21:51 by abergman          #+#    #+#             */
-/*   Updated: 2024/12/02 13:31:12 by hsharame         ###   ########.fr       */
+/*   Updated: 2024/12/04 18:07:14 by hsharame         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,19 +14,25 @@
 
 bool	check_bracket(char *str)
 {
-	char	*bracket;
+	int		i;
+	bool	in_quote;
 
-	bracket = ft_strchr(str, '(');
-	if (bracket != NULL)
+	i = 0;
+	in_quote = false;
+	while (str[i] != '\0')
 	{
-		printf("minishell: syntax error near unexpected token '%s'\n", bracket);
-		return (false);
-	}
-	bracket = ft_strchr(str, ')');
-	if (bracket != NULL)
-	{
-		printf("minishell: syntax error near unexpected token '%s'\n", bracket);
-		return (false);
+		if ((str[i] == '\'' || str[i] == '"'))
+			in_quote = !in_quote;
+		if (!in_quote)
+		{
+			if (str[i] == '(' || str[i] == ')')
+			{
+				printf("minishell: syntax error near unexpected token '%c'\n",
+					str[i]);
+				return (false);
+			}
+		}
+		i++;
 	}
 	return (true);
 }
