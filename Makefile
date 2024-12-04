@@ -6,7 +6,7 @@
 #    By: abergman <abergman@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/09/28 13:34:37 by abergman          #+#    #+#              #
-#    Updated: 2024/12/04 16:56:47 by abergman         ###   ########.fr        #
+#    Updated: 2024/12/04 18:39:07 by abergman         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,9 +19,9 @@ OBJS			:= $(patsubst %.c,$(OBJDIR)/%.o,$(SRC))
 
 HEADERS 		= ./header/minishell.h
 
-DEBUG			= -fsanitize=address,leak,undefined
+DEBUG			= -g3 -fsanitize=address,leak,undefined
 
-CC				= cc -o3 -Wall -Wextra -Werror -g3
+CC				= cc -o3 -Wall -Wextra -Werror
 
 RM				= @rm -f
 
