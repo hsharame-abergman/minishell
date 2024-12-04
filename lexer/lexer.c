@@ -6,7 +6,7 @@
 /*   By: hsharame <hsharame@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/30 15:48:48 by hsharame          #+#    #+#             */
-/*   Updated: 2024/12/04 16:09:29 by hsharame         ###   ########.fr       */
+/*   Updated: 2024/12/04 16:20:52 by hsharame         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,8 @@ bool	init_tokens(t_token **token_list, char *input, int *i)
 		return (quotes(token_list, input, i));
 	else if (ft_isoperator(input[*i]))
 	{
-		if (ft_isoperator(input[*i + 1]))
+		if (ft_isoperator(input[*i + 1])
+			&& input[*i + 1] == input[*i])
 		{
 			value = ft_substr(input, start, 2);
 			(*i)++;

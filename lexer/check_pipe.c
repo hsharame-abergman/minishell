@@ -6,7 +6,7 @@
 /*   By: hsharame <hsharame@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/21 15:43:42 by hsharame          #+#    #+#             */
-/*   Updated: 2024/12/04 16:09:04 by hsharame         ###   ########.fr       */
+/*   Updated: 2024/12/04 16:19:43 by hsharame         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,28 @@ static void	ft_free_node(t_token *cmd)
 	cmd = NULL;
 }
 
+bool	syntax_pipe(t_token **token)
+{
+	t_token	*current;
+
+	current = *token;
+	if (current->type == END)
+		return (true);
+	while (current->next->type != END)
+		current = current->next;
+	if (current->type == PIPE)
+	{
+		if (current->prev
+			&& is_redirection_token(current->prev->type))
+		{
+			error_syntax("syntax error near unexpected token `newline'\n",
+				2, true);
+			return (false);
+		}
+	}
+	return (true);
+}
+
 char	*check_pipe(t_token **token_list, char *input, int *i)
 {
 	t_token	*current;
@@ -58,6 +80,8 @@ char	*check_pipe(t_token **token_list, char *input, int *i)
 		current = current->next;
 	if (current->type == PIPE)
 	{
+		ft_free_node(current->next);
+		current->next = NULL;
 		return (input_pipe(token_list, input, i));
 	}
 	return (ft_strdup(input));
