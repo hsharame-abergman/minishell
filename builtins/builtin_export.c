@@ -6,7 +6,7 @@
 /*   By: abergman <abergman@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/12 15:44:23 by abergman          #+#    #+#             */
-/*   Updated: 2024/11/29 01:44:36 by abergman         ###   ########.fr       */
+/*   Updated: 2024/12/06 18:17:15 by abergman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 /* Adds the given variables to the enviroment variables.  */
 /* Return 1 if one or more arguments were not added       */
 /* and return 0 if all arguments were successfully added. */
-int	is_valid_env_key(char *argument)
+static int	is_valid_env_key(char *argument)
 {
 	int	index;
 

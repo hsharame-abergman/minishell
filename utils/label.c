@@ -6,7 +6,7 @@
 /*   By: abergman <abergman@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/14 17:42:39 by hsharame          #+#    #+#             */
-/*   Updated: 2024/12/04 17:21:54 by abergman         ###   ########.fr       */
+/*   Updated: 2024/12/06 18:26:54 by abergman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@ char	*ft_set_pwd(t_store *store)
 	if ((ft_strcmp(pwd, home)) >= 0)
 	{
 		res[1] = ft_substr(pwd, ft_strlen(home), ft_strlen(pwd));
-		if (ft_strlen(res[1]))
+		if (ft_strlen(res[1]) >= 0)
 		{
 			free(res[0]);
 			res[0] = ft_strjoin("~", res[1]);

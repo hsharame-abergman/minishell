@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_executor.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hsharame <hsharame@student.42.fr>          +#+  +:+       +#+        */
+/*   By: abergman <abergman@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/30 15:42:08 by abergman          #+#    #+#             */
-/*   Updated: 2024/12/03 10:07:19 by abergman         ###   ########.fr       */
+/*   Updated: 2024/12/06 18:19:11 by abergman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@
 	If there are more than one command in the pipeline:
 		"Pipeline exit status is the state of the last command in the pipeline"
 */
-int	ft_get_children(t_store *store)
+static int	ft_get_children(t_store *store)
 {
 	pid_t	wpid;
 	int		status;
@@ -58,7 +58,7 @@ int	ft_get_children(t_store *store)
 	or when the embedded file was run by itself.
 	Returns false if there was an error in the branch.
 */
-int	ft_create_children_process(t_store *store)
+static int	ft_create_children_process(t_store *store)
 {
 	t_cmd	*command;
 
@@ -80,7 +80,7 @@ int	ft_create_children_process(t_store *store)
 
 /* Prepares command list execution. */
 /* Create pipes and check files.	*/
-int	ft_preporation_for_execution(t_store *store)
+static int	ft_preporation_for_execution(t_store *store)
 {
 	if (!store || !store->pars)
 		return (EXIT_SUCCESS);

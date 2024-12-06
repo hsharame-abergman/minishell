@@ -6,7 +6,7 @@
 /*   By: abergman <abergman@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/08 12:44:42 by abergman          #+#    #+#             */
-/*   Updated: 2024/12/04 15:51:04 by abergman         ###   ########.fr       */
+/*   Updated: 2024/12/06 18:18:22 by abergman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
  *	Returns EXIT_CMD_NOT_FOUND if a path to the executable bin file cannot be
  *	found. Returns 1 in case of failure to run existing, executable file.
  */
-int	ft_execute_sys_bin(t_store *store, t_cmd *cmd)
+static int	ft_execute_sys_bin(t_store *store, t_cmd *cmd)
 {
 	if (!cmd->value && cmd->value[0] == '\0')
 		return (EXIT_CMD_NOT_FOUND);
@@ -32,7 +32,7 @@ int	ft_execute_sys_bin(t_store *store, t_cmd *cmd)
 	return (EXIT_FAILURE);
 }
 
-int	ft_execute_local_bin(t_store *data, t_cmd *cmd)
+static int	ft_execute_local_bin(t_store *data, t_cmd *cmd)
 {
 	int	res;
 
