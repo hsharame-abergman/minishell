@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: abergman <abergman@student.42.fr>          +#+  +:+       +#+         #
+#    By: hsharame <hsharame@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/09/28 13:34:37 by abergman          #+#    #+#              #
-#    Updated: 2024/12/04 18:39:07 by abergman         ###   ########.fr        #
+#    Updated: 2024/12/06 13:48:32 by hsharame         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,7 +21,7 @@ HEADERS 		= ./header/minishell.h
 
 DEBUG			= -g3 -fsanitize=address,leak,undefined
 
-CC				= cc -o3 -Wall -Wextra -Werror
+CC				= cc -o3 -Wall -Wextra -Werror $(DEBUG)
 
 RM				= @rm -f
 

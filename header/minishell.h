@@ -6,7 +6,7 @@
 /*   By: hsharame <hsharame@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/02 11:29:45 by hsharame          #+#    #+#             */
-/*   Updated: 2024/12/04 16:44:23 by hsharame         ###   ########.fr       */
+/*   Updated: 2024/12/06 12:57:58 by hsharame         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -200,6 +200,7 @@ bool				init_tokens(t_token **token_list, char *input, int *i);
 bool				lexer(t_store *data);
 bool				syntax_pipe(t_token **token);
 bool				syntax_redir(t_token **token);
+void				ft_free_node(t_token *cmd);
 
 /* ************************************************************************** */
 /*                     Expander                                               */

@@ -6,7 +6,7 @@
 /*   By: hsharame <hsharame@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/11 15:37:39 by hsharame          #+#    #+#             */
-/*   Updated: 2024/12/02 17:50:15 by hsharame         ###   ########.fr       */
+/*   Updated: 2024/12/06 14:05:28 by hsharame         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,15 +55,33 @@ t_cmd	*parser_first_redir(t_token *token, t_cmd *last, t_store *data)
 	return (current);
 }
 
+void	join_cmd(t_token **save)
+{
+	char	*tmp;
+
+	while (save && (*save)->is_adjacent)
+	{
+		tmp = (*save)->next->value;
+		(*save)->next->value = ft_strjoin((*save)->value, tmp);
+		ft_free_pointer(tmp);
+		(*save) = (*save)->next;
+	}
+}
+
 t_cmd	*handle_cmd(t_token **save, t_cmd **last, int *first, t_store *data)
 {
 	t_cmd	*current;
 
 	current = NULL;
+	if ((*save)->type == TOKEN_WORD && (*save)->value[0] == '\0')
+		(*save) = (*save)->next;
 	if (is_word_token((*save)->type))
 	{
+		if ((*save)->is_adjacent)
+			join_cmd(save);
 		current = parser_cmd(*save, *last);
-		*save = (*save)->next;
+		if (*save)
+			*save = (*save)->next;
 		*first = 0;
 	}
 	else if (is_redirection_token((*save)->type))
