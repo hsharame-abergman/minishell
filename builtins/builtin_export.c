@@ -6,7 +6,7 @@
 /*   By: abergman <abergman@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/12 15:44:23 by abergman          #+#    #+#             */
-/*   Updated: 2024/12/06 18:17:15 by abergman         ###   ########.fr       */
+/*   Updated: 2024/12/06 23:11:59 by abergman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,34 +49,35 @@ static char	**ft_separate_values(char *argument)
 	return (response);
 }
 
-/* i initialize the index for iteration					*/
+/* I initialize the index for iteration					*/
 /* I initialize the program exit status   				*/
-/* If there is no first parameter,           	        */
+/* If there is no first parameter,           				*/
 /* then we return the error of builtin_env				*/
 int	builtin_export(t_store *store, char **av)
 {
-	int		index;
+	int		index_response[2];
 	char	**node;
-	int		response;
 
-	index = 1;
-	response = EXIT_SUCCESS;
-	if (!av[index])
+	index_response[0] = 1;
+	index_response[1] = EXIT_SUCCESS;
+	if (!av[index_response[0]])
 		return (builtin_env(store, NULL));
-	while (av[index])
+	while (av[index_response[0]])
 	{
-		if (is_valid_env_key(av[index]))
+		if (is_valid_env_key(av[index_response[0]]))
 		{
-			ft_error_handler("export", av[index], "not a valid identifier", 0);
-			response = EXIT_FAILURE;
+			index_response[1] = ft_error_handler("export",
+					av[index_response[0]], "not a valid identifier", 1);
 		}
-		else if (ft_strchr(av[index], '=') != NULL)
+		else if (ft_strchr(av[index_response[0]], '=') != NULL)
 		{
-			node = ft_separate_values(av[index]);
+			node = ft_separate_values(av[index_response[0]]);
 			ft_set_env(store, node[0], node[1]);
 			free_tab(node);
 		}
-		index++;
+		else if (ft_strlen(av[index_response[0]]) != 0)
+			ft_set_env(store, av[index_response[0]], "");
+		index_response[0]++;
 	}
-	return (response);
+	return (index_response[1]);
 }
