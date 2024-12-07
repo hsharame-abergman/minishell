@@ -6,7 +6,7 @@
 /*   By: abergman <abergman@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/27 20:49:12 by abergman          #+#    #+#             */
-/*   Updated: 2024/11/29 01:25:55 by abergman         ###   ########.fr       */
+/*   Updated: 2024/12/07 22:36:36 by abergman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,15 +28,16 @@ static char	**ft_realloc_envs(t_store *store, int counter)
 	int		i;
 
 	i = 0;
-	new_envs = malloc(sizeof(char *) * (counter + 1));
+	new_envs = ft_calloc((counter + 1), sizeof(new_envs));
 	if (new_envs == NULL)
 		return (NULL);
 	while (i < counter)
 	{
 		new_envs[i] = ft_strdup(store->envp[i]);
+		ft_free_pointer(store->envp[i]);
 		i++;
 	}
-	new_envs[i] = NULL;
+	ft_free_pointer(store->envp);
 	return (new_envs);
 }
 
@@ -52,7 +53,7 @@ int	ft_remove_env(t_store *store, int index)
 	counter = index;
 	while (store->envp[i + 1])
 	{
-		store->envp[i] = store->envp[i + 1];
+		store->envp[i] = ft_strdup(store->envp[i + 1]);
 		ft_free_pointer(store->envp[i + 1]);
 		counter++;
 		i++;

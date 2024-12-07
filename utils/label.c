@@ -6,7 +6,7 @@
 /*   By: abergman <abergman@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/14 17:42:39 by hsharame          #+#    #+#             */
-/*   Updated: 2024/12/06 18:26:54 by abergman         ###   ########.fr       */
+/*   Updated: 2024/12/07 22:36:06 by abergman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,11 +62,11 @@ char	*ft_set_pwd(t_store *store)
 
 	pwd = ft_get_env_value(store->envp, "PWD");
 	if (!pwd)
-		pwd = ft_strdup("");
+		pwd = "";
 	res[0] = ft_strdup(pwd);
 	home = ft_get_env_value(store->envp, "HOME");
 	if (!home)
-		home = ft_strdup("");
+		home = "";
 	if ((ft_strcmp(pwd, home)) >= 0)
 	{
 		res[1] = ft_substr(pwd, ft_strlen(home), ft_strlen(pwd));
