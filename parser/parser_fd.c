@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser_fd.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abergman <abergman@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hsharame <hsharame@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/23 17:21:07 by hsharame          #+#    #+#             */
-/*   Updated: 2024/12/06 23:13:49 by abergman         ###   ########.fr       */
+/*   Updated: 2024/12/07 16:07:00 by hsharame         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,10 +55,16 @@ bool	open_file_trunc(t_redirect *trunc, char *filename)
 	if (!reset_redirect(trunc, false))
 		return (false);
 	trunc->outfile = ft_strdup(filename);
+	if (trunc->outfile && trunc->outfile[0] == '\0')
+	{
+		ft_putstr_fd("minishell: ambiguous redirect\n", 2);
+		g_exit_code = 1;
+		return (false);
+	}
 	trunc->fd_out = open(filename, O_CREAT | O_WRONLY | O_TRUNC, 0644);
 	if (trunc->fd_out == -1 && filename[0] != '\0')
 	{
-		ft_putstr_fd("Error\n", 2);
+		ft_error_handler(filename, NULL, "Is a directory", 1);
 		return (false);
 	}
 	return (true);
@@ -69,10 +75,16 @@ bool	open_file_append(t_redirect *append, char *filename)
 	if (!reset_redirect(append, false))
 		return (false);
 	append->outfile = ft_strdup(filename);
+	if (append->outfile && append->outfile[0] == '\0')
+	{
+		ft_putstr_fd("minishell: ambiguous redirect\n", 2);
+		g_exit_code = 1;
+		return (false);
+	}
 	append->fd_out = open(filename, O_CREAT | O_WRONLY | O_APPEND, 0644);
 	if (append->fd_out == -1 && filename[0] != '\0')
 	{
-		ft_putstr_fd("Error\n", 2);
+		ft_error_handler(filename, NULL, "Is a directory", 1);
 		return (false);
 	}
 	return (true);
@@ -89,10 +101,16 @@ bool	open_input(t_redirect *input, char *filename)
 	if (!reset_redirect(input, true))
 		return (false);
 	input->infile = ft_strdup(filename);
+	if (input->infile && input->infile[0] == '\0')
+	{
+		ft_putstr_fd("minishell: ambiguous redirect\n", 2);
+		g_exit_code = 1;
+		return (false);
+	}
 	input->fd_in = open(filename, O_RDONLY);
 	if (input->fd_in == -1 && filename[0] != '\0')
 	{
-		ft_error_handler(filename, NULL, strerror(errno), 0);
+		ft_error_handler(filename, NULL, "Is a directory", 1);
 		return (false);
 	}
 	return (true);
