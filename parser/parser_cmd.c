@@ -6,7 +6,7 @@
 /*   By: hsharame <hsharame@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/11 15:37:39 by hsharame          #+#    #+#             */
-/*   Updated: 2024/12/06 14:05:28 by hsharame         ###   ########.fr       */
+/*   Updated: 2024/12/09 12:15:10 by hsharame         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,6 +75,11 @@ t_cmd	*handle_cmd(t_token **save, t_cmd **last, int *first, t_store *data)
 	current = NULL;
 	if ((*save)->type == TOKEN_WORD && (*save)->value[0] == '\0')
 		(*save) = (*save)->next;
+	if ((*save)->type == END)
+	{
+		current = create_node("");
+		current->error = true;
+	}
 	if (is_word_token((*save)->type))
 	{
 		if ((*save)->is_adjacent)
